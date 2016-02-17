@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name = "sec5BedList">
+        <item>Bed 1</item>
+        <item>Bed 2</item>
+        <item>Bed 3</item>
+        <item>Bed 4</item>
+        <item>Bed 5</item>
+        <item>Bed 6</item>
+        <item>Bed 7</item>
+    </string-array>
+
+</resources>
