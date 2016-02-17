@@ -7,4 +7,6 @@
     <string name="dateID">Date planted</string>
     <string name="notesID">Notes</string>
     <string name="nameDefault">Name</string>
+    <string name="enterButtonID">ENTER</string>
+    <string name="backButtonID">BACK</string>
 </resources>
