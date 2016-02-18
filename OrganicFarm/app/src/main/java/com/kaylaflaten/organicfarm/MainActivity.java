@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     ListView sectionitems;
 
@@ -57,5 +60,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent section1 = new Intent(this, beds.class);
+
+    }
+
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this, beds.class);
+        EditText editText = (EditText) findViewById(R.id.edit_message);
+        intent.putExtra(SECTION, /*section clicked*/ );
+        startActivity(intent);
+
     }
 }
