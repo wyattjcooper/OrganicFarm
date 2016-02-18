@@ -66,14 +66,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent section1 = new Intent(this, beds.class);
+        startActivity(section1);
+        System.out.print(position+ "Pressed");
+    }
+
+
+    @Override
+    public void onClick(View v) {
 
     }
 
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, beds.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        intent.putExtra(SECTION, /*section clicked*/ );
-        startActivity(intent);
-
-    }
+//    public void sendMessage(View view) {
+//        Intent intent = new Intent(this, beds.class);
+////        EditText editText = (EditText) findViewById(R.id.edit_message);
+//        intent.putExtra(section1, /*section clicked*/ );
+//        startActivity(intent);
+//
+//    }
 }

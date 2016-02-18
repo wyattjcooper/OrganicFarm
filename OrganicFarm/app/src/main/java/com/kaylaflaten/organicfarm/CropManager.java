@@ -71,6 +71,7 @@ public class CropManager extends AppCompatActivity {
             public void onCancelled(FirebaseError error) {
             }
         });
+
         entryRef.child("notes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -87,7 +88,6 @@ public class CropManager extends AppCompatActivity {
             }
         });
 
-
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +95,6 @@ public class CropManager extends AppCompatActivity {
                 entryRef.setValue(newEntry);
             }
         });
-
 
         back.setOnClickListener(new Button.OnClickListener() {
             @Override

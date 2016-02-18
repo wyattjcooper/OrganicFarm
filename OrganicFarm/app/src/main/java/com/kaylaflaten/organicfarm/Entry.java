@@ -6,12 +6,12 @@ package com.kaylaflaten.organicfarm;
 public class Entry {
     private String date;
     private String name;
-    private String text;
+    private String notes;
     public Entry() {}
     public Entry(String name, String date, String text) {
         this.name = name;
         this.date = date;
-        this.text = text;
+        this.notes = text;
     }
 
     public String getDate() {
@@ -21,7 +21,7 @@ public class Entry {
         return name;
     }
     public String getText() {
-        return text;
+        return notes;
     }
 }
 
