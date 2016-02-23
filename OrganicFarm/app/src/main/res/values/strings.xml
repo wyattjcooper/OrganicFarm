@@ -9,4 +9,6 @@
     <string name="nameDefault">Name</string>
     <string name="enterButtonID">ENTER</string>
     <string name="backButtonID">BACK</string>
+    <string name="title_activity_bed_page">BedPage</string>
+    <string name="addCropButton">Add Crop</string>
 </resources>

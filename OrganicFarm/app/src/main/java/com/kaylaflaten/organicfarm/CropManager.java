@@ -72,7 +72,7 @@ public class CropManager extends AppCompatActivity {
             }
         });
 
-        entryRef.child("notes").addValueEventListener(new ValueEventListener() {
+        entryRef.child("text").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 String data = (String) snapshot.getValue();
