@@ -36,6 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
+
+        FloatingActionButton mapfab = (FloatingActionButton) findViewById(R.id.mapfab);
+        mapfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent("android.intent.action.MAP"));
+            }
+        });
     }
 
     @Override
@@ -67,11 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, beds.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        intent.putExtra(SECTION, /*section clicked*/ );
-        startActivity(intent);
+
+
+    @Override
+    public void onClick(View v) {
 
     }
 }
