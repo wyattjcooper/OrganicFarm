@@ -11,4 +11,6 @@
     <string name="backButtonID">BACK</string>
     <string name="title_activity_bed_page">BedPage</string>
     <string name="addCropButton">Add Crop</string>
+    <string name="title_activity_crops_in_bed">CropsInBe</string>
+    <string name="cropAddButton">Add Crop</string>
 </resources>

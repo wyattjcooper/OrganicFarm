@@ -22,6 +22,10 @@
         </activity>
         <activity android:name=".CropManager" />
         <activity android:name=".beds" />
+        <activity
+            android:name=".CropsInBed"
+            android:label="@string/title_activity_crops_in_bed"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

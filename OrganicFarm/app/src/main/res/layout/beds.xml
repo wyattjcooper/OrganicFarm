@@ -4,26 +4,9 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="272dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView6"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.28" />
-
     <ListView
         android:layout_width="397dp"
-        android:layout_height="197dp"
-        android:id="@+id/bedItems"
-        android:layout_weight="0.28" />
+        android:layout_height="match_parent"
+        android:id="@+id/bedItems" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="124dp"
-        android:layout_height="58dp"
-        android:text="@string/addCropButton"
-        android:id="@+id/button3"
-        android:layout_gravity="center_horizontal" />
 </LinearLayout>
