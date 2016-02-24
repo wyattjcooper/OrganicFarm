@@ -38,24 +38,24 @@ public class CropsInBed extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.listView);
 
-        String[] planets = new String[] { };
+        String[] crops = new String[] { };
 
         // Store the keys of the crops retrieved from Firebase
         final ArrayList<String> keys = new ArrayList<String>();
 
-        // Store crop names
-        final ArrayList<String> planetList = new ArrayList<String>();
+        // Setting up the ArrayAdapter
+        final ArrayList<String> cropList = new ArrayList<String>();
 
-        planetList.addAll( Arrays.asList(planets) );
+        cropList.addAll( Arrays.asList(crops) );
 
-        aa = new ArrayAdapter<String>(this, R.layout.simplerow, planetList);
+        aa = new ArrayAdapter<String>(this, R.layout.simplerow, cropList);
 
         lv.setAdapter(aa);
 
-
-
+        // Get the reference to our Firebase database
         final Firebase myFirebaseRef = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
 
+        // Set up reference to the section and bed
         Firebase bedRef = myFirebaseRef.child("Section").child("Bed");
 
         // Attach crops already in the database to our list
@@ -63,9 +63,13 @@ public class CropsInBed extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
                     Entry cropEntry = postSnapshot.getValue(Entry.class);
+                    // Fetch the key from the database
                     String key = postSnapshot.getKey();
+                    // Add key to keys list
                     keys.add(key);
+                    // Add name to the list by adding it to the ArrayAdapter
                     aa.add(cropEntry.getName());
                 }
             }
@@ -76,6 +80,7 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
+        // Add new crop by clicking the add button
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,18 +90,20 @@ public class CropsInBed extends AppCompatActivity {
         });
 
 
-        // Pass key of the selected crop to the CropManager so that it can load the data
+        // Click on a crop - pass the key to the CropManager so that it can load the crops data
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
+                // Look up the key in the keys list - same position
                 String itemSelected = keys.get(position).toString();
                 intent.putExtra("itemSelected", itemSelected);
                 startActivity(intent);
             }
         });
 
+        // Go back to Main Activity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
