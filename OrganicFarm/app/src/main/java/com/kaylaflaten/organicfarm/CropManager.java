@@ -40,12 +40,13 @@ public class CropManager extends AppCompatActivity {
         back = (Button) findViewById(R.id.button2);
 
         final Bundle extras = getIntent().getExtras();
+
         Firebase entryRef = myFirebaseRef.child(section.getText().toString()).child(bed.getText().toString());
 
         if (extras != null) {
-            String crop = extras.getString("itemSelected");
-            entryRef = myFirebaseRef.child(section.getText().toString()).child(bed.getText().toString()).child(crop);
-            name.setText(crop);
+            String cropID = extras.getString("itemSelected");
+            entryRef = myFirebaseRef.child(section.getText().toString()).child(bed.getText().toString()).child(cropID);
+            //name.setText(cropID);
         }
 
 
@@ -64,6 +65,7 @@ public class CropManager extends AppCompatActivity {
             public void onCancelled(FirebaseError error) {
             }
         });
+
         entryRef.child("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -80,7 +82,7 @@ public class CropManager extends AppCompatActivity {
             }
         });
 
-        entryRef.child("text").addValueEventListener(new ValueEventListener() {
+        entryRef.child("notes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 String data = (String) snapshot.getValue();
@@ -117,7 +119,7 @@ public class CropManager extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropManager.this, MainActivity.class);
+                Intent intent = new Intent(CropManager.this, CropsInBed.class);
                 startActivity(intent);
             }
         });

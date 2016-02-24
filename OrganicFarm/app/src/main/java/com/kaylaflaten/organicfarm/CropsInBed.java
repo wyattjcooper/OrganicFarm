@@ -17,10 +17,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
+import com.kaylaflaten.organicfarm.Entry;
 
 public class CropsInBed extends AppCompatActivity {
 
     Button add;
+    Button back;
     ListView lv;
     ArrayAdapter<String> aa;
 
@@ -30,10 +32,18 @@ public class CropsInBed extends AppCompatActivity {
         setContentView(R.layout.activity_crops_in_be);
         Firebase.setAndroidContext(this);
 
+        add = (Button) findViewById(R.id.button4);
+
+        back = (Button) findViewById(R.id.button3);
+
         lv = (ListView) findViewById(R.id.listView);
 
         String[] planets = new String[] { };
 
+        // Store the keys of the crops retrieved from Firebase
+        final ArrayList<String> keys = new ArrayList<String>();
+
+        // Store crop names
         final ArrayList<String> planetList = new ArrayList<String>();
 
         planetList.addAll( Arrays.asList(planets) );
@@ -42,22 +52,21 @@ public class CropsInBed extends AppCompatActivity {
 
         lv.setAdapter(aa);
 
-        add = (Button) findViewById(R.id.button4);
+
 
         final Firebase myFirebaseRef = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
 
         Firebase bedRef = myFirebaseRef.child("Section").child("Bed");
 
-
-
         // Attach crops already in the database to our list
         bedRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                System.out.println("There are " + snapshot.getChildrenCount() + " crops");
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    String crop = postSnapshot.getValue().toString();
-                    aa.add(crop);
+                    Entry cropEntry = postSnapshot.getValue(Entry.class);
+                    String key = postSnapshot.getKey();
+                    keys.add(key);
+                    aa.add(cropEntry.getName());
                 }
             }
 
@@ -67,12 +76,6 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,24 +84,26 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
+
+        // Pass key of the selected crop to the CropManager so that it can load the data
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
-                String itemSelected = (String) parent.getItemAtPosition(position);
+                String itemSelected = keys.get(position).toString();
                 intent.putExtra("itemSelected", itemSelected);
                 startActivity(intent);
             }
         });
 
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            String name = extras.getString("pushID");
-//            aa.add(name);
-//        }
-
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CropsInBed.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
