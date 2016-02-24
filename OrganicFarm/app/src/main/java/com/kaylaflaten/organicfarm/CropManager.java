@@ -39,13 +39,13 @@ public class CropManager extends AppCompatActivity {
         enter = (Button) findViewById(R.id.button);
         back = (Button) findViewById(R.id.button2);
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         Firebase entryRef = myFirebaseRef.child(section.getText().toString()).child(bed.getText().toString());
 
         if (extras != null) {
-            String name = extras.getString("itemSelected");
-            entryRef = myFirebaseRef.child(section.getText().toString()).child(bed.getText().toString()).child(name);
-
+            String crop = extras.getString("itemSelected");
+            entryRef = myFirebaseRef.child(section.getText().toString()).child(bed.getText().toString()).child(crop);
+            name.setText(crop);
         }
 
 
@@ -100,12 +100,16 @@ public class CropManager extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
-                Firebase pushRef = finalEntryRef.push();
-                pushRef.setValue(newEntry);
                 Intent intent = new Intent(CropManager.this, CropsInBed.class);
-                intent.putExtra("name",name.getText().toString());
-                intent.putExtra("pushID",pushRef.getKey());
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
+                if (extras == null) {
+                    Firebase pushRef = finalEntryRef.push();
+                    pushRef.setValue(newEntry);
+                    intent.putExtra("pushID",pushRef.getKey());
+                }
+                else if (extras != null) {
+                    finalEntryRef.setValue(newEntry);
+                }
                 startActivity(intent);
             }
         });
