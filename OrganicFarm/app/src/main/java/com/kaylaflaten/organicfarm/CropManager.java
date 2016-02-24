@@ -126,6 +126,7 @@ public class CropManager extends AppCompatActivity {
             }
         });
 
+        // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +135,7 @@ public class CropManager extends AppCompatActivity {
             }
         });
 
+        // Delete crops
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
