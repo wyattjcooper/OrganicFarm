@@ -13,4 +13,5 @@
     <string name="addCropButton">Add Crop</string>
     <string name="title_activity_crops_in_bed">CropsInBe</string>
     <string name="cropAddButton">Add Crop</string>
+    <string name="deleteButton">Delete</string>
 </resources>
