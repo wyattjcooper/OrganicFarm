@@ -24,6 +24,8 @@ public class beds  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Bundle extras = getIntent().getExtras();
+
         beditems = (ListView) findViewById(R.id.bedItems);
         /*Check which section was clicked; change next line with xml name */
 
@@ -33,7 +35,12 @@ public class beds  extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String section = "";
+                if (extras != null) {
+                    section = extras.getString("section");
+                }
                 Intent intent = new Intent(beds.this, CropsInBed.class);
+                intent.putExtra("section", section);
                 startActivity(intent);
             }
         });

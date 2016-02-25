@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(MainActivity.this, beds.class);
+                String section = "Section " + (position + 1);
+                intent.putExtra("section", section);
                 startActivity(intent);
             }
         });

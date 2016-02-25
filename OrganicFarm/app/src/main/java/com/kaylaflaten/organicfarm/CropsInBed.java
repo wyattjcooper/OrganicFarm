@@ -18,9 +18,11 @@ import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.kaylaflaten.organicfarm.Entry;
+import android.widget.TextView;
 
 public class CropsInBed extends AppCompatActivity {
 
+    TextView sectionDisplay;
     Button add;
     Button back;
     ListView lv;
@@ -31,6 +33,8 @@ public class CropsInBed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crops_in_be);
         Firebase.setAndroidContext(this);
+
+        sectionDisplay = (TextView) findViewById(R.id.textView6);
 
         add = (Button) findViewById(R.id.button4);
 
@@ -52,11 +56,23 @@ public class CropsInBed extends AppCompatActivity {
 
         lv.setAdapter(aa);
 
+        final Bundle extras = getIntent().getExtras();
+
+        String sectionNum = "Section";
+
+        if (extras != null) {
+            sectionNum = extras.getString("section");
+        }
+
         // Get the reference to our Firebase database
         final Firebase myFirebaseRef = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
 
         // Set up reference to the section and bed
-        Firebase bedRef = myFirebaseRef.child("Section").child("Bed");
+        Firebase bedRef = myFirebaseRef.child(sectionNum).child("Bed");
+
+
+        // Display current section in the TextView
+        sectionDisplay.setText(sectionNum);
 
         // Attach crops already in the database to our list
         bedRef.addValueEventListener(new ValueEventListener() {
@@ -81,10 +97,12 @@ public class CropsInBed extends AppCompatActivity {
         });
 
         // Add new crop by clicking the add button
+        final String finalSectionNum = sectionNum;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
+                intent.putExtra("section", finalSectionNum);
                 startActivity(intent);
             }
         });
@@ -98,6 +116,7 @@ public class CropsInBed extends AppCompatActivity {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = keys.get(position).toString();
+                intent.putExtra("section", finalSectionNum);
                 intent.putExtra("itemSelected", itemSelected);
                 startActivity(intent);
             }
