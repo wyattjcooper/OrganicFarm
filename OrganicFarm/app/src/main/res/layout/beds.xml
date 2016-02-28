@@ -9,12 +9,4 @@
         android:layout_height="match_parent"
         android:id="@+id/bedItems" />
 
-<<<<<<< HEAD
-=======
-
-    <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.SEND" />-->
-    <!--</intent-filter>-->
-
->>>>>>> master
 </LinearLayout>
