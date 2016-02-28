@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
 
     <string-array name = "sec1BedList">
         <item>Bed 1</item>
@@ -10,5 +10,9 @@
         <item>Bed 6</item>
         <item>Bed 7</item>
     </string-array>
+
+    <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.SEND" />-->
+    <!--</intent-filter>-->
 
 </resources>
