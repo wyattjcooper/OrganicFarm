@@ -23,6 +23,7 @@ import android.widget.TextView;
 public class CropsInBed extends AppCompatActivity {
 
     TextView sectionDisplay;
+    TextView bedDisplay;
     Button add;
     Button back;
     ListView lv;
@@ -35,6 +36,8 @@ public class CropsInBed extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
         sectionDisplay = (TextView) findViewById(R.id.textView6);
+
+        bedDisplay = (TextView) findViewById(R.id.textView7);
 
         add = (Button) findViewById(R.id.button4);
 
@@ -58,21 +61,28 @@ public class CropsInBed extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String sectionNum = "Section";
+        String sectionNum = "Section ";
+        String bedNum = "Bed ";
+        int sec = -1;
+        int bedN = -1;
 
         if (extras != null) {
-            sectionNum = extras.getString("section");
+            sec = extras.getInt("section", -1);
+            bedN = extras.getInt("bed", -1);
+            sectionNum = sectionNum + (sec + 1);
+            bedNum = bedNum + (bedN + 1);
         }
 
         // Get the reference to our Firebase database
         final Firebase myFirebaseRef = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
 
         // Set up reference to the section and bed
-        Firebase bedRef = myFirebaseRef.child(sectionNum).child("Bed");
+        Firebase bedRef = myFirebaseRef.child(sectionNum).child(bedNum);
 
 
-        // Display current section in the TextView
+        // Display current section/bed in the TextViews
         sectionDisplay.setText(sectionNum);
+        bedDisplay.setText(bedNum);
 
         // Attach crops already in the database to our list
         bedRef.addValueEventListener(new ValueEventListener() {
@@ -97,18 +107,23 @@ public class CropsInBed extends AppCompatActivity {
         });
 
         // Add new crop by clicking the add button
-        final String finalSectionNum = sectionNum;
+        final int finalSec1 = sec;
+        final int finalBedN = bedN;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
-                intent.putExtra("section", finalSectionNum);
+                intent.putExtra("section", finalSec1);
+                intent.putExtra("bed", finalBedN);
+                intent.putExtra("new",true);
                 startActivity(intent);
             }
         });
 
 
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
+        final int finalSec2 = sec;
+        final int finalBedN1 = bedN;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -116,17 +131,20 @@ public class CropsInBed extends AppCompatActivity {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = keys.get(position).toString();
-                intent.putExtra("section", finalSectionNum);
+                intent.putExtra("section", finalSec2);
+                intent.putExtra("bed", finalBedN1);
                 intent.putExtra("itemSelected", itemSelected);
                 startActivity(intent);
             }
         });
 
-        // Go back to Main Activity
+        // Go back to Beds
+        final int finalSec = sec;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CropsInBed.this, MainActivity.class);
+                Intent intent = new Intent(CropsInBed.this, beds.class);
+                intent.putExtra("section", finalSec);
                 startActivity(intent);
             }
         });
