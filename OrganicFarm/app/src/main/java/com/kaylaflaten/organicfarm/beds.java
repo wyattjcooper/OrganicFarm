@@ -54,7 +54,7 @@ public class Beds extends AppCompatActivity {
                 break;
             default: Log.d("IntentError", "No extras sent to Intent");
                     break;
-            
+
         }
         sectionDisplay = (TextView) findViewById(R.id.textView8);
         back = (Button) findViewById(R.id.button6);
