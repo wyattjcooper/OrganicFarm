@@ -143,7 +143,7 @@ public class CropsInBed extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CropsInBed.this, beds.class);
+                Intent intent = new Intent(CropsInBed.this, Beds.class);
                 intent.putExtra("section", finalSec);
                 startActivity(intent);
             }
