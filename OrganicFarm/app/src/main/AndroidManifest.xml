@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CropManager" />
-        <activity android:name=".Beds" />
+        <activity android:name=".beds" />
         <activity
             android:name=".CropsInBed"
             android:label="@string/title_activity_crops_in_bed"

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(view.getContext(), Beds.class);
+                Intent intent = new Intent(view.getContext(), beds.class);
                 intent.putExtra("section", position);
                 startActivity(intent);
             }
