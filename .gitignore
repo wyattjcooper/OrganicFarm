@@ -1,2 +1,8 @@
 
 OrganicFarm/.idea/inspectionProfiles/Project_Default.xml
+OrganicFarm/build.gradle
+OrganicFarm/app/build.gradle
+OrganicFarm/app/proguard-rules.pro
+OrganicFarm/OrganicFarm/gradle.properties
+OrganicFarm/OrganicFarm/settings.gradle
+OrganicFarm/OrganicFarm/local.properties
