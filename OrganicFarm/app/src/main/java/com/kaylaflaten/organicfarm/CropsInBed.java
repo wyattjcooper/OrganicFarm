@@ -2,10 +2,7 @@ package com.kaylaflaten.organicfarm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,7 +14,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
-import com.kaylaflaten.organicfarm.Entry;
 import android.widget.TextView;
 
 public class CropsInBed extends AppCompatActivity {
