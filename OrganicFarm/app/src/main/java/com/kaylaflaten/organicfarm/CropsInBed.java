@@ -10,11 +10,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import android.widget.TextView;
+import com.kaylaflaten.organicfarm.FirebaseCtrl;
 
 public class CropsInBed extends AppCompatActivity {
 
@@ -43,6 +46,8 @@ public class CropsInBed extends AppCompatActivity {
 
         String[] crops = new String[] { };
 
+        String[] path = new String[2];
+
         // Store the keys of the crops retrieved from Firebase
         final ArrayList<String> keys = new ArrayList<String>();
 
@@ -69,12 +74,14 @@ public class CropsInBed extends AppCompatActivity {
             bedNum = bedNum + (bedN + 1);
         }
 
+        path[0] = sectionNum;
+        path[1] = bedNum;
+
         // Get the reference to our Firebase database
         final Firebase myFirebaseRef = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
 
         // Set up reference to the section and bed
         Firebase bedRef = myFirebaseRef.child(sectionNum).child(bedNum);
-
 
         // Display current section/bed in the TextViews
         sectionDisplay.setText(sectionNum);
@@ -101,6 +108,8 @@ public class CropsInBed extends AppCompatActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+
+
 
         // Add new crop by clicking the add button
         final int finalSec1 = sec;
