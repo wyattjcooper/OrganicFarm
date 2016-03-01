@@ -15,19 +15,19 @@ import java.util.List;
 /**
  * Created by WyattCooper on 3/1/16.
  */
-public class FirebaseCtrl {
+public class DatabaseCtrl {
     private Firebase ref;
     private Firebase bedRef;
 
 
     // Parameterized constructor to set the Firebase reference
-    public FirebaseCtrl(String child1, String child2, Context context) {
+    public DatabaseCtrl(String child1, String child2, Context context) {
         Firebase.setAndroidContext(context);
         ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
         bedRef = ref.child(child1).child(child2);
     }
 
-    public FirebaseCtrl() {
+    public DatabaseCtrl() {
 
     }
 
@@ -41,6 +41,7 @@ public class FirebaseCtrl {
     }
 
 
+    // Populates an array adapter with crop names and creates a key list with their key 
     public ArrayList<String> generateKeysList(final ArrayAdapter<String> aa) {
         final ArrayList<String> keys = new ArrayList<String>();
         // Attach crops already in the database to our list

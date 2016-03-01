@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.widget.TextView;
-import com.kaylaflaten.organicfarm.FirebaseCtrl;
+import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 public class CropsInBed extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class CropsInBed extends AppCompatActivity {
     Button add;
     Button back;
     ListView lv;
-    FirebaseCtrl fbCtrl;
+    DatabaseCtrl dbCtrl;
     ArrayAdapter<String> aa;
 
     @Override
@@ -60,10 +60,10 @@ public class CropsInBed extends AppCompatActivity {
         bedDisplay.setText(bedNum);
 
         // Set up our database control object
-        fbCtrl = new FirebaseCtrl(sectionNum, bedNum, this);
+        dbCtrl = new DatabaseCtrl(sectionNum, bedNum, this);
 
         // Attach crops already in the database to our list
-        ArrayList<String> keys = fbCtrl.generateKeysList(aa);
+        ArrayList<String> keys = dbCtrl.generateKeysList(aa);
 
         // Add new crop by clicking the add button
         final int finalSec1 = sec;
