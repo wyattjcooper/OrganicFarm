@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent("android.intent.action.CROPHARVESTER"));
+            }
+        });
 
 //        FloatingActionButton mapfab = (FloatingActionButton) findViewById(R.id.mapfab);
 //        mapfab.setOnClickListener(new OnClickListener() {

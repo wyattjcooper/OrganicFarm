@@ -7,119 +7,115 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.kaylaflaten.organicfarm.CropManager">
+    tools:context="com.kaylaflaten.organicfarm.CropHarvester">
 
     <TextView
+        android:id="@+id/textViewCrop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/sectionID"
-        android:id="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/cropID"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/bedID"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
+        android:id="@+id/textViewDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/cropID"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/datePlantedID"
-        android:id="@+id/textView4"
+        android:text="@string/dateHarvestedID"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/textViewCrop"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/textViewAH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/notesID"
-        android:id="@+id/textView5"
-        android:layout_centerVertical="true"
+        android:text="@string/amountHarvestedID"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textViewDP"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textViewFH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Finished Harvesting"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textViewAH"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textViewHN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Notes"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textViewFH"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
+        android:id="@+id/editTextHD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_alignBottom="@+id/textView4"
+        android:ems="9"
+        android:layout_alignBottom="@+id/textViewDP"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <EditText
+        android:id="@+id/editTextAH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="8"
+        android:layout_alignBottom="@+id/textViewAH"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:id="@+id/checkboxFH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewFH"
+        android:layout_alignParentRight="true"/>
+
+    <EditText
+        android:id="@+id/editTextHN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
-        android:layout_above="@+id/button"
-        android:layout_below="@+id/textView5" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/nameDefault"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_above="@+id/textView4"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/textViewHN"
+        android:layout_above="@+id/buttonEnter" />
+
 
     <Button
+        android:id="@+id/buttonEnter"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enterButtonID"
-        android:id="@+id/button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentLeft="true" />
 
     <Button
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/backButtonID"
-        android:id="@+id/button2"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deleteButton"
-        android:id="@+id/button5"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
