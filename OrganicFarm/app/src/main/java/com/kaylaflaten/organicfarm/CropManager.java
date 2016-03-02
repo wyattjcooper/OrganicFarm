@@ -65,7 +65,6 @@ public class CropManager extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(notes,"notes", "Enter notes here");
 
         // Push new data or modify old data when pressing enter button
-        //final Firebase finalEntryRef = entryRef;
         final int finalSec2 = sec;
         final int finalBedN2 = bedN;
         enter.setOnClickListener(new Button.OnClickListener() {
@@ -75,16 +74,12 @@ public class CropManager extends AppCompatActivity {
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
                 // If we are adding a new crop, push a new child
                 if (extras.getBoolean("new") == true) {
-                    //Firebase pushRef = finalEntryRef.push();
-                    //pushRef.setValue(newEntry);
                     String key = dbCtrl.pushEntryReturnKey(newEntry);
                     intent.putExtra("pushID", key);
-                    //intent.putExtra("pushID", pushRef.getKey());
                 }
                 // If we are not adding a new crop, modify the existing child we clicked on
                 else if (extras.getBoolean("new") != true) {
                     dbCtrl.setValueEntry(newEntry);
-                    //finalEntryRef.setValue(newEntry);
                 }
                 intent.putExtra("section", finalSec2);
                 intent.putExtra("bed", finalBedN2);
@@ -118,7 +113,6 @@ public class CropManager extends AppCompatActivity {
                 // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
                 else if (extras.getBoolean("new") != true) {
                     dbCtrl.removeValueEntry();
-                    //finalEntryRef.removeValue();
                     Intent intent = new Intent(CropManager.this, CropsInBed.class);
                     intent.putExtra("section", finalSec1);
                     intent.putExtra("bed", finalBedN1);
