@@ -4,7 +4,7 @@
     <string name="sectionID">Section</string>
     <string name="bedID">Bed</string>
     <string name="cropID">Crop</string>
-    <string name="dateID">Date planted</string>
+    <string name="datePlantedID">Date Planted</string>
     <string name="notesID">Notes</string>
     <string name="nameDefault">Name</string>
     <string name="enterButtonID">ENTER</string>
@@ -14,4 +14,5 @@
     <string name="title_activity_crops_in_bed">CropsInBe</string>
     <string name="cropAddButton">Add Crop</string>
     <string name="deleteButton">Delete</string>
+    <string name="dateHarvestedID">Date Harvested</string>
 </resources>
