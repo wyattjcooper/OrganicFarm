@@ -79,7 +79,6 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
-
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
         final int finalSec2 = sec;
         final int finalBedN1 = bedN;
