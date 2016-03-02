@@ -6,3 +6,4 @@ OrganicFarm/app/proguard-rules.pro
 OrganicFarm/OrganicFarm/gradle.properties
 OrganicFarm/OrganicFarm/settings.gradle
 OrganicFarm/OrganicFarm/local.properties
+OrganicFarm\.idea\gradle.xml
