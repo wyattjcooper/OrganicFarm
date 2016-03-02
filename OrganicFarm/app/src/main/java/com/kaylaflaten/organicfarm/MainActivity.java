@@ -3,6 +3,7 @@ package com.kaylaflaten.organicfarm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -36,9 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 startActivity(intent);
             }
         });
-<<<<<<< HEAD
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new OnClickListener() {
@@ -58,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //        // ATTENTION: This was auto-generated to implement the App Indexing API.
 //        // See https://g.co/AppIndexing/AndroidStudio for more information.
 //        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-=======
->>>>>>> 05c3b6250308c687f0a636d6d2db65fbee9a37de
     }
 
     @Override
