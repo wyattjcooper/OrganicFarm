@@ -18,14 +18,22 @@ import java.util.List;
  */
 public class DatabaseCtrl {
     private Firebase ref;
-    private Firebase bedRef;
+    private Firebase twoChildRef;
     private Firebase entryRef;
+    private Firebase oneChildRef;
+
+    // Parameterized constructor to set the Firebase reference
+    public DatabaseCtrl(String child1, Context context) {
+        Firebase.setAndroidContext(context);
+        ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
+        oneChildRef = ref.child(child1);
+    }
 
     // Parameterized constructor to set the Firebase reference
     public DatabaseCtrl(String child1, String child2, Context context) {
         Firebase.setAndroidContext(context);
         ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
-        bedRef = ref.child(child1).child(child2);
+        twoChildRef = ref.child(child1).child(child2);
     }
 
     public DatabaseCtrl() {
@@ -37,15 +45,23 @@ public class DatabaseCtrl {
     }
 
     public Firebase getBedRef() {
-        return bedRef;
+        return twoChildRef;
     }
 
-    public void setEntryRef(String ID) {
-        if (ID == null) {
-            entryRef = bedRef;
+    public void setEntryRef(String ID, int numChildren) {
+        if (numChildren == 2) {
+            if (ID == null) {
+                entryRef = twoChildRef;
+            } else {
+                entryRef = twoChildRef.child(ID);
+            }
         }
-        else {
-            entryRef = bedRef.child(ID);
+        else if (numChildren == 1) {
+            if (ID == null) {
+                entryRef = oneChildRef;
+            } else {
+                entryRef = oneChildRef.child(ID);
+            }
         }
         return;
     }
@@ -54,7 +70,7 @@ public class DatabaseCtrl {
     public ArrayList<String> generateKeysList(final ArrayAdapter<String> aa) {
         final ArrayList<String> keys = new ArrayList<String>();
         // Attach crops already in the database to our list
-        bedRef.addValueEventListener(new ValueEventListener() {
+        twoChildRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {

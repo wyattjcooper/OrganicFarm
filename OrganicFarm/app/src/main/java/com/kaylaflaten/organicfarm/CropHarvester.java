@@ -9,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 import com.firebase.client.Firebase;
 
@@ -37,6 +38,9 @@ public class CropHarvester extends AppCompatActivity {
         enter = (Button) findViewById(R.id.buttonEnter);
         back = (Button) findViewById(R.id.buttonBack);
 
+        // Create the DatabaseCtrl object
+        final DatabaseCtrl dbCtrl = new DatabaseCtrl("Harvest", this);
+
         final Bundle extras = getIntent().getExtras();
 
         String sectionNum = "Section ";
@@ -50,6 +54,11 @@ public class CropHarvester extends AppCompatActivity {
             sectionNum = sectionNum + (sec + 1);
             bedNum = bedNum + (bedN + 1);
         }
+
+        // If we selected a crop from the list,
+        // we will have passed its ID, so we set our reference to that ID
+        String cropID = extras.getString("itemSelected");
+        dbCtrl.setEntryRef(cropID,1);
 
 
 
