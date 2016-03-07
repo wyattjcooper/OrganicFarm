@@ -58,7 +58,7 @@ public class CropManager extends AppCompatActivity {
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         String cropID = extras.getString("itemSelected");
-        dbCtrl.setEntryRef(cropID);
+        dbCtrl.setEntryRef(cropID, 2);
 
         dbCtrl.listenAndSetEditText(name, "name", "Enter name here");
         dbCtrl.listenAndSetEditText(date,"date", "Enter date here");
@@ -67,15 +67,24 @@ public class CropManager extends AppCompatActivity {
         // Push new data or modify old data when pressing enter button
         final int finalSec2 = sec;
         final int finalBedN2 = bedN;
+        final int finalSec3 = sec;
+        final int finalBedN3 = bedN;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropManager.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
-                // If we are adding a new crop, push a new child
+                // If we are adding a new crop, push a new child and add it to Harvest data branch
                 if (extras.getBoolean("new") == true) {
-                    String key = dbCtrl.pushEntryReturnKey(newEntry);
-                    intent.putExtra("pushID", key);
+                    // Push the entry data
+                    String entryKey = dbCtrl.pushEntryReturnKey(newEntry);
+                    intent.putExtra("pushID", entryKey);
+                    // Initialize the harvest data
+                    Harvest harvestDefault = new Harvest("Enter date here", 0.0, false,"Enter notes here", finalSec3 + 1, finalBedN3 + 1);
+                    dbCtrl.setOneChildRef("Harvest");
+                    dbCtrl.setEntryRef(entryKey, 1);
+                    dbCtrl.setValueHarvest(harvestDefault);
+
                 }
                 // If we are not adding a new crop, modify the existing child we clicked on
                 else if (extras.getBoolean("new") != true) {

@@ -38,6 +38,7 @@ public class CropHarvester extends AppCompatActivity {
         enter = (Button) findViewById(R.id.buttonEnter);
         back = (Button) findViewById(R.id.buttonBack);
 
+
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl("Harvest", this);
 
