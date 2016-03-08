@@ -44,6 +44,9 @@ public class DatabaseCtrl {
         return ref;
     }
 
+    public void setOneChildRef(String child1) { oneChildRef = ref.child(child1); }
+    public void setTwoChildRef(String child1, String child2) { twoChildRef = ref.child(child1).child(child2); }
+
     public Firebase getBedRef() {
         return twoChildRef;
     }
@@ -121,6 +124,7 @@ public class DatabaseCtrl {
     public void setValueEntry(Entry entry) {
         entryRef.setValue(entry);
     }
+    public void setValueHarvest(Harvest harvest) { entryRef.setValue(harvest);}
 
     public void removeValueEntry() {
         entryRef.removeValue();
