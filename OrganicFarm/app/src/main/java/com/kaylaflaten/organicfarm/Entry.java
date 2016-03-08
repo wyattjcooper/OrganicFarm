@@ -14,12 +14,13 @@ public class Entry {
         this.notes = notes;
     }
 
-    public String getDate() {
-        return date;
-    }
+    public String getDate() { return date;}
     public String getName() { return name; }
-    public String getNotes() {
-        return notes;
-    }
+    public String getNotes() {return notes;}
+
+    public void setDate(String d) { date = d;}
+    public void setName(String n) { name = n; }
+    public void setNotes(String no) {notes = no;}
+
 }
 

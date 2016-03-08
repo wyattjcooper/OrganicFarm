@@ -37,7 +37,7 @@ public class DatabaseCtrl {
     }
 
     public DatabaseCtrl() {
-
+        ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
     }
 
     public Firebase getRef() {
@@ -128,6 +128,54 @@ public class DatabaseCtrl {
 
     public void removeValueEntry() {
         entryRef.removeValue();
+    }
+
+    public Entry returnEntryAtLocation(String section, String bed, String key) {
+        Firebase eRef = ref.child(section).child(bed).child(key);
+        final Entry returnEntry = new Entry();
+        eRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Entry data = (Entry) snapshot.getValue();
+                if (data == null) {
+
+                } else {
+                    returnEntry.setDate(data.getDate());
+                    returnEntry.setName(data.getName());
+                    returnEntry.setNotes(data.getNotes());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+        return returnEntry;
+    }
+
+    public Harvest returnHarvestAtLocation(String key) {
+        Firebase hRef = ref.child("Harvest").child(key);
+        final Harvest returnHarvest = new Harvest();
+        hRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Harvest data = (Harvest) snapshot.getValue();
+                if (data == null) {
+
+                } else {
+                    returnHarvest.setDate(data.getDate());
+                    returnHarvest.setFinished(data.getFinished());
+                    returnHarvest.setNotes(data.getNotes());
+                    returnHarvest.setSection(data.getSection());
+                    returnHarvest.setBed(data.getBed());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+        return returnHarvest;
     }
 
 

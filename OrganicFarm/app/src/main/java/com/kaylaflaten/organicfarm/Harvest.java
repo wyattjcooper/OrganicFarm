@@ -28,4 +28,11 @@ public class Harvest {
     public int getSection() {return section;}
     public int getBed() {return bed;}
 
+    public void setDate(String d) { date = d;}
+    public void setAmount(double a) {amount = a;}
+    public void setFinished(boolean t) {finished = t;}
+    public  void setNotes(String no) {notes = no;}
+    public  void setSection(int s) {section = s;}
+    public void setBed(int b) {bed = b;}
+
 }
