@@ -1,16 +1,17 @@
 package com.kaylaflaten.organicfarm;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.Button;
-import android.view.View;
 import android.content.Intent;
-import com.kaylaflaten.organicfarm.Entry;
-import com.kaylaflaten.organicfarm.DatabaseCtrl;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class CropManager extends AppCompatActivity {
+/**
+ * Created by Carmen on 3/7/2016.
+ */
+public class CropEditor extends AppCompatActivity {
 
     TextView section;
     TextView bed;
@@ -24,7 +25,7 @@ public class CropManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crop_manager);
+        setContentView(R.layout.activity_crop_editor);
 
         section = (TextView) findViewById(R.id.textView);
         bed = (TextView) findViewById(R.id.textView2);
@@ -70,7 +71,7 @@ public class CropManager extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropManager.this, CropsInBed.class);
+                Intent intent = new Intent(CropEditor.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
                 // If we are adding a new crop, push a new child
                 if (extras.getBoolean("new") == true) {
@@ -94,12 +95,31 @@ public class CropManager extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropManager.this, CropsInBed.class);
+                Intent intent = new Intent(CropEditor.this, CropsInBed.class);
                 intent.putExtra("section", finalSec);
                 intent.putExtra("bed", finalBedN);
                 startActivity(intent);
             }
         });
 
+        // Delete crops
+        final int finalSec1 = sec;
+        final int finalBedN1 = bedN;
+        delete.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (extras.getBoolean("new") == true) {
+                    // If we are adding a new crop, there is nothing to delete so do nothing
+                }
+                // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
+                else if (extras.getBoolean("new") != true) {
+                    dbCtrl.removeValueEntry();
+                    Intent intent = new Intent(CropEditor.this, CropsInBed.class);
+                    intent.putExtra("section", finalSec1);
+                    intent.putExtra("bed", finalBedN1);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

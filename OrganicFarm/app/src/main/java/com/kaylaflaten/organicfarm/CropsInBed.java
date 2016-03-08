@@ -87,7 +87,7 @@ public class CropsInBed extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(CropsInBed.this, CropManager.class);
+                Intent intent = new Intent(CropsInBed.this, CropViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
                 intent.putExtra("section", finalSec2);

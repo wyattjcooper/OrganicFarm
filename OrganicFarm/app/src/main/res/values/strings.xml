@@ -9,10 +9,10 @@
     <string name="nameDefault">Name</string>
     <string name="enterButtonID">ENTER</string>
     <string name="backButtonID">BACK</string>
+    <string name="editButtonID">EDIT</string>
     <string name="title_activity_bed_page">BedPage</string>
     <string name="addCropButton">Add Crop</string>
     <string name="title_activity_crops_in_bed">CropsInBe</string>
-    <string name="cropAddButton">Add Crop</string>
     <string name="deleteButton">Delete</string>
     <string name="dateHarvestedID">Date Harvested</string>
     <string name="amountHarvestedID">Amount Harvested</string>
