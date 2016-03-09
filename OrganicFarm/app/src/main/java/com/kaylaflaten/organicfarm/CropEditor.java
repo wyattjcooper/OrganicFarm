@@ -32,7 +32,7 @@ public class CropEditor extends AppCompatActivity {
         bed = (TextView) findViewById(R.id.textView2);
         name = (EditText) findViewById(R.id.editText3);
         date = (EditText) findViewById(R.id.editText);
-        notes = (EditText) findViewById(R.id.editText2);
+        notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.button);
         back = (Button) findViewById(R.id.button2);
         delete = (Button) findViewById(R.id.button5);

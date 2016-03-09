@@ -26,14 +26,13 @@ public class CropViewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_viewer);
 
-        section = (TextView) findViewById(R.id.textView);
-        bed = (TextView) findViewById(R.id.textView2);
-        bed = (TextView) findViewById(R.id.textView2);
-        name = (TextView) findViewById(R.id.editText3);
-        date = (TextView) findViewById(R.id.editText);
-        notes = (TextView) findViewById(R.id.editText2);
-        back = (Button) findViewById(R.id.button2);
-        edit = (Button) findViewById(R.id.button5);
+        section = (TextView) findViewById(R.id.section);
+        bed = (TextView) findViewById(R.id.bed);
+        name = (TextView) findViewById(R.id.crop);
+        date = (TextView) findViewById(R.id.date);
+        notes = (TextView) findViewById(R.id.notes);
+        back = (Button) findViewById(R.id.back);
+        edit = (Button) findViewById(R.id.edit);
 
         final Bundle extras = getIntent().getExtras();
 

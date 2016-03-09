@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sectionID"
-        android:id="@+id/textView"
+        android:id="@+id/section"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/bedID"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
+        android:id="@+id/bed"
+        android:layout_below="@+id/section"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cropID"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
+        android:id="@+id/cropTitle"
+        android:layout_below="@+id/bed"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp" />
@@ -46,9 +46,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/datePlantedID"
-        android:id="@+id/textView4"
+        android:id="@+id/dateTitle"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/cropTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
-        android:id="@+id/textView5"
+        android:id="@+id/notesTitle"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -66,9 +66,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
+        android:id="@+id/date"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -77,20 +77,19 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/notes"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
-        android:layout_above="@+id/button"
-        android:layout_below="@+id/textView5" />
+        android:layout_above="@+id/back"
+        android:layout_below="@+id/notesTitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:text="@string/nameDefault"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_above="@+id/textView4"
+        android:id="@+id/crop"
+        android:layout_alignBottom="@+id/cropTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -98,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/backButtonID"
-        android:id="@+id/button2"
+        android:id="@+id/back"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -108,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/editButtonID"
-        android:id="@+id/button5"
+        android:id="@+id/edit"
         android:layout_alignBottom="@+id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
