@@ -19,22 +19,19 @@ public class CropManager extends AppCompatActivity {
     EditText notes;
     Button back;
     Button enter;
-    Button delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_manager);
 
-        section = (TextView) findViewById(R.id.textView);
-        bed = (TextView) findViewById(R.id.textView2);
-        bed = (TextView) findViewById(R.id.textView2);
-        name = (EditText) findViewById(R.id.editText3);
-        date = (EditText) findViewById(R.id.editText);
-        notes = (EditText) findViewById(R.id.editText2);
-        enter = (Button) findViewById(R.id.button);
-        back = (Button) findViewById(R.id.button2);
-        delete = (Button) findViewById(R.id.button5);
+        section = (TextView) findViewById(R.id.section);
+        bed = (TextView) findViewById(R.id.bed);
+        name = (EditText) findViewById(R.id.name);
+        date = (EditText) findViewById(R.id.date);
+        notes = (EditText) findViewById(R.id.notes);
+        enter = (Button) findViewById(R.id.enter);
+        back = (Button) findViewById(R.id.back);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -55,16 +52,8 @@ public class CropManager extends AppCompatActivity {
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(),bed.getText().toString(), this);
 
-        // If we selected a crop from the list,
-        // we will have passed its ID, so we set our reference to that ID
+        dbCtrl.setEntryRef(null, 2);
 
-        final String cropID = extras.getString("itemSelected");
-
-        dbCtrl.setEntryRef(cropID, 2);
-
-        dbCtrl.listenAndSetEditText(name, "name", "Enter name here");
-        dbCtrl.listenAndSetEditText(date,"date", "Enter date here");
-        dbCtrl.listenAndSetEditText(notes,"notes", "Enter notes here");
 
         // Push new data or modify old data when pressing enter button
         final int finalSec2 = sec;
@@ -78,8 +67,9 @@ public class CropManager extends AppCompatActivity {
                 Intent intent = new Intent(CropManager.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
                 // If we are adding a new crop, push a new child and add it to Harvest data branch
-                if (extras.getBoolean("new") == true) {
+//                if (extras.getBoolean("new") == true) {
                     // Push the entry data
+
                     entryKey[0] = dbCtrl.pushEntryReturnKey(newEntry);
                     intent.putExtra("pushID", entryKey[0]);
                     // Initialize the harvest data
@@ -88,11 +78,11 @@ public class CropManager extends AppCompatActivity {
                     dbCtrl.setEntryRef(entryKey[0], 1);
                     dbCtrl.setValueHarvest(harvestDefault);
 
-                }
-                // If we are not adding a new crop, modify the existing child we clicked on
-                else if (extras.getBoolean("new") != true) {
-                    dbCtrl.setValueEntry(newEntry);
-                }
+//                }
+//                // If we are not adding a new crop, modify the existing child we clicked on
+//                else if (extras.getBoolean("new") != true) {
+//                    dbCtrl.setValueEntry(newEntry);
+//                }
                 intent.putExtra("section", finalSec2);
                 intent.putExtra("bed", finalBedN2);
                 // Go back to crop entry page

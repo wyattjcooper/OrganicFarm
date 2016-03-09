@@ -3,6 +3,7 @@ package com.kaylaflaten.organicfarm;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;

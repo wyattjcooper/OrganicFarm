@@ -21,95 +21,98 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:text="@string/bedID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/bedID"
         android:id="@+id/bed"
         android:layout_below="@+id/section"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/cropTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cropID"
-        android:id="@+id/cropTitle"
         android:layout_below="@+id/bed"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp" />
 
     <TextView
+        android:id="@+id/dateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/datePlantedID"
-        android:id="@+id/dateTitle"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/cropTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/notesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
-        android:id="@+id/notesTitle"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/crop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="textPersonName"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/nameDefault"
+        android:layout_alignBottom="@+id/cropTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
         android:id="@+id/date"
-        android:ems="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/datePlantedID"
+        android:inputType="date"
         android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
+        android:id="@+id/notes"
+        android:gravity="top|left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/notesID"
         android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/notes"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/back"
         android:layout_below="@+id/notesTitle" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/nameDefault"
-        android:id="@+id/crop"
-        android:layout_alignBottom="@+id/cropTitle"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <Button
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/backButtonID"
-        android:id="@+id/back"
+        android:textAppearance="?android:attr/textAppearanceButton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/editButtonID"
-        android:id="@+id/edit"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

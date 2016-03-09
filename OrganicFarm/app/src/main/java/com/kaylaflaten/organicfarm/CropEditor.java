@@ -22,32 +22,34 @@ public class CropEditor extends AppCompatActivity {
     Button enter;
     Button delete;
 
+    int secN;
+    int bedN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_editor);
 
-        section = (TextView) findViewById(R.id.textView);
-        bed = (TextView) findViewById(R.id.textView2);
-        bed = (TextView) findViewById(R.id.textView2);
-        name = (EditText) findViewById(R.id.editText3);
-        date = (EditText) findViewById(R.id.editText);
+        section = (TextView) findViewById(R.id.section);
+        bed = (TextView) findViewById(R.id.bed);
+        name = (EditText) findViewById(R.id.name);
+        date = (EditText) findViewById(R.id.date);
         notes = (EditText) findViewById(R.id.notes);
-        enter = (Button) findViewById(R.id.button);
-        back = (Button) findViewById(R.id.button2);
-        delete = (Button) findViewById(R.id.button5);
+        enter = (Button) findViewById(R.id.enter);
+        back = (Button) findViewById(R.id.back);
+        delete = (Button) findViewById(R.id.delete);
 
         final Bundle extras = getIntent().getExtras();
 
         String sectionNum = "Section ";
         String bedNum = "Bed ";
-        int bedN = -1;
-        int sec = -1;
+        bedN = -1;
+        secN = -1;
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
-            sec = extras.getInt("section", -1);
-            sectionNum = sectionNum + (sec + 1);
+            secN = extras.getInt("section", -1);
+            sectionNum = sectionNum + (secN + 1);
             bedNum = bedNum + (bedN + 1);
         }
         section.setText(sectionNum);
@@ -58,7 +60,7 @@ public class CropEditor extends AppCompatActivity {
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
-        String cropID = extras.getString("itemSelected");
+        final String cropID = extras.getString("itemSelected");
         dbCtrl.setEntryRef(cropID, 2);
 
         dbCtrl.listenAndSetEditText(name, "name", "Enter name here");
@@ -66,45 +68,47 @@ public class CropEditor extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(notes,"notes", "Enter notes here");
 
         // Push new data or modify old data when pressing enter button
-        final int finalSec2 = sec;
+        final int finalSec2 = secN;
         final int finalBedN2 = bedN;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropEditor.this, CropsInBed.class);
+                Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
                 // If we are adding a new crop, push a new child
-                if (extras.getBoolean("new") == true) {
-                    String key = dbCtrl.pushEntryReturnKey(newEntry);
-                    intent.putExtra("pushID", key);
-                }
+
                 // If we are not adding a new crop, modify the existing child we clicked on
-                else if (extras.getBoolean("new") != true) {
                     dbCtrl.setValueEntry(newEntry);
-                }
+
+
+                // Look up the key in the keys list - same position
                 intent.putExtra("section", finalSec2);
                 intent.putExtra("bed", finalBedN2);
+                intent.putExtra("itemSelected", cropID);
+                startActivity(intent);
+
+
+
                 // Go back to crop entry page
                 startActivity(intent);
             }
         });
 
         // Navigate back to bed page - no changes will be made
-        final int finalSec = sec;
-        final int finalBedN = bedN;
+
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropEditor.this, CropsInBed.class);
-                intent.putExtra("section", finalSec);
-                intent.putExtra("bed", finalBedN);
+                System.out.println("here");
+                Intent intent = new Intent(CropEditor.this, CropViewer.class);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
+                intent.putExtra("itemSelected", cropID);
                 startActivity(intent);
             }
         });
 
         // Delete crops
-        final int finalSec1 = sec;
-        final int finalBedN1 = bedN;
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,8 +119,8 @@ public class CropEditor extends AppCompatActivity {
                 else if (extras.getBoolean("new") != true) {
                     dbCtrl.removeValueEntry();
                     Intent intent = new Intent(CropEditor.this, CropsInBed.class);
-                    intent.putExtra("section", finalSec1);
-                    intent.putExtra("bed", finalBedN1);
+                    intent.putExtra("section", secN);
+                    intent.putExtra("bed", bedN);
                     startActivity(intent);
                 }
             }

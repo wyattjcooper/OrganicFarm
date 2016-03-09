@@ -21,6 +21,9 @@ public class CropViewer extends AppCompatActivity {
     Button back;
     Button edit;
 
+    int secN = -1;
+    int bedN = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +41,11 @@ public class CropViewer extends AppCompatActivity {
 
         String sectionNum = "Section ";
         String bedNum = "Bed ";
-        int bedN = -1;
-        int sec = -1;
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
-            sec = extras.getInt("section", -1);
-            sectionNum = sectionNum + (sec + 1);
+            secN = extras.getInt("section", -1);
+            sectionNum = sectionNum + (secN + 1);
             bedNum = bedNum + (bedN + 1);
         }
         section.setText(sectionNum);
@@ -58,9 +59,10 @@ public class CropViewer extends AppCompatActivity {
         final String cropID = extras.getString("itemSelected");
         dbCtrl.setEntryRef(cropID, 2);
 
-        name.setText("cat");
-        date.setText("Cat");
-        notes.setText("catt");
+//        Entry crop  = dbCtrl.returnEntryAtLocation(sectionNum, bedNum, cropID);
+//        name.setText(crop.getName());
+//        date.setText(crop.getDate());
+//        notes.setText(crop.getNotes());
 //        dbCtrl.listenAndSetText(name, "name", "Enter name here");
 //        dbCtrl.listenAndSetEditText(date, "date", "Enter date here");
 //        dbCtrl.listenAndSetEditText(notes, "notes", "Enter notes here");
@@ -68,7 +70,7 @@ public class CropViewer extends AppCompatActivity {
 
 
         // Navigate back to bed page - no changes will be made
-        final int finalSec = sec;
+        final int finalSec = secN;
         final int finalBedN = bedN;
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -82,7 +84,7 @@ public class CropViewer extends AppCompatActivity {
 
         // Edit crops
         //FIX
-        final int finalSec1 = sec;
+        final int finalSec1 = secN;
         final int finalBedN1 = bedN;
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
