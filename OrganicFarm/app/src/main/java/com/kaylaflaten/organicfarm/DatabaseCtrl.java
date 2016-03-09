@@ -9,6 +9,7 @@ import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
+import android.widget.CheckBox;
 import com.kaylaflaten.organicfarm.Entry;
 
 import java.util.List;
@@ -114,6 +115,24 @@ public class DatabaseCtrl {
             }
         });
     }
+
+    // Input: an EditText field to be modified, a value to listen for changes to, and a default string
+    // that the EditText will have if no changes are found
+    public void listenAndSetCheckBox(final CheckBox cb, String child) {
+        entryRef.child(child).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                boolean data = (boolean) snapshot.getValue();
+                cb.setActivated(data);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+
 
     public String pushEntryReturnKey(Entry entry) {
         Firebase pushRef = entryRef.push();

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Switch;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
@@ -25,8 +25,9 @@ public class CropHarvester extends AppCompatActivity {
     String date;
     boolean done;
     EditText notesInput;
-    DatePicker datePicker;
-    Switch finished;
+    EditText datePicker;
+    EditText amount;
+    CheckBox finished;
     Button back;
     Button enter;
 
@@ -37,6 +38,10 @@ public class CropHarvester extends AppCompatActivity {
 
         enter = (Button) findViewById(R.id.buttonEnter);
         back = (Button) findViewById(R.id.buttonBack);
+        datePicker = (EditText) findViewById(R.id.editTextHD);
+        notesInput = (EditText) findViewById(R.id.editTextHN);
+        finished = (CheckBox) findViewById(R.id.checkboxFH);
+        amount = (EditText) findViewById(R.id.editTextAH);
 
 
         // Create the DatabaseCtrl object
@@ -60,16 +65,30 @@ public class CropHarvester extends AppCompatActivity {
         // we will have passed its ID, so we set our reference to that ID
        // String cropID = extras.getString("itemSelected");
         String cropID = "-KCSKgIhqPfeJtezBxP-";
-        dbCtrl.setEntryRef(cropID,1);
+        dbCtrl.setEntryRef(cropID, 1);
 
         Harvest harvestData = dbCtrl.returnHarvestAtLocation(cropID);
+
+        //notesInput.setText(harvestData.getNotes().toString());
+        //finished.setActivated(harvestData.getFinished());
+        //datePicker.setText(harvestData.getDate().toString());
+//        amount.setText(harvestData.getAmount().toString());
+        dbCtrl.listenAndSetEditText(notesInput, "notes", "NULL");
+        dbCtrl.listenAndSetEditText(datePicker, "date", "NULL");
+        dbCtrl.listenAndSetCheckBox(finished, "finished");
+
+
+
+
 
 
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Intent intent = new Intent(CropHarvester.this, MainActivity.class);
+                Harvest newHarvest = new Harvest(datePicker.getText().toString(), 0.0, finished.isActivated(), notesInput.getText().toString(), 1, 1);
+                dbCtrl.setValueHarvest(newHarvest);
+                startActivity(intent);
             }
         });
 
