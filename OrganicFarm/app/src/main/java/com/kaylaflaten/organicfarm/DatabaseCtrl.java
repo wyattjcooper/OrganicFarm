@@ -103,7 +103,7 @@ public class DatabaseCtrl {
         entryRef.child(child).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String data = (String) snapshot.getValue();
+                String data = snapshot.getValue().toString();
                 if (data == null) {
                     et.setText(defaultVal);
                 } else {
