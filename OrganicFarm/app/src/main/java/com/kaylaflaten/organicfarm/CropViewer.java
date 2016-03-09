@@ -39,24 +39,28 @@ public class CropViewer extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String sectionNum = "Section ";
-        String bedNum = "Bed ";
+        String secS = "Section ";
+        String bedS = "Bed ";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
-            sectionNum = sectionNum + (secN + 1);
-            bedNum = bedNum + (bedN + 1);
+            secS = secS + (secN + 1);
+            bedS = bedS + (bedN + 1);
         }
-        section.setText(sectionNum);
-        bed.setText(bedNum);
+        section.setText(secS);
+        bed.setText(bedS);
+
+        final String cropID = extras.getString("itemSelected");
 
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(), bed.getText().toString(), this);
 
+        Entry crop = dbCtrl.returnEntryAtLocation(secS, bedS, cropID);
+
+        //name.setText(crop.getName());
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
-        final String cropID = extras.getString("itemSelected");
         dbCtrl.setEntryRef(cropID, 2);
 
 //        Entry crop  = dbCtrl.returnEntryAtLocation(sectionNum, bedNum, cropID);

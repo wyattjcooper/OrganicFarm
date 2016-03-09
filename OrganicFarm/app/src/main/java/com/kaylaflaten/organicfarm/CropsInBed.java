@@ -23,6 +23,9 @@ public class CropsInBed extends AppCompatActivity {
     DatabaseCtrl dbCtrl;
     ArrayAdapter<String> aa;
 
+    int secN;
+    int bedN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,31 +45,31 @@ public class CropsInBed extends AppCompatActivity {
         lv.setAdapter(aa);
 
         // Grabbing Section and Bed values from intent
-        String sectionNum = "Section ";
-        String bedNum = "Bed ";
-        int sec = -1;
-        int bedN = -1;
+        String secS = "Section ";
+        String bedS = "Bed ";
+        secN = -1;
+        bedN = -1;
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            sec = extras.getInt("section", -1);
+            secN = extras.getInt("section", -1);
             bedN = extras.getInt("bed", -1);
-            sectionNum = sectionNum + (sec + 1);
-            bedNum = bedNum + (bedN + 1);
+            secS = secS + (secN + 1);
+            bedS = bedS + (bedN + 1);
         }
 
         // Display current section/bed in the TextViews
-        sectionDisplay.setText(sectionNum);
-        bedDisplay.setText(bedNum);
+        sectionDisplay.setText(secS);
+        bedDisplay.setText(bedS);
 
         // Set up our database control object
-        dbCtrl = new DatabaseCtrl(sectionNum, bedNum, this);
+        dbCtrl = new DatabaseCtrl(secS, bedS, this);
 
         // Attach crops already in the database to our list
         ArrayList<String> keys = dbCtrl.generateKeysList(aa);
 
         // Add new crop by clicking the add button
-        final int finalSec1 = sec;
+        final int finalSec1 = secN;
         final int finalBedN = bedN;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +83,7 @@ public class CropsInBed extends AppCompatActivity {
         });
 
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
-        final int finalSec2 = sec;
-        final int finalBedN1 = bedN;
+
         final ArrayList<String> finalKeys = keys;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,20 +92,19 @@ public class CropsInBed extends AppCompatActivity {
                 Intent intent = new Intent(CropsInBed.this, CropViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
-                intent.putExtra("section", finalSec2);
-                intent.putExtra("bed", finalBedN1);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
                 intent.putExtra("itemSelected", itemSelected);
                 startActivity(intent);
             }
         });
 
         // Go back to Beds
-        final int finalSec = sec;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CropsInBed.this, Beds.class);
-                intent.putExtra("section", finalSec);
+                intent.putExtra("section", secN);
                 startActivity(intent);
             }
         });
