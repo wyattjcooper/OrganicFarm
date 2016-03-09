@@ -58,7 +58,7 @@ public class CropEditor extends AppCompatActivity {
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
-        String cropID = extras.getString("itemSelected");
+        final String cropID = extras.getString("itemSelected");
         dbCtrl.setEntryRef(cropID, 2);
 
         dbCtrl.listenAndSetEditText(name, "name", "Enter name here");
@@ -68,15 +68,24 @@ public class CropEditor extends AppCompatActivity {
         // Push new data or modify old data when pressing enter button
         final int finalSec2 = sec;
         final int finalBedN2 = bedN;
+        final int finalSec3 = sec;
+        final int[] finalBedN3 = {bedN};
+        final String[] entryKey = {"blank"};
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropEditor.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
-                // If we are adding a new crop, push a new child
+                // If we are adding a new crop, push a new child and add it to Harvest data branch
                 if (extras.getBoolean("new") == true) {
-                    String key = dbCtrl.pushEntryReturnKey(newEntry);
-                    intent.putExtra("pushID", key);
+                    // Push the entry data
+                    entryKey[0] = dbCtrl.pushEntryReturnKey(newEntry);
+                    intent.putExtra("pushID", entryKey[0]);
+                    // Initialize the harvest data
+                    Harvest harvestDefault = new Harvest("Enter date here", 0.0, false,"Enter notes here", finalSec3 + 1, finalBedN3[0] + 1);
+                    dbCtrl.setOneChildRef("Harvest");
+                    dbCtrl.setEntryRef(entryKey[0], 1);
+                    dbCtrl.setValueHarvest(harvestDefault);
                 }
                 // If we are not adding a new crop, modify the existing child we clicked on
                 else if (extras.getBoolean("new") != true) {
@@ -113,6 +122,9 @@ public class CropEditor extends AppCompatActivity {
                 }
                 // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
                 else if (extras.getBoolean("new") != true) {
+                    dbCtrl.removeValueEntry();
+                    dbCtrl.setOneChildRef("Harvest");
+                    dbCtrl.setEntryRef(cropID, 1);
                     dbCtrl.removeValueEntry();
                     Intent intent = new Intent(CropEditor.this, CropsInBed.class);
                     intent.putExtra("section", finalSec1);

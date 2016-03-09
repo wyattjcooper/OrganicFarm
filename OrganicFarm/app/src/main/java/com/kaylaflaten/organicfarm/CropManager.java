@@ -87,7 +87,6 @@ public class CropManager extends AppCompatActivity {
                     dbCtrl.setOneChildRef("Harvest");
                     dbCtrl.setEntryRef(entryKey[0], 1);
                     dbCtrl.setValueHarvest(harvestDefault);
-
                 }
                 // If we are not adding a new crop, modify the existing child we clicked on
                 else if (extras.getBoolean("new") != true) {
