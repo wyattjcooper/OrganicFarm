@@ -137,7 +137,7 @@ public class DatabaseCtrl {
         eRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Entry data = (Entry) snapshot.getValue();
+                Entry data = (Entry) snapshot.getValue(Entry.class);
                 if (data == null) {
 
                 } else {
@@ -160,7 +160,7 @@ public class DatabaseCtrl {
         hRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Harvest data = (Harvest) snapshot.getValue();
+                Harvest data = (Harvest) snapshot.getValue(Harvest.class);
                 if (data == null) {
 
                 } else {
