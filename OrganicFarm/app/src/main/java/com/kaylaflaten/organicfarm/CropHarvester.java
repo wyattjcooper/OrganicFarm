@@ -76,9 +76,7 @@ public class CropHarvester extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(notesInput, "notes", "NULL");
         dbCtrl.listenAndSetEditText(datePicker, "date", "NULL");
         dbCtrl.listenAndSetCheckBox(finished, "finished");
-
-
-
+        dbCtrl.listenAndSetEditText(amount, "amount", "NULL");
 
 
 
