@@ -133,6 +133,24 @@ public class DatabaseCtrl {
         });
     }
 
+    public void listenAndSetText(final TextView et, String child, final String defaultVal) {
+        entryRef.child(child).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.getValue() == null) {
+                    et.setText(defaultVal);
+                } else {
+                    String data = snapshot.getValue().toString();
+                    et.setText(data.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
 
 
     public String pushEntryReturnKey(Entry entry) {
@@ -153,17 +171,15 @@ public class DatabaseCtrl {
 
     public Entry returnEntryAtLocation(String section, String bed, String key) {
         Firebase eRef = ref.child(section).child(bed).child(key);
-        final Entry returnEntry = new Entry();
+        Entry returnEntry = new Entry("NULL","NULL","NULL");
         eRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Entry data = (Entry) snapshot.getValue(Entry.class);
+                Entry data = snapshot.getValue(Entry.class);
                 if (data == null) {
 
                 } else {
-                    returnEntry.setDate(data.getDate());
-                    returnEntry.setName(data.getName());
-                    returnEntry.setNotes(data.getNotes());
+                    Entry returnEntry = data;
                 }
             }
 
@@ -176,7 +192,7 @@ public class DatabaseCtrl {
 
     public Harvest returnHarvestAtLocation(String key) {
         Firebase hRef = ref.child("Harvest").child(key);
-        final Harvest returnHarvest = new Harvest();
+        final Harvest[] returnHarvest = {new Harvest()};
         hRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -184,11 +200,7 @@ public class DatabaseCtrl {
                 if (data == null) {
 
                 } else {
-                    returnHarvest.setDate(data.getDate());
-                    returnHarvest.setFinished(data.getFinished());
-                    returnHarvest.setNotes(data.getNotes());
-                    returnHarvest.setSection(data.getSection());
-                    returnHarvest.setBed(data.getBed());
+                    returnHarvest[0] = data;
                 }
             }
 
@@ -196,7 +208,7 @@ public class DatabaseCtrl {
             public void onCancelled(FirebaseError error) {
             }
         });
-        return returnHarvest;
+        return returnHarvest[0];
     }
 
 

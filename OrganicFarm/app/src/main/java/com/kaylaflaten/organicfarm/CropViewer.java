@@ -58,20 +58,25 @@ public class CropViewer extends AppCompatActivity {
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(), bed.getText().toString(), this);
 
-        Entry crop = dbCtrl.returnEntryAtLocation(secS, bedS, cropID);
+        //Entry crop = dbCtrl.returnEntryAtLocation(secS, bedS, cropID);
 
         //name.setText(crop.getName());
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         dbCtrl.setEntryRef(cropID, 2);
 
-//        Entry crop  = dbCtrl.returnEntryAtLocation(sectionNum, bedNum, cropID);
-//        name.setText(crop.getName());
-//        date.setText(crop.getDate());
-//        notes.setText(crop.getNotes());
-//        dbCtrl.listenAndSetText(name, "name", "Enter name here");
-//        dbCtrl.listenAndSetEditText(date, "date", "Enter date here");
-//        dbCtrl.listenAndSetEditText(notes, "notes", "Enter notes here");
+//        Entry cropE  = dbCtrl.returnEntryAtLocation(secS, bedS, cropID);
+//        name.setText(cropE.getName());
+//        date.setText(cropE.getDate());
+//        notes.setText(cropE.getNotes());
+
+        dbCtrl.listenAndSetText(name, "name", "Name");
+        dbCtrl.listenAndSetText(date, "date", "Date");
+        dbCtrl.listenAndSetText(notes, "notes", "Notes");
+
+
+
+
 
 
 
