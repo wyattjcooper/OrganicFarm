@@ -20,6 +20,7 @@ public class CropViewer extends AppCompatActivity {
     TextView notes;
     Button back;
     Button edit;
+    Button harvest;
 
     int secN = -1;
     int bedN = -1;
@@ -36,6 +37,7 @@ public class CropViewer extends AppCompatActivity {
         notes = (TextView) findViewById(R.id.notes);
         back = (Button) findViewById(R.id.back);
         edit = (Button) findViewById(R.id.edit);
+        harvest = (Button) findViewById(R.id.button);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -94,6 +96,19 @@ public class CropViewer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropViewer.this, CropEditor.class);
+                // Look up the key in the keys list - same position
+                intent.putExtra("section", finalSec1);
+                intent.putExtra("bed", finalBedN1);
+                intent.putExtra("itemSelected", cropID);
+                startActivity(intent);
+            }
+        });
+
+        // Harvest the crop
+        harvest.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CropViewer.this, CropHarvester.class);
                 // Look up the key in the keys list - same position
                 intent.putExtra("section", finalSec1);
                 intent.putExtra("bed", finalBedN1);

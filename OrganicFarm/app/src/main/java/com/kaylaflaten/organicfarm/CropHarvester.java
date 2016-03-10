@@ -63,8 +63,8 @@ public class CropHarvester extends AppCompatActivity {
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
-       // String cropID = extras.getString("itemSelected");
-        String cropID = "-KCSKgIhqPfeJtezBxP-";
+        final String cropID = extras.getString("itemSelected");
+        //String cropID = "-KCSKgIhqPfeJtezBxP-";
         dbCtrl.setEntryRef(cropID, 1);
 
         Harvest harvestData = dbCtrl.returnHarvestAtLocation(cropID);
@@ -96,9 +96,10 @@ public class CropHarvester extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropHarvester.this, MainActivity.class);
+                Intent intent = new Intent(CropHarvester.this, CropViewer.class);
                 intent.putExtra("section", finalSec);
                 intent.putExtra("bed", finalBedN);
+                intent.putExtra("itemSelected", cropID);
                 startActivity(intent);
             }
         });

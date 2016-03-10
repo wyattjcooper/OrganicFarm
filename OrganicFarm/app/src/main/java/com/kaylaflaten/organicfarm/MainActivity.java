@@ -38,24 +38,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent("android.intent.action.CROPHARVESTER"));
-            }
-        });
 
-//        FloatingActionButton mapfab = (FloatingActionButton) findViewById(R.id.mapfab);
-//        mapfab.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent("android.intent.action.MAP"));
-//            }
-//        });
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
     }
 
     @Override
