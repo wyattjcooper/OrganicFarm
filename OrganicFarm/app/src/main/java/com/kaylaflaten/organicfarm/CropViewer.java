@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -58,52 +57,31 @@ public class CropViewer extends AppCompatActivity {
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(), bed.getText().toString(), this);
 
-        //Entry crop = dbCtrl.returnEntryAtLocation(secS, bedS, cropID);
-
-        //name.setText(crop.getName());
-        // If we selected a crop from the list,
-        // we will have passed its ID, so we set our reference to that ID
         dbCtrl.setEntryRef(cropID, 2);
-
-//        Entry cropE  = dbCtrl.returnEntryAtLocation(secS, bedS, cropID);
-//        name.setText(cropE.getName());
-//        date.setText(cropE.getDate());
-//        notes.setText(cropE.getNotes());
 
         dbCtrl.listenAndSetText(name, "name", "Name");
         dbCtrl.listenAndSetText(date, "date", "Date");
         dbCtrl.listenAndSetText(notes, "notes", "Notes");
 
-
-
-
-
-
-
         // Navigate back to bed page - no changes will be made
-        final int finalSec = secN;
-        final int finalBedN = bedN;
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropViewer.this, CropsInBed.class);
-                intent.putExtra("section", finalSec);
-                intent.putExtra("bed", finalBedN);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
                 startActivity(intent);
             }
         });
 
         // Edit crops
-        //FIX
-        final int finalSec1 = secN;
-        final int finalBedN1 = bedN;
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropViewer.this, CropEditor.class);
                 // Look up the key in the keys list - same position
-                intent.putExtra("section", finalSec1);
-                intent.putExtra("bed", finalBedN1);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
                 intent.putExtra("itemSelected", cropID);
                 startActivity(intent);
             }
@@ -115,8 +93,8 @@ public class CropViewer extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CropViewer.this, CropHarvester.class);
                 // Look up the key in the keys list - same position
-                intent.putExtra("section", finalSec1);
-                intent.putExtra("bed", finalBedN1);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
                 intent.putExtra("itemSelected", cropID);
                 startActivity(intent);
             }
