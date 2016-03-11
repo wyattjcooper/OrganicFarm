@@ -83,10 +83,12 @@ public class DatabaseCtrl {
                     Entry cropEntry = postSnapshot.getValue(Entry.class);
                     // Fetch the key from the database
                     String key = postSnapshot.getKey();
-                    // Add key to keys list
-                    keys.add(key);
-                    // Add name to the list by adding it to the ArrayAdapter
-                    aa.add(cropEntry.getName());
+                    if (!keys.contains(key)) {
+                        // Add key to keys list
+                        keys.add(key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        aa.add(cropEntry.getName());
+                    }
                 }
             }
             @Override

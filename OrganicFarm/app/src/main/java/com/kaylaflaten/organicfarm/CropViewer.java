@@ -21,8 +21,8 @@ public class CropViewer extends AppCompatActivity {
     Button edit;
     Button harvest;
 
-    int secN = -1;
-    int bedN = -1;
+    int secN;
+    int bedN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

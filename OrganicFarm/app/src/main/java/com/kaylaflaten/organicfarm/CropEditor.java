@@ -43,8 +43,6 @@ public class CropEditor extends AppCompatActivity {
 
         String sectionNum = "Section ";
         String bedNum = "Bed ";
-        bedN = -1;
-        secN = -1;
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
@@ -113,7 +111,6 @@ public class CropEditor extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("here");
                 Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);

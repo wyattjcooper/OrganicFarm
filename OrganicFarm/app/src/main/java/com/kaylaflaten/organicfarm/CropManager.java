@@ -39,8 +39,6 @@ public class CropManager extends AppCompatActivity {
 
         String sectionNum = "Section ";
         String bedNum = "Bed ";
-        bedN = -1;
-        secN = -1;
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
@@ -58,7 +56,6 @@ public class CropManager extends AppCompatActivity {
 
 
         // Push new data or modify old data when pressing enter button
-        final int finalSec3 = secN;
         final String[] entryKey = {"blank"};
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
