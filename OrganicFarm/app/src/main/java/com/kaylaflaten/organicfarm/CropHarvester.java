@@ -84,7 +84,7 @@ public class CropHarvester extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-                Harvest newHarvest = new Harvest(datePicker.getText().toString(), 0.0, finished.isActivated(), notesInput.getText().toString(), 1, 1);
+                Harvest newHarvest = new Harvest(datePicker.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isActivated(), notesInput.getText().toString(), 1, 1);
                 //dbCtrl.setValueHarvest(newHarvest);
                 String[] locationHarvest = new String[2];
                 locationHarvest[0] = "Harvest";

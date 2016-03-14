@@ -73,16 +73,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:id="@+id/editTextAH"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="8"
-        android:layout_alignBottom="@+id/textViewAH"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <CheckBox
         android:id="@+id/checkboxFH"
         android:layout_width="wrap_content"
@@ -117,5 +107,15 @@
         android:text="@string/backButtonID"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextAH"
+        android:layout_alignTop="@+id/textViewAH"
+        android:layout_alignRight="@+id/editTextHN"
+        android:layout_alignEnd="@+id/editTextHN" />
 
 </RelativeLayout>
