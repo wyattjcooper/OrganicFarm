@@ -23,26 +23,34 @@ public class DatabaseCtrl {
     private Firebase twoChildRef;
     private Firebase entryRef;
     private Firebase oneChildRef;
-
+    private static String REFNAME = "https://dazzling-inferno-9759.firebaseio.com/";
     // Parameterized constructor to set the Firebase reference
     public DatabaseCtrl(String child1, Context context) {
         Firebase.setAndroidContext(context);
-        ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
+        ref = new Firebase(REFNAME);
         oneChildRef = ref.child(child1);
     }
 
     // Parameterized constructor to set the Firebase reference
     public DatabaseCtrl(String child1, String child2, Context context) {
         Firebase.setAndroidContext(context);
-        ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
+        ref = new Firebase(REFNAME);
         twoChildRef = ref.child(child1).child(child2);
     }
 
     public DatabaseCtrl() {
-        ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
+        ref = new Firebase(REFNAME);
     }
 
     public Firebase getRef() {
+        return ref;
+    }
+
+    private Firebase createReferenceFromLocationList(String[] location) {
+        ref = new Firebase(REFNAME);
+        for (String child : location) {
+            ref = ref.child(child);
+        }
         return ref;
     }
 
@@ -88,6 +96,33 @@ public class DatabaseCtrl {
                         keys.add(key);
                         // Add name to the list by adding it to the ArrayAdapter
                         aa.add(cropEntry.getName());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        return keys;
+    }
+
+    public <T> ArrayList<String> fillObjectListReturnKeys(String[] location, final ArrayList<T> OBJECTLIST) {
+        Firebase reference = createReferenceFromLocationList(location);
+        final ArrayList<String> keys = new ArrayList<String>();
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    T object = (T) postSnapshot.getValue();
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key)) {
+                        // Add key to keys list
+                        keys.add(key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        OBJECTLIST.add(object);
                     }
                 }
             }
@@ -161,6 +196,18 @@ public class DatabaseCtrl {
         return pushRef.getKey();
     }
 
+    public <T> String pushObjectReturnKey(String[] location, T object ) {
+        Firebase reference = createReferenceFromLocationList(location);
+        Firebase pushRef = reference.push();
+        pushRef.setValue(object);
+        return pushRef.getKey();
+    }
+
+    public <T> void  setValueAtLocation(String[] location, T object) {
+        Firebase reference = createReferenceFromLocationList(location);
+        reference.setValue(object);
+    }
+
 
     public void setValueEntry(Entry entry) {
         entryRef.setValue(entry);
@@ -169,6 +216,26 @@ public class DatabaseCtrl {
 
     public void removeValueEntry() {
         entryRef.removeValue();
+    }
+
+    public <T> T returnObjectAtLocation(String[] location) {
+        Firebase reference = createReferenceFromLocationList(location);
+        T returnObject = null;
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                T data = (T) snapshot.getValue();
+                if (data == null) {
+
+                } else {
+                    T returnObject = data;
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+        return returnObject;
     }
 
     public Entry returnEntryAtLocation(String section, String bed, String key) {
