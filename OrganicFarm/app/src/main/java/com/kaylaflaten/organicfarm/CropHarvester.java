@@ -45,7 +45,7 @@ public class CropHarvester extends AppCompatActivity {
 
 
         // Create the DatabaseCtrl object
-        final DatabaseCtrl dbCtrl = new DatabaseCtrl("Harvest", this);
+        final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
         final Bundle extras = getIntent().getExtras();
 

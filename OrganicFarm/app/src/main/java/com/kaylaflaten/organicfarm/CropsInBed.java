@@ -65,10 +65,14 @@ public class CropsInBed extends AppCompatActivity {
         bedDisplay.setText(bedS);
 
         // Set up our database control object
-        dbCtrl = new DatabaseCtrl(secS, bedS, this);
+        dbCtrl = new DatabaseCtrl(this);
 
         // Attach crops already in the database to our list
-        ArrayList<String> keys = dbCtrl.generateKeysList(aa);
+        String[] location = new String[2];
+        location[0] = secS;
+        location[1] = bedS;
+        //ArrayList<String> keys = dbCtrl.generateKeysList(aa);
+        ArrayList<String> keys = dbCtrl.generateKeysListFromLocation(location, aa);
 
         // Add new crop by clicking the add button
         final int finalSec1 = secN;

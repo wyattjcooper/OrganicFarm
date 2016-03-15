@@ -63,7 +63,7 @@ public class CropViewer extends AppCompatActivity {
         location[2] = cropID;
 
         // Create the DatabaseCtrl object
-        final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(), bed.getText().toString(), this);
+        final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
         //dbCtrl.setEntryRef(cropID, 2);
 

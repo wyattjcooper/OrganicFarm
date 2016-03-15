@@ -53,14 +53,14 @@ public class CropEditor extends AppCompatActivity {
         section.setText(sectionNum);
         bed.setText(bedNum);
 
-        String[] location = new String[3];
+        final String[] location = new String[3];
         location[0] = sectionNum;
         location[1] = bedNum;
 
 
 
         // Create the DatabaseCtrl object
-        final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(),bed.getText().toString(), this);
+        final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
@@ -79,6 +79,8 @@ public class CropEditor extends AppCompatActivity {
         final int finalSec3 = secN;
         final int[] finalBedN3 = {bedN};
         final String[] entryKey = {"blank"};
+        final String finalSectionNum = sectionNum;
+        final String finalBedNum = bedNum;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,18 +89,23 @@ public class CropEditor extends AppCompatActivity {
                 // If we are adding a new crop, push a new child
 
                 // If we are adding a new crop, push a new child and add it to Harvest data branch
-                if (extras.getBoolean("new") == true) {
-                    // Push the entry data
-                    entryKey[0] = dbCtrl.pushEntryReturnKey(newEntry);
-                    intent.putExtra("pushID", entryKey[0]);
-                    // Initialize the harvest data
-                    Harvest harvestDefault = new Harvest("Enter date here", 0.0, false,"Enter notes here", finalSec3 + 1, finalBedN3[0] + 1);
-                    dbCtrl.setOneChildRef("Harvest");
-                    dbCtrl.setEntryRef(entryKey[0], 1);
-                    dbCtrl.setValueHarvest(harvestDefault);
-                }
+//                if (extras.getBoolean("new") == true) {
+//                    // Push the entry data
+//                    entryKey[0] = dbCtrl.pushEntryReturnKey(newEntry);
+//                    intent.putExtra("pushID", entryKey[0]);
+//                    // Initialize the harvest data
+//                    Harvest harvestDefault = new Harvest("Enter date here", 0.0, false,"Enter notes here", finalSec3 + 1, finalBedN3[0] + 1);
+//                    //dbCtrl.setOneChildRef("Harvest");
+//                    //dbCtrl.setEntryRef(entryKey[0], 1);
+//                    //dbCtrl.setValueHarvest(harvestDefault);
+//
+//                }
+                String[] location = new String[3];
+                location[0] = finalSectionNum;
+                location[1] = finalBedNum;
+                location[2] = cropID;
                 // If we are not adding a new crop, modify the existing child we clicked on
-                    dbCtrl.setValueEntry(newEntry);
+                dbCtrl.setValueAtLocation(location, newEntry);
 
 
                 // Look up the key in the keys list - same position
@@ -136,10 +143,11 @@ public class CropEditor extends AppCompatActivity {
                 }
                 // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
                 else if (extras.getBoolean("new") != true) {
-                    dbCtrl.removeValueEntry();
-                    dbCtrl.setOneChildRef("Harvest");
-                    dbCtrl.setEntryRef(cropID, 1);
-                    dbCtrl.removeValueEntry();
+                    dbCtrl.removeValueFromLocation(location);
+                    String[] harvestLocation = new String[2];
+                    harvestLocation[0] = "Harvest";
+                    harvestLocation[1] = cropID;
+                    dbCtrl.removeValueFromLocation(harvestLocation);
                     Intent intent = new Intent(CropEditor.this, CropsInBed.class);
                     intent.putExtra("section", secN);
                     intent.putExtra("bed", bedN);

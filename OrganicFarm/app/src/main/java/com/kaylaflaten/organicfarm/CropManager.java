@@ -51,9 +51,9 @@ public class CropManager extends AppCompatActivity {
         bed.setText(bedNum);
 
         // Create the DatabaseCtrl object
-        final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(),bed.getText().toString(), this);
+        final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
-        dbCtrl.setEntryRef(null, 2);
+        //dbCtrl.setEntryRef(null, 2);
 
 
         // Push new data or modify old data when pressing enter button
