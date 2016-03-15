@@ -53,17 +53,25 @@ public class CropEditor extends AppCompatActivity {
         section.setText(sectionNum);
         bed.setText(bedNum);
 
+        String[] location = new String[3];
+        location[0] = sectionNum;
+        location[1] = bedNum;
+
+
+
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(),bed.getText().toString(), this);
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
-        dbCtrl.setEntryRef(cropID, 2);
+        location[2] = cropID;
 
-        dbCtrl.listenAndSetEditText(name, "name", "Enter name here");
-        dbCtrl.listenAndSetEditText(date,"date", "Enter date here");
-        dbCtrl.listenAndSetEditText(notes,"notes", "Enter notes here");
+        //dbCtrl.setEntryRef(cropID, 2);
+
+        dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
+        dbCtrl.listenAndSetEditText(location, date,"date", "Enter date here");
+        dbCtrl.listenAndSetEditText(location, notes,"notes", "Enter notes here");
 
         // Push new data or modify old data when pressing enter button
         final int finalSec2 = secN;

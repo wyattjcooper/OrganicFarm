@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 /**
  * Created by Carmen on 3/7/2016.
@@ -52,16 +54,30 @@ public class CropViewer extends AppCompatActivity {
         section.setText(secS);
         bed.setText(bedS);
 
+        String[] location = new String[3];
+        location[0] = secS;
+        location[1] = bedS;
+
         final String cropID = extras.getString("itemSelected");
+
+        location[2] = cropID;
 
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(section.getText().toString(), bed.getText().toString(), this);
 
-        dbCtrl.setEntryRef(cropID, 2);
+        //dbCtrl.setEntryRef(cropID, 2);
 
-        dbCtrl.listenAndSetText(name, "name", "Name");
-        dbCtrl.listenAndSetText(date, "date", "Date");
-        dbCtrl.listenAndSetText(notes, "notes", "Notes");
+
+        dbCtrl.listenAndSetText(location,name, "name", "Name");
+        dbCtrl.listenAndSetText(location, date, "date", "Date");
+        dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
+
+
+        //ArrayList<String> info = new ArrayList<String>();
+       // info.add("");
+        //dbCtrl.returnValueAtLocation(location, "name",info);
+
+        //name.setText(info.get(0));
 
         // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {

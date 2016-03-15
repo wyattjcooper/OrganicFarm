@@ -12,7 +12,7 @@ import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
 import android.widget.CheckBox;
 import com.kaylaflaten.organicfarm.Entry;
-
+import android.util.Log;
 import java.util.List;
 
 /**
@@ -134,10 +134,27 @@ public class DatabaseCtrl {
         return keys;
     }
 
+//    public String returnObjectAtLocation(String[] location) {
+//        Firebase reference = createReferenceFromLocationList(location);
+//        final String[] data = {""};
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                    data[0] =  snapshot.getValue().toString();
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError error) {
+//            }
+//        });
+//        return data[0];
+//    }
+
     // Input: an EditText field to be modified, a value to listen for changes to, and a default string
     // that the EditText will have if no changes are found
-    public void listenAndSetEditText(final EditText et, String child, final String defaultVal) {
-        entryRef.child(child).addValueEventListener(new ValueEventListener() {
+    public void listenAndSetEditText(String[] location, final EditText et, String child, final String defaultVal) {
+        Firebase reference = createReferenceFromLocationList(location);
+        reference.child(child).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.getValue() == null) {
@@ -170,8 +187,9 @@ public class DatabaseCtrl {
         });
     }
 
-    public void listenAndSetText(final TextView et, String child, final String defaultVal) {
-        entryRef.child(child).addValueEventListener(new ValueEventListener() {
+    public void listenAndSetText(String[] location, final TextView et, String child, final String defaultVal) {
+        Firebase reference = createReferenceFromLocationList(location);
+        reference.child(child).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.getValue() == null) {
@@ -218,67 +236,71 @@ public class DatabaseCtrl {
         entryRef.removeValue();
     }
 
-    public <T> T returnObjectAtLocation(String[] location) {
-        Firebase reference = createReferenceFromLocationList(location);
-        T returnObject = null;
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                T data = (T) snapshot.getValue();
-                if (data == null) {
+//    public <T> ArrayList<T> returnValueAtLocation(String[] location, final String child, final ArrayList<T> returnList) {
+//        Firebase reference = createReferenceFromLocationList(location);
+//        Log.d("MyApp", "The reference is: " + reference.child(child).toString());
+//        reference.child(child);
+//        reference.child(child).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                if (snapshot.getValue() == null) {
+//
+//                } else {
+//                    returnList.set(0, (T) snapshot.getValue());
+//                    Log.d("MyApp", "Value is: " + snapshot.getValue().toString());
+//                    Log.d("MyApp", "Value is: " + returnList.get(0));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                Log.d("MyApp", "The read failed: " + firebaseError.getMessage());
+//            }
+//        });
+//        return returnList;
+//    }
 
-                } else {
-                    T returnObject = data;
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-        return returnObject;
-    }
-
-    public Entry returnEntryAtLocation(String section, String bed, String key) {
-        Firebase eRef = ref.child(section).child(bed).child(key);
-        Entry returnEntry = new Entry("NULL","NULL","NULL");
-        eRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Entry data = snapshot.getValue(Entry.class);
-                if (data == null) {
-
-                } else {
-                    Entry returnEntry = data;
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-        return returnEntry;
-    }
-
-    public Harvest returnHarvestAtLocation(String key) {
-        Firebase hRef = ref.child("Harvest").child(key);
-        final Harvest[] returnHarvest = {new Harvest()};
-        hRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Harvest data = (Harvest) snapshot.getValue(Harvest.class);
-                if (data == null) {
-
-                } else {
-                    returnHarvest[0] = data;
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-        return returnHarvest[0];
-    }
+//    public Entry returnEntryAtLocation(String section, String bed, String key) {
+//        Firebase eRef = ref.child(section).child(bed).child(key);
+//        Entry returnEntry = new Entry("NULL","NULL","NULL");
+//        eRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                Entry data = snapshot.getValue(Entry.class);
+//                if (data == null) {
+//
+//                } else {
+//                    Entry returnEntry = data;
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError error) {
+//            }
+//        });
+//        return returnEntry;
+//    }
+//
+//    public Harvest returnHarvestAtLocation(String key) {
+//        Firebase hRef = ref.child("Harvest").child(key);
+//        final Harvest[] returnHarvest = {new Harvest()};
+//        hRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                Harvest data = (Harvest) snapshot.getValue(Harvest.class);
+//                if (data == null) {
+//
+//                } else {
+//                    returnHarvest[0] = data;
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError error) {
+//            }
+//        });
+//        return returnHarvest[0];
+//    }
 
 
 }
