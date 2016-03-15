@@ -65,19 +65,9 @@ public class CropViewer extends AppCompatActivity {
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
-        //dbCtrl.setEntryRef(cropID, 2);
-
-
         dbCtrl.listenAndSetText(location,name, "name", "Name");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
-
-
-        //ArrayList<String> info = new ArrayList<String>();
-       // info.add("");
-        //dbCtrl.returnValueAtLocation(location, "name",info);
-
-        //name.setText(info.get(0));
 
         // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {

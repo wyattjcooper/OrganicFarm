@@ -71,7 +71,6 @@ public class CropsInBed extends AppCompatActivity {
         String[] location = new String[2];
         location[0] = secS;
         location[1] = bedS;
-        //ArrayList<String> keys = dbCtrl.generateKeysList(aa);
         ArrayList<String> keys = dbCtrl.generateKeysListFromLocation(location, aa);
 
         // Add new crop by clicking the add button

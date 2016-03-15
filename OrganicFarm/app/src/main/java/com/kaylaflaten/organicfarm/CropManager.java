@@ -53,9 +53,6 @@ public class CropManager extends AppCompatActivity {
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
-        //dbCtrl.setEntryRef(null, 2);
-
-
         // Push new data or modify old data when pressing enter button
         final String[] entryKey = {"blank"};
         final String finalSectionNum = sectionNum;
@@ -65,26 +62,11 @@ public class CropManager extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CropManager.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
-
-
                 String[] location = new String[2];
                 location[0] = finalSectionNum;
                 location[1] = finalBedNum;
                 entryKey[0] = dbCtrl.pushObjectReturnKey(location,newEntry);
-
-                //entryKey[0] = dbCtrl.pushEntryReturnKey(newEntry);
                 intent.putExtra("pushID", entryKey[0]);
-                // Initialize the harvest data
-                //Harvest harvestDefault = new Harvest("Enter date here", 0.0, false,"Enter notes here", secN + 1, bedN + 1);
-                //dbCtrl.setOneChildRef("Harvest");
-                //dbCtrl.setEntryRef(entryKey[0], 1);
-                //dbCtrl.setValueHarvest(harvestDefault);
-
-                //String[] locationHarvest = new String[2];
-                //locationHarvest[0] = "Harvest";
-                //locationHarvest[1] = entryKey[0];
-                //dbCtrl.setValueAtLocation(locationHarvest, null);
-
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 // Go back to crop entry page

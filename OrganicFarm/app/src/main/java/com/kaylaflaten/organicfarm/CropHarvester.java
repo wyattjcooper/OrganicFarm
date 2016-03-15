@@ -64,28 +64,12 @@ public class CropHarvester extends AppCompatActivity {
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
-        //String cropID = "-KCSKgIhqPfeJtezBxP-";
-        //dbCtrl.setEntryRef(cropID, 1);
-
-        //Harvest harvestData = dbCtrl.returnHarvestAtLocation(cropID);
-
-        //notesInput.setText(harvestData.getNotes().toString());
-        //finished.setActivated(harvestData.getFinished());
-        //datePicker.setText(harvestData.getDate().toString());
-//        amount.setText(harvestData.getAmount().toString());
-        //dbCtrl.listenAndSetEditText(notesInput, "notes", "NULL");
-        //dbCtrl.listenAndSetEditText(datePicker, "date", "NULL");
-        //dbCtrl.listenAndSetCheckBox(finished, "finished");
-        //dbCtrl.listenAndSetEditText(amount, "amount", "NULL");
-
-
 
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropHarvester.this, MainActivity.class);
                 Harvest newHarvest = new Harvest(datePicker.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isActivated(), notesInput.getText().toString(), 1, 1);
-                //dbCtrl.setValueHarvest(newHarvest);
                 String[] locationHarvest = new String[2];
                 locationHarvest[0] = "Harvest";
                 locationHarvest[1] = cropID;
