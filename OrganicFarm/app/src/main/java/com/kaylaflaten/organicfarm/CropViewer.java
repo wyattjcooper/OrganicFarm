@@ -109,6 +109,9 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 intent.putExtra("itemSelected", cropID);
+                intent.putExtra("cropName", name.getText().toString());
+                intent.putExtra("cropDate", date.getText().toString());
+                intent.putExtra("cropNotes", notes.getText().toString());
                 startActivity(intent);
             }
         });

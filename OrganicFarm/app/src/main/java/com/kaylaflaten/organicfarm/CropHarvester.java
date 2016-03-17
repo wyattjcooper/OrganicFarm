@@ -51,10 +51,16 @@ public class CropHarvester extends AppCompatActivity {
 
         String sectionNum = "Section ";
         String bedNum = "Bed ";
+        String cropName = "";
+        String cropNotes = "";
+        String cropDate = "";
         int bedN = -1;
         int sec = -1;
 
         if (extras != null) {
+            cropName = extras.getString("cropName");
+            cropNotes = extras.getString("cropNotes");
+            cropDate = extras.getString("cropDate");
             bedN = extras.getInt("bed", -1);
             sec = extras.getInt("section", -1);
             sectionNum = sectionNum + (sec + 1);
@@ -65,15 +71,39 @@ public class CropHarvester extends AppCompatActivity {
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
 
+        final String finalCropName = cropName;
+        final String finalCropDate = cropDate;
+        final String finalCropNotes = cropNotes;
+        final String finalBedNum = bedNum;
+        final String finalSectionNum = sectionNum;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-                Harvest newHarvest = new Harvest(datePicker.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isActivated(), notesInput.getText().toString(), 1, 1);
+                Harvest newHarvest = new Harvest(datePicker.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isChecked(), notesInput.getText().toString(), 1, 1);
                 String[] locationHarvest = new String[2];
                 locationHarvest[0] = "Harvest";
                 locationHarvest[1] = cropID;
-                String key = dbCtrl.pushObjectReturnKey(locationHarvest,newHarvest);
+                String key = dbCtrl.pushObjectReturnKey(locationHarvest, newHarvest);
+                if (finished.isChecked() == false) {
+
+
+
+                }
+                else if (finished.isChecked()) {
+                    String[] locationCropHist = new String[3];
+                    locationCropHist[0] = "Crop History";
+                    locationCropHist[1] = finalCropName;
+                    locationCropHist[2] = cropID;
+                    Entry entryHistory = new Entry(finalCropName, finalCropDate, finalCropNotes);
+                    dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
+
+                    String[] locationOldCrop = new String[3];
+                    locationOldCrop[0] = finalSectionNum;
+                    locationOldCrop[1] = finalBedNum;
+                    locationOldCrop[2] = cropID;
+                    dbCtrl.removeValueFromLocation(locationOldCrop);
+                }
                 startActivity(intent);
             }
         });
