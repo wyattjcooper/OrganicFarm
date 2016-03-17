@@ -92,8 +92,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/notesID"
         android:inputType="textMultiLine"
-        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_above="@+id/back"
         android:layout_below="@+id/notesTitle" />
 
@@ -123,5 +125,25 @@
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Amount Harvested"
+        android:id="@+id/NDtextView"
+        android:layout_alignTop="@+id/notesTitle"
+        android:layout_alignRight="@+id/NDtextView2"
+        android:layout_alignEnd="@+id/NDtextView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Amount"
+        android:id="@+id/NDtextView2"
+        android:layout_alignTop="@+id/notes"
+        android:layout_alignRight="@+id/notes"
+        android:layout_alignEnd="@+id/notes" />
 
 </RelativeLayout>

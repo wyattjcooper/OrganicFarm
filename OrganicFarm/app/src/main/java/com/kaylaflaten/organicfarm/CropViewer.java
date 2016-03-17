@@ -19,6 +19,7 @@ public class CropViewer extends AppCompatActivity {
     TextView name;
     TextView date;
     TextView notes;
+    TextView amount;
     Button back;
     Button edit;
     Button harvest;
@@ -36,6 +37,7 @@ public class CropViewer extends AppCompatActivity {
         name = (TextView) findViewById(R.id.crop);
         date = (TextView) findViewById(R.id.date);
         notes = (TextView) findViewById(R.id.notes);
+        amount = (TextView) findViewById(R.id.NDtextView2);
         back = (Button) findViewById(R.id.back);
         edit = (Button) findViewById(R.id.edit);
         harvest = (Button) findViewById(R.id.button);
@@ -68,6 +70,11 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location,name, "name", "Name");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
+
+        String[] locationHarvest = new String[1];
+        locationHarvest[0] = "Harvest";
+
+        dbCtrl.listenAndSetTextToAmountHarvested(locationHarvest,amount,cropID,"0" );
 
         // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {

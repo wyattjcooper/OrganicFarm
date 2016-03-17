@@ -119,6 +119,26 @@ public class DatabaseCtrl {
         });
     }
 
+    public void listenAndSetTextToAmountHarvested(String[] location, final TextView et, String child, final String defaultVal) {
+        final double[] amount = {0.0};
+        Firebase reference = createReferenceFromLocationList(location);
+        reference.child(child).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest harvest = postSnapshot.getValue(Harvest.class);
+                    amount[0] = amount[0] + harvest.getAmount();
+                }
+                et.setText(amount[0] + "lbs");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
     public <T> String pushObjectReturnKey(String[] location, T object ) {
         Firebase reference = createReferenceFromLocationList(location);
         Firebase pushRef = reference.push();
