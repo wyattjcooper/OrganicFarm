@@ -43,20 +43,22 @@
             android:layout_weight="0.54" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/addCropButton"
-            android:id="@+id/button4"
-            android:layout_gravity="center_horizontal" />
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
 
         <Button
-            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/button3"
-            android:layout_gravity="center_horizontal" />
+            android:text="@string/backButtonID"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"/>
 
     </LinearLayout>
 </RelativeLayout>

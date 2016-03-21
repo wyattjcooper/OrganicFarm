@@ -35,8 +35,8 @@ public class CropsInBed extends AppCompatActivity {
 
         sectionDisplay = (TextView) findViewById(R.id.textView6);
         bedDisplay = (TextView) findViewById(R.id.textView7);
-        add = (Button) findViewById(R.id.button4);
-        back = (Button) findViewById(R.id.button3);
+        add = (Button) findViewById(R.id.add);
+        back = (Button) findViewById(R.id.back);
         lv = (ListView) findViewById(R.id.listView);
         String[] crops = new String[] { };
 
