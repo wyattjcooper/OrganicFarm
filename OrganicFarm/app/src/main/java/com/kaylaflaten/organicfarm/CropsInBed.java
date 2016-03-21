@@ -33,8 +33,8 @@ public class CropsInBed extends AppCompatActivity {
         setContentView(R.layout.activity_crops_in_be);
         Log.println(1, "MyApp", "The read succeeded");
 
-        sectionDisplay = (TextView) findViewById(R.id.textView6);
-        bedDisplay = (TextView) findViewById(R.id.textView7);
+        sectionDisplay = (TextView) findViewById(R.id.section);
+        bedDisplay = (TextView) findViewById(R.id.bed);
         add = (Button) findViewById(R.id.add);
         back = (Button) findViewById(R.id.back);
         lv = (ListView) findViewById(R.id.listView);

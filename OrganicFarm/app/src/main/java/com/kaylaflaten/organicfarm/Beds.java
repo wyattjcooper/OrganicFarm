@@ -56,7 +56,7 @@ public class Beds extends AppCompatActivity {
                 break;
 
         }
-        sectionDisplay = (TextView) findViewById(R.id.textView8);
+        sectionDisplay = (TextView) findViewById(R.id.section);
         back = (Button) findViewById(R.id.back);
         sectionDisplay.setText("Section " + (section + 1));
         beditems = (ListView) findViewById(R.id.bedItems);
