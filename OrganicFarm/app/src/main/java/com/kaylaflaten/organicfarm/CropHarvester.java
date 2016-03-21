@@ -18,14 +18,9 @@ import com.firebase.client.Firebase;
  */
 public class CropHarvester extends AppCompatActivity {
 
-    TextView section;
-    TextView bed;
-    TextView cropName;
-    TextView harvestNotes;
-    String date;
-    boolean done;
-    EditText notesInput;
-    EditText datePicker;
+
+    EditText notes;
+    EditText date;
     EditText amount;
     CheckBox finished;
     Button back;
@@ -39,17 +34,21 @@ public class CropHarvester extends AppCompatActivity {
     String secS;
     String bedS;
 
+    String cropName;
+    String cropNotes;
+    String cropDate;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_harvester);
         Firebase.setAndroidContext(this);
 
-        enter = (Button) findViewById(R.id.buttonEnter);
-        back = (Button) findViewById(R.id.buttonBack);
-        datePicker = (EditText) findViewById(R.id.editTextHD);
-        notesInput = (EditText) findViewById(R.id.editTextHN);
-        finished = (CheckBox) findViewById(R.id.checkboxFH);
-        amount = (EditText) findViewById(R.id.editTextAH);
+        enter = (Button) findViewById(R.id.enter);
+        back = (Button) findViewById(R.id.back);
+        date = (EditText) findViewById(R.id.date);
+        notes = (EditText) findViewById(R.id.notes);
+        finished = (CheckBox) findViewById(R.id.finished);
+        amount = (EditText) findViewById(R.id.amount);
 
 
         // Create the DatabaseCtrl object
@@ -59,9 +58,6 @@ public class CropHarvester extends AppCompatActivity {
 
         secS = "Section ";
         bedS = "Bed ";
-        String cropName = "";
-        String cropNotes = "";
-        String cropDate = "";
 
 
         if (extras != null) {
@@ -77,14 +73,11 @@ public class CropHarvester extends AppCompatActivity {
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
-        final String finalCropName = cropName;
-        final String finalCropDate = cropDate;
-        final String finalCropNotes = cropNotes;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-                Harvest newHarvest = new Harvest(datePicker.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isChecked(), notesInput.getText().toString(), 1, 1);
+                Harvest newHarvest = new Harvest(date.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isChecked(), notes.getText().toString(), 1, 1);
                 String[] locationHarvest = new String[2];
                 locationHarvest[0] = "Harvest";
                 locationHarvest[1] = cropID;
@@ -97,9 +90,9 @@ public class CropHarvester extends AppCompatActivity {
                 else if (finished.isChecked()) {
                     String[] locationCropHist = new String[3];
                     locationCropHist[0] = "Crop History";
-                    locationCropHist[1] = finalCropName;
+                    locationCropHist[1] = cropName;
                     locationCropHist[2] = cropID;
-                    Entry entryHistory = new Entry(finalCropName, finalCropDate, finalCropNotes);
+                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes);
                     dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
 
                     String[] locationOldCrop = new String[3];

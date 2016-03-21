@@ -20,6 +20,7 @@
     <string name="nameHint">Enter Name </string>
     <string name="dateHint">Enter Date</string>
     <string name="noteHint">Enter Notes</string>
+    <string name="amountHint">Enter Amount</string>
     <string name="title_activity_harvest_viewer">HarvestViewer</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

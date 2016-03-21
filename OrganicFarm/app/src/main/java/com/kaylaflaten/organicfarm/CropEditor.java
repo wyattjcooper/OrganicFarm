@@ -124,10 +124,6 @@ public class CropEditor extends AppCompatActivity {
                     harvestLocation[0] = "Harvest";
                     harvestLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(harvestLocation);
-                    //Intent intent = new Intent(CropEditor.this, CropsInBed.class);
-                    //intent.putExtra("section", secN);
-                    //intent.putExtra("bed", bedN);
-                    //startActivity(intent);
                     finish();
                 }
             }
