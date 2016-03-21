@@ -37,10 +37,10 @@ public class CropViewer extends AppCompatActivity {
         name = (TextView) findViewById(R.id.crop);
         date = (TextView) findViewById(R.id.date);
         notes = (TextView) findViewById(R.id.notes);
-        amount = (TextView) findViewById(R.id.NDtextView2);
+        amount = (TextView) findViewById(R.id.amount);
         back = (Button) findViewById(R.id.back);
         edit = (Button) findViewById(R.id.edit);
-        harvest = (Button) findViewById(R.id.button);
+        harvest = (Button) findViewById(R.id.harvest);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -80,10 +80,7 @@ public class CropViewer extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropViewer.this, CropsInBed.class);
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                startActivity(intent);
+                finish();
             }
         });
 

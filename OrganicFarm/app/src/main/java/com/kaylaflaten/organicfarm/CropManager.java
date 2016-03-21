@@ -78,10 +78,7 @@ public class CropManager extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropManager.this, CropsInBed.class);
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                startActivity(intent);
+                finish();
             }
         });
     }

@@ -114,11 +114,7 @@ public class CropHarvester extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropHarvester.this, CropViewer.class);
-                intent.putExtra("section", finalSec);
-                intent.putExtra("bed", finalBedN);
-                intent.putExtra("itemSelected", cropID);
-                startActivity(intent);
+                finish();
             }
         });
 

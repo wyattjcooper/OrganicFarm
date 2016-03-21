@@ -109,11 +109,7 @@ public class CropEditor extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                intent.putExtra("itemSelected", cropID);
-                startActivity(intent);
+                finish();
             }
         });
 
