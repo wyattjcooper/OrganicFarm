@@ -25,6 +25,9 @@ public class CropEditor extends AppCompatActivity {
     int secN;
     int bedN;
 
+    String secS;
+    String bedS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,21 +44,21 @@ public class CropEditor extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String sectionNum = "Section ";
-        String bedNum = "Bed ";
+        secS = "Section ";
+        bedS = "Bed ";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
-            sectionNum = sectionNum + (secN + 1);
-            bedNum = bedNum + (bedN + 1);
+            secS = secS + (secN + 1);
+            bedS = bedS + (bedN + 1);
         }
-        section.setText(sectionNum);
-        bed.setText(bedNum);
+        section.setText(secS);
+        bed.setText(bedS);
 
         final String[] location = new String[3];
-        location[0] = sectionNum;
-        location[1] = bedNum;
+        location[0] = secS;
+        location[1] = bedS;
 
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
@@ -72,13 +75,6 @@ public class CropEditor extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(location, notes,"notes", "Enter notes here");
 
         // Push new data or modify old data when pressing enter button
-        final int finalSec2 = secN;
-        final int finalBedN2 = bedN;
-        final int finalSec3 = secN;
-        final int[] finalBedN3 = {bedN};
-        final String[] entryKey = {"blank"};
-        final String finalSectionNum = sectionNum;
-        final String finalBedNum = bedNum;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,20 +83,21 @@ public class CropEditor extends AppCompatActivity {
                 // If we are adding a new crop, push a new child
 
                 String[] location = new String[3];
-                location[0] = finalSectionNum;
-                location[1] = finalBedNum;
+                location[0] = secS;
+                location[1] = bedS;
                 location[2] = cropID;
                 // If we are not adding a new crop, modify the existing child we clicked on
                 dbCtrl.setValueAtLocation(location, newEntry);
 
                 // Look up the key in the keys list - same position
-                intent.putExtra("section", finalSec2);
-                intent.putExtra("bed", finalBedN2);
-                intent.putExtra("itemSelected", cropID);
-                startActivity(intent);
+//                intent.putExtra("section", secN);
+//                intent.putExtra("bed", bedN);
+//                intent.putExtra("itemSelected", cropID);
+//                startActivity(intent);
 
                 // Go back to crop entry page
-                startActivity(intent);
+               // startActivity(intent);
+                finish();
             }
         });
 
@@ -127,10 +124,11 @@ public class CropEditor extends AppCompatActivity {
                     harvestLocation[0] = "Harvest";
                     harvestLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(harvestLocation);
-                    Intent intent = new Intent(CropEditor.this, CropsInBed.class);
-                    intent.putExtra("section", secN);
-                    intent.putExtra("bed", bedN);
-                    startActivity(intent);
+                    //Intent intent = new Intent(CropEditor.this, CropsInBed.class);
+                    //intent.putExtra("section", secN);
+                    //intent.putExtra("bed", bedN);
+                    //startActivity(intent);
+                    finish();
                 }
             }
         });

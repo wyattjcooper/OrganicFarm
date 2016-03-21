@@ -49,8 +49,6 @@ public class CropsInBed extends AppCompatActivity {
         // Grabbing Section and Bed values from intent
         String secS = "Section ";
         String bedS = "Bed ";
-        secN = -1;
-        bedN = -1;
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -74,21 +72,18 @@ public class CropsInBed extends AppCompatActivity {
         ArrayList<String> keys = dbCtrl.generateKeysListFromLocation(location, aa);
 
         // Add new crop by clicking the add button
-        final int finalSec1 = secN;
-        final int finalBedN = bedN;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
-                intent.putExtra("section", finalSec1);
-                intent.putExtra("bed", finalBedN);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
                 intent.putExtra("new",true);
                 startActivity(intent);
             }
         });
 
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
-
         final ArrayList<String> finalKeys = keys;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

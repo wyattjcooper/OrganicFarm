@@ -31,6 +31,14 @@ public class CropHarvester extends AppCompatActivity {
     Button back;
     Button enter;
 
+    //section/bed ints
+    int secN;
+    int bedN;
+
+    //section/bed strings
+    String secS;
+    String bedS;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_harvester);
@@ -49,37 +57,33 @@ public class CropHarvester extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String sectionNum = "Section ";
-        String bedNum = "Bed ";
+        secS = "Section ";
+        bedS = "Bed ";
         String cropName = "";
         String cropNotes = "";
         String cropDate = "";
-        int bedN = -1;
-        int sec = -1;
+
 
         if (extras != null) {
             cropName = extras.getString("cropName");
             cropNotes = extras.getString("cropNotes");
             cropDate = extras.getString("cropDate");
             bedN = extras.getInt("bed", -1);
-            sec = extras.getInt("section", -1);
-            sectionNum = sectionNum + (sec + 1);
-            bedNum = bedNum + (bedN + 1);
+            secN = extras.getInt("section", -1);
+            secS = secS + (secN + 1);
+            bedS = bedS + (bedN + 1);
         }
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
-
         final String finalCropName = cropName;
         final String finalCropDate = cropDate;
         final String finalCropNotes = cropNotes;
-        final String finalBedNum = bedNum;
-        final String finalSectionNum = sectionNum;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropHarvester.this, MainActivity.class);
+                //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
                 Harvest newHarvest = new Harvest(datePicker.getText().toString(), Double.parseDouble(amount.getText().toString()), finished.isChecked(), notesInput.getText().toString(), 1, 1);
                 String[] locationHarvest = new String[2];
                 locationHarvest[0] = "Harvest";
@@ -99,18 +103,17 @@ public class CropHarvester extends AppCompatActivity {
                     dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
 
                     String[] locationOldCrop = new String[3];
-                    locationOldCrop[0] = finalSectionNum;
-                    locationOldCrop[1] = finalBedNum;
+                    locationOldCrop[0] = secS;
+                    locationOldCrop[1] = bedS;
                     locationOldCrop[2] = cropID;
                     dbCtrl.removeValueFromLocation(locationOldCrop);
                 }
-                startActivity(intent);
+                //startActivity(intent);
+                finish();
             }
         });
 
         // Navigate back to bed page - no changes will be made
-        final int finalSec = sec;
-        final int finalBedN = bedN;
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
