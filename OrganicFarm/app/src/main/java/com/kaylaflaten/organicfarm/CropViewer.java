@@ -23,6 +23,7 @@ public class CropViewer extends AppCompatActivity {
     Button back;
     Button edit;
     Button harvest;
+    Button history;
 
     int secN;
     int bedN;
@@ -41,6 +42,7 @@ public class CropViewer extends AppCompatActivity {
         back = (Button) findViewById(R.id.back);
         edit = (Button) findViewById(R.id.edit);
         harvest = (Button) findViewById(R.id.harvest);
+        history = (Button) findViewById(R.id.HHbutton);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -74,7 +76,7 @@ public class CropViewer extends AppCompatActivity {
         String[] locationHarvest = new String[1];
         locationHarvest[0] = "Harvest";
 
-        dbCtrl.listenAndSetTextToAmountHarvested(locationHarvest,amount,cropID,"0" );
+        dbCtrl.listenAndSetTextToAmountHarvested(locationHarvest, amount, cropID, "0");
 
         // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {
@@ -109,6 +111,17 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("cropName", name.getText().toString());
                 intent.putExtra("cropDate", date.getText().toString());
                 intent.putExtra("cropNotes", notes.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        // View harvest history
+        history.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CropViewer.this, HarvestHistory.class);
+                // Look up the key in the keys list - same position
+                intent.putExtra("cropID", cropID);
                 startActivity(intent);
             }
         });

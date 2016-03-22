@@ -145,5 +145,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harvest History"
+        android:id="@+id/HHbutton"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/edit"
+        android:layout_alignStart="@+id/edit" />
+
 
 </RelativeLayout>
