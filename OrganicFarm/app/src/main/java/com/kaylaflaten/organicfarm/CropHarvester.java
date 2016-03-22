@@ -56,7 +56,7 @@ public class CropHarvester extends AppCompatActivity {
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);
         textViewUserDate = (TextView) findViewById(R.id.date);
-        change = (Button) findViewById(R.id.change);
+       // change = (Button) findViewById(R.id.change);
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
