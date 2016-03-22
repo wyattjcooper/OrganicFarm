@@ -59,6 +59,10 @@
         <activity
             android:name=".HarvestViewer"
             android:label="@string/title_activity_harvest_viewer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HarvestHistory"
+            android:label="@string/title_activity_harvest_history"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

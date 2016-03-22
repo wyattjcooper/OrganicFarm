@@ -59,7 +59,7 @@ public class HarvestAdapter extends ArrayAdapter<Harvest> {
             TextView amount = (TextView) v.findViewById(R.id.AMtextView);
             ImageView image = (ImageView) v.findViewById(R.id.imageView);
             date.setText(h.getDate());
-            amount.setText(amount.getText());
+            amount.setText(h.getAmount().toString());
         }
 
         // the view must be returned to our activity

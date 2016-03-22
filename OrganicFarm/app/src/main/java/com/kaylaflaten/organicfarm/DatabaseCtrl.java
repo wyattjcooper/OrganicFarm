@@ -62,6 +62,36 @@ public class DatabaseCtrl {
         return keys;
     }
 
+
+    // Populates an array adapter with crop names and creates a key list with their key
+    public ArrayList<String> addHarvestsToHarvestAdapter(String[] location, final HarvestAdapter ha) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = createReferenceFromLocationList(location);
+        // Attach crops already in the database to our list
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest object = (Harvest) postSnapshot.getValue(Harvest.class);
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key)) {
+                        // Add key to keys list
+                        keys.add(key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        ha.add(object);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        return keys;
+    }
+
     // Input: an EditText field to be modified, a value to listen for changes to, and a default string
     // that the EditText will have if no changes are found
     public void listenAndSetEditText(String[] location, final EditText et, String child, final String defaultVal) {
