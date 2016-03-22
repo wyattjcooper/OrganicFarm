@@ -100,12 +100,12 @@ public class CropHarvester extends AppCompatActivity {
 
 
 
-        change.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        change.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
@@ -178,13 +178,13 @@ public class CropHarvester extends AppCompatActivity {
         datePic.init(currentYear, currentMonth - 1, currentDay, birthdayListener);
 
         // add to the container
-        LinearLayout linearLayoutCalTvContainer = new LinearLayout(this);
-        linearLayoutCalTvContainer.setOrientation(LinearLayout.VERTICAL);
-        linearLayoutCalTvContainer.addView(datePic);
-        linearLayoutCalTvContainer.addView(textViewUserDate);
+        //LinearLayout linearLayoutCalTvContainer = new LinearLayout(this);
+      //  linearLayoutCalTvContainer.setOrientation(LinearLayout.VERTICAL);
+       // linearLayoutCalTvContainer.addView(datePic);
+//        linearLayoutCalTvContainer.addView(textViewUserDate);
 
         // set the views for the activity
-        setContentView(linearLayoutCalTvContainer);
+        //setContentView(linearLayoutCalTvContainer);
 
     }
 
@@ -216,7 +216,7 @@ public class CropHarvester extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date d = sdf.parse(clickedDate);
 
-            SimpleDateFormat sdfDateTime = new SimpleDateFormat("MMMM dd, yyyy 'is' EEEE", Locale.US);
+            SimpleDateFormat sdfDateTime = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
             String dateStr = sdfDateTime.format(d);
 
             textViewUserDate.setText(dateStr);
