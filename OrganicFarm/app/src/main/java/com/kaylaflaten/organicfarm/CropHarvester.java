@@ -55,13 +55,8 @@ public class CropHarvester extends AppCompatActivity {
 
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);
-<<<<<<< HEAD
         date = (TextView) findViewById(R.id.date);
         change = (Button) findViewById(R.id.change);
-=======
-        textViewUserDate = (TextView) findViewById(R.id.date);
-       // change = (Button) findViewById(R.id.change);
->>>>>>> 04a52a2ed7db9f7a06e10111a683449010d04a55
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
@@ -137,83 +132,9 @@ public class CropHarvester extends AppCompatActivity {
         });
 
 
-<<<<<<< HEAD
-=======
-
-        // hide the whole calendar view (works in api 11 or greater)
-        if (currentapiVersion >= 11) {
-            datePic.setCalendarViewShown(false);
-        }
-
-        // create the TextView
-//        textViewUserDate = new TextView(this);
-//        textViewUserDate.setGravity(Gravity.CENTER);
-
-        // initialize the date to current date
-//        SimpleDateFormat sdfDateTime = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-//        String dateStr = sdfDateTime.format(new Date(System.currentTimeMillis()));
-
-//        String[] dateSplit = dateStr.split("-");
-//        int currentYear = Integer.parseInt(dateSplit[0]);
-//        int currentMonth = Integer.parseInt(dateSplit[1]);
-//        int currentDay = Integer.parseInt(dateSplit[2]);
-
-        // to show date and day of week in the TextView
-        setHumanReadableDate(currentYear, currentMonth, currentDay);
-
-        // initialize date picker listener
-        // currentMonth - 1, because on the picker, 0 is January
-        datePic.init(currentYear, currentMonth - 1, currentDay, birthdayListener);
-
-        // add to the container
-        //LinearLayout linearLayoutCalTvContainer = new LinearLayout(this);
-      //  linearLayoutCalTvContainer.setOrientation(LinearLayout.VERTICAL);
-       // linearLayoutCalTvContainer.addView(datePic);
-//        linearLayoutCalTvContainer.addView(textViewUserDate);
-
-        // set the views for the activity
-        //setContentView(linearLayoutCalTvContainer);
-
     }
 
-    // the date picker listener
-    DatePicker.OnDateChangedListener birthdayListener = new DatePicker.OnDateChangedListener() {
 
-        @Override
-        public void onDateChanged(DatePicker birthDayDatePicker,
-                                  int newYear, int newMonth, int newDay) {
-
-            try{
-
-                // currentMonth + 1, to retrieve proper month
-                setHumanReadableDate(newYear, newMonth + 1, newDay);
-
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    // show the user a better date format
-    public void setHumanReadableDate(int newYear, int newMonth, int newDay){
-        try {
-
-            String clickedDate = newYear + "-" + newMonth + "-" + newDay;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date d = sdf.parse(clickedDate);
-
-            SimpleDateFormat sdfDateTime = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-            String dateStr = sdfDateTime.format(d);
-
-            textViewUserDate.setText(dateStr);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
->>>>>>> 04a52a2ed7db9f7a06e10111a683449010d04a55
-    }
 
     }
 
