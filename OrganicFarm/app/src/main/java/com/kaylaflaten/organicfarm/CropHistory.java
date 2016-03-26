@@ -27,6 +27,7 @@ public class CropHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_history3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Crop History");
         setSupportActionBar(toolbar);
 
         lv = (ListView) findViewById(R.id.cropHistoryListView);

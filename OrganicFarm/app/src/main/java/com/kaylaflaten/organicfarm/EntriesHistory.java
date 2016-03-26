@@ -23,7 +23,8 @@ public class EntriesHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entries_history);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEntriesHistory);
+        toolbar.setTitle("History of Crops Planted");
         setSupportActionBar(toolbar);
 
         String cropName = "";
@@ -42,6 +43,8 @@ public class EntriesHistory extends AppCompatActivity {
             cropName = extras.getString("cropName");
         }
 
+        toolbar.setTitle("History of "+cropName);
+
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
 
@@ -53,6 +56,7 @@ public class EntriesHistory extends AppCompatActivity {
 
         // Click on a crop - pass the key to the CropManager so that it can load the harvest data
         final ArrayList<String> finalKeys = keys;
+        final String finalCropName = cropName;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -60,7 +64,7 @@ public class EntriesHistory extends AppCompatActivity {
                 Intent intent = new Intent(EntriesHistory.this, HarvestHistory.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
-
+                intent.putExtra("cropName", finalCropName);
                 intent.putExtra("cropID", itemSelected);
                 startActivity(intent);
             }

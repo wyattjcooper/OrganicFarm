@@ -23,9 +23,13 @@ public class HarvestHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_history);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Harvest History For Something");
         setSupportActionBar(toolbar);
 
         String cropID = "";
+        String cropName = "";
+        String cropDate = "";
+
 
         lv = (ListView) findViewById(R.id.listViewHH);
         Harvest[] harvests = new Harvest[] { };
@@ -39,8 +43,10 @@ public class HarvestHistory extends AppCompatActivity {
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             cropID = extras.getString("cropID");
-
+            cropName = extras.getString("cropName");
         }
+
+        toolbar.setTitle("Harvest history of "+ cropID);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
@@ -51,17 +57,6 @@ public class HarvestHistory extends AppCompatActivity {
         location[1] = cropID;
         ArrayList<String> keys = dbCtrl.addHarvestsToHarvestAdapter(location, ha);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                finish();
-
-            }
-        });
     }
 
 }

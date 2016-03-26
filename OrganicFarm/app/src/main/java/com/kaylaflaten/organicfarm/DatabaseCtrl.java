@@ -10,6 +10,7 @@ import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
+import android.widget.Toolbar;
 import android.widget.CheckBox;
 import com.kaylaflaten.organicfarm.Entry;
 import android.util.Log;
@@ -173,13 +174,13 @@ public class DatabaseCtrl {
 
     // Input: an EditText field to be modified, a value to listen for changes to, and a default string
     // that the EditText will have if no changes are found
-    public void listenAndSetCheckBox(String[] location, final CheckBox cb, String child) {
+    public void listenAndSetToolbar(String[] location, final Toolbar tb, String child) {
         Firebase reference = createReferenceFromLocationList(location);
         reference.child(child).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                boolean data = (boolean) snapshot.getValue();
-                cb.setActivated(data);
+                Entry data = (Entry) snapshot.getValue(Entry.class);
+                tb.setTitle(data.getName() + " planted " + data.getDate());
             }
 
             @Override

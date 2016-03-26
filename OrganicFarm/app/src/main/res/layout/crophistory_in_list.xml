@@ -5,33 +5,30 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date Planted"
-        android:id="@+id/cropHistoryDate" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Date data here"
-        android:id="@+id/cropHistoryDateData"
-        android:layout_alignParentTop="true"
+        android:text="Notes"
+        android:id="@+id/cropHistoryNotes"
+        android:foregroundTint="#9bd88e"
+        android:singleLine="false"
+        android:shadowColor="#0b4b03"
+        android:layout_below="@+id/cropHistoryDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Notes"
-        android:id="@+id/cropHistoryNotes"
-        android:layout_below="@+id/cropHistoryDate"
+        android:text="Date Planted"
+        android:id="@+id/cropHistoryDate"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:foregroundTint="#9bd88e"
-        android:singleLine="false"
-        android:shadowColor="#0b4b03" />
+        android:background="#a6e98d" />
+
 </RelativeLayout>
