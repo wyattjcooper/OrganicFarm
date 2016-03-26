@@ -9,15 +9,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.lang.Object;
+import java.util.TimerTask;
+import java.util.Timer;
 
 public class EntriesHistory extends AppCompatActivity {
 
     ListView lv;
     DatabaseCtrl dbCtrl;
     CropHistoryAdapter ca;
+    TextView amountData;
+    TimerTask timer;
+    Timer scheduler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,8 @@ public class EntriesHistory extends AppCompatActivity {
         String cropName = "";
 
         lv = (ListView) findViewById(R.id.entriesHistoryListView);
+        amountData = (TextView) findViewById(R.id.entriesHistoryAmountData);
+
         Entry[] entries = new Entry[] { };
 
         // Setting up the ArrayAdapter and ListView
@@ -52,7 +62,7 @@ public class EntriesHistory extends AppCompatActivity {
         String[] location = new String[2];
         location[0] = "Crop History";
         location[1] = cropName;
-        ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapter(location, ca);
+        final ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapter(location, ca);
 
         // Click on a crop - pass the key to the CropManager so that it can load the harvest data
         final ArrayList<String> finalKeys = keys;
@@ -69,6 +79,25 @@ public class EntriesHistory extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        final String[] locationHarvest = new String[1];
+        locationHarvest[0] = "Harvest";
+        scheduler = new Timer();
+        timer = new TimerTask() {
+            @Override
+            public void run() {
+                if (keys.isEmpty() == false) {
+                    dbCtrl.listenAndSetTextToAmountHarvested(locationHarvest, amountData, keys.get(0), "Error");
+                }
+            }
+        };
+
+        scheduler.schedule(timer,0, 10 * 1000);
+
+
+
     }
+
+
 
 }

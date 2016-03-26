@@ -143,6 +143,7 @@ public class DatabaseCtrl {
                     }
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
@@ -221,6 +222,41 @@ public class DatabaseCtrl {
                 }
                 et.setText(amount[0] + "lbs");
             }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void listenAndSetTextToAmountOfCropHarvested(String[] location, final TextView et, String child, final String defaultVal) {
+        final double[] amount = {0.0};
+        final Firebase reference = createReferenceFromLocationList(location).child(child);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    String id = postSnapshot.getKey();
+                    Firebase newRef = reference.child(id);
+                    newRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                // Fetch the object from the database
+                                Harvest harvest = postSnapshot.getValue(Harvest.class);
+                                amount[0] = amount[0] + harvest.getAmount();
+                            }
+                            et.setText(amount[0] + "lbs");
+                        }
+                        @Override
+                        public void onCancelled(FirebaseError error) {
+                        }
+                    });
+
+                    }
+                }
+
 
             @Override
             public void onCancelled(FirebaseError error) {
