@@ -58,9 +58,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.cropHistorySelected) {
+            Intent cropHistory = new Intent(MainActivity.this, CropHistory.class);
+            startActivity(cropHistory);
             return true;
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }
