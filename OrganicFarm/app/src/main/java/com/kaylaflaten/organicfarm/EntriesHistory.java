@@ -92,7 +92,7 @@ public class EntriesHistory extends AppCompatActivity {
             }
         };
 
-        scheduler.schedule(timer,0, 10 * 1000);
+        scheduler.schedule(timer,0, 10);
 
 
 
