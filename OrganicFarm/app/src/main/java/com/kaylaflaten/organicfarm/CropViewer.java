@@ -2,7 +2,9 @@ package com.kaylaflaten.organicfarm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,6 +34,9 @@ public class CropViewer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_viewer);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarCropViewer);
+
+
 
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
@@ -57,6 +62,10 @@ public class CropViewer extends AppCompatActivity {
         }
         section.setText(secS);
         bed.setText(bedS);
+        setSupportActionBar(toolbar);
+
+
+
 
         String[] location = new String[3];
         location[0] = secS;
@@ -72,6 +81,8 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location,name, "name", "Name");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
+
+        toolbar.setTitle(secS);
 
         String[] locationHarvest = new String[1];
         locationHarvest[0] = "Harvest";
@@ -111,6 +122,7 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("cropName", name.getText().toString());
                 intent.putExtra("cropDate", date.getText().toString());
                 intent.putExtra("cropNotes", notes.getText().toString());
+                intent.putExtra("cropData", name.getText().toString());
                 startActivity(intent);
             }
         });
@@ -125,5 +137,7 @@ public class CropViewer extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }

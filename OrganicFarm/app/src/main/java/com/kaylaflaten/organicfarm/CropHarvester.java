@@ -144,7 +144,7 @@ public class CropHarvester extends AppCompatActivity {
                     locationCropHist[0] = "Crop History";
                     locationCropHist[1] = cropName;
                     locationCropHist[2] = cropID;
-                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes);
+                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes,0.0);
                     dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
 
                     String[] locationOldCrop = new String[3];

@@ -44,9 +44,10 @@ public class HarvestHistory extends AppCompatActivity {
         if (extras != null) {
             cropID = extras.getString("cropID");
             cropName = extras.getString("cropName");
+            cropDate = extras.getString("cropData");
         }
 
-        toolbar.setTitle("Harvest history of "+ cropID);
+        toolbar.setTitle("Harvest History Of "+ cropDate);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);

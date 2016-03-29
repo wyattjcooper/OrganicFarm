@@ -61,7 +61,7 @@ public class CropManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropManager.this, CropsInBed.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),0.0);
                 String[] location = new String[2];
                 location[0] = finalSectionNum;
                 location[1] = finalBedNum;

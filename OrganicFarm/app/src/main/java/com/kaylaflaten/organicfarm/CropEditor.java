@@ -79,7 +79,7 @@ public class CropEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString());
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), 0.0);
                 // If we are adding a new crop, push a new child
 
                 String[] location = new String[3];

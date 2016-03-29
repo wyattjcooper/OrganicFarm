@@ -23,22 +23,27 @@ public class EntriesHistory extends AppCompatActivity {
     ListView lv;
     DatabaseCtrl dbCtrl;
     CropHistoryAdapter ca;
-    TextView amountData;
+
     TimerTask timer;
     Timer scheduler;
+
+    TextView amountData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entries_history);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEntriesHistory);
+
+        amountData = (TextView) findViewById(R.id.entriesHistoryAmountData);
+
+
         toolbar.setTitle("History of Crops Planted");
         setSupportActionBar(toolbar);
 
         String cropName = "";
 
         lv = (ListView) findViewById(R.id.entriesHistoryListView);
-        amountData = (TextView) findViewById(R.id.entriesHistoryAmountData);
 
         Entry[] entries = new Entry[] { };
 
@@ -53,7 +58,7 @@ public class EntriesHistory extends AppCompatActivity {
             cropName = extras.getString("cropName");
         }
 
-        toolbar.setTitle("History of "+cropName);
+        toolbar.setTitle("History Of "+cropName);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
@@ -76,28 +81,50 @@ public class EntriesHistory extends AppCompatActivity {
                 String itemSelected = finalKeys.get(position).toString();
                 intent.putExtra("cropName", finalCropName);
                 intent.putExtra("cropID", itemSelected);
+                View viewAtPos = getViewByPosition(position, lv);
+                TextView data = (TextView) viewAtPos.findViewById(R.id.cropHistoryDate);
+
+//                TextView data = (TextView)
+                String date = data.getText().toString();
+                intent.putExtra("cropData", date);
                 startActivity(intent);
             }
         });
 
-        final String[] locationHarvest = new String[1];
-        locationHarvest[0] = "Harvest";
-        scheduler = new Timer();
-        timer = new TimerTask() {
-            @Override
-            public void run() {
-                if (keys.isEmpty() == false) {
-                    dbCtrl.listenAndSetTextToAmountHarvested(locationHarvest, amountData, keys.get(0), "Error");
-                }
-            }
-        };
 
-        scheduler.schedule(timer,0, 10);
-
-
+//        final double[] total = {0.0};
+//        final String[] locationHarvest = new String[1];
+//        locationHarvest[0] = "Harvest";
+//        scheduler = new Timer();
+//        timer = new TimerTask() {
+//            @Override
+//            public void run() {
+//                total[0] = 0.0;
+//                if (keys.isEmpty() == false) {
+//
+//                    for (int i = 0; i < keys.size(); i++){
+//                        total[0] += dbCtrl.listenAndReturnAmountHarvested(locationHarvest,keys.get(i));
+//                    }
+//
+//                }
+//            }
+//            };
+//        dbCtrl.getTotalAmountHarvestedOfCropName(keys, amountData, "adsfds");
+//        scheduler.schedule(timer,0, 10);
 
     }
 
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
+    }
 
 
 }
