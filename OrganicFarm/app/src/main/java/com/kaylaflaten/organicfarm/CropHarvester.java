@@ -1,10 +1,12 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.firebase.client.Firebase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -27,7 +30,7 @@ public class CropHarvester extends AppCompatActivity {
 
 
     EditText notes;
-    TextView date;
+    EditText date;
     EditText amount;
     CheckBox finished;
     Button change;
@@ -48,6 +51,32 @@ public class CropHarvester extends AppCompatActivity {
     String cropNotes;
     String cropDate;
 
+//    Calendar myCalendar = Calendar.getInstance();
+//
+//    DatePickerDialog.OnDateSetListener dateDialog = new DatePickerDialog.OnDateSetListener() {
+//
+//        @Override
+//        public void onDateSet(DatePicker view, int year, int monthOfYear,
+//                              int dayOfMonth) {
+//            // TODO Auto-generated method stub
+//            myCalendar.set(Calendar.YEAR, year);
+//            myCalendar.set(Calendar.MONTH, monthOfYear);
+//            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//            updateLabel();
+//        }
+//
+//        private void updateLabel() {
+//
+//            String myFormat = "MM/dd/yy"; //In which you need put here
+//            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//
+//            date.setText(sdf.format(myCalendar.getTime()));
+//        }
+//
+//
+//    };
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_harvester);
@@ -55,11 +84,12 @@ public class CropHarvester extends AppCompatActivity {
 
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);
-        date = (TextView) findViewById(R.id.date);
+        date = (EditText) findViewById(R.id.date);
         change = (Button) findViewById(R.id.change);
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
+
 
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
@@ -86,9 +116,14 @@ public class CropHarvester extends AppCompatActivity {
 //        change.setOnClickListener(new Button.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//
+////                Intent intent = new Intent(CropHarvester.this, PicDate.class);
+////                startActivity(intent);
+//                DatePicker datePic = new DatePicker(this);
 //            }
 //        });
+
+
+
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
@@ -130,6 +165,42 @@ public class CropHarvester extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+                // TODO Auto-generated method stub
+                //To show current date in the datepicker
+                Calendar mcurrentDate=Calendar.getInstance();
+                final int mYear=mcurrentDate.get(Calendar.YEAR);
+                final int mMonth=mcurrentDate.get(Calendar.MONTH);
+                final int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker=new DatePickerDialog(CropHarvester.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        // TODO Auto-generated method stub
+                    /*      Your code   to get date and time    */
+                        date.setText(mMonth + "/" + mDay + "/" + mYear);
+                    }
+                },mYear, mMonth, mDay);
+                mDatePicker.setTitle("Select date");
+                mDatePicker.show();  }
+        });
+
+//        date.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                new DatePickerDialog(CropHarvester.this, date, myCalendar
+//                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//            }
+//        });
 
 
     }

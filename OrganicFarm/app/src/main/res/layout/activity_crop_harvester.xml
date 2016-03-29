@@ -63,7 +63,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
+    <EditText
         android:id="@+id/date"
         android:hint="@string/dateHint"
         android:textAppearance="?android:attr/textAppearanceLarge"

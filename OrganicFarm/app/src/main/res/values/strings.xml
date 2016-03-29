@@ -113,6 +113,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_harvest_history">HarvestHistory</string>
+    <string name="title_activity_pic_date">Pick Date</string>
     <string name="title_activity_crop_history">CropHistory</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="crop_history_tabname">Crop History</string>
