@@ -65,4 +65,13 @@
         android:textAppearance="?android:attr/textAppearanceButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reload"
+        android:id="@+id/cropsInBedRefreshB"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

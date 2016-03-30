@@ -34,7 +34,7 @@ public class CropViewer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_viewer);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarCropViewer);
+        //final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarCropViewer);
 
 
 
@@ -53,16 +53,18 @@ public class CropViewer extends AppCompatActivity {
 
         String secS = "Section ";
         String bedS = "Bed ";
+        String cropName = "";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
+            cropName = extras.getString("cropName");
             secS = secS + (secN + 1);
             bedS = bedS + (bedN + 1);
         }
         section.setText(secS);
         bed.setText(bedS);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
 
 
@@ -82,7 +84,7 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
 
-        toolbar.setTitle(secS);
+        //toolbar.setTitle(secS);
 
         String[] locationHarvest = new String[1];
         locationHarvest[0] = "Harvest";
@@ -111,6 +113,9 @@ public class CropViewer extends AppCompatActivity {
         });
 
         // Harvest the crop
+        final String finalCropName = cropName;
+        final String finalSecS = secS;
+        final String finalBedS = bedS;
         harvest.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +127,6 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("cropName", name.getText().toString());
                 intent.putExtra("cropDate", date.getText().toString());
                 intent.putExtra("cropNotes", notes.getText().toString());
-                intent.putExtra("cropData", name.getText().toString());
                 startActivity(intent);
             }
         });
@@ -134,6 +138,7 @@ public class CropViewer extends AppCompatActivity {
                 Intent intent = new Intent(CropViewer.this, HarvestHistory.class);
                 // Look up the key in the keys list - same position
                 intent.putExtra("cropID", cropID);
+                intent.putExtra("cropData", name.getText().toString() + " Planted In " + finalSecS +"," + finalBedS);
                 startActivity(intent);
             }
         });

@@ -151,8 +151,9 @@
         android:layout_height="wrap_content"
         android:text="Harvest History"
         android:id="@+id/HHbutton"
-        android:layout_toRightOf="@+id/harvest"
-        android:layout_toEndOf="@+id/harvest" />
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/crop"
+        android:layout_alignEnd="@+id/crop" />
 
 
 </RelativeLayout>

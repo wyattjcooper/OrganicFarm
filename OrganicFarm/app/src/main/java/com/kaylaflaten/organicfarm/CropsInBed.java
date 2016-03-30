@@ -20,6 +20,7 @@ public class CropsInBed extends AppCompatActivity {
     TextView bedDisplay;
     Button add;
     Button back;
+    Button reload;
     ListView lv;
     DatabaseCtrl dbCtrl;
     ArrayAdapter<String> aa;
@@ -37,6 +38,7 @@ public class CropsInBed extends AppCompatActivity {
         bedDisplay = (TextView) findViewById(R.id.bed);
         add = (Button) findViewById(R.id.add);
         back = (Button) findViewById(R.id.back);
+        reload = (Button) findViewById(R.id.cropsInBedRefreshB);
         lv = (ListView) findViewById(R.id.listView);
         String[] crops = new String[] { };
 
@@ -83,6 +85,21 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
+        // Add new crop by clicking the add button
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CropsInBed.this, CropsInBed.class);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
+                intent.putExtra("new", true);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
         final ArrayList<String> finalKeys = keys;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,7 +120,14 @@ public class CropsInBed extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent(CropsInBed.this, Beds.class);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
+                startActivity(intent);
                 finish();
+
+
             }
         });
     }

@@ -91,27 +91,6 @@ public class EntriesHistory extends AppCompatActivity {
             }
         });
 
-
-//        final double[] total = {0.0};
-//        final String[] locationHarvest = new String[1];
-//        locationHarvest[0] = "Harvest";
-//        scheduler = new Timer();
-//        timer = new TimerTask() {
-//            @Override
-//            public void run() {
-//                total[0] = 0.0;
-//                if (keys.isEmpty() == false) {
-//
-//                    for (int i = 0; i < keys.size(); i++){
-//                        total[0] += dbCtrl.listenAndReturnAmountHarvested(locationHarvest,keys.get(i));
-//                    }
-//
-//                }
-//            }
-//            };
-//        dbCtrl.getTotalAmountHarvestedOfCropName(keys, amountData, "adsfds");
-//        scheduler.schedule(timer,0, 10);
-
     }
 
     public View getViewByPosition(int pos, ListView listView) {

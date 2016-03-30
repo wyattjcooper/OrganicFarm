@@ -173,23 +173,6 @@ public class DatabaseCtrl {
         });
     }
 
-//    // Input: an EditText field to be modified, a value to listen for changes to, and a default string
-//    // that the EditText will have if no changes are found
-//    public void listenAndSetToolbar(String[] location, final Toolbar tb, String child) {
-//        Firebase reference = createReferenceFromLocationList(location);
-//        reference.child(child).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                Entry data = (Entry) snapshot.getValue(Entry.class);
-//                tb.setTitle(data.getName() + " planted " + data.getDate());
-//            }
-//
-//            @Override
-//            public void onCancelled(FirebaseError error) {
-//            }
-//        });
-//    }
-
     public void listenAndSetText(String[] location, final TextView et, String child, final String defaultVal) {
         Firebase reference = createReferenceFromLocationList(location);
         reference.child(child).addValueEventListener(new ValueEventListener() {
@@ -228,97 +211,6 @@ public class DatabaseCtrl {
             }
         });
     }
-
-    public void updateAmountHarvested( final String child) {
-        final double[] amount = {0.0};
-        Firebase reference = new Firebase(REFNAME);
-        reference = reference.child("Harvest");
-        final Firebase finalReference = reference;
-        reference.child(child).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    // Fetch the object from the database
-                    Harvest harvest = postSnapshot.getValue(Harvest.class);
-                    amount[0] = amount[0] + harvest.getAmount();
-                }
-                finalReference.child(child).setValue(amount[0]);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-    }
-
-    public void getTotalAmountHarvestedOfCropName(final ArrayList<String> keys, final TextView et, final String defaultVal) {
-        final double[] amount = {0.0};
-        Firebase reference = new Firebase(REFNAME);
-        reference = reference.child("Harvest");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    // Fetch the object from the database
-                    if (keys.contains(postSnapshot.getKey())) {
-                        if ( postSnapshot.getValue() != null) {
-                            double a = (Double) postSnapshot.getValue();
-                            amount[0] = amount[0] + a;
-                        }
-                    }
-
-                }
-                et.setText(amount[0] + "lbs");
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-    }
-
-    public void getFarmTotalAmountHarvested(final TextView et) {
-        final double[] amount = {0.0};
-        Firebase reference = new Firebase(REFNAME);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    // Fetch the object from the database
-                    Double a = (Double) postSnapshot.getValue();
-                    amount[0] += a;
-
-                }
-                et.setText(amount[0] + "lbs");
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-    }
-
-    public double listenAndReturnAmountHarvested(String[] location, String child) {
-        final double[] amount = {0.0};
-        Firebase reference = createReferenceFromLocationList(location);
-        reference.child(child).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    // Fetch the object from the database
-                    Harvest harvest = postSnapshot.getValue(Harvest.class);
-                    amount[0] = amount[0] + harvest.getAmount();
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
-        });
-        return amount[0];
-    }
-
-
 
     public <T> String pushObjectReturnKey(String[] location, T object ) {
         Firebase reference = createReferenceFromLocationList(location);

@@ -79,7 +79,7 @@ public class CropEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), 0.0);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
                 String[] location = new String[3];
@@ -106,6 +106,7 @@ public class CropEditor extends AppCompatActivity {
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
@@ -119,12 +120,17 @@ public class CropEditor extends AppCompatActivity {
                 }
                 // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
                 else if (extras.getBoolean("new") != true) {
+                    Intent intent = new Intent(CropEditor.this, CropsInBed.class);
+                    intent.putExtra("section", secN);
+                    intent.putExtra("bed", bedN);
                     dbCtrl.removeValueFromLocation(location);
                     String[] harvestLocation = new String[2];
                     harvestLocation[0] = "Harvest";
                     harvestLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(harvestLocation);
+                    startActivity(intent);
                     finish();
+
                 }
             }
         });

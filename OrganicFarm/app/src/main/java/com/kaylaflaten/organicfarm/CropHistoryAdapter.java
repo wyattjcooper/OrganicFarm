@@ -56,7 +56,7 @@ public class CropHistoryAdapter extends ArrayAdapter<Entry> {
         if (e != null) {
             TextView date = (TextView) v.findViewById(R.id.cropHistoryDate);
             TextView notes = (TextView) v.findViewById(R.id.cropHistoryNotes);
-            date.setText(e.getName()+" planted on " + e.getDate().toString());
+            date.setText(e.getName()+" Planted On " + e.getDate().toString());
             notes.setText("Note: "+e.getNotes());
 
 
