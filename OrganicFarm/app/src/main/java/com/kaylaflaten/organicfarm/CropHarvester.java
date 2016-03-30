@@ -2,17 +2,23 @@ package com.kaylaflaten.organicfarm;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 import com.firebase.client.Firebase;
@@ -38,7 +44,6 @@ public class CropHarvester extends AppCompatActivity {
     Button enter;
 
 
-
     //section/bed ints
     int secN;
     int bedN;
@@ -51,30 +56,15 @@ public class CropHarvester extends AppCompatActivity {
     String cropNotes;
     String cropDate;
 
-//    Calendar myCalendar = Calendar.getInstance();
-//
-//    DatePickerDialog.OnDateSetListener dateDialog = new DatePickerDialog.OnDateSetListener() {
-//
-//        @Override
-//        public void onDateSet(DatePicker view, int year, int monthOfYear,
-//                              int dayOfMonth) {
-//            // TODO Auto-generated method stub
-//            myCalendar.set(Calendar.YEAR, year);
-//            myCalendar.set(Calendar.MONTH, monthOfYear);
-//            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//            updateLabel();
-//        }
-//
-//        private void updateLabel() {
-//
-//            String myFormat = "MM/dd/yy"; //In which you need put here
-//            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-//
-//            date.setText(sdf.format(myCalendar.getTime()));
-//        }
-//
-//
-//    };
+    private SimpleDateFormat dateFormatter;
+
+    private DatePickerDialog datePicker;
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +72,14 @@ public class CropHarvester extends AppCompatActivity {
         setContentView(R.layout.activity_crop_harvester);
         Firebase.setAndroidContext(this);
 
+        dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+
+
+        setDateTimeField();
+
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);
         date = (EditText) findViewById(R.id.date);
-        change = (Button) findViewById(R.id.change);
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
@@ -111,19 +105,6 @@ public class CropHarvester extends AppCompatActivity {
         }
 
 
-
-
-//        change.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent intent = new Intent(CropHarvester.this, PicDate.class);
-////                startActivity(intent);
-//                DatePicker datePic = new DatePicker(this);
-//            }
-//        });
-
-
-
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
         final String cropID = extras.getString("itemSelected");
@@ -144,7 +125,7 @@ public class CropHarvester extends AppCompatActivity {
                     locationCropHist[0] = "Crop History";
                     locationCropHist[1] = cropName;
                     locationCropHist[2] = cropID;
-                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes,true, secN + 1, bedN + 1);
+                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes, true, secN + 1, bedN + 1);
                     dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
 
                     String[] locationOldCrop = new String[3];
@@ -167,45 +148,93 @@ public class CropHarvester extends AppCompatActivity {
         });
 
 
-        date.setOnClickListener(new View.OnClickListener() {
-
+        date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                //date.setEnabled(false);
+                datePicker.show();
 
-                // TODO Auto-generated method stub
-                //To show current date in the datepicker
-                Calendar mcurrentDate=Calendar.getInstance();
-                final int mYear=mcurrentDate.get(Calendar.YEAR);
-                final int mMonth=mcurrentDate.get(Calendar.MONTH);
-                final int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog mDatePicker=new DatePickerDialog(CropHarvester.this, new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        // TODO Auto-generated method stub
-                    /*      Your code   to get date and time    */
-                        date.setText(mMonth + "/" + mDay + "/" + mYear);
-                    }
-                },mYear, mMonth, mDay);
-                mDatePicker.setTitle("Select date");
-                mDatePicker.show();  }
+            }
         });
-
 //        date.setOnClickListener(new View.OnClickListener() {
 //
 //            @Override
 //            public void onClick(View v) {
+//                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+//
 //                // TODO Auto-generated method stub
-//                new DatePickerDialog(CropHarvester.this, date, myCalendar
-//                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//                //To show current date in the datepicker
+//                final Calendar mcurrentDate = Calendar.getInstance();
+//
+//
+//                DatePickerDialog mDatePicker = new DatePickerDialog(CropHarvester.this, new DatePickerDialog.OnDateSetListener() {
+//                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                        // TODO Auto-generated method stub
+//                    /*      Your code   to get date and time    */
+//                        //harvestDate = mMonth + "/" + mDay + "/" + mYear;
+//                        Calendar newDate = Calendar.getInstance();
+//                        newDate.set(year, monthOfYear, dayOfMonth);
+//                        date.setText(dateFormatter.format(newDate.getTime()));
+//                    },mcurrentDate.get(Calendar.YEAR), mcurrentDate.get(Calendar.MONTH), mcurrentDate.get(Calendar.DAY_OF_MONTH));
+//
+//                }
 //            }
-//        });
+//        }
+    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//        // ATTENTION: This was auto-generated to implement the App Indexing API.
+//        // See https://g.co/AppIndexing/AndroidStudio for more information.
+//        client.connect();
+//        Action viewAction = Action.newAction(
+//                Action.TYPE_VIEW, // TODO: choose an action type.
+//                "CropHarvester Page", // TODO: Define a title for the content shown.
+//                // TODO: If you have web page content that matches this app activity's content,
+//                // make sure this auto-generated web page URL is correct.
+//                // Otherwise, set the URL to null.
+//                Uri.parse("http://host/path"),
+//                // TODO: Make sure this auto-generated app deep link URI is correct.
+//                Uri.parse("android-app://com.kaylaflaten.organicfarm/http/host/path")
+//        );
+//        AppIndex.AppIndexApi.start(client, viewAction);
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//
+//        // ATTENTION: This was auto-generated to implement the App Indexing API.
+//        // See https://g.co/AppIndexing/AndroidStudio for more information.
+//        Action viewAction = Action.newAction(
+//                Action.TYPE_VIEW, // TODO: choose an action type.
+//                "CropHarvester Page", // TODO: Define a title for the content shown.
+//                // TODO: If you have web page content that matches this app activity's content,
+//                // make sure this auto-generated web page URL is correct.
+//                // Otherwise, set the URL to null.
+//                Uri.parse("http://host/path"),
+//                // TODO: Make sure this auto-generated app deep link URI is correct.
+//                Uri.parse("android-app://com.kaylaflaten.organicfarm/http/host/path")
+//        );
+//        AppIndex.AppIndexApi.end(client, viewAction);
+//        client.disconnect();
+//    }
 
 
+    private void setDateTimeField() {
+        Calendar newCalendar = Calendar.getInstance();
+        datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                date.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
-
-
-    }
+}
 
