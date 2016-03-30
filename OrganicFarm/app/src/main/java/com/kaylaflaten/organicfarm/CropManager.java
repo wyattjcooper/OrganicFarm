@@ -1,13 +1,20 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+
 import com.kaylaflaten.organicfarm.Entry;
 import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
@@ -23,10 +30,18 @@ public class CropManager extends AppCompatActivity {
     int secN;
     int bedN;
 
+    private SimpleDateFormat dateFormatter;
+
+    private DatePickerDialog datePicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_manager);
+
+        dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+
+        setDateTimeField();
 
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
@@ -74,6 +89,16 @@ public class CropManager extends AppCompatActivity {
             }
         });
 
+        date.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //date.setEnabled(false);
+                datePicker.show();
+
+            }
+        });
+
+
         // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -81,5 +106,18 @@ public class CropManager extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setDateTimeField() {
+        Calendar newCalendar = Calendar.getInstance();
+        datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                date.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 }

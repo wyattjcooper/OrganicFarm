@@ -1,12 +1,18 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by Carmen on 3/7/2016.
@@ -28,6 +34,12 @@ public class CropEditor extends AppCompatActivity {
     String secS;
     String bedS;
 
+    private SimpleDateFormat dateFormatter;
+
+    private DatePickerDialog datePicker;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +53,10 @@ public class CropEditor extends AppCompatActivity {
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);
         delete = (Button) findViewById(R.id.delete);
+
+        dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+
+        setDateTimeField();
 
         final Bundle extras = getIntent().getExtras();
 
@@ -73,6 +89,16 @@ public class CropEditor extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
         dbCtrl.listenAndSetEditText(location, date,"date", "Enter date here");
         dbCtrl.listenAndSetEditText(location, notes,"notes", "Enter notes here");
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //date.setEnabled(false);
+                datePicker.show();
+
+            }
+        });
+
 
         // Push new data or modify old data when pressing enter button
         enter.setOnClickListener(new Button.OnClickListener() {
@@ -134,5 +160,18 @@ public class CropEditor extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setDateTimeField() {
+        Calendar newCalendar = Calendar.getInstance();
+        datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                date.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 }
