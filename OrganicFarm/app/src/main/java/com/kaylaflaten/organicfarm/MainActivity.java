@@ -13,11 +13,15 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     ListView sectionitems;
+    TextView totalAmountData;
+    TextView totalNumHarvestsData;
+    DatabaseCtrl dbCtrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         setSupportActionBar(toolbar);
 
         sectionitems = (ListView) findViewById(R.id.sectionItems);
+        totalAmountData = (TextView) findViewById(R.id.totalAmountData);
+        totalNumHarvestsData = (TextView) findViewById(R.id.totalNumharvestsData);
+        dbCtrl = new DatabaseCtrl(this);
+
         sectionitems.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sectionList)));
         sectionitems.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -37,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 startActivity(intent);
             }
         });
+
+        dbCtrl.listenAndSetTextToTotalAmount(totalAmountData);
+        dbCtrl.listenAndSetTextToTotalNumberOfHarvests(totalNumHarvestsData);
 
 
 
@@ -63,9 +74,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             startActivity(cropHistory);
             return true;
         }
-
-
-
         return super.onOptionsItemSelected(item);
     }
 

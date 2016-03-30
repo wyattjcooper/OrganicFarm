@@ -286,6 +286,49 @@ public class DatabaseCtrl {
         });
     }
 
+    public void listenAndSetTextToTotalAmount(final TextView et) {
+        final double[] amount = {0.0};
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest harvest = postSnapshot.getValue(Harvest.class);
+                    //parentID[0] = harvest.getPID();
+                    //amount[0] = amount[0] + harvest.getAmount();
+                    amount[0] = amount[0] + harvest.getAmount();
+                }
+                et.setText(amount[0] + "lbs");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void listenAndSetTextToTotalNumberOfHarvests(final TextView et) {
+        final int[] amount = {0};
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    amount[0] += 1;
+                }
+                et.setText(amount[0] + " Harvests");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
     public <T> String pushObjectReturnKey(String[] location, T object ) {
         Firebase reference = createReferenceFromLocationList(location);
         Firebase pushRef = reference.push();
