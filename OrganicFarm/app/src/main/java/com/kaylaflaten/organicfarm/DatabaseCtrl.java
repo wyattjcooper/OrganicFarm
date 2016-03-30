@@ -65,19 +65,22 @@ public class DatabaseCtrl {
 
 
     // Populates an array adapter with crop names and creates a key list with their key
-    public ArrayList<String> addHarvestsToHarvestAdapter(String[] location, final HarvestAdapter ha) {
+    public ArrayList<String> addHarvestsOfSpecificCropToHarvestAdapter(final String pid1, final HarvestAdapter ha) {
         final ArrayList<String> keys = new ArrayList<String>();
-        Firebase reference = createReferenceFromLocationList(location);
+        Firebase reference = new Firebase(REFNAME);
         // Attach crops already in the database to our list
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest object = (Harvest) postSnapshot.getValue(Harvest.class);
+                    Log.println(1, "MyApp", "Reading harvests");
                     // Fetch the key from the database
                     String key = postSnapshot.getKey();
-                    if (!keys.contains(key)) {
+                    if (!keys.contains(key) && (pid1.equals(object.getPID()))) {
+                        Log.println(1, "MyApp", "The read succeeded");
+
                         // Add key to keys list
                         keys.add(key);
                         // Add name to the list by adding it to the ArrayAdapter
@@ -85,6 +88,40 @@ public class DatabaseCtrl {
                     }
                 }
             }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        return keys;
+    }
+
+    // Populates an array adapter with crop names and creates a key list with their key
+    public ArrayList<String> addHarvestsOfCropNameToHarvestAdapter(final String name1, final HarvestAdapter ha) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = new Firebase(REFNAME);
+        // Attach crops already in the database to our list
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest object = (Harvest) postSnapshot.getValue(Harvest.class);
+                    Log.println(1, "MyApp", "Reading harvests");
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key) && (name1.equals(object.getName()))) {
+                        Log.println(1, "MyApp", "The read succeeded");
+
+                        // Add key to keys list
+                        keys.add(key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        ha.add(object);
+                    }
+                }
+            }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
@@ -114,6 +151,7 @@ public class DatabaseCtrl {
                     }
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
@@ -192,16 +230,52 @@ public class DatabaseCtrl {
         });
     }
 
-    public void listenAndSetTextToAmountHarvested(String[] location, final TextView et, String child, final String defaultVal) {
+    public void listenAndSetTextToAmountOfSpecificCropHarvested(final TextView et, final String pid1) {
         final double[] amount = {0.0};
-        Firebase reference = createReferenceFromLocationList(location);
-        reference.child(child).addValueEventListener(new ValueEventListener() {
+        final String[] parentID = {""};
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
-                    amount[0] = amount[0] + harvest.getAmount();
+                    //parentID[0] = harvest.getPID();
+                    //amount[0] = amount[0] + harvest.getAmount();
+                    if (harvest.getPID().equals(pid1)) {
+                        Log.println(1, "MyApp", "Read succeeded");
+
+                        amount[0] = amount[0] + harvest.getAmount();
+                    }
+                }
+                et.setText(amount[0] + "lbs");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void listenAndSetTextToAmountOfCropNameHarvested(final TextView et, final String name1) {
+        final double[] amount = {0.0};
+        final String[] parentID = {""};
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest harvest = postSnapshot.getValue(Harvest.class);
+                    //parentID[0] = harvest.getPID();
+                    //amount[0] = amount[0] + harvest.getAmount();
+                    if (harvest.getName().equals(name1)) {
+                        Log.println(1, "MyApp", "Read succeeded");
+
+                        amount[0] = amount[0] + harvest.getAmount();
+                    }
                 }
                 et.setText(amount[0] + "lbs");
             }

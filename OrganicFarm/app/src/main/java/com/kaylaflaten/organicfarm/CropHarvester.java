@@ -52,9 +52,10 @@ public class CropHarvester extends AppCompatActivity {
     String secS;
     String bedS;
 
-    String cropName;
-    String cropNotes;
-    String cropDate;
+    String cropName = "";
+    String cropNotes = "";
+    String cropDate = "";
+    String cropID = "";
 
     private SimpleDateFormat dateFormatter;
 
@@ -98,6 +99,7 @@ public class CropHarvester extends AppCompatActivity {
             cropName = extras.getString("cropName");
             cropNotes = extras.getString("cropNotes");
             cropDate = extras.getString("cropDate");
+            cropID = extras.getString("itemSelected");
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
             secS = secS + (secN + 1);
@@ -107,15 +109,15 @@ public class CropHarvester extends AppCompatActivity {
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID
-        final String cropID = extras.getString("itemSelected");
+        //final String cropID = extras.getString("itemSelected");
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-                Harvest newHarvest = new Harvest(date.getText().toString(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), 1, 1);
-                String[] locationHarvest = new String[2];
+                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
+                String[] locationHarvest = new String[1];
                 locationHarvest[0] = "Harvest";
-                locationHarvest[1] = cropID;
+                //locationHarvest[1] = cropID;
                 String key = dbCtrl.pushObjectReturnKey(locationHarvest, newHarvest);
                 if (finished.isChecked() == false) {
 

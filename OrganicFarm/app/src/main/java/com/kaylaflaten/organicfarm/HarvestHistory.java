@@ -53,10 +53,9 @@ public class HarvestHistory extends AppCompatActivity {
         dbCtrl = new DatabaseCtrl(this);
 
         // Attach crops already in the database to our list
-        String[] location = new String[2];
-        location[0] = "Harvest";
-        location[1] = cropID;
-        ArrayList<String> keys = dbCtrl.addHarvestsToHarvestAdapter(location, ha);
+//        String[] location = new String[1];
+//        location[0] = "Harvest";
+        ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropID, ha);
 
     }
 

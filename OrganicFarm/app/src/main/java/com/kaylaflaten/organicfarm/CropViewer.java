@@ -86,10 +86,11 @@ public class CropViewer extends AppCompatActivity {
 
         //toolbar.setTitle(secS);
 
-        String[] locationHarvest = new String[1];
-        locationHarvest[0] = "Harvest";
+//        String[] locationHarvest = new String[1];
+//        locationHarvest[0] = "Harvest";
 
-        dbCtrl.listenAndSetTextToAmountHarvested(locationHarvest, amount, cropID, "0");
+        dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
+        //name.setText(cropID);
 
         // Navigate back to bed page - no changes will be made
         back.setOnClickListener(new Button.OnClickListener() {

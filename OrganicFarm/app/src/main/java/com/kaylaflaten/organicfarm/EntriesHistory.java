@@ -23,10 +23,6 @@ public class EntriesHistory extends AppCompatActivity {
     ListView lv;
     DatabaseCtrl dbCtrl;
     CropHistoryAdapter ca;
-
-    TimerTask timer;
-    Timer scheduler;
-
     TextView amountData;
 
     @Override
@@ -90,6 +86,8 @@ public class EntriesHistory extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        dbCtrl.listenAndSetTextToAmountOfCropNameHarvested(amountData, cropName);
 
     }
 
