@@ -21,6 +21,7 @@ public class CropsInBed extends AppCompatActivity {
     Button add;
     Button back;
     Button reload;
+    Button history;
     ListView lv;
     DatabaseCtrl dbCtrl;
     ArrayAdapter<String> aa;
@@ -40,6 +41,7 @@ public class CropsInBed extends AppCompatActivity {
         back = (Button) findViewById(R.id.back);
         reload = (Button) findViewById(R.id.cropsInBedRefreshB);
         lv = (ListView) findViewById(R.id.listView);
+        history = (Button) findViewById(R.id.bedsHistoryButton);
         String[] crops = new String[] { };
 
         // Setting up the ArrayAdapter and ListView
@@ -93,6 +95,19 @@ public class CropsInBed extends AppCompatActivity {
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 intent.putExtra("new", true);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        // Go to bed history
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CropsInBed.this, BedHistory.class);
+                intent.putExtra("section", secN);
+                intent.putExtra("bed", bedN);
                 startActivity(intent);
                 finish();
 

@@ -162,6 +162,36 @@ public class DatabaseCtrl {
     }
 
     // Populates an array adapter with crop names and creates a key list with their key
+    public ArrayList<String> addEntriesToEntryAdapterBySectionAndBedHistorically(String[] location, final CropHistoryAdapter ca, final int section, final int bed) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = createReferenceFromLocationList(location);
+        // Attach crops already in the database to our list
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Entry object = (Entry) postSnapshot.getValue(Entry.class);
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key) && (object.getSection() == section) && (object.getBed() == bed) && (object.getFinished())) {
+                        // Add key to keys list
+                        keys.add(key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        ca.add(object);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        return keys;
+    }
+
+    // Populates an array adapter with crop names and creates a key list with their key
     public ArrayList<String> addCropNamesToArrayAdapter(String[] location, final ArrayAdapter aa) {
         final ArrayList<String> keys = new ArrayList<String>();
         Firebase reference = createReferenceFromLocationList(location);
@@ -232,7 +262,6 @@ public class DatabaseCtrl {
     }
 
     public void listenAndSetTextToAmountOfSpecificCropHarvested(final TextView et, final String pid1) {
-
         final String[] parentID = {""};
         Log.println(1, "MyApp", "Called");
         Firebase reference = new Firebase(REFNAME);
@@ -278,6 +307,35 @@ public class DatabaseCtrl {
                         Log.println(1, "MyApp", "Read succeeded");
 
                         amount[0] = amount[0] + harvest.getAmount();
+                    }
+                }
+                et.setText(amount[0] + "lbs");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void listenAndSetTextToAmountInSectionAndBedHistorically(final TextView et, final int secN, final int bedN) {
+
+        final String[] parentID = {""};
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                final double[] amount = {0.0};
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest entry = postSnapshot.getValue(Harvest.class);
+                    //parentID[0] = harvest.getPID();
+                    //amount[0] = amount[0] + harvest.getAmount();
+                    if ((entry.getBed() == bedN) && (entry.getSection() == secN)) {
+                        Log.println(1, "MyApp", "Read succeeded");
+
+                        amount[0] = amount[0] + entry.getAmount();
                     }
                 }
                 et.setText(amount[0] + "lbs");
@@ -346,6 +404,30 @@ public class DatabaseCtrl {
                     // Fetch the object from the database
                     Entry currCrop = (Entry) postSnapshot.getValue(Entry.class);
                     if (currCrop.getFinished() == false) {
+                        amount[0] += 1;
+                    }
+                }
+                et.setText(amount[0] + " Crops");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void listenAndSetTextToTotalNumberOfCropsHistoricallyInSectionBed(final TextView et, final int secN, final int bedN) {
+
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("All Crops").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                final int[] amount = {0};
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Entry currCrop = (Entry) postSnapshot.getValue(Entry.class);
+                    if (currCrop.getFinished() == true && (currCrop.getSection() == secN) && (currCrop.getBed() == bedN)) {
                         amount[0] += 1;
                     }
                 }

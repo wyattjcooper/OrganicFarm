@@ -38,7 +38,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/bed"
         android:layout_above="@id/back"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
 
         <ListView
             android:layout_width="match_parent"
@@ -74,4 +75,13 @@
         android:id="@+id/cropsInBedRefreshB"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History Of Bed"
+        android:id="@+id/bedsHistoryButton"
+        android:layout_above="@+id/linearLayout"
+        android:layout_toRightOf="@+id/back"
+        android:layout_toEndOf="@+id/back" />
 </RelativeLayout>

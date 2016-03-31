@@ -14,9 +14,9 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:id="@+id/listView2"
-        android:layout_alignParentBottom="true"
+        android:layout_height="400dp"
+        android:id="@+id/listViewBedHistory"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/textView3"
+        android:id="@+id/amoutDataBedHistory"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/bedHistoryAmountTxt"
@@ -46,10 +46,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView2"
+        android:text="Crops Harvested"
+        android:id="@+id/numberTextBedHistory"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listView2"
-        android:layout_alignEnd="@+id/listView2" />
+        android:layout_alignRight="@+id/listViewBedHistory"
+        android:layout_alignEnd="@+id/listViewBedHistory" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Loading..."
+        android:id="@+id/numberDataBedHistory"
+        android:layout_alignRight="@+id/numberTextBedHistory"
+        android:layout_alignEnd="@+id/numberTextBedHistory"
+        android:layout_alignTop="@+id/amoutDataBedHistory"
+        android:layout_alignLeft="@+id/numberTextBedHistory"
+        android:layout_alignStart="@+id/numberTextBedHistory" />
 
 </RelativeLayout>
