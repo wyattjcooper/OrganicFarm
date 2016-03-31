@@ -14,20 +14,21 @@
 
     <ListView
         android:layout_width="fill_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:id="@+id/sectionItems"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/totalCropsData"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:focusable="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Total Amount Harvested"
-        android:id="@+id/totalAmtTxt"
-        android:layout_below="@+id/sectionItems"
+        android:text="Total Amount Harvested:"
+        android:id="@+id/totalTitle"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -37,19 +38,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
         android:id="@+id/totalAmountData"
-        android:layout_alignTop="@+id/totalAmtTxt"
-        android:layout_alignLeft="@+id/totalNumharvestsData"
-        android:layout_alignStart="@+id/totalNumharvestsData" />
+        android:layout_below="@+id/totalTitle"
+        android:layout_alignParentLeft="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Total Number of Harvests"
-        android:id="@+id/totalHarvestsText"
-        android:layout_below="@+id/totalAmtTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="Total Number of Harvests"-->
+        <!--android:id="@+id/totalHarvestsText"-->
+        <!--android:layout_below="@+id/totalAmtTxt"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,19 +57,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
         android:id="@+id/totalNumharvestsData"
-        android:layout_below="@+id/totalAmountData"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/totalTitle"
+        android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Number Of Crops In Farm"
-        android:id="@+id/textView"
-        android:layout_below="@+id/totalHarvestsText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="Number Of Crops In Farm"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_below="@+id/totalHarvestsText"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,8 +76,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
         android:id="@+id/totalCropsData"
-        android:layout_below="@+id/totalHarvestsText"
-        android:layout_alignLeft="@+id/totalNumharvestsData"
-        android:layout_alignStart="@+id/totalNumharvestsData" />
+        android:layout_below="@+id/totalTitle"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
