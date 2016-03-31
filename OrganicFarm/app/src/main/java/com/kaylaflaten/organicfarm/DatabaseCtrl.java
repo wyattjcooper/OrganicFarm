@@ -55,6 +55,7 @@ public class DatabaseCtrl {
                     }
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
@@ -231,13 +232,14 @@ public class DatabaseCtrl {
     }
 
     public void listenAndSetTextToAmountOfSpecificCropHarvested(final TextView et, final String pid1) {
-        final double[] amount = {0.0};
+
         final String[] parentID = {""};
         Log.println(1, "MyApp", "Called");
         Firebase reference = new Firebase(REFNAME);
         reference.child("Harvest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                final double[] amount = {0.0};
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
@@ -259,13 +261,14 @@ public class DatabaseCtrl {
     }
 
     public void listenAndSetTextToAmountOfCropNameHarvested(final TextView et, final String name1) {
-        final double[] amount = {0.0};
+
         final String[] parentID = {""};
         Log.println(1, "MyApp", "Called");
         Firebase reference = new Firebase(REFNAME);
         reference.child("Harvest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                final double[] amount = {0.0};
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
@@ -287,12 +290,13 @@ public class DatabaseCtrl {
     }
 
     public void listenAndSetTextToTotalAmount(final TextView et) {
-        final double[] amount = {0.0};
+
         Log.println(1, "MyApp", "Called");
         Firebase reference = new Firebase(REFNAME);
         reference.child("Harvest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                final double[] amount = {0.0};
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
@@ -300,7 +304,7 @@ public class DatabaseCtrl {
                     //amount[0] = amount[0] + harvest.getAmount();
                     amount[0] = amount[0] + harvest.getAmount();
                 }
-                et.setText(amount[0] + "lbs");
+                et.setText((int) amount[0] + "lbs");
             }
 
             @Override
@@ -310,17 +314,42 @@ public class DatabaseCtrl {
     }
 
     public void listenAndSetTextToTotalNumberOfHarvests(final TextView et) {
-        final int[] amount = {0};
+
         Log.println(1, "MyApp", "Called");
         Firebase reference = new Firebase(REFNAME);
         reference.child("Harvest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                final int[] amount = {0};
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     amount[0] += 1;
                 }
                 et.setText(amount[0] + " Harvests");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
+    public void listenAndSetTextToTotalNumberOfCropsCurrentlyPlanted(final TextView et) {
+
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("All Crops").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                final int[] amount = {0};
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Entry currCrop = (Entry) postSnapshot.getValue(Entry.class);
+                    if (currCrop.getFinished() == false) {
+                        amount[0] += 1;
+                    }
+                }
+                et.setText(amount[0] + "Crops");
             }
 
             @Override

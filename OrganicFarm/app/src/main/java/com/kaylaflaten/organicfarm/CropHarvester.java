@@ -123,11 +123,17 @@ public class CropHarvester extends AppCompatActivity {
 
 
                 } else if (finished.isChecked()) {
+                    String[] locationCropOverall = new String[2];
+                    locationCropOverall[0] = "All Crops";
+                    locationCropOverall[1] = cropID;
+                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes, true, secN + 1, bedN + 1);
+                    dbCtrl.setValueAtLocation(locationCropOverall, entryHistory);
+
+
                     String[] locationCropHist = new String[3];
                     locationCropHist[0] = "Crop History";
                     locationCropHist[1] = cropName;
                     locationCropHist[2] = cropID;
-                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes, true, secN + 1, bedN + 1);
                     dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
 
                     String[] locationOldCrop = new String[3];

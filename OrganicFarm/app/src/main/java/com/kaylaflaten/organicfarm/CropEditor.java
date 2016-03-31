@@ -115,6 +115,13 @@ public class CropEditor extends AppCompatActivity {
                 // If we are not adding a new crop, modify the existing child we clicked on
                 dbCtrl.setValueAtLocation(location, newEntry);
 
+
+                String[] locationCropOverall = new String[2];
+                locationCropOverall[0] = "All Crops";
+                locationCropOverall[1] = cropID;
+                dbCtrl.setValueAtLocation(locationCropOverall, newEntry);
+
+
                 // Look up the key in the keys list - same position
 //                intent.putExtra("section", secN);
 //                intent.putExtra("bed", bedN);

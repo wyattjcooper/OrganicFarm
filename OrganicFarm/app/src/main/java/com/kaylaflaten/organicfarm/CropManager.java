@@ -81,6 +81,13 @@ public class CropManager extends AppCompatActivity {
                 location[0] = finalSectionNum;
                 location[1] = finalBedNum;
                 entryKey[0] = dbCtrl.pushObjectReturnKey(location,newEntry);
+                String key = entryKey[0];
+                if (entryKey[0] != null) {
+                    String[] locationOverall = new String[2];
+                    locationOverall[0] = "All Crops";
+                    locationOverall[1] = key;
+                    dbCtrl.setValueAtLocation(locationOverall, newEntry);
+                }
                 intent.putExtra("pushID", entryKey[0]);
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);

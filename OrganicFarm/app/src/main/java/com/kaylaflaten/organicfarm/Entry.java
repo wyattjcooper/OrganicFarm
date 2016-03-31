@@ -18,6 +18,7 @@ public class Entry {
         this.notes = notes;
         this.finished = finished;
         this.bed = bed;
+        this.section = section;
     }
 
     public String getDate() { return date;}
@@ -26,6 +27,7 @@ public class Entry {
     public int getSection() {return section;}
     public int getBed() {return bed;}
     public boolean getFinished() {return finished;}
+
     public void setDate(String d) { date = d;}
     public void setName(String n) { name = n; }
     public void setNotes(String no) { notes = no;}

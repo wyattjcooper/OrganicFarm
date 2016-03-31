@@ -61,4 +61,24 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Number Of Crops In Farm"
+        android:id="@+id/textView"
+        android:layout_below="@+id/totalHarvestsText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Loading..."
+        android:id="@+id/totalCropsData"
+        android:layout_below="@+id/totalHarvestsText"
+        android:layout_alignLeft="@+id/totalNumharvestsData"
+        android:layout_alignStart="@+id/totalNumharvestsData" />
+
 </RelativeLayout>
