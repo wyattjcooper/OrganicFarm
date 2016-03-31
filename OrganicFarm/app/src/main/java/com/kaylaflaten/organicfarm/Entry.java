@@ -7,6 +7,7 @@ public class Entry {
     private String date;
     private String name;
     private String notes;
+    String image;
     private boolean finished;
     int section;
     int bed;

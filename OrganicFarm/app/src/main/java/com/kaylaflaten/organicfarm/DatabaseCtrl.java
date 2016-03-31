@@ -304,7 +304,7 @@ public class DatabaseCtrl {
                     //amount[0] = amount[0] + harvest.getAmount();
                     amount[0] = amount[0] + harvest.getAmount();
                 }
-                et.setText((int) amount[0] + "lbs");
+                et.setText((int) amount[0] + " lbs");
             }
 
             @Override
@@ -349,7 +349,7 @@ public class DatabaseCtrl {
                         amount[0] += 1;
                     }
                 }
-                et.setText(amount[0] + "Crops");
+                et.setText(amount[0] + " Crops");
             }
 
             @Override

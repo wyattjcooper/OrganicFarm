@@ -9,6 +9,7 @@ public class Harvest {
     private String notes;
     private String name;
     private String pid;
+    String image;
     public int section;
     public int bed;
 
@@ -26,12 +27,14 @@ public class Harvest {
     public String getName() { return name;}
     public String getPID() { return pid;}
     public String getDate() { return date;}
+    public String getImage() {return image;}
     public Double getAmount() {return amount;}
     public String getNotes() {return notes;}
     public int getSection() {return section;}
     public int getBed() {return bed;}
 
     public void setName(String name1) { name = name1;}
+    public void setImage(String image1) {image = image1;}
     public void setPID(String parentID1) { pid = parentID1;}
     public void setDate(String d) { date = d;}
     public void setAmount(double a) {amount = a;}
