@@ -29,7 +29,6 @@ public class Beds extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
 
         ListView beditems;
-        TextView sectionDisplay;
         Button back;
         int bedXML = 0;
         final int section;
@@ -56,9 +55,7 @@ public class Beds extends AppCompatActivity {
                 break;
 
         }
-        sectionDisplay = (TextView) findViewById(R.id.section);
         back = (Button) findViewById(R.id.back);
-        sectionDisplay.setText("Section " + (section + 1));
         beditems = (ListView) findViewById(R.id.bedItems);
         /*Check which section was clicked; change next line with xml name */
 
@@ -80,5 +77,10 @@ public class Beds extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        //getActionBar().setTitle("Section " + (section + 1));
+        getSupportActionBar().setTitle("Section " + (section + 1));
+
     }
 }

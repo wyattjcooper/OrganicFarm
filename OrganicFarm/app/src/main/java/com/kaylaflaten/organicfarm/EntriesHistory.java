@@ -34,8 +34,8 @@ public class EntriesHistory extends AppCompatActivity {
         amountData = (TextView) findViewById(R.id.entriesHistoryAmountData);
 
 
-        toolbar.setTitle("History of Crops Planted");
-        setSupportActionBar(toolbar);
+//        toolbar.setTitle("History of Crops Planted");
+//        setSupportActionBar(toolbar);
 
         String cropName = "";
 

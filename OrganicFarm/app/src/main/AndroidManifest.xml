@@ -22,8 +22,7 @@
         </activity>
         <activity
             android:name=".CropHarvester"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.CROPHARVESTER" />
 
@@ -42,8 +41,7 @@
         </activity>
         <activity
             android:name=".CropEditor"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.CROPEDITOR" />
 
@@ -54,12 +52,7 @@
         <activity android:name=".Beds" />
         <activity
             android:name=".CropsInBed"
-            android:label="@string/title_activity_crops_in_bed"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".HarvestViewer"
-            android:label="@string/title_activity_harvest_viewer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_crops_in_bed" />
         <activity
             android:name=".HarvestHistory"
             android:label="@string/title_activity_harvest_history"
@@ -67,16 +60,14 @@
         <activity
             android:name=".CropHistory"
             android:label="@string/title_activity_crop_history"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.MainActivity" />
         </activity>
         <activity
             android:name=".EntriesHistory"
-            android:label="@string/title_activity_entries_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_entries_history"></activity>
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -87,8 +78,8 @@
 
         <activity
             android:name=".BedHistory"
-            android:label="@string/title_activity_bed_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_bed_history"></activity>
+
     </application>
 
 </manifest>

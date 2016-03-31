@@ -9,15 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="1">
 
-    <TextView
-        android:id="@+id/section"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Section"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
 
+
+    </android.support.design.widget.AppBarLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

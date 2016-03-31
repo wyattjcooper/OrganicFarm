@@ -140,6 +140,9 @@ public class CropsInBed extends AppCompatActivity {
 
             }
         });
+
+        getSupportActionBar().setTitle(secS + " " + bedS);
+
     }
 
 
