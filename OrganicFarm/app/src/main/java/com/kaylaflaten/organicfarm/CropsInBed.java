@@ -16,8 +16,8 @@ import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 public class CropsInBed extends AppCompatActivity {
 
-    TextView sectionDisplay;
-    TextView bedDisplay;
+    //TextView sectionDisplay;
+    //TextView bedDisplay;
     Button add;
     Button back;
     Button reload;
@@ -35,8 +35,8 @@ public class CropsInBed extends AppCompatActivity {
         setContentView(R.layout.activity_crops_in_be);
         Log.println(1, "MyApp", "The read succeeded");
 
-        sectionDisplay = (TextView) findViewById(R.id.section);
-        bedDisplay = (TextView) findViewById(R.id.bed);
+        //sectionDisplay = (TextView) findViewById(R.id.section);
+        //bedDisplay = (TextView) findViewById(R.id.bed);
         add = (Button) findViewById(R.id.add);
         back = (Button) findViewById(R.id.back);
         reload = (Button) findViewById(R.id.cropsInBedRefreshB);
@@ -63,8 +63,8 @@ public class CropsInBed extends AppCompatActivity {
         }
 
         // Display current section/bed in the TextViews
-        sectionDisplay.setText(secS);
-        bedDisplay.setText(bedS);
+        //sectionDisplay.setText(secS);
+        //bedDisplay.setText(bedS);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);

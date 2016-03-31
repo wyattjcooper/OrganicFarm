@@ -12,31 +12,10 @@
     tools:context="com.kaylaflaten.organicfarm.CropsInBed"
     tools:showIn="@layout/activity_crops_in_be">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/sectionID"
-        android:id="@+id/section"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="@string/bedID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/bed"
-        android:layout_below="@+id/section"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/bed"
         android:layout_above="@id/back"
         android:weightSum="1"
         android:id="@+id/linearLayout">
@@ -73,15 +52,16 @@
         android:layout_height="wrap_content"
         android:text="Reload"
         android:id="@+id/cropsInBedRefreshB"
+        android:layout_toRightOf="@+id/back"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/back"
+        android:layout_alignEnd="@+id/back" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="History Of Bed"
         android:id="@+id/bedsHistoryButton"
-        android:layout_above="@+id/linearLayout"
-        android:layout_toRightOf="@+id/back"
-        android:layout_toEndOf="@+id/back" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

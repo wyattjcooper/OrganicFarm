@@ -31,7 +31,7 @@ public class BedHistory extends AppCompatActivity {
         numberData = (TextView) findViewById(R.id.numberDataBedHistory);
 
         toolbar.setTitle("History of Crops Planted");
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         String cropName = "";
         int secN = 0;
