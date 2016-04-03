@@ -1,6 +1,8 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,12 +30,19 @@ public class EntriesHistory extends AppCompatActivity {
     DatabaseCtrl dbCtrl;
     CropHistoryAdapter ca;
     TextView amountData;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entries_history);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEntriesHistory);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //setSupportActionBar(toolbar);
 
         amountData = (TextView) findViewById(R.id.entriesHistoryAmountData);
 
@@ -41,7 +54,7 @@ public class EntriesHistory extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.entriesHistoryListView);
 
-        Entry[] entries = new Entry[] { };
+        Entry[] entries = new Entry[]{};
 
         // Setting up the ArrayAdapter and ListView
         final ArrayList<Entry> entryList = new ArrayList<Entry>();
@@ -54,7 +67,7 @@ public class EntriesHistory extends AppCompatActivity {
             cropName = extras.getString("cropName");
         }
 
-        toolbar.setTitle("History Of "+cropName);
+        //toolbar.setTitle("History Of " + cropName);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
@@ -89,13 +102,16 @@ public class EntriesHistory extends AppCompatActivity {
 
         dbCtrl.listenAndSetTextToAmountOfCropNameHarvested(amountData, cropName);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public View getViewByPosition(int pos, ListView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();
         final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
-        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+        if (pos < firstListItemPosition || pos > lastListItemPosition) {
             return listView.getAdapter().getView(pos, null, listView);
         } else {
             final int childIndex = pos - firstListItemPosition;
@@ -104,4 +120,43 @@ public class EntriesHistory extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "EntriesHistory Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.kaylaflaten.organicfarm/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "EntriesHistory Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.kaylaflaten.organicfarm/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
