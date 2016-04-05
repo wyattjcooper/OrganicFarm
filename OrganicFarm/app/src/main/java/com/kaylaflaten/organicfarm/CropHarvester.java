@@ -164,6 +164,8 @@ public class CropHarvester extends AppCompatActivity {
 
             }
         });
+
+
 //        date.setOnClickListener(new View.OnClickListener() {
 //
 //            @Override

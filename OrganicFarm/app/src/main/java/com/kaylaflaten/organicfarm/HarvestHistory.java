@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -57,6 +58,17 @@ public class HarvestHistory extends AppCompatActivity {
 //        location[0] = "Harvest";
         ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropID, ha);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+        }
+        return true;
     }
 
 }

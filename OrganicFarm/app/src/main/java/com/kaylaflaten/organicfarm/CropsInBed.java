@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 public class CropsInBed extends AppCompatActivity {
@@ -34,7 +37,8 @@ public class CropsInBed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crops_in_be);
-        Log.println(1, "MyApp", "The read succeeded");
+
+
 
         add = (Button) findViewById(R.id.add);
         back = (Button) findViewById(R.id.back);
@@ -81,7 +85,7 @@ public class CropsInBed extends AppCompatActivity {
                 Intent intent = new Intent(CropsInBed.this, CropManager.class);
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
-                intent.putExtra("new",true);
+                intent.putExtra("new", true);
                 startActivity(intent);
             }
         });
@@ -142,10 +146,18 @@ public class CropsInBed extends AppCompatActivity {
 
         getSupportActionBar().setTitle(secS + " " + bedS);
 
-        //
-        // getSupportActionBar().on
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+        }
+        return true;
+    }
 
 }
