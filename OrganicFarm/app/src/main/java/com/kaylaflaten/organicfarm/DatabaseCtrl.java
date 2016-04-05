@@ -416,6 +416,29 @@ public class DatabaseCtrl {
         });
     }
 
+    public void listenAndSetTextToTotalNumberOfCropsEverPlanted(final TextView et) {
+
+        Log.println(1, "MyApp", "Called");
+        Firebase reference = new Firebase(REFNAME);
+        reference.child("All Crops").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                final int[] amount = {0};
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Entry currCrop = (Entry) postSnapshot.getValue(Entry.class);
+                    amount[0] += 1;
+
+                }
+                et.setText(amount[0] + " Crops");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
+
     public void listenAndSetTextToTotalNumberOfCropsHistoricallyInSectionBed(final TextView et, final int secN, final int bedN) {
 
         Log.println(1, "MyApp", "Called");
@@ -455,6 +478,32 @@ public class DatabaseCtrl {
     public void removeValueFromLocation(String[] location) {
         Firebase reference = createReferenceFromLocationList(location);
         reference.removeValue();
+
+    }
+
+    public void deleteHarvests(final String cropID) {
+        Firebase reference = new Firebase(REFNAME);
+        reference = reference.child("Harvest");
+        final Firebase finalReference = reference;
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                final int[] amount = {0};
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest currHarvest = postSnapshot.getValue(Harvest.class);
+                    if (currHarvest.getPID().equals(cropID)) {
+                        finalReference.child(postSnapshot.getKey()).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+
+
 
     }
 }

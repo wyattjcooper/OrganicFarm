@@ -166,6 +166,7 @@ public class CropEditor extends AppCompatActivity {
                     cropsOverallLocation[0] = "All Crops";
                     cropsOverallLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(cropsOverallLocation);
+                    dbCtrl.deleteHarvests(cropID);
                     startActivity(intent);
                     finish();
 
