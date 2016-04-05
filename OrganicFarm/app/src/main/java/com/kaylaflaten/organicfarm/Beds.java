@@ -36,7 +36,7 @@ public class Beds extends AppCompatActivity {
         if (extras != null) {
             section = extras.getInt("section", -1);
         } else {
-            section = -1;
+            section = 0;
         }
 
         //TODO: Make switch statement
@@ -81,6 +81,7 @@ public class Beds extends AppCompatActivity {
 
         //getActionBar().setTitle("Section " + (section + 1));
         getSupportActionBar().setTitle("Section " + (section + 1));
+
 
     }
 }

@@ -48,10 +48,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".CropManager" />
-        <activity android:name=".Beds" />
+
         <activity
             android:name=".CropsInBed"
-            android:label="@string/title_activity_crops_in_bed" />
+            android:label="@string/title_activity_crops_in_bed"
+            android:parentActivityName=".Beds">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kaylaflaten.organicfarm.Beds" />
+        </activity>
+
         <activity
             android:name=".HarvestHistory"
             android:label="@string/title_activity_harvest_history"
@@ -93,7 +99,21 @@
 
         <activity
             android:name=".BedHistory"
-            android:label="@string/title_activity_bed_history"></activity>
+            android:label="@string/title_activity_bed_history"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kaylaflaten.organicfarm.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".Beds"
+            android:label="@string/title_activity_bed_history"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kaylaflaten.organicfarm.MainActivity" />
+        </activity>
 
     </application>
 

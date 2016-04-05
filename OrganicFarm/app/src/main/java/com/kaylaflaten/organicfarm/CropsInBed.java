@@ -3,6 +3,7 @@ package com.kaylaflaten.organicfarm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,8 +36,6 @@ public class CropsInBed extends AppCompatActivity {
         setContentView(R.layout.activity_crops_in_be);
         Log.println(1, "MyApp", "The read succeeded");
 
-        //sectionDisplay = (TextView) findViewById(R.id.section);
-        //bedDisplay = (TextView) findViewById(R.id.bed);
         add = (Button) findViewById(R.id.add);
         back = (Button) findViewById(R.id.back);
         reload = (Button) findViewById(R.id.cropsInBedRefreshB);
@@ -142,6 +141,9 @@ public class CropsInBed extends AppCompatActivity {
         });
 
         getSupportActionBar().setTitle(secS + " " + bedS);
+
+        //
+        // getSupportActionBar().on
 
     }
 
