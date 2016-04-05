@@ -506,4 +506,27 @@ public class DatabaseCtrl {
 
 
     }
+
+    public void deleteHarvestsFromAllActivities(final String cropID) {
+        Firebase reference = new Firebase(REFNAME);
+        reference = reference.child("All Activites");
+        final Firebase finalReference = reference;
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                final int[] amount = {0};
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest currHarvest = postSnapshot.getValue(Harvest.class);
+                    if (currHarvest.getPID().equals(cropID)) {
+                        finalReference.child(postSnapshot.getKey()).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+    }
 }

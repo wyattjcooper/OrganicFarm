@@ -123,6 +123,12 @@ public class CropEditor extends AppCompatActivity {
                 dbCtrl.setValueAtLocation(locationCropOverall, newEntry);
 
 
+                String[] allActivitiesLocation = new String[2];
+                allActivitiesLocation[0] = "All Activities";
+                allActivitiesLocation[1] = cropID;
+                dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
+
+
                 // Look up the key in the keys list - same position
 //                intent.putExtra("section", secN);
 //                intent.putExtra("bed", bedN);
@@ -167,6 +173,11 @@ public class CropEditor extends AppCompatActivity {
                     cropsOverallLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(cropsOverallLocation);
                     dbCtrl.deleteHarvests(cropID);
+
+                    String[] allActivitiesLocation = new String[2];
+                    allActivitiesLocation[0] = "All Activities";
+                    allActivitiesLocation[1] = cropID;
+                    dbCtrl.removeValueFromLocation(allActivitiesLocation);
                     startActivity(intent);
                     finish();
 

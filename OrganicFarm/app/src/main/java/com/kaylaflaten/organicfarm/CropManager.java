@@ -88,6 +88,11 @@ public class CropManager extends AppCompatActivity {
                     locationOverall[0] = "All Crops";
                     locationOverall[1] = key;
                     dbCtrl.setValueAtLocation(locationOverall, newEntry);
+
+                    String[] allActivitiesLocation = new String[2];
+                    allActivitiesLocation[0] = "All Activities";
+                    allActivitiesLocation[1] = key;
+                    dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
                 }
                 intent.putExtra("pushID", entryKey[0]);
                 intent.putExtra("section", secN);

@@ -142,6 +142,10 @@ public class CropHarvester extends AppCompatActivity {
                     locationOldCrop[2] = cropID;
                     dbCtrl.removeValueFromLocation(locationOldCrop);
                 }
+                String[] allActivitiesLocation = new String[2];
+                allActivitiesLocation[0] = "All Activities";
+                allActivitiesLocation[1] = key;
+                dbCtrl.setValueAtLocation(allActivitiesLocation, newHarvest);
                 //startActivity(intent);
                 finish();
             }
