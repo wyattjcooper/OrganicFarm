@@ -106,7 +106,7 @@ public class CropEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), false, secN + 1, bedN + 1);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
                 String[] location = new String[3];
@@ -164,10 +164,12 @@ public class CropEditor extends AppCompatActivity {
                     intent.putExtra("section", secN);
                     intent.putExtra("bed", bedN);
                     dbCtrl.removeValueFromLocation(location);
+
                     String[] harvestLocation = new String[2];
                     harvestLocation[0] = "Harvest";
                     harvestLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(harvestLocation);
+
                     String[] cropsOverallLocation = new String[2];
                     cropsOverallLocation[0] = "All Crops";
                     cropsOverallLocation[1] = cropID;
@@ -178,6 +180,7 @@ public class CropEditor extends AppCompatActivity {
                     allActivitiesLocation[0] = "All Activities";
                     allActivitiesLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(allActivitiesLocation);
+
                     startActivity(intent);
                     finish();
 

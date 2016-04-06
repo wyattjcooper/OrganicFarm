@@ -114,7 +114,7 @@ public class CropHarvester extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
+                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(),dbCtrl.getUID(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
                 String[] locationHarvest = new String[1];
                 locationHarvest[0] = "Harvest";
                 //locationHarvest[1] = cropID;
@@ -126,7 +126,7 @@ public class CropHarvester extends AppCompatActivity {
                     String[] locationCropOverall = new String[2];
                     locationCropOverall[0] = "All Crops";
                     locationCropOverall[1] = cropID;
-                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes, true, secN + 1, bedN + 1);
+                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes,dbCtrl.getUID(), true, secN + 1, bedN + 1);
                     dbCtrl.setValueAtLocation(locationCropOverall, entryHistory);
 
 

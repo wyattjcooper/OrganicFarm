@@ -12,8 +12,11 @@ import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
 import android.widget.Toolbar;
 import android.widget.CheckBox;
+
+import com.google.android.gms.auth.api.Auth;
 import com.kaylaflaten.organicfarm.Entry;
 import android.util.Log;
+import com.firebase.client.AuthData;
 import java.util.List;
 
 /**
@@ -528,5 +531,30 @@ public class DatabaseCtrl {
             public void onCancelled(FirebaseError error) {
             }
         });
+    }
+
+    public void listenAndSetToUID(final TextView text){
+        Firebase ref = new Firebase(REFNAME);
+        ref = ref.child("Users").child(ref.getAuth().getUid().toString());
+        final Firebase finalRef = ref;
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot!=null) {
+                    //User user = (User) dataSnapshot.getValue(User.class);
+                    text.setText((dataSnapshot.getValue().toString()));
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
+    public String getUID() {
+        Firebase ref = new Firebase(REFNAME);
+        return ref.getAuth().getUid().toString();
     }
 }

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     TextView totalAmountData;
     TextView totalNumHarvestsData;
     TextView totalCropsData;
+    TextView userID;
     DatabaseCtrl dbCtrl;
 
     @Override
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         totalAmountData = (TextView) findViewById(R.id.totalAmountData);
         totalNumHarvestsData = (TextView) findViewById(R.id.totalNumharvestsData);
         totalCropsData = (TextView) findViewById(R.id.totalCropsData);
+        userID = (TextView) findViewById(R.id.userIdDisplayActivityMain);
         dbCtrl = new DatabaseCtrl(this);
 
         sectionitems.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sectionList)));
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         dbCtrl.listenAndSetTextToTotalAmount(totalAmountData);
         dbCtrl.listenAndSetTextToTotalNumberOfHarvests(totalNumHarvestsData);
         dbCtrl.listenAndSetTextToTotalNumberOfCropsEverPlanted(totalCropsData);
+        dbCtrl.listenAndSetToUID(userID);
 
         totalAmountData.setGravity(Gravity.LEFT);
         totalNumHarvestsData.setGravity(Gravity.CENTER);
