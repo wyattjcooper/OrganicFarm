@@ -23,9 +23,9 @@ public class HarvestHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_history);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Harvest History For Something");
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setTitle("Harvest History For Something");
+        //setSupportActionBar(toolbar);
 
         String cropID = "";
         String cropName = "";
@@ -48,7 +48,8 @@ public class HarvestHistory extends AppCompatActivity {
             cropDate = extras.getString("cropData");
         }
 
-        toolbar.setTitle("Harvest History Of "+ cropDate);
+        getSupportActionBar().setTitle("Harvest History Of "+ cropDate);
+        //toolbar.setTitle("Harvest History Of "+ cropDate);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
