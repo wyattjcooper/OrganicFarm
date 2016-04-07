@@ -555,6 +555,10 @@ public class DatabaseCtrl {
 
     public String getUID() {
         Firebase ref = new Firebase(REFNAME);
-        return ref.getAuth().getUid().toString();
+        String uid = "";
+        if (ref.getAuth()!=null) {
+            uid = ref.getAuth().getUid();
+        }
+        return uid;
     }
 }
