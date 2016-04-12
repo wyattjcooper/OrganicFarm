@@ -17,18 +17,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
-
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".CropHarvester"
@@ -64,7 +62,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropsInBed" />
         </activity>
-
         <activity
             android:name=".CropsInBed"
             android:label="@string/title_activity_crops_in_bed"
@@ -73,7 +70,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.Beds" />
         </activity>
-
         <activity
             android:name=".HarvestHistory"
             android:label="@string/title_activity_harvest_history"
@@ -82,7 +78,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropViewer" />
         </activity>
-
         <activity
             android:name=".CropHistory"
             android:label="@string/title_activity_crop_history"
@@ -91,7 +86,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropViewer" />
         </activity>
-
         <activity
             android:name=".EntriesHistory"
             android:label="@string/title_activity_entries_history"
@@ -116,7 +110,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".HarvestEditor"
+            android:label="@string/title_activity_harvest_editor"
+            android:parentActivityName=".HarvestHistory"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kaylaflaten.organicfarm.HarvestHistory" />
+        </activity>
     </application>
 
 </manifest>
