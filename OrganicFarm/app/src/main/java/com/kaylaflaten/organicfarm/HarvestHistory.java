@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -48,16 +50,30 @@ public class HarvestHistory extends AppCompatActivity {
             cropDate = extras.getString("cropData");
         }
 
+        // Set up our database control object
+        dbCtrl = new DatabaseCtrl(this);
+        ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropID, ha);
+
+        // Click on a crop - pass the key to the CropManager so that it can load the crops data
+        final ArrayList<String> finalKeys = keys;
+        final String finalCropID = cropID;
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(HarvestHistory.this, HarvestEditor.class);
+                // Look up the key in the keys list - same position
+                String itemSelected = finalKeys.get(position).toString();
+                intent.putExtra("harvestID", itemSelected);
+                intent.putExtra("cropID", finalCropID);
+                startActivity(intent);
+            }
+        });
+
         getSupportActionBar().setTitle("Harvest History Of "+ cropDate);
         //toolbar.setTitle("Harvest History Of "+ cropDate);
 
-        // Set up our database control object
-        dbCtrl = new DatabaseCtrl(this);
 
-        // Attach crops already in the database to our list
-//        String[] location = new String[1];
-//        location[0] = "Harvest";
-        ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropID, ha);
 
     }
 
