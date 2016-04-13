@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Total Amount"
-        android:id="@+id/bedHistoryAmountTxt"
+        android:id="@+id/amountTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -35,33 +35,27 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/amoutDataBedHistory"
+        android:id="@+id/amount"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/bedHistoryAmountTxt"
-        android:layout_alignRight="@+id/bedHistoryAmountTxt"
-        android:layout_alignEnd="@+id/bedHistoryAmountTxt" />
+        android:layout_below="@+id/amountTitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Crops Harvested"
-        android:id="@+id/numberTextBedHistory"
+        android:id="@+id/titleHarvested"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listViewBedHistory"
-        android:layout_alignEnd="@+id/listViewBedHistory" />
+        android:layout_alignParentRight="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Loading..."
-        android:id="@+id/numberDataBedHistory"
-        android:layout_alignRight="@+id/numberTextBedHistory"
-        android:layout_alignEnd="@+id/numberTextBedHistory"
-        android:layout_alignTop="@+id/amoutDataBedHistory"
-        android:layout_alignLeft="@+id/numberTextBedHistory"
-        android:layout_alignStart="@+id/numberTextBedHistory" />
+        android:id="@+id/harvested"
+        android:layout_below="@+id/titleHarvested"
+        android:layout_alignLeft="@+id/titleHarvested" />
 
 </RelativeLayout>
