@@ -26,11 +26,11 @@ public class BedHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_history);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBedsHistory);
-        amountData = (TextView) findViewById(R.id.amoutDataBedHistory);
-        numberData = (TextView) findViewById(R.id.numberDataBedHistory);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBedsHistory);
+        amountData = (TextView) findViewById(R.id.amount);
+        numberData = (TextView) findViewById(R.id.harvested);
 
-        toolbar.setTitle("History of Crops Planted");
+        getSupportActionBar().setTitle("History of Crops Planted");
 //        setSupportActionBar(toolbar);
 
         String cropName = "";
@@ -53,7 +53,7 @@ public class BedHistory extends AppCompatActivity {
             bedN = extras.getInt("bed", -1);
         }
 
-        toolbar.setTitle("History Of Section" + (secN + 1) + ", Bed " + (bedN + 1));
+        getSupportActionBar().setTitle("History Of Section" + (secN + 1) + ", Bed " + (bedN + 1));
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
