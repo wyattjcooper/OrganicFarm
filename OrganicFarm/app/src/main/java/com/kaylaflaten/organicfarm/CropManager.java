@@ -24,7 +24,7 @@ public class CropManager extends AppCompatActivity {
     TextView section;
     TextView bed;
     EditText name;
-    EditText date;
+    TextView date;
     EditText notes;
     Button back;
     Button enter;
@@ -47,7 +47,7 @@ public class CropManager extends AppCompatActivity {
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
         name = (EditText) findViewById(R.id.name);
-        date = (EditText) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.date);
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);

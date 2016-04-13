@@ -23,7 +23,7 @@ public class CropEditor extends AppCompatActivity {
     TextView section;
     TextView bed;
     EditText name;
-    EditText date;
+    TextView date;
     EditText notes;
     Button back;
     Button enter;
@@ -49,7 +49,7 @@ public class CropEditor extends AppCompatActivity {
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
         name = (EditText) findViewById(R.id.name);
-        date = (EditText) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.date);
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
         back = (Button) findViewById(R.id.back);
@@ -88,7 +88,7 @@ public class CropEditor extends AppCompatActivity {
         //dbCtrl.setEntryRef(cropID, 2);
 
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
-        dbCtrl.listenAndSetEditText(location, date,"date", "Enter date here");
+        dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetEditText(location, notes,"notes", "Enter notes here");
 
         date.setOnClickListener(new View.OnClickListener() {
