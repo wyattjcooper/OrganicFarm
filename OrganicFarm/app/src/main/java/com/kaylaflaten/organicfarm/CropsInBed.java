@@ -23,7 +23,6 @@ public class CropsInBed extends AppCompatActivity {
     //TextView sectionDisplay;
     //TextView bedDisplay;
     Button add;
-    Button back;
     Button reload;
     Button history;
     ListView lv;
@@ -41,8 +40,7 @@ public class CropsInBed extends AppCompatActivity {
 
 
         add = (Button) findViewById(R.id.add);
-        back = (Button) findViewById(R.id.back);
-        reload = (Button) findViewById(R.id.cropsInBedRefreshB);
+        //reload = (Button) findViewById(R.id.cropsInBedRefreshB);
         lv = (ListView) findViewById(R.id.listView);
         history = (Button) findViewById(R.id.bedsHistoryButton);
         String[] crops = new String[] { };
@@ -91,18 +89,18 @@ public class CropsInBed extends AppCompatActivity {
         });
 
         // Add new crop by clicking the add button
-        reload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CropsInBed.this, CropsInBed.class);
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                intent.putExtra("new", true);
-                startActivity(intent);
-                finish();
-
-            }
-        });
+//        reload.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(CropsInBed.this, CropsInBed.class);
+//                intent.putExtra("section", secN);
+//                intent.putExtra("bed", bedN);
+//                intent.putExtra("new", true);
+//                startActivity(intent);
+//                finish();
+//
+//            }
+//        });
 
         // Go to bed history
         history.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +110,6 @@ public class CropsInBed extends AppCompatActivity {
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 startActivity(intent);
-                finish();
 
             }
         });
@@ -134,15 +131,6 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
-        // Go back to Beds
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-
-
-            }
-        });
 
         getSupportActionBar().setTitle(secS + " " + bedS);
 

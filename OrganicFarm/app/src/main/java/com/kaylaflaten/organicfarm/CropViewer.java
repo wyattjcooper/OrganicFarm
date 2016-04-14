@@ -45,7 +45,6 @@ public class CropViewer extends AppCompatActivity {
         date = (TextView) findViewById(R.id.date);
         notes = (TextView) findViewById(R.id.notes);
         amount = (TextView) findViewById(R.id.amount);
-        back = (Button) findViewById(R.id.back);
         edit = (Button) findViewById(R.id.edit);
         harvest = (Button) findViewById(R.id.harvest);
         history = (Button) findViewById(R.id.HHbutton);
@@ -93,13 +92,6 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
         //name.setText(cropID);
 
-        // Navigate back to bed page - no changes will be made
-        back.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         // Edit crops
         edit.setOnClickListener(new Button.OnClickListener() {
