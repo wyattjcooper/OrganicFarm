@@ -98,6 +98,8 @@ public class HarvestEditor extends AppCompatActivity {
         dbCtrl.listenAndSetText(locationHarvest, section, "section", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, bed, "bed", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "NULL");
+        dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "NULL");
+
 
 
 
