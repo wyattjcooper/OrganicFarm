@@ -93,11 +93,12 @@ public class CropManager extends AppCompatActivity {
                     allActivitiesLocation[1] = key;
                     dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
                 }
-                intent.putExtra("pushID", entryKey[0]);
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                // Go back to crop entry page
-                startActivity(intent);
+//                intent.putExtra("pushID", entryKey[0]);
+//                intent.putExtra("section", secN);
+//                intent.putExtra("bed", bedN);
+//                // Go back to crop entry page
+//                startActivity(intent);
+                finish();
             }
         });
 

@@ -84,6 +84,7 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
 
+
         //toolbar.setTitle(secS);
 
 //        String[] locationHarvest = new String[1];
@@ -139,6 +140,13 @@ public class CropViewer extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        System.out.print("here");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

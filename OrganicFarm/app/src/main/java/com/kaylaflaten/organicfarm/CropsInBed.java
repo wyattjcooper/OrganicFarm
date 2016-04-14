@@ -32,6 +32,9 @@ public class CropsInBed extends AppCompatActivity {
     int secN;
     int bedN;
 
+    String secS;
+    String bedS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,8 @@ public class CropsInBed extends AppCompatActivity {
         //reload = (Button) findViewById(R.id.cropsInBedRefreshB);
         lv = (ListView) findViewById(R.id.listView);
         history = (Button) findViewById(R.id.bedsHistoryButton);
+
+
         String[] crops = new String[] { };
 
         // Setting up the ArrayAdapter and ListView
@@ -52,8 +57,8 @@ public class CropsInBed extends AppCompatActivity {
         lv.setAdapter(aa);
 
         // Grabbing Section and Bed values from intent
-        String secS = "Section ";
-        String bedS = "Bed ";
+        secS = "Section ";
+        bedS = "Bed ";
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -147,5 +152,24 @@ public class CropsInBed extends AppCompatActivity {
         }
         return true;
     }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+
+        // Setting up the ArrayAdapter and ListView
+        String[] crops = new String[] { };
+        final ArrayList<String> cropList = new ArrayList<String>();
+        cropList.addAll( Arrays.asList(crops) );
+        aa = new ArrayAdapter<String>(this, R.layout.simplerow, cropList);
+        lv.setAdapter(aa);
+
+
+        String[] location = new String[2];
+        location[0] = secS;
+        location[1] = bedS;
+        ArrayList<String> keys = dbCtrl.generateKeysListFromLocation(location, aa);
+    }
+
 
 }

@@ -88,7 +88,7 @@ public class CropEditor extends AppCompatActivity {
 
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
-        dbCtrl.listenAndSetEditText(location, notes,"notes", "Enter notes here");
+        dbCtrl.listenAndSetEditText(location, notes, "notes", "Enter notes here");
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +104,7 @@ public class CropEditor extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropEditor.this, CropViewer.class);
+                //Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
@@ -128,6 +128,12 @@ public class CropEditor extends AppCompatActivity {
                 dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
 
 
+
+                // Look up the key in the keys list - same position
+//                intent.putExtra("section", secN);
+//                intent.putExtra("bed", bedN);
+//                intent.putExtra("itemSelected", cropID);
+//                startActivity(intent);
                 // Look up the key in the keys list - same position
 //                intent.putExtra("section", secN);
 //                intent.putExtra("bed", bedN);
@@ -171,7 +177,7 @@ public class CropEditor extends AppCompatActivity {
                     allActivitiesLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(allActivitiesLocation);
 
-                    startActivity(intent);
+                    //startActivity(intent);
                     finish();
 
                 }
