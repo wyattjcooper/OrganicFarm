@@ -12,21 +12,13 @@
     tools:context="com.kaylaflaten.organicfarm.CropsInBed"
     tools:showIn="@layout/activity_crops_in_be">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/back"
-        android:weightSum="1"
-        android:id="@+id/linearLayout">
-
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/listView"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.54" />
-    </LinearLayout>
+            android:layout_above="@+id/add"
+            android:layout_gravity="center_horizontal" />
+
 
     <Button
         android:id="@+id/add"
@@ -37,25 +29,18 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/backButtonID"
-        android:textAppearance="?android:attr/textAppearanceButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reload"
-        android:id="@+id/cropsInBedRefreshB"
-        android:layout_toRightOf="@+id/back"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/back"
-        android:layout_alignEnd="@+id/back" />
+
+    <!--<Button-->
+        <!--style="?android:attr/buttonStyleSmall"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Reload"-->
+        <!--android:id="@+id/cropsInBedRefreshB"-->
+        <!--android:layout_toRightOf="@+id/back"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignRight="@+id/back"-->
+        <!--android:layout_alignEnd="@+id/back" />-->
 
     <Button
         android:layout_width="wrap_content"
@@ -63,5 +48,5 @@
         android:text="History Of Bed"
         android:id="@+id/bedsHistoryButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>

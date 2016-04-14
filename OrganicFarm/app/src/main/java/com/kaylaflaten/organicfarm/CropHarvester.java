@@ -71,7 +71,8 @@ public class CropHarvester extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_harvester);
         Firebase.setAndroidContext(this);
-        
+
+
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -79,7 +80,6 @@ public class CropHarvester extends AppCompatActivity {
         setDateTimeField();
 
         enter = (Button) findViewById(R.id.enter);
-        back = (Button) findViewById(R.id.back);
         date = (TextView) findViewById(R.id.date);
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
@@ -147,14 +147,6 @@ public class CropHarvester extends AppCompatActivity {
                 allActivitiesLocation[1] = key;
                 dbCtrl.setValueAtLocation(allActivitiesLocation, newHarvest);
                 //startActivity(intent);
-                finish();
-            }
-        });
-
-        // Navigate back to bed page - no changes will be made
-        back.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 finish();
             }
         });

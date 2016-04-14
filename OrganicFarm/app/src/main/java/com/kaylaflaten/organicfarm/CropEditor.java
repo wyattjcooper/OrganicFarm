@@ -52,7 +52,6 @@ public class CropEditor extends AppCompatActivity {
         date = (TextView) findViewById(R.id.date);
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
-        back = (Button) findViewById(R.id.back);
         delete = (Button) findViewById(R.id.delete);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
@@ -141,15 +140,6 @@ public class CropEditor extends AppCompatActivity {
             }
         });
 
-        // Navigate back to bed page - no changes will be made
-
-        back.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finish();
-            }
-        });
 
         // Delete crops
         delete.setOnClickListener(new Button.OnClickListener() {

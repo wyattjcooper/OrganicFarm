@@ -116,15 +116,6 @@
         android:layout_above="@+id/enter" />
 
     <Button
-        android:id="@+id/back"
-        android:textAppearance="?android:attr/textAppearanceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/backButtonID"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
-
-    <Button
         android:id="@+id/enter"
         android:textAppearance="?android:attr/textAppearanceButton"
         android:layout_width="wrap_content"
