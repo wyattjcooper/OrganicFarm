@@ -118,14 +118,6 @@
         android:layout_alignTop="@+id/amountTitle"
         android:layout_alignParentRight="true"/>
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/backButtonID"
-        android:textAppearance="?android:attr/textAppearanceButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
 
     <Button
         android:id="@+id/edit"
@@ -142,6 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Harvest"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

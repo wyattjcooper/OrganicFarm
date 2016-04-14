@@ -36,10 +36,9 @@ public class CropHarvester extends AppCompatActivity {
 
 
     EditText notes;
-    EditText date;
+    TextView date;
     EditText amount;
     CheckBox finished;
-    Button change;
     Button back;
     Button enter;
 
@@ -73,14 +72,15 @@ public class CropHarvester extends AppCompatActivity {
         setContentView(R.layout.activity_crop_harvester);
         Firebase.setAndroidContext(this);
 
+
+
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
 
         setDateTimeField();
 
         enter = (Button) findViewById(R.id.enter);
-        back = (Button) findViewById(R.id.back);
-        date = (EditText) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.date);
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
@@ -151,14 +151,6 @@ public class CropHarvester extends AppCompatActivity {
             }
         });
 
-        // Navigate back to bed page - no changes will be made
-        back.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
 
         date.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -169,73 +161,7 @@ public class CropHarvester extends AppCompatActivity {
             }
         });
 
-
-//        date.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-//
-//                // TODO Auto-generated method stub
-//                //To show current date in the datepicker
-//                final Calendar mcurrentDate = Calendar.getInstance();
-//
-//
-//                DatePickerDialog mDatePicker = new DatePickerDialog(CropHarvester.this, new DatePickerDialog.OnDateSetListener() {
-//                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                        // TODO Auto-generated method stub
-//                    /*      Your code   to get date and time    */
-//                        //harvestDate = mMonth + "/" + mDay + "/" + mYear;
-//                        Calendar newDate = Calendar.getInstance();
-//                        newDate.set(year, monthOfYear, dayOfMonth);
-//                        date.setText(dateFormatter.format(newDate.getTime()));
-//                    },mcurrentDate.get(Calendar.YEAR), mcurrentDate.get(Calendar.MONTH), mcurrentDate.get(Calendar.DAY_OF_MONTH));
-//
-//                }
-//            }
-//        }
     }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client.connect();
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "CropHarvester Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app deep link URI is correct.
-//                Uri.parse("android-app://com.kaylaflaten.organicfarm/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.start(client, viewAction);
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "CropHarvester Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app deep link URI is correct.
-//                Uri.parse("android-app://com.kaylaflaten.organicfarm/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.end(client, viewAction);
-//        client.disconnect();
-//    }
-
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();

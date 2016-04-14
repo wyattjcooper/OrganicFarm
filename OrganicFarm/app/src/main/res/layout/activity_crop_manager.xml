@@ -64,6 +64,8 @@
 
     <EditText
         android:id="@+id/name"
+        android:gravity="right"
+        android:textAlignment="gravity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -74,8 +76,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <TextView
         android:id="@+id/date"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/dateHint"
@@ -108,14 +115,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceButton"
-        android:text="@string/backButtonID"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
 
 
 </RelativeLayout>

@@ -22,23 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/section"
-        android:layout_above="@id/back"
         android:weightSum="1">
 
         <ListView
-            android:paddingLeft="0dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/bedItems"
-            android:layout_weight="0.82" />
+            android:id="@+id/bedItems" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/backButtonID"
-        android:textAppearance="?android:attr/textAppearanceButton"
-        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
