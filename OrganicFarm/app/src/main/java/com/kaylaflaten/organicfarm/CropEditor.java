@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,13 +39,14 @@ public class CropEditor extends AppCompatActivity {
     private SimpleDateFormat dateFormatter;
 
     private DatePickerDialog datePicker;
-
-
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_editor);
+
+
 
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
@@ -128,20 +130,6 @@ public class CropEditor extends AppCompatActivity {
                 dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
 
 
-
-                // Look up the key in the keys list - same position
-//                intent.putExtra("section", secN);
-//                intent.putExtra("bed", bedN);
-//                intent.putExtra("itemSelected", cropID);
-//                startActivity(intent);
-                // Look up the key in the keys list - same position
-//                intent.putExtra("section", secN);
-//                intent.putExtra("bed", bedN);
-//                intent.putExtra("itemSelected", cropID);
-//                startActivity(intent);
-
-                // Go back to crop entry page
-               // startActivity(intent);
                 finish();
             }
         });
@@ -156,9 +144,9 @@ public class CropEditor extends AppCompatActivity {
                 }
                 // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
                 else if (extras.getBoolean("new") != true) {
-                    Intent intent = new Intent(CropEditor.this, CropsInBed.class);
-                    intent.putExtra("section", secN);
-                    intent.putExtra("bed", bedN);
+                    //Intent intent = new Intent(CropEditor.this, CropsInBed.class);
+                    //intent.putExtra("section", secN);
+                    //intent.putExtra("bed", bedN);
                     dbCtrl.removeValueFromLocation(location);
 
                     String[] harvestLocation = new String[2];
@@ -177,7 +165,8 @@ public class CropEditor extends AppCompatActivity {
                     allActivitiesLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(allActivitiesLocation);
 
-                    //startActivity(intent);
+                    Intent intent = new Intent();
+                    setResult(2, intent);
                     finish();
 
                 }

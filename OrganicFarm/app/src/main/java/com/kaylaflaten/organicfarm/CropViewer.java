@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -31,13 +32,11 @@ public class CropViewer extends AppCompatActivity {
     int secN;
     int bedN;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_viewer);
-        //final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarCropViewer);
-
-
 
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
@@ -103,7 +102,7 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 intent.putExtra("itemSelected", cropID);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -139,12 +138,13 @@ public class CropViewer extends AppCompatActivity {
         });
 
 
+
     }
 
     @Override
-    public void onStart(){
-        super.onStart();
-        System.out.print("here");
+    public void onRestart(){
+        super.onRestart();
+
     }
 
     @Override
@@ -157,4 +157,12 @@ public class CropViewer extends AppCompatActivity {
         }
         return true;
     }
+
+    //checks to see if delete was just called.  If so, finish.
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        if (resultCode == 2){
+            finish();
+        }
+    }
+
 }
