@@ -71,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private EditText mfirstNameEntry;
+    private EditText mlastNameEntry;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -85,6 +87,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        mfirstNameEntry = (EditText) findViewById(R.id.firstNameEntry);
+        mlastNameEntry = (EditText) findViewById(R.id.lastNameEntry);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -97,19 +101,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        Button mEmailRegisterButton = (Button) findViewById(R.id.register_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
-        mEmailRegisterButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptRegster();
-            }
-        });
+
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -418,7 +416,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                    User newUser = new User(mEmail, "Steph", "Curry", 0);
+                    User newUser = new User(mEmail, mfirstNameEntry.getText().toString(), mlastNameEntry.getText().toString(), 0);
                     ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
                     finish();
                     startActivity(intent);

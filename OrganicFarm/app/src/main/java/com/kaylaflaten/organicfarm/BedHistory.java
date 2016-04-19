@@ -18,7 +18,7 @@ public class BedHistory extends AppCompatActivity {
 
     ListView lv;
     DatabaseCtrl dbCtrl;
-    CropHistoryAdapter ca;
+    CropHistoryByNameAdapter ca;
     TextView amountData;
     TextView numberData;
 
@@ -44,7 +44,7 @@ public class BedHistory extends AppCompatActivity {
         // Setting up the ArrayAdapter and ListView
         final ArrayList<Entry> entryList = new ArrayList<Entry>();
         entryList.addAll(Arrays.asList(entries));
-        ca = new CropHistoryAdapter(this, R.layout.crophistory_in_list, entryList);
+        ca = new CropHistoryByNameAdapter(this, R.layout.crophistorybyname_in_list, entryList);
         lv.setAdapter(ca);
 
         final Bundle extras = getIntent().getExtras();
@@ -61,7 +61,7 @@ public class BedHistory extends AppCompatActivity {
         // Attach crops already in the database to our list
         String[] location = new String[1];
         location[0] = "All Crops";
-        final ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapterBySectionAndBedHistorically(location, ca, (secN + 1), (bedN + 1));
+        final ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapterByNameHistorically(location, ca, (secN + 1), (bedN + 1));
 
         // Click on a crop - pass the key to the CropManager so that it can load the harvest data
         final ArrayList<String> finalKeys = keys;
