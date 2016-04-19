@@ -41,7 +41,7 @@ public class CropHistoryByNameAdapter extends ArrayAdapter<Entry> {
         // to inflate it basically means to render, or show, the view.
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.crophistory_in_list, null);
+            v = inflater.inflate(R.layout.crophistorybyname_in_list, null);
         }
 
         /*
@@ -54,12 +54,14 @@ public class CropHistoryByNameAdapter extends ArrayAdapter<Entry> {
         Entry e = entries.get(position);
 
         if (e != null) {
+            TextView crop = (TextView) v.findViewById(R.id.crop);
             TextView date = (TextView) v.findViewById(R.id.date);
-            TextView location = (TextView) v.findViewById(R.id.location);
+            //TextView location = (TextView) v.findViewById(R.id.location);
             TextView notes = (TextView) v.findViewById(R.id.notes);
 
+            crop.setText(e.getName());
             date.setText(e.getDate().toString());
-            location.setText("Section: " + e.getSection() + " Bed: " + e.getBed());
+            //location.setText("Section: " + e.getSection() + " Bed: " + e.getBed());
             notes.setText(e.getNotes());
 
 

@@ -6,30 +6,41 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Date:"
-        android:id="@+id/dateTitle"
-        android:layout_below="@+id/location"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="crop"
+        android:id="@+id/crop"
+        android:layout_below="@+id/line"
         android:layout_alignParentLeft="true" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="5dp"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="Location"-->
+        <!--android:id="@+id/location"-->
+        <!--android:layout_below="@+id/crop"-->
+        <!--android:layout_alignParentLeft="true" />-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Date:"
+        android:id="@+id/dateTitle"
+        android:layout_below="@+id/crop"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Date"
         android:id="@+id/date"
         android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Location"
-        android:id="@+id/location"
-        android:layout_below="@+id/line"
-        android:layout_alignParentLeft="true" />
 
 
     <TextView
