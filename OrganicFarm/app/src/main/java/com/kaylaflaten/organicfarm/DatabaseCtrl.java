@@ -533,7 +533,7 @@ public class DatabaseCtrl {
         });
     }
 
-    public void listenAndSetToUID(final TextView text){
+    public void listenAndSetToUsername(final TextView text){
         Firebase ref = new Firebase(REFNAME);
         ref = ref.child("Users").child(ref.getAuth().getUid().toString());
         final Firebase finalRef = ref;
@@ -541,8 +541,8 @@ public class DatabaseCtrl {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot!=null) {
-                    //User user = (User) dataSnapshot.getValue(User.class);
-                    text.setText((dataSnapshot.getValue().toString()));
+                    String user = dataSnapshot.child("firstName").getValue().toString();
+                    text.setText(user);
                 }
             }
 

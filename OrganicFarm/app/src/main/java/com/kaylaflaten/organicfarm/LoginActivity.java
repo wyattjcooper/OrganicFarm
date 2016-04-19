@@ -257,9 +257,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView.requestFocus();
         } else {
             // Register the user
+            showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            //mAuthTask.execute((Void) null);
-            mAuthTask.doInBackground();
+            mAuthTask.execute((Void) null);
 
         }
     }
@@ -416,9 +416,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onSuccess(Map<String, Object> result) {
                     System.out.println("Successfully created user account with uid: " + result.get("uid"));
                     Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                     User newUser = new User(mEmail, "Steph", "Curry", 0);
                     ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
+                    finish();
+                    startActivity(intent);
 
                 }
                 @Override
@@ -435,6 +438,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

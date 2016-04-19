@@ -58,9 +58,9 @@
         android:text="Amount"
         android:id="@+id/amountLabelHarvestEditor"
 
-        android:layout_above="@+id/dateLabelHarvestEditor"
-        android:layout_alignRight="@+id/notesLabelHarvestEditor"
-        android:layout_alignEnd="@+id/notesLabelHarvestEditor" />
+        android:layout_above="@+id/dateHarvestEditor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,6 +69,7 @@
         android:text="Notes"
         android:id="@+id/notesLabelHarvestEditor"
         android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/sectionDisplayTitleHarvestEditor"
         android:layout_alignEnd="@+id/sectionDisplayTitleHarvestEditor" />
 
     <TextView
@@ -77,8 +78,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
         android:id="@+id/nameTextHarvestEditor"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignTop="@+id/sectionHarvestEditor"
+        android:layout_toRightOf="@+id/sectionHarvestEditor"
+        android:layout_toEndOf="@+id/sectionHarvestEditor" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -118,7 +120,8 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/notesLabelHarvestEditor"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/deleteHarvestEditor" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -146,8 +149,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Loading..."
         android:id="@+id/bedHarvestEditor"
-        android:layout_below="@+id/bedDisplayLabelHarvestEditor"
-        android:layout_toLeftOf="@+id/amountHarvestEditor"
-        android:layout_toStartOf="@+id/amountHarvestEditor" />
+        android:layout_alignBottom="@+id/bedDisplayLabelHarvestEditor"
+        android:layout_toRightOf="@+id/deleteHarvestEditor"
+        android:layout_toEndOf="@+id/deleteHarvestEditor" />
 
 </RelativeLayout>
