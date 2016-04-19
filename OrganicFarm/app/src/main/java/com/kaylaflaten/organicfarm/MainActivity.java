@@ -54,9 +54,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         dbCtrl.listenAndSetTextToTotalAmount(totalAmountData);
         dbCtrl.listenAndSetTextToTotalNumberOfHarvests(totalNumHarvestsData);
         dbCtrl.listenAndSetTextToTotalNumberOfCropsEverPlanted(totalCropsData);
-        if (dbCtrl.getUID() != null) {
-            dbCtrl.listenAndSetToUsername(userID);
-        }
+        dbCtrl.listenAndSetToUsername(userID);
+
 
         totalAmountData.setGravity(Gravity.LEFT);
         totalNumHarvestsData.setGravity(Gravity.CENTER);

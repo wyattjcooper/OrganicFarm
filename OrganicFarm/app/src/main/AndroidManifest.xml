@@ -50,7 +50,23 @@
                 android:value="com.kaylaflaten.organicfarm.CropsInBed" />
         </activity>
         <activity
+            android:name=".CropHistoryViewer"
+            android:label="@string/app_name"
+            android:parentActivityName=".EntriesHistory">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kaylaflaten.organicfarm.EntriesHistory" />
+        </activity>
+        <activity
             android:name=".CropEditor"
+            android:label="@string/app_name"
+            android:parentActivityName=".CropViewer">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kaylaflaten.organicfarm.CropViewer" />
+        </activity>
+        <activity
+            android:name=".CropHistoryEditor"
             android:label="@string/app_name"
             android:parentActivityName=".CropViewer">
             <meta-data
@@ -116,8 +132,8 @@
         <activity
             android:name=".HarvestEditor"
             android:label="@string/title_activity_harvest_editor"
-            android:parentActivityName=".HarvestHistory"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".HarvestHistory">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.HarvestHistory" />

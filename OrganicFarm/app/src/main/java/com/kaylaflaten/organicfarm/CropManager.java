@@ -9,15 +9,10 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-import android.content.Intent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-
-import com.kaylaflaten.organicfarm.Entry;
-import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 public class CropManager extends AppCompatActivity {
 
@@ -25,6 +20,7 @@ public class CropManager extends AppCompatActivity {
     TextView bed;
     EditText name;
     TextView date;
+    TextView owner;
     EditText notes;
     Button back;
     Button enter;
@@ -47,9 +43,10 @@ public class CropManager extends AppCompatActivity {
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
         name = (EditText) findViewById(R.id.name);
-        date = (TextView) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.dateByName);
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
+        owner = (TextView) findViewById(R.id.ownerCropAdder);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -76,7 +73,7 @@ public class CropManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // Intent intent = new Intent(CropManager.this, CropsInBed.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), dbCtrl.getUID(),false, secN + 1, bedN + 1);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), owner.getText().toString(),false, secN + 1, bedN + 1);
                 String[] location = new String[2];
                 location[0] = finalSectionNum;
                 location[1] = finalBedNum;
@@ -105,6 +102,9 @@ public class CropManager extends AppCompatActivity {
 
             }
         });
+        if (!dbCtrl.getUID().equals("no id")) {
+            dbCtrl.listenAndSetToUsername(owner);
+        }
 
     }
 

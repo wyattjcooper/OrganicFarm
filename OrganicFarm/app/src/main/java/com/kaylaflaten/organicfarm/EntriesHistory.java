@@ -1,13 +1,9 @@
 package com.kaylaflaten.organicfarm;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,9 +16,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.lang.Object;
-import java.util.TimerTask;
-import java.util.Timer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EntriesHistory extends AppCompatActivity {
 
@@ -86,13 +81,27 @@ public class EntriesHistory extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(EntriesHistory.this, HarvestHistory.class);
+                Intent intent = new Intent(EntriesHistory.this, CropHistoryViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
                 intent.putExtra("cropName", finalCropName);
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
-                TextView data = (TextView) viewAtPos.findViewById(R.id.date);
+                TextView data = (TextView) viewAtPos.findViewById(R.id.dateByName);
+                TextView sectionBed = (TextView) viewAtPos.findViewById(R.id.location);
+                String sectionBED = sectionBed.getText().toString();
+                final Pattern pattern = Pattern.compile("\\d+"); // the regex
+                final Matcher matcher = pattern.matcher(sectionBED); // your string
+
+                final ArrayList<Integer> ints = new ArrayList<Integer>(); // results
+
+                while (matcher.find()) { // for each match
+                    ints.add(Integer.parseInt(matcher.group())); // convert to int
+                }
+
+                intent.putExtra("secN",ints.get(0));
+                intent.putExtra("bedN",ints.get(1));
+
 
                 String date = data.getText().toString();
                 intent.putExtra("cropData", date);
@@ -101,6 +110,8 @@ public class EntriesHistory extends AppCompatActivity {
         });
 
         dbCtrl.listenAndSetTextToAmountOfCropNameHarvested(amountData, cropName);
+
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

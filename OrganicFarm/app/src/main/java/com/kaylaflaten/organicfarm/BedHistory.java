@@ -2,10 +2,7 @@ package com.kaylaflaten.organicfarm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -66,18 +63,21 @@ public class BedHistory extends AppCompatActivity {
         // Click on a crop - pass the key to the CropManager so that it can load the harvest data
         final ArrayList<String> finalKeys = keys;
         final String finalCropName = cropName;
+        final int finalSecN = secN;
+        final int finalBedN = bedN;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(BedHistory.this, HarvestHistory.class);
+                Intent intent = new Intent(BedHistory.this, CropHistoryViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
                 intent.putExtra("cropName", finalCropName);
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
-                TextView data = (TextView) viewAtPos.findViewById(R.id.date);
-
+                TextView data = (TextView) viewAtPos.findViewById(R.id.dateByName);
+                intent.putExtra("secN", finalSecN);
+                intent.putExtra("bedN", finalBedN);
 //                TextView data = (TextView)
                 String date = data.getText().toString();
                 intent.putExtra("cropData", date);

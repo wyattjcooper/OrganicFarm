@@ -2,31 +2,21 @@ package com.kaylaflaten.organicfarm;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 import com.firebase.client.Firebase;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -37,9 +27,9 @@ public class CropHarvester extends AppCompatActivity {
 
     EditText notes;
     TextView date;
+    TextView owner;
     EditText amount;
     CheckBox finished;
-    Button back;
     Button enter;
 
 
@@ -80,7 +70,8 @@ public class CropHarvester extends AppCompatActivity {
         setDateTimeField();
 
         enter = (Button) findViewById(R.id.enter);
-        date = (TextView) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.dateByName);
+        owner = (TextView) findViewById(R.id.ownerCropHarvester);
         notes = (EditText) findViewById(R.id.notes);
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
@@ -126,7 +117,7 @@ public class CropHarvester extends AppCompatActivity {
                     String[] locationCropOverall = new String[2];
                     locationCropOverall[0] = "All Crops";
                     locationCropOverall[1] = cropID;
-                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes,dbCtrl.getUID(), true, secN + 1, bedN + 1);
+                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes,owner.getText().toString(), true, secN + 1, bedN + 1);
                     dbCtrl.setValueAtLocation(locationCropOverall, entryHistory);
 
 
@@ -162,6 +153,10 @@ public class CropHarvester extends AppCompatActivity {
 
             }
         });
+
+        if (!dbCtrl.getUID().equals("no id")) {
+            dbCtrl.listenAndSetToUsername(owner);
+        }
 
     }
 

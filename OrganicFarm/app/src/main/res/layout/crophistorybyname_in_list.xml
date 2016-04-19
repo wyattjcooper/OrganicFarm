@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="crop"
-        android:id="@+id/crop"
+        android:id="@+id/cropByName"
         android:layout_below="@+id/line"
         android:layout_alignParentLeft="true" />
 
@@ -29,7 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Date:"
         android:id="@+id/dateTitle"
-        android:layout_below="@+id/crop"
+        android:layout_below="@+id/cropByName"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Date"
-        android:id="@+id/date"
+        android:id="@+id/dateByName"
         android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true" />
 
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Note"
-        android:id="@+id/notes"
+        android:id="@+id/notesByName"
         android:singleLine="false"
         android:layout_below="@+id/notesTitle"
         android:layout_alignParentLeft="true" />

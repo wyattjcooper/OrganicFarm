@@ -77,7 +77,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/dateByName"
         android:gravity="right"
         android:textAlignment="gravity"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"

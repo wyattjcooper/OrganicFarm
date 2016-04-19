@@ -82,7 +82,7 @@ public class DatabaseCtrl {
                     Log.println(1, "MyApp", "Reading harvests");
                     // Fetch the key from the database
                     String key = postSnapshot.getKey();
-                    if (!keys.contains(key) && (pid1.equals(object.getPID()))) {
+                    if (!keys.contains(key) && (object != null) && (pid1.equals(object.getPID()))) {
                         Log.println(1, "MyApp", "The read succeeded");
 
                         // Add key to keys list
@@ -570,7 +570,7 @@ public class DatabaseCtrl {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot!=null) {
+                if (dataSnapshot.child("firstName").getValue()!=null) {
                     String user = dataSnapshot.child("firstName").getValue().toString();
                     text.setText(user);
                 }

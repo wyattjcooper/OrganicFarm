@@ -1,17 +1,22 @@
 package com.kaylaflaten.organicfarm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 /**
- * Created by Carmen on 3/7/2016.
+ * Created by Wyatt on 4/19/2016.
  */
-public class CropViewer extends AppCompatActivity {
+public class CropHistoryViewer extends AppCompatActivity {
 
     TextView section;
     TextView bed;
@@ -19,11 +24,10 @@ public class CropViewer extends AppCompatActivity {
     TextView date;
     TextView notes;
     TextView amount;
-    Button back;
+    TextView owner;
     Button edit;
     Button harvest;
     Button history;
-    TextView owner;
 
     int secN;
     int bedN;
@@ -32,29 +36,31 @@ public class CropViewer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crop_viewer);
+        setContentView(R.layout.activity_crop_history_viewer);
 
-        section = (TextView) findViewById(R.id.section);
-        bed = (TextView) findViewById(R.id.bed);
-        name = (TextView) findViewById(R.id.cropByName);
-        date = (TextView) findViewById(R.id.dateByName);
-        notes = (TextView) findViewById(R.id.notes);
-        amount = (TextView) findViewById(R.id.amount);
-        edit = (Button) findViewById(R.id.edit);
-        harvest = (Button) findViewById(R.id.harvest);
-        history = (Button) findViewById(R.id.HHbutton);
-        owner = (TextView) findViewById(R.id.ownerCropViewer);
+        section = (TextView) findViewById(R.id.sectionCropHistoryViewer);
+        bed = (TextView) findViewById(R.id.bedCropHistoryViewer);
+        name = (TextView) findViewById(R.id.cropCropHistoryViewer);
+        date = (TextView) findViewById(R.id.dateCropHistoryViewer);
+        notes = (TextView) findViewById(R.id.notesCropHistoryViewer);
+        amount = (TextView) findViewById(R.id.amountCropHistoryViewer);
+        edit = (Button) findViewById(R.id.editCropHistoryViewer);
+        harvest = (Button) findViewById(R.id.harvestCropHistoryViewer);
+        history = (Button) findViewById(R.id.HHbuttonCropHistoryViewer);
+        owner = (TextView) findViewById(R.id.ownerCropHistoryViewer);
 
         final Bundle extras = getIntent().getExtras();
 
         String secS = "Section ";
         String bedS = "Bed ";
         String cropName = "";
+        String cropDate = "";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
             cropName = extras.getString("cropName");
+            cropDate = extras.getString("cropData");
             secS = secS + (secN + 1);
             bedS = bedS + (bedN + 1);
         }
@@ -63,14 +69,12 @@ public class CropViewer extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
 
+        final String cropID = extras.getString("cropID");
 
 
         String[] location = new String[3];
-        location[0] = secS;
-        location[1] = bedS;
-
-        final String cropID = extras.getString("itemSelected");
-
+        location[0] = "Crop History";
+        location[1] = cropName;
         location[2] = cropID;
 
         // Create the DatabaseCtrl object
@@ -79,27 +83,29 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location,name, "name", "Name");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
+        dbCtrl.listenAndSetText(location, owner,"owner", "Owner");
 
-        dbCtrl.listenAndSetText(location, owner, "owner", "Owner");
-
-
-        //getSupportActionBar().setTitle("Planted by" + owner.getText().toString());
+        getSupportActionBar().setTitle(cropName + " Planted on " + cropDate);
 
 
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
+       // dbCtrl.listenAndSetTextToAmountOfCropNameHarvested(amount, name.getText().toString());
 
 
 
         // Edit crops
+        final String finalCropName2 = cropName;
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropViewer.this, CropEditor.class);
+                Intent intent = new Intent(CropHistoryViewer.this, CropHistoryEditor.class);
                 // Look up the key in the keys list - same position
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
-                intent.putExtra("itemSelected", cropID);
-                startActivityForResult(intent,1);
+                intent.putExtra("cropID", cropID);
+                intent.putExtra("cropName", finalCropName2);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -107,28 +113,30 @@ public class CropViewer extends AppCompatActivity {
         final String finalCropName = cropName;
         final String finalSecS = secS;
         final String finalBedS = bedS;
-        harvest.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CropViewer.this, CropHarvester.class);
-                // Look up the key in the keys list - same position
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                intent.putExtra("itemSelected", cropID);
-                intent.putExtra("cropName", name.getText().toString());
-                intent.putExtra("cropDate", date.getText().toString());
-                intent.putExtra("cropNotes", notes.getText().toString());
-                startActivityForResult(intent,1);
-            }
-        });
+//        harvest.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(CropViewer.this, CropHarvester.class);
+//                // Look up the key in the keys list - same position
+//                intent.putExtra("section", secN);
+//                intent.putExtra("bed", bedN);
+//                intent.putExtra("itemSelected", cropID);
+//                intent.putExtra("cropName", name.getText().toString());
+//                intent.putExtra("cropDate", date.getText().toString());
+//                intent.putExtra("cropNotes", notes.getText().toString());
+//                startActivityForResult(intent,1);
+//            }
+//        });
 
         // View harvest history
+        final String finalCropName1 = cropName;
         history.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropViewer.this, HarvestHistory.class);
+                Intent intent = new Intent(CropHistoryViewer.this, HarvestHistory.class);
                 // Look up the key in the keys list - same position
                 intent.putExtra("cropID", cropID);
+                intent.putExtra("cropName", finalCropName1);
                 intent.putExtra("cropData", name.getText().toString() + " Planted In " + finalSecS +"," + finalBedS);
                 startActivity(intent);
             }

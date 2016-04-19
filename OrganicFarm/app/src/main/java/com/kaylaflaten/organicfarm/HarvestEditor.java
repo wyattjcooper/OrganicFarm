@@ -20,22 +20,14 @@ import java.util.Locale;
 public class HarvestEditor extends AppCompatActivity {
 
 
-    TextView section;
-    TextView bed;
+
     TextView name;
-    EditText date;
+    TextView date;
     EditText notes;
     EditText amount;
     TextView owner;
     Button enter;
     Button delete;
-
-    TextView sectionTitle;
-    TextView bedTitle;
-    TextView dateTitle;
-    TextView amountTitle;
-    TextView notesTitle;
-
 
     private SimpleDateFormat dateFormatter;
 
@@ -44,30 +36,23 @@ public class HarvestEditor extends AppCompatActivity {
 
     String harvestID;
     String cropID;
+    String cropName;
+    int secN;
+    int bedN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_editor);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
-
-        section = (TextView) findViewById(R.id.sectionHarvestEditor);
-        bed = (TextView) findViewById(R.id.bedHarvestEditor);
-        name = (TextView) findViewById(R.id.nameTextHarvestEditor);
-        date = (EditText) findViewById(R.id.dateHarvestEditor);
+        date = (TextView) findViewById(R.id.dateHarvestEditor);
         notes = (EditText) findViewById(R.id.notesHarvestEditor);
         owner = (TextView) findViewById(R.id.ownerHarvestEditor);
         amount = (EditText) findViewById(R.id.amountHarvestEditor);
-        enter = (Button) findViewById(R.id.enterHarvestEditor);
         delete = (Button) findViewById(R.id.deleteHarvestEditor);
-
-        sectionTitle = (TextView) findViewById(R.id.sectionDisplayTitleHarvestEditor);
-        bedTitle = (TextView) findViewById(R.id.bedDisplayLabelHarvestEditor);
-        dateTitle = (TextView) findViewById(R.id.dateLabelHarvestEditor);
-        amountTitle = (TextView) findViewById(R.id.amountLabelHarvestEditor);
-        notesTitle = (TextView) findViewById(R.id.notesLabelHarvestEditor);
+        enter = (Button) findViewById(R.id.enterHarvestEditor);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -77,10 +62,15 @@ public class HarvestEditor extends AppCompatActivity {
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
         final Bundle extras = getIntent().getExtras();
-
+        secN = 0;
+        bedN = 0;
+        cropName = "";
         if (extras != null) {
             harvestID = extras.getString("harvestID");
             cropID = extras.getString("cropID");
+            cropName = extras.getString("cropName");
+            secN = extras.getInt("secN", 1);
+            bedN = extras.getInt("bedN", 1);
         }
 
         final String[] locationHarvest = new String[2];
@@ -92,11 +82,8 @@ public class HarvestEditor extends AppCompatActivity {
         locationAllActivities[1] = harvestID;
 
 
-        dbCtrl.listenAndSetText(locationHarvest, name,"name", "NULL" );
-        dbCtrl.listenAndSetEditText(locationHarvest, date,"date", "NULL" );
+        dbCtrl.listenAndSetText(locationHarvest, date,"date", "NULL" );
         dbCtrl.listenAndSetEditText(locationHarvest, amount,"amount", "NULL" );
-        dbCtrl.listenAndSetText(locationHarvest, section, "section", "NULL");
-        dbCtrl.listenAndSetText(locationHarvest, bed, "bed", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "NULL");
 
@@ -110,9 +97,9 @@ public class HarvestEditor extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Harvest newHarvest = new Harvest(name.getText().toString(), cropID, date.getText().toString(), owner.getText().toString(),
+                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(), owner.getText().toString(),
                                                 Double.parseDouble(amount.getText().toString()), notes.getText().toString(),
-                                                Integer.parseInt(section.getText().toString()), Integer.parseInt(bed.getText().toString()) );
+                                                secN, bedN);
                 dbCtrl.setValueAtLocation(locationHarvest, newHarvest);
                 dbCtrl.setValueAtLocation(locationAllActivities, newHarvest);
 

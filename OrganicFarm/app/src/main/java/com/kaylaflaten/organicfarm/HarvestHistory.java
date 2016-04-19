@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class HarvestHistory extends AppCompatActivity {
     ListView lv;
     DatabaseCtrl dbCtrl;
     HarvestAdapter ha;
+    Button edit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class HarvestHistory extends AppCompatActivity {
         getSupportActionBar().setTitle("Harvest History Of "+ cropDate);
         //toolbar.setTitle("Harvest History Of "+ cropDate);
 
+        final String finalCropID1 = cropID;
 
 
     }
