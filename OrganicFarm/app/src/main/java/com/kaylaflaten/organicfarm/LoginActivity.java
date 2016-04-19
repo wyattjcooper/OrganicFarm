@@ -379,7 +379,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             final Firebase ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
-
+            final boolean[] succeeded = {true};
             ref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
@@ -390,31 +390,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
-                    // there was an error
+                    mPasswordView.setError("Wrong password or account does not exist");
+
+
                 }
             });
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+//            try {
+//                // Simulate network access.
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                return false;
+//            }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
 
             ref.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
                     System.out.println("Successfully created user account with uid: " + result.get("uid"));
                     Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
 
                     User newUser = new User(mEmail, mfirstNameEntry.getText().toString(), mlastNameEntry.getText().toString(), 0);
                     ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
@@ -425,6 +420,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onError(FirebaseError firebaseError) {
                     // there was an error
+                    succeeded[0] =false;
+                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                    Toast.makeText(getApplicationContext(), "Unsuccessful log in attempt", Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(intent);
                 }
             });
             return true;

@@ -75,7 +75,7 @@ public class CropManager extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropManager.this, CropsInBed.class);
+               // Intent intent = new Intent(CropManager.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), dbCtrl.getUID(),false, secN + 1, bedN + 1);
                 String[] location = new String[2];
                 location[0] = finalSectionNum;
@@ -93,11 +93,6 @@ public class CropManager extends AppCompatActivity {
                     allActivitiesLocation[1] = key;
                     dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
                 }
-//                intent.putExtra("pushID", entryKey[0]);
-//                intent.putExtra("section", secN);
-//                intent.putExtra("bed", bedN);
-//                // Go back to crop entry page
-//                startActivity(intent);
                 finish();
             }
         });
