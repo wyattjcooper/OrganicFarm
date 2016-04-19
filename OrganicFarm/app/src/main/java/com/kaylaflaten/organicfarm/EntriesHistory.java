@@ -67,7 +67,8 @@ public class EntriesHistory extends AppCompatActivity {
             cropName = extras.getString("cropName");
         }
 
-        //toolbar.setTitle("History Of " + cropName);
+
+        getSupportActionBar().setTitle("History Of " + cropName);
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
@@ -91,9 +92,8 @@ public class EntriesHistory extends AppCompatActivity {
                 intent.putExtra("cropName", finalCropName);
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
-                TextView data = (TextView) viewAtPos.findViewById(R.id.cropHistoryDate);
+                TextView data = (TextView) viewAtPos.findViewById(R.id.date);
 
-//                TextView data = (TextView)
                 String date = data.getText().toString();
                 intent.putExtra("cropData", date);
                 startActivity(intent);

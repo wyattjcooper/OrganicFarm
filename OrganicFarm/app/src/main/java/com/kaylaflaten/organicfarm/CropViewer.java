@@ -84,13 +84,11 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
 
 
-        //toolbar.setTitle(secS);
+        //getSupportActionBar().setTitle(secS);
 
-//        String[] locationHarvest = new String[1];
-//        locationHarvest[0] = "Harvest";
 
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
-        //name.setText(cropID);
+
 
 
         // Edit crops
@@ -121,7 +119,7 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("cropName", name.getText().toString());
                 intent.putExtra("cropDate", date.getText().toString());
                 intent.putExtra("cropNotes", notes.getText().toString());
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -160,7 +158,7 @@ public class CropViewer extends AppCompatActivity {
 
     //checks to see if delete was just called.  If so, finish.
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-        if (resultCode == 2){
+        if (resultCode == 2 || resultCode == 3){
             finish();
         }
     }

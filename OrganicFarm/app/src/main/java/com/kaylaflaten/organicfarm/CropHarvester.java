@@ -117,12 +117,12 @@ public class CropHarvester extends AppCompatActivity {
                 Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(),dbCtrl.getUID(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
                 String[] locationHarvest = new String[1];
                 locationHarvest[0] = "Harvest";
+                int resultCode = 0;
+
                 //locationHarvest[1] = cropID;
                 String key = dbCtrl.pushObjectReturnKey(locationHarvest, newHarvest);
-                if (finished.isChecked() == false) {
-
-
-                } else if (finished.isChecked()) {
+                if (finished.isChecked()) {
+                    resultCode = 3;
                     String[] locationCropOverall = new String[2];
                     locationCropOverall[0] = "All Crops";
                     locationCropOverall[1] = cropID;
@@ -146,7 +146,9 @@ public class CropHarvester extends AppCompatActivity {
                 allActivitiesLocation[0] = "All Activities";
                 allActivitiesLocation[1] = key;
                 dbCtrl.setValueAtLocation(allActivitiesLocation, newHarvest);
-                //startActivity(intent);
+                Intent intent = new Intent();
+                setResult(resultCode, intent);
+                finish();
                 finish();
             }
         });

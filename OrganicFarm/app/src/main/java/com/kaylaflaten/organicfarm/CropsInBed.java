@@ -23,7 +23,6 @@ public class CropsInBed extends AppCompatActivity {
     //TextView sectionDisplay;
     //TextView bedDisplay;
     Button add;
-    Button reload;
     Button history;
     ListView lv;
     DatabaseCtrl dbCtrl;
@@ -68,10 +67,6 @@ public class CropsInBed extends AppCompatActivity {
             bedS = bedS + (bedN + 1);
         }
 
-        // Display current section/bed in the TextViews
-        //sectionDisplay.setText(secS);
-        //bedDisplay.setText(bedS);
-
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
 
@@ -93,19 +88,6 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
-        // Add new crop by clicking the add button
-//        reload.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(CropsInBed.this, CropsInBed.class);
-//                intent.putExtra("section", secN);
-//                intent.putExtra("bed", bedN);
-//                intent.putExtra("new", true);
-//                startActivity(intent);
-//                finish();
-//
-//            }
-//        });
 
         // Go to bed history
         history.setOnClickListener(new View.OnClickListener() {

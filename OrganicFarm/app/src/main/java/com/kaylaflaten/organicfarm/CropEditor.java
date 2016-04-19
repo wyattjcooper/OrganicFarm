@@ -144,9 +144,6 @@ public class CropEditor extends AppCompatActivity {
                 }
                 // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
                 else if (extras.getBoolean("new") != true) {
-                    //Intent intent = new Intent(CropEditor.this, CropsInBed.class);
-                    //intent.putExtra("section", secN);
-                    //intent.putExtra("bed", bedN);
                     dbCtrl.removeValueFromLocation(location);
 
                     String[] harvestLocation = new String[2];

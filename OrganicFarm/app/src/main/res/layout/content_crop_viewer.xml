@@ -16,8 +16,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sectionID"
         android:id="@+id/section"
-        android:layout_above="@+id/bed"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/bed"
-        android:layout_below="@+id/HHbutton"
+        android:layout_below="@+id/section"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -56,9 +56,10 @@
         android:id="@+id/amountTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Amount Harvested"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/dateTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -68,7 +69,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/amountTitle"
         android:layout_alignParentLeft="true" />
 
@@ -105,7 +106,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/notesTitle"
-        android:layout_above="@+id/back"
+        android:layout_above="@+id/edit"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
