@@ -117,7 +117,7 @@ public class CropHarvester extends AppCompatActivity {
                     String[] locationCropOverall = new String[2];
                     locationCropOverall[0] = "All Crops";
                     locationCropOverall[1] = cropID;
-                    Entry entryHistory = new Entry(cropName, cropDate, cropNotes,owner.getText().toString(), true, secN + 1, bedN + 1);
+                    Entry entryHistory = new Entry(cropName, cropDate, date.getText().toString(),cropNotes,owner.getText().toString(), true, secN + 1, bedN + 1);
                     dbCtrl.setValueAtLocation(locationCropOverall, entryHistory);
 
 

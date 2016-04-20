@@ -125,4 +125,31 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
+    <TextView
+        android:id="@+id/harvestDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Date"
+        android:layout_below="@+id/dateTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/harvestDateByName"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/dateHint"
+        android:inputType="date"
+        android:layout_alignRight="@+id/enter"
+        android:layout_alignEnd="@+id/enter"
+        android:layout_alignTop="@+id/harvestDateTitle"
+        android:layout_alignLeft="@+id/dateByName"
+        android:layout_alignStart="@+id/dateByName" />
+
 </RelativeLayout>

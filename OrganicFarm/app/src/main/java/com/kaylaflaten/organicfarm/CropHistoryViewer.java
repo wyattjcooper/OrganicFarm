@@ -24,6 +24,7 @@ public class CropHistoryViewer extends AppCompatActivity {
     TextView date;
     TextView notes;
     TextView amount;
+    TextView harvestDate;
     TextView owner;
     Button edit;
     Button harvest;
@@ -42,6 +43,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         bed = (TextView) findViewById(R.id.bedCropHistoryViewer);
         name = (TextView) findViewById(R.id.cropCropHistoryViewer);
         date = (TextView) findViewById(R.id.dateCropHistoryViewer);
+        harvestDate = (TextView) findViewById(R.id.harvestDateCropHistoryViewer);
         notes = (TextView) findViewById(R.id.notesCropHistoryViewer);
         amount = (TextView) findViewById(R.id.amountCropHistoryViewer);
         edit = (Button) findViewById(R.id.editCropHistoryViewer);
@@ -84,7 +86,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(location, owner,"owner", "Owner");
-
+        dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Harvest Date");
         getSupportActionBar().setTitle(cropName + " Planted on " + cropDate);
 
 

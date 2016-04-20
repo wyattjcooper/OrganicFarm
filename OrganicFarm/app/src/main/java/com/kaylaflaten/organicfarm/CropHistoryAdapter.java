@@ -56,10 +56,12 @@ public class CropHistoryAdapter extends ArrayAdapter<Entry> {
             TextView date = (TextView) v.findViewById(R.id.dateByName);
             TextView location = (TextView) v.findViewById(R.id.location);
             TextView notes = (TextView) v.findViewById(R.id.notes);
+            TextView harvestDate = (TextView) v.findViewById(R.id.harvestDateCropHistoryBySB);
 
             date.setText(e.getDate().toString());
-            location.setText("Section: " + e.getSection() + " Bed: " + e.getBed());
+            location.setText("Section: " + e.getSection() + " Bed: " + e.getBed() + " Planted By " + e.getOwner());
             notes.setText(e.getNotes());
+            harvestDate.setText(e.getHarvestDate());
 
 
 

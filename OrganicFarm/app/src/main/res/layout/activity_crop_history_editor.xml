@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cropID"
-        android:layout_alignTop="@+id/nameCropHistoryEditor"
-        android:layout_alignRight="@+id/notesTitleCropHistoryEditor"
-        android:layout_alignEnd="@+id/notesTitleCropHistoryEditor" />
+        android:layout_alignTop="@+id/dateCropHistoryEditor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/dateTitleCropHistoryEditor"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/datePlantedID"
-        android:layout_above="@+id/notesTitleCropHistoryEditor"
+        android:layout_below="@+id/nameCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -35,10 +35,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/dateTitle"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <EditText
@@ -49,11 +48,11 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="@string/nameHint"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/dateTitle"
         android:layout_alignBottom="@+id/cropTitle"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/dateCropHistoryEditor"
+        android:layout_alignStart="@+id/dateCropHistoryEditor" />
 
     <TextView
         android:id="@+id/dateCropHistoryEditor"
@@ -82,8 +81,8 @@
         android:textAlignment="gravity"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
-        android:layout_above="@+id/enterCropHistoryEditor"
-        android:layout_below="@+id/notesTitleCropHistoryEditor" />
+        android:layout_below="@+id/notesTitleCropHistoryEditor"
+        android:layout_above="@+id/deleteCropHistoryEditor" />
 
 
     <Button
@@ -103,5 +102,33 @@
         android:text="@string/enterButtonID"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Date"
+        android:layout_below="@+id/dateTitleCropHistoryEditor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/harvestDateCropHistoryEditor"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/dateHint"
+        android:inputType="date"
+        android:layout_below="@+id/dateCropHistoryEditor"
+        android:layout_alignRight="@+id/enterCropHistoryEditor"
+        android:layout_alignEnd="@+id/enterCropHistoryEditor"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignLeft="@+id/dateCropHistoryEditor"
+        android:layout_alignStart="@+id/dateCropHistoryEditor" />
 
 </RelativeLayout>

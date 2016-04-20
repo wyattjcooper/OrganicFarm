@@ -18,6 +18,7 @@ public class CropViewer extends AppCompatActivity {
     TextView name;
     TextView date;
     TextView notes;
+    TextView harvestDate;
     TextView amount;
     Button back;
     Button edit;
@@ -38,6 +39,7 @@ public class CropViewer extends AppCompatActivity {
         bed = (TextView) findViewById(R.id.bed);
         name = (TextView) findViewById(R.id.cropByName);
         date = (TextView) findViewById(R.id.dateByName);
+        harvestDate = (TextView) findViewById(R.id.harvestDateCropViewer);
         notes = (TextView) findViewById(R.id.notes);
         amount = (TextView) findViewById(R.id.amount);
         edit = (Button) findViewById(R.id.edit);
@@ -79,7 +81,7 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location,name, "name", "Name");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
-
+        dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Harvest Date");
         dbCtrl.listenAndSetText(location, owner, "owner", "Owner");
 
 

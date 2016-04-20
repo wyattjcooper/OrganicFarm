@@ -24,6 +24,7 @@ public class CropEditor extends AppCompatActivity {
     TextView bed;
     EditText name;
     TextView date;
+    TextView harvestDate;
     EditText notes;
     Button back;
     Button enter;
@@ -37,7 +38,8 @@ public class CropEditor extends AppCompatActivity {
 
     private SimpleDateFormat dateFormatter;
 
-    private DatePickerDialog datePicker;
+    private DatePickerDialog datePicker1;
+    private DatePickerDialog datePicker2;
     
 
     @Override
@@ -51,6 +53,7 @@ public class CropEditor extends AppCompatActivity {
         bed = (TextView) findViewById(R.id.bed);
         name = (EditText) findViewById(R.id.name);
         date = (TextView) findViewById(R.id.dateByName);
+        harvestDate = (TextView) findViewById(R.id.harvestDateByName);
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
         delete = (Button) findViewById(R.id.delete);
@@ -85,8 +88,6 @@ public class CropEditor extends AppCompatActivity {
         final String cropID = extras.getString("itemSelected");
         location[2] = cropID;
 
-        //dbCtrl.setEntryRef(cropID, 2);
-
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetEditText(location, notes, "notes", "Enter notes here");
@@ -95,10 +96,21 @@ public class CropEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //date.setEnabled(false);
-                datePicker.show();
+                datePicker1.show();
 
             }
         });
+
+        harvestDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //date.setEnabled(false);
+                datePicker2.show();
+
+            }
+        });
+
+
 
 
         // Push new data or modify old data when pressing enter button
@@ -106,7 +118,7 @@ public class CropEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
                 String[] location = new String[3];
@@ -172,12 +184,21 @@ public class CropEditor extends AppCompatActivity {
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();
-        datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        datePicker1 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 date.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        datePicker2 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                harvestDate.setText(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));

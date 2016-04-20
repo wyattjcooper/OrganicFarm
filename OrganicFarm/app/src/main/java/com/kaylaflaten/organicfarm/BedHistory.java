@@ -72,15 +72,18 @@ public class BedHistory extends AppCompatActivity {
                 Intent intent = new Intent(BedHistory.this, CropHistoryViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
-                intent.putExtra("cropName", finalCropName);
+
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
                 TextView data = (TextView) viewAtPos.findViewById(R.id.dateByName);
+                TextView name = (TextView) viewAtPos.findViewById(R.id.cropByName);
                 intent.putExtra("secN", finalSecN);
                 intent.putExtra("bedN", finalBedN);
+
 //                TextView data = (TextView)
                 String date = data.getText().toString();
                 intent.putExtra("cropData", date);
+                intent.putExtra("cropName", name.getText().toString());
                 startActivity(intent);
             }
         });

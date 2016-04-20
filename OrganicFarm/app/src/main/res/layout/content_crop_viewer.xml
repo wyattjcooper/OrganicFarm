@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/nameDefault"
+        android:text="Loading..."
         android:layout_alignBottom="@+id/cropTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/datePlantedID"
+        android:text="Loading..."
         android:inputType="date"
         android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/notesID"
+        android:text="Loading..."
         android:inputType="textMultiLine"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Amount"
+        android:text="Loading..."
         android:layout_alignTop="@+id/amountTitle"
         android:layout_alignParentRight="true"/>
 
@@ -169,6 +169,27 @@
         android:layout_above="@+id/dateByName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/harvestDateTitleCropViewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Anticipated Harvest Date"
+        android:layout_below="@+id/dateTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/harvestDateCropViewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Loading..."
+        android:inputType="date"
+        android:layout_below="@+id/dateByName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

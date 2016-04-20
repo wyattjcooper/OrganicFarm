@@ -125,5 +125,32 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:id="@+id/harvestDateTitleCropManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Date"
+        android:layout_alignBottom="@+id/harvestDateCropAdder"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/harvestDateCropAdder"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/dateHint"
+        android:inputType="date"
+        android:layout_below="@+id/dateByName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/dateByName"
+        android:layout_alignStart="@+id/dateByName" />
+
 
 </RelativeLayout>
