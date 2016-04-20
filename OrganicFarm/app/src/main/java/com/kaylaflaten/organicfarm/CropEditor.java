@@ -54,7 +54,7 @@ public class CropEditor extends AppCompatActivity {
         name = (EditText) findViewById(R.id.name);
         date = (TextView) findViewById(R.id.dateByName);
         harvestDate = (TextView) findViewById(R.id.harvestDateByName);
-        notes = (EditText) findViewById(R.id.notes);
+        notes = (EditText) findViewById(R.id.notesHarvestViewer);
         enter = (Button) findViewById(R.id.enter);
         delete = (Button) findViewById(R.id.delete);
 

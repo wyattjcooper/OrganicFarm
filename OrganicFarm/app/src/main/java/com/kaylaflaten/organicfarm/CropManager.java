@@ -47,7 +47,7 @@ public class CropManager extends AppCompatActivity {
         name = (EditText) findViewById(R.id.name);
         date = (TextView) findViewById(R.id.dateByName);
         harvestDate = (TextView) findViewById(R.id.harvestDateCropAdder);
-        notes = (EditText) findViewById(R.id.notes);
+        notes = (EditText) findViewById(R.id.notesHarvestViewer);
         enter = (Button) findViewById(R.id.enter);
         owner = (TextView) findViewById(R.id.ownerCropAdder);
 

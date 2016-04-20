@@ -40,7 +40,7 @@ public class CropViewer extends AppCompatActivity {
         name = (TextView) findViewById(R.id.cropByName);
         date = (TextView) findViewById(R.id.dateByName);
         harvestDate = (TextView) findViewById(R.id.harvestDateCropViewer);
-        notes = (TextView) findViewById(R.id.notes);
+        notes = (TextView) findViewById(R.id.notesHarvestViewer);
         amount = (TextView) findViewById(R.id.amount);
         edit = (Button) findViewById(R.id.edit);
         harvest = (Button) findViewById(R.id.harvest);

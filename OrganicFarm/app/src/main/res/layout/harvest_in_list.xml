@@ -78,4 +78,14 @@
         android:background="#b007085f"
         android:layout_alignParentTop="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Harvested By"
+        android:id="@+id/harvestedByHarvestAdapter"
+        android:layout_alignBottom="@+id/notesText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

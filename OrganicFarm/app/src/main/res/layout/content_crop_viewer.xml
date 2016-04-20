@@ -96,7 +96,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/notes"
+        android:id="@+id/notesHarvestViewer"
         android:gravity="top|left"
         android:layout_width="wrap_content"
         android:layout_height="200dp"

@@ -105,7 +105,7 @@ public class CropHarvester extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(),dbCtrl.getUID(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
+                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(),owner.getText().toString(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
                 String[] locationHarvest = new String[1];
                 locationHarvest[0] = "Harvest";
                 int resultCode = 0;

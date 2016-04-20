@@ -47,7 +47,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         notes = (TextView) findViewById(R.id.notesCropHistoryViewer);
         amount = (TextView) findViewById(R.id.amountCropHistoryViewer);
         edit = (Button) findViewById(R.id.editCropHistoryViewer);
-        harvest = (Button) findViewById(R.id.harvestCropHistoryViewer);
+        //harvest = (Button) findViewById(R.id.harvestCropHistoryViewer);
         history = (Button) findViewById(R.id.HHbuttonCropHistoryViewer);
         owner = (TextView) findViewById(R.id.ownerCropHistoryViewer);
 
@@ -59,8 +59,8 @@ public class CropHistoryViewer extends AppCompatActivity {
         String cropDate = "";
 
         if (extras != null) {
-            bedN = extras.getInt("bed", -1);
-            secN = extras.getInt("section", -1);
+            bedN = extras.getInt("secN", -1);
+            secN = extras.getInt("bedN", -1);
             cropName = extras.getString("cropName");
             cropDate = extras.getString("cropData");
             secS = secS + (secN + 1);

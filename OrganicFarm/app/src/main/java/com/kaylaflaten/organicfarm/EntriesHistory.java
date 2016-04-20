@@ -99,8 +99,8 @@ public class EntriesHistory extends AppCompatActivity {
                     ints.add(Integer.parseInt(matcher.group())); // convert to int
                 }
 
-                intent.putExtra("secN",ints.get(0));
-                intent.putExtra("bedN",ints.get(1));
+                intent.putExtra("secN",ints.get(0) - 1);
+                intent.putExtra("bedN",ints.get(1) - 1);
 
 
                 String date = data.getText().toString();
