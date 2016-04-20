@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setTitle("Current Farm");
+
+
         sectionitems = (ListView) findViewById(R.id.sectionItems);
         totalAmountData = (TextView) findViewById(R.id.totalAmountData);
         totalNumHarvestsData = (TextView) findViewById(R.id.totalNumharvestsData);

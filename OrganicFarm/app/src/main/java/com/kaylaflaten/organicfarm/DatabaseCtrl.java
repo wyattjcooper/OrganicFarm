@@ -565,7 +565,9 @@ public class DatabaseCtrl {
 
     public void listenAndSetToUsername(final TextView text){
         Firebase ref = new Firebase(REFNAME);
-        ref = ref.child("Users").child(ref.getAuth().getUid().toString());
+        if (ref.getAuth()!=null) {
+            ref = ref.child("Users").child(ref.getAuth().getUid());
+        }
         final Firebase finalRef = ref;
         ref.addValueEventListener(new ValueEventListener() {
             @Override
