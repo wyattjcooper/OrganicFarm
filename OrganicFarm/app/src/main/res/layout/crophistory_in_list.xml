@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Date"
-        android:id="@+id/date"
+        android:id="@+id/dateBySB"
         android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true" />
 

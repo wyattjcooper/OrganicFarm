@@ -87,7 +87,7 @@ public class EntriesHistory extends AppCompatActivity {
                 intent.putExtra("cropName", finalCropName);
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
-                TextView data = (TextView) viewAtPos.findViewById(R.id.dateByName);
+                TextView data = (TextView) viewAtPos.findViewById(R.id.dateBySB);
                 TextView sectionBed = (TextView) viewAtPos.findViewById(R.id.location);
                 String sectionBED = sectionBed.getText().toString();
                 final Pattern pattern = Pattern.compile("\\d+"); // the regex

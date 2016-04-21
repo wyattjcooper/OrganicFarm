@@ -125,16 +125,13 @@ public class HarvestEditor extends AppCompatActivity {
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (extras.getBoolean("new") == true) {
-                    // If we are adding a new crop, there is nothing to delete so do nothing
-                }
-                // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
-                else if (extras.getBoolean("new") != true) {
-                    dbCtrl.removeValueFromLocation(locationHarvest);
-                    dbCtrl.removeValueFromLocation(locationAllActivities);
-                    finish();
-                }
+                Intent intent = new Intent();
+                dbCtrl.removeValueFromLocation(locationHarvest);
+                dbCtrl.removeValueFromLocation(locationAllActivities);
+                setResult(2, intent);
+                finish();
             }
+
         });
     }
 

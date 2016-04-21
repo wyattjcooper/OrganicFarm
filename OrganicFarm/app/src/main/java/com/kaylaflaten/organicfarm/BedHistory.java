@@ -75,8 +75,8 @@ public class BedHistory extends AppCompatActivity {
 
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
-                TextView data = (TextView) viewAtPos.findViewById(R.id.dateByName);
-                TextView name = (TextView) viewAtPos.findViewById(R.id.cropByName);
+                TextView data = (TextView) viewAtPos.findViewById(R.id.date);
+                TextView name = (TextView) viewAtPos.findViewById(R.id.crop);
                 intent.putExtra("secN", finalSecN);
                 intent.putExtra("bedN", finalBedN);
 

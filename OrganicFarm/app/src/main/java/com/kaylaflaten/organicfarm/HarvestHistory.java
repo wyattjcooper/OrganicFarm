@@ -94,4 +94,22 @@ public class HarvestHistory extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+        lv = (ListView) findViewById(R.id.listViewHH);
+        Harvest[] harvests = new Harvest[] { };
+        // Setting up the ArrayAdapter and ListView
+        final ArrayList<Harvest> harvestList = new ArrayList<Harvest>();
+        harvestList.addAll(Arrays.asList(harvests));
+        ha = new HarvestAdapter(this, R.layout.harvest_in_list, harvestList);
+        lv.setAdapter(ha);
+
+        // Set up our database control object
+        dbCtrl = new DatabaseCtrl(this);
+        //ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(, ha);
+
+    }
+
 }
