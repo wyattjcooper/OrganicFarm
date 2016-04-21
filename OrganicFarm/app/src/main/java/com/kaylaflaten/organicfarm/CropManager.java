@@ -9,15 +9,10 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-import android.content.Intent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-
-import com.kaylaflaten.organicfarm.Entry;
-import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 public class CropManager extends AppCompatActivity {
 
@@ -25,6 +20,8 @@ public class CropManager extends AppCompatActivity {
     TextView bed;
     EditText name;
     TextView date;
+    TextView owner;
+    TextView harvestDate;
     EditText notes;
     Button back;
     Button enter;
@@ -33,7 +30,8 @@ public class CropManager extends AppCompatActivity {
 
     private SimpleDateFormat dateFormatter;
 
-    private DatePickerDialog datePicker;
+    private DatePickerDialog datePicker1;
+    private DatePickerDialog datePicker2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +45,11 @@ public class CropManager extends AppCompatActivity {
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);
         name = (EditText) findViewById(R.id.name);
-        date = (TextView) findViewById(R.id.date);
-        notes = (EditText) findViewById(R.id.notes);
+        date = (TextView) findViewById(R.id.dateByName);
+        harvestDate = (TextView) findViewById(R.id.harvestDateCropAdder);
+        notes = (EditText) findViewById(R.id.notesHarvestViewer);
         enter = (Button) findViewById(R.id.enter);
+        owner = (TextView) findViewById(R.id.ownerCropAdder);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -76,7 +76,7 @@ public class CropManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // Intent intent = new Intent(CropManager.this, CropsInBed.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(), dbCtrl.getUID(),false, secN + 1, bedN + 1);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(), owner.getText().toString(),false, secN + 1, bedN + 1);
                 String[] location = new String[2];
                 location[0] = finalSectionNum;
                 location[1] = finalBedNum;
@@ -101,21 +101,43 @@ public class CropManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //date.setEnabled(false);
-                datePicker.show();
+                datePicker1.show();
 
             }
         });
+
+        harvestDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //date.setEnabled(false);
+                datePicker2.show();
+
+            }
+        });
+
+        if (!dbCtrl.getUID().equals("no id")) {
+            dbCtrl.listenAndSetToUsername(owner);
+        }
 
     }
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();
-        datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        datePicker1 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 date.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        datePicker2 = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                harvestDate.setText(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));

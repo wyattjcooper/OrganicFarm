@@ -8,9 +8,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="crop"
-        android:id="@+id/crop"
-        android:layout_below="@+id/line"
-        android:layout_alignParentLeft="true" />
+        android:id="@+id/cropByName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
@@ -27,9 +27,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Date:"
+        android:text="Planted:"
         android:id="@+id/dateTitle"
-        android:layout_below="@+id/crop"
+        android:layout_below="@+id/cropByName"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Date"
-        android:id="@+id/date"
+        android:id="@+id/dateByName"
         android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true" />
 
@@ -52,18 +52,21 @@
         android:id="@+id/notesTitle"
         android:foregroundTint="#9bd88e"
         android:singleLine="false"
-        android:layout_below="@+id/dateTitle"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/harvestDateCroptitleHistoryByNameAdapter" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Note"
-        android:id="@+id/notes"
+        android:id="@+id/notesByName"
         android:singleLine="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/notesTitle"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 
@@ -75,5 +78,40 @@
         android:id="@+id/line"
         android:layout_alignParentTop="true"
         android:background="#b007085f" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Completed:"
+        android:id="@+id/harvestDateCroptitleHistoryByNameAdapter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dateTitle"
+        android:layout_alignRight="@+id/harvestDateCropHistoryByNameAdapter" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date"
+        android:id="@+id/harvestDateCropHistoryByNameAdapter"
+        android:layout_alignTop="@+id/harvestDateCroptitleHistoryByNameAdapter"
+        android:layout_alignLeft="@+id/dateByName"
+        android:layout_alignStart="@+id/dateByName"
+        android:layout_alignBottom="@+id/harvestDateCroptitleHistoryByNameAdapter"
+        android:layout_alignRight="@+id/dateByName"
+        android:layout_alignEnd="@+id/dateByName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Loading..."
+        android:id="@+id/plantedByCropHistoryByName"
+        android:layout_below="@+id/notesByName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

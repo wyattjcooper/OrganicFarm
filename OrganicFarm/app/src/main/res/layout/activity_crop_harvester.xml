@@ -10,7 +10,7 @@
     tools:context="com.kaylaflaten.organicfarm.CropHarvester">
 
     <TextView
-        android:id="@+id/crop"
+        android:id="@+id/cropByName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -26,7 +26,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/dateHarvestedID"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/crop"
+        android:layout_below="@+id/cropByName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -64,7 +64,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/dateByName"
         android:gravity="right"
         android:textAlignment="gravity"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
@@ -124,7 +124,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Anonymous"
+        android:id="@+id/ownerCropHarvester"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class HarvestHistory extends AppCompatActivity {
     ListView lv;
     DatabaseCtrl dbCtrl;
     HarvestAdapter ha;
+    Button edit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +60,17 @@ public class HarvestHistory extends AppCompatActivity {
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
         final ArrayList<String> finalKeys = keys;
         final String finalCropID = cropID;
+        final String finalCropName = cropName;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(HarvestHistory.this, HarvestEditor.class);
+                Intent intent = new Intent(HarvestHistory.this, HarvestViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
                 intent.putExtra("harvestID", itemSelected);
                 intent.putExtra("cropID", finalCropID);
+                intent.putExtra("cropName", finalCropName);
                 startActivity(intent);
             }
         });
@@ -73,6 +78,7 @@ public class HarvestHistory extends AppCompatActivity {
         getSupportActionBar().setTitle("Harvest History Of "+ cropDate);
         //toolbar.setTitle("Harvest History Of "+ cropDate);
 
+        final String finalCropID1 = cropID;
 
 
     }

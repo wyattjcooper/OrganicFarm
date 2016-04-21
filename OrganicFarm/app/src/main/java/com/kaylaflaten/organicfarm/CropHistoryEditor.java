@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,17 +17,16 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Carmen on 3/7/2016.
+ * Created by Wyatt on 4/20/2016.
  */
-public class CropEditor extends AppCompatActivity {
+public class CropHistoryEditor extends AppCompatActivity {
 
     TextView section;
     TextView bed;
+    TextView harvestDate;
     EditText name;
     TextView date;
-    TextView harvestDate;
     EditText notes;
-    Button back;
     Button enter;
     Button delete;
 
@@ -40,23 +40,23 @@ public class CropEditor extends AppCompatActivity {
 
     private DatePickerDialog datePicker1;
     private DatePickerDialog datePicker2;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crop_editor);
+        setContentView(R.layout.activity_crop_history_editor);
 
 
 
-        section = (TextView) findViewById(R.id.section);
-        bed = (TextView) findViewById(R.id.bed);
-        name = (EditText) findViewById(R.id.name);
-        date = (TextView) findViewById(R.id.dateByName);
-        harvestDate = (TextView) findViewById(R.id.harvestDateByName);
-        notes = (EditText) findViewById(R.id.notesHarvestViewer);
-        enter = (Button) findViewById(R.id.enter);
-        delete = (Button) findViewById(R.id.delete);
+        //section = (TextView) findViewById(R.id.sectionCropHistoryEditor);
+        //bed = (TextView) findViewById(R.id.bedCropHistoryEditor);
+        name = (EditText) findViewById(R.id.nameCropHistoryEditor);
+        date = (TextView) findViewById(R.id.dateCropHistoryEditor);
+        harvestDate = (TextView) findViewById(R.id.harvestDateCropHistoryEditor);
+        notes = (EditText) findViewById(R.id.notesCropHistoryEditor);
+        enter = (Button) findViewById(R.id.enterCropHistoryEditor);
+        delete = (Button) findViewById(R.id.deleteCropHistoryEditor);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -66,27 +66,28 @@ public class CropEditor extends AppCompatActivity {
 
         secS = "Section ";
         bedS = "Bed ";
+        String cropName = "";
+        String cropID = "";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
+            cropName = extras.getString("cropName");
+            cropID = extras.getString("cropID");
             secS = secS + (secN + 1);
             bedS = bedS + (bedN + 1);
         }
-        section.setText(secS);
-        bed.setText(bedS);
+        //section.setText(secS);
+        //bed.setText(bedS);
 
         final String[] location = new String[3];
-        location[0] = secS;
-        location[1] = bedS;
+        location[0] = "Crop History";
+        location[1] = cropName;
+        location[2] = cropID;
 
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
-        // If we selected a crop from the list,
-        // we will have passed its ID, so we set our reference to that ID
-        final String cropID = extras.getString("itemSelected");
-        location[2] = cropID;
 
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
@@ -111,9 +112,8 @@ public class CropEditor extends AppCompatActivity {
         });
 
 
-
-
         // Push new data or modify old data when pressing enter button
+        final String finalCropID = cropID;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,23 +121,24 @@ public class CropEditor extends AppCompatActivity {
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
-                String[] location = new String[3];
-                location[0] = secS;
-                location[1] = bedS;
-                location[2] = cropID;
-                // If we are not adding a new crop, modify the existing child we clicked on
-                dbCtrl.setValueAtLocation(location, newEntry);
+//                String[] location = new String[3];
+//                location[0] = secS;
+//                location[1] = bedS;
+//                location[2] = cropID;
+//                // If we are not adding a new crop, modify the existing child we clicked on
+//                dbCtrl.setValueAtLocation(location, newEntry);
 
 
-                String[] locationCropOverall = new String[2];
-                locationCropOverall[0] = "All Crops";
-                locationCropOverall[1] = cropID;
-                dbCtrl.setValueAtLocation(locationCropOverall, newEntry);
+                String[] locationCropHistory = new String[3];
+                locationCropHistory[0] = "Crop History";
+                locationCropHistory[1] = name.getText().toString();
+                locationCropHistory[2] = finalCropID;
+                dbCtrl.setValueAtLocation(locationCropHistory, newEntry);
 
 
                 String[] allActivitiesLocation = new String[2];
                 allActivitiesLocation[0] = "All Activities";
-                allActivitiesLocation[1] = cropID;
+                allActivitiesLocation[1] = finalCropID;
                 dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
 
 
@@ -147,38 +148,39 @@ public class CropEditor extends AppCompatActivity {
 
 
         // Delete crops
+        final String finalCropID1 = cropID;
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (extras.getBoolean("new") == true) {
-                    // If we are adding a new crop, there is nothing to delete so do nothing
-                }
-                // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
-                else if (extras.getBoolean("new") != true) {
+
+
                     dbCtrl.removeValueFromLocation(location);
 
                     String[] harvestLocation = new String[2];
                     harvestLocation[0] = "Harvest";
-                    harvestLocation[1] = cropID;
+                    harvestLocation[1] = finalCropID1;
                     dbCtrl.removeValueFromLocation(harvestLocation);
 
-                    String[] cropsOverallLocation = new String[2];
-                    cropsOverallLocation[0] = "All Crops";
-                    cropsOverallLocation[1] = cropID;
-                    dbCtrl.removeValueFromLocation(cropsOverallLocation);
-                    dbCtrl.deleteHarvests(cropID);
+                    String[] locationCropHistory = new String[3];
+                    locationCropHistory[0] = "Crop History";
+                    locationCropHistory[1] = name.getText().toString();
+                    locationCropHistory[2] = finalCropID1;
+                    dbCtrl.removeValueFromLocation(locationCropHistory);
 
                     String[] allActivitiesLocation = new String[2];
+                    allActivitiesLocation[0] = "All Crops";
+                    allActivitiesLocation[1] = finalCropID1;
+                    dbCtrl.removeValueFromLocation(allActivitiesLocation);
                     allActivitiesLocation[0] = "All Activities";
-                    allActivitiesLocation[1] = cropID;
                     dbCtrl.removeValueFromLocation(allActivitiesLocation);
 
-                    Intent intent = new Intent();
+
+                Intent intent = new Intent();
                     setResult(2, intent);
                     finish();
 
                 }
-            }
+
         });
     }
 

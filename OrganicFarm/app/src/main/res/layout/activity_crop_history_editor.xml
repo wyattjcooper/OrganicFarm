@@ -8,14 +8,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.kaylaflaten.organicfarm.CropManager">
+    tools:context="com.kaylaflaten.organicfarm.CropHistoryEditor">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sectionID"
-        android:id="@+id/section"
+        android:id="@+id/sectionCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -25,103 +25,102 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/bed"
-        android:layout_below="@+id/section"
+        android:id="@+id/bedCropHistoryEditor"
+        android:layout_below="@+id/sectionCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/cropTitle"
+        android:id="@+id/cropTitlecropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cropID"
-        android:layout_below="@+id/bed"
+        android:layout_below="@+id/bedCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp" />
 
     <TextView
-        android:id="@+id/dateTitle"
+        android:id="@+id/dateTitleCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/datePlantedID"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/cropTitle"
+        android:layout_below="@+id/cropTitlecropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/amountTitle"
+        android:id="@+id/amountTitleCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Amount Harvested"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/dateTitle"
+        android:layout_below="@+id/harvestDateTitleCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/notesTitle"
+        android:id="@+id/notesTitleCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/amountTitle"
+        android:layout_below="@+id/amountTitleCropHistoryEditor"
         android:layout_alignParentLeft="true" />
 
-    <TextView
-        android:id="@+id/cropByName"
+    <EditText
+        android:id="@+id/nameCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading..."
-        android:layout_alignBottom="@+id/cropTitle"
+        android:text="@string/nameDefault"
+        android:layout_alignBottom="@+id/cropTitlecropHistoryEditor"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:id="@+id/dateByName"
+    <EditText
+        android:id="@+id/dateCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading..."
+        android:text="@string/datePlantedID"
         android:inputType="date"
-        android:layout_alignBottom="@+id/dateTitle"
+        android:layout_alignBottom="@+id/dateTitleCropHistoryEditor"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:id="@+id/notesHarvestViewer"
+    <EditText
+        android:id="@+id/notesCropHistoryEditor"
         android:gravity="top|left"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading..."
+        android:text="@string/notesID"
         android:inputType="textMultiLine"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/notesTitle"
-        android:layout_above="@+id/edit"
+        android:layout_below="@+id/notesTitleCropHistoryEditor"
+        android:layout_above="@+id/editCropHistoryEditor"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:id="@+id/amount"
+    <EditText
+        android:id="@+id/amountCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading..."
-        android:layout_alignTop="@+id/amountTitle"
+        android:text="Amount"
+        android:layout_alignTop="@+id/amountTitleCropHistoryEditor"
         android:layout_alignParentRight="true"/>
 
 
     <Button
-        android:id="@+id/edit"
+        android:id="@+id/enterCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/editButtonID"
@@ -130,64 +129,53 @@
         android:layout_alignParentBottom="true"/>
 
     <Button
-        android:id="@+id/harvest"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Harvest"
-        android:layout_alignParentLeft="true"
+        android:text="Delete"
+        android:id="@+id/deleteCropHistoryEditor"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Harvest History"
-        android:id="@+id/HHbutton"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/cropByName"
-        android:layout_alignEnd="@+id/cropByName" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading..."
-        android:id="@+id/ownerCropViewer"
-        android:textColor="#080707"
-        android:layout_above="@+id/dateByName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Planted By"
-        android:id="@+id/plantedByTitleCropViewer"
-        android:layout_above="@+id/dateByName"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/dateCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Loading"
+        android:id="@+id/ownerCropHistoryEditor"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <TextView
-        android:id="@+id/harvestDateTitleCropViewer"
+        android:id="@+id/harvestDateTitleCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Anticipated Harvest Date"
-        android:layout_below="@+id/dateTitle"
+        android:text="Finished Harvesting On"
+        android:layout_below="@+id/dateTitleCropHistoryEditor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/harvestDateCropViewer"
+    <EditText
+        android:id="@+id/harvestDateCropHistoryEditor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
         android:inputType="date"
-        android:layout_below="@+id/dateByName"
+        android:layout_below="@+id/dateCropHistoryEditor"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

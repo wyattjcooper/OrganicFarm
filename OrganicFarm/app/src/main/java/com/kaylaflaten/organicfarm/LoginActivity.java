@@ -388,20 +388,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     finish();
                     startActivity(intent);
                 }
+
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
-                    mPasswordView.setError("Wrong password or account does not exist");
 
 
                 }
             });
 
-//            try {
-//                // Simulate network access.
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
+            try {
+                // Simulate network access.
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                return false;
+            }
 
 
             ref.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
@@ -422,7 +422,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // there was an error
                     succeeded[0] =false;
                     Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                    Toast.makeText(getApplicationContext(), "Unsuccessful log in attempt", Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(intent);
                 }
