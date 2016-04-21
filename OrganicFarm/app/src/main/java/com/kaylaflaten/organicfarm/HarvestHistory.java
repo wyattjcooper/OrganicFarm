@@ -23,6 +23,7 @@ public class HarvestHistory extends AppCompatActivity {
     HarvestAdapter ha;
     Button edit;
 
+    String cropName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class HarvestHistory extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         String cropID = "";
-        String cropName = "";
+        cropName = "";
         String cropDate = "";
 
 
@@ -75,7 +76,7 @@ public class HarvestHistory extends AppCompatActivity {
             }
         });
 
-        getSupportActionBar().setTitle("Harvest History Of "+ cropDate);
+        getSupportActionBar().setTitle("Harvest History Of "+ cropName);
         //toolbar.setTitle("Harvest History Of "+ cropDate);
 
         final String finalCropID1 = cropID;
@@ -108,7 +109,7 @@ public class HarvestHistory extends AppCompatActivity {
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
-        //ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(, ha);
+        ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropName, ha);
 
     }
 
