@@ -29,6 +29,7 @@ public class HarvestViewer extends AppCompatActivity {
     TextView date;
     TextView owner;
     TextView amount;
+    TextView pid;
     TextView finished;
     Button edit;
 
@@ -75,6 +76,7 @@ public class HarvestViewer extends AppCompatActivity {
         owner = (TextView) findViewById(R.id.ownerHarvestViewer);
         notes = (TextView) findViewById(R.id.notesHarvestViewer);
         amount = (TextView) findViewById(R.id.amountHarvestViewer);
+        pid = (TextView) findViewById(R.id.pidPlaceHolderHarvestViewer);
 
 
         // Create the DatabaseCtrl object
@@ -109,12 +111,23 @@ public class HarvestViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(locationHarvest, amount, "amount", "Amount");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "Owner");
+        dbCtrl.listenAndSetText(locationHarvest, pid, "pid", "PID");
         //dbCtrl.listenAndSetText(locationHarvest, finished, "finished", "Finished");
 
 
-
-
-
+        final String finalHarvestID = harvestID;
+        final String finalCropName = cropName;
+        edit.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HarvestViewer.this, HarvestEditor.class);
+                // Look up the key in the keys list - same position
+                intent.putExtra("cropName", finalCropName);
+                intent.putExtra("harvestID", finalHarvestID);
+                intent.putExtra("cropID",pid.getText().toString() );
+                startActivityForResult(intent, 1);
+            }
+        });
 
         // If we selected a crop from the list,
         // we will have passed its ID, so we set our reference to that ID

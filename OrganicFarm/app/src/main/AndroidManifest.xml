@@ -35,6 +35,7 @@
         <activity
             android:name=".CropHarvester"
             android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".CropViewer">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,6 +69,7 @@
         <activity
             android:name=".CropEditor"
             android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".CropViewer">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -76,6 +78,7 @@
         <activity
             android:name=".CropHistoryEditor"
             android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".CropViewer">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -85,6 +88,7 @@
         <activity
             android:name=".CropManager"
             android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".CropsInBed">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -141,6 +145,7 @@
         <activity
             android:name=".HarvestEditor"
             android:label="@string/title_activity_harvest_editor"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".HarvestHistory">
 
             <meta-data

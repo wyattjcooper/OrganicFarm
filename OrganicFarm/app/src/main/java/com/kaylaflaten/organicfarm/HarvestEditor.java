@@ -65,12 +65,14 @@ public class HarvestEditor extends AppCompatActivity {
         secN = 0;
         bedN = 0;
         cropName = "";
+        String pid = "";
         if (extras != null) {
             harvestID = extras.getString("harvestID");
             cropID = extras.getString("cropID");
             cropName = extras.getString("cropName");
             secN = extras.getInt("secN", 1);
             bedN = extras.getInt("bedN", 1);
+            pid = extras.getString("pid");
         }
 
         final String[] locationHarvest = new String[2];
@@ -83,17 +85,26 @@ public class HarvestEditor extends AppCompatActivity {
 
 
         dbCtrl.listenAndSetText(locationHarvest, date,"date", "NULL" );
-        dbCtrl.listenAndSetEditText(locationHarvest, amount,"amount", "NULL" );
+        dbCtrl.listenAndSetEditText(locationHarvest, amount, "amount", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "NULL");
 
+        getSupportActionBar().setTitle(cropName + " Harvest");
 
 
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //date.setEnabled(false);
+                datePicker.show();
 
+            }
+        });
 
 
 
         // Push new data or modify old data when pressing enter button
+        final String finalPid = pid;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {

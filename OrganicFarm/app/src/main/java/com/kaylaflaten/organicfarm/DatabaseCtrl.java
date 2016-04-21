@@ -307,7 +307,7 @@ public class DatabaseCtrl {
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
                     //parentID[0] = harvest.getPID();
                     //amount[0] = amount[0] + harvest.getAmount();
-                    if (harvest.getPID().equals(pid1)) {
+                    if (harvest.getPID()!=null && harvest.getPID().equals(pid1)) {
                         Log.println(1, "MyApp", "Read succeeded");
 
                         amount[0] = amount[0] + harvest.getAmount();
@@ -336,7 +336,7 @@ public class DatabaseCtrl {
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
                     //parentID[0] = harvest.getPID();
                     //amount[0] = amount[0] + harvest.getAmount();
-                    if (harvest.getName().equals(name1)) {
+                    if (harvest.getName()!=null && harvest.getName().equals(name1)) {
                         Log.println(1, "MyApp", "Read succeeded");
 
                         amount[0] = amount[0] + harvest.getAmount();
@@ -525,7 +525,7 @@ public class DatabaseCtrl {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest currHarvest = postSnapshot.getValue(Harvest.class);
-                    if (currHarvest.getPID().equals(cropID)) {
+                    if (currHarvest.getPID()!=null && currHarvest.getPID().equals(cropID)) {
                         finalReference.child(postSnapshot.getKey()).removeValue();
                     }
                 }

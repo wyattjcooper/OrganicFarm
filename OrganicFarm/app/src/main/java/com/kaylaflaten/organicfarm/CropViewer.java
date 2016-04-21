@@ -101,7 +101,8 @@ public class CropViewer extends AppCompatActivity {
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 intent.putExtra("itemSelected", cropID);
-                startActivityForResult(intent,1);
+                intent.putExtra("cropName", name.getText().toString());
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -131,6 +132,7 @@ public class CropViewer extends AppCompatActivity {
                 Intent intent = new Intent(CropViewer.this, HarvestHistory.class);
                 // Look up the key in the keys list - same position
                 intent.putExtra("cropID", cropID);
+                intent.putExtra("cropName", name.getText().toString());
                 intent.putExtra("cropData", name.getText().toString() + " Planted In " + finalSecS +"," + finalBedS);
                 startActivity(intent);
             }
