@@ -55,14 +55,14 @@ public class HarvestAdapter extends ArrayAdapter<Harvest> {
 
         if (h != null) {
 
-            TextView date = (TextView) v.findViewById(R.id.DAtextView);
-            TextView amount = (TextView) v.findViewById(R.id.AMtextView);
-            TextView notes = (TextView) v.findViewById(R.id.notesText);
-            TextView harvestBy = (TextView) v.findViewById(R.id.harvestedByHarvestAdapter);
+            TextView date = (TextView) v.findViewById(R.id.date);
+            TextView amount = (TextView) v.findViewById(R.id.amount);
+            TextView notes = (TextView) v.findViewById(R.id.notes);
+            TextView harvestBy = (TextView) v.findViewById(R.id.harvestedBy);
             date.setText(h.getDate());
-            harvestBy.setText("Harvested By "+h.getOwner());
+            harvestBy.setText(h.getOwner());
             amount.setText(h.getAmount().toString());
-            notes.setText("Note: "+h.getNotes());
+            notes.setText(h.getNotes());
         }
 
         // the view must be returned to our activity

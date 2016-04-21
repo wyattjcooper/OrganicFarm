@@ -49,6 +49,15 @@
         android:layout_below="@+id/cropTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/harvestDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Date"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/dateTitle"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/notesTitle"
@@ -57,7 +66,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/dateTitle"
+        android:layout_below="@+id/harvestDateTitle"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"/>
 
@@ -93,6 +102,22 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:id="@+id/harvestDate"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/dateHint"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/dateTitle"
+        android:inputType="date"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/harvestDateTitle"/>
+
     <EditText
         android:id="@+id/notesHarvestViewer"
         android:gravity="top|left"
@@ -115,42 +140,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
+
+
+
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Anonymous"
-        android:id="@+id/ownerCropAdder"
+        android:id="@+id/planter"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/harvestDateTitleCropManager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harvest Date"
-        android:layout_alignBottom="@+id/harvestDateCropAdder"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/harvestDateCropAdder"
-        android:gravity="right"
-        android:textAlignment="gravity"
-        android:textColor="?attr/editTextColor"
-        android:background="?attr/editTextBackground"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/dateHint"
-        android:inputType="date"
-        android:layout_below="@+id/dateByName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/dateByName"
-        android:layout_alignStart="@+id/dateByName" />
+        android:layout_alignParentLeft="true" />
 
 
 </RelativeLayout>

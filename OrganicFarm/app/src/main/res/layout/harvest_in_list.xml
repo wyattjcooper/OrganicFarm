@@ -6,9 +6,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date"
-        android:id="@+id/textViewDA"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Date:"
+        android:id="@+id/dateTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -17,75 +17,75 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:id="@+id/DAtextView"
-        android:layout_marginLeft="20dp"
-        android:layout_alignBottom="@+id/textViewDA"
-        android:layout_toRightOf="@+id/textViewDA" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Amount"
-        android:id="@+id/textViewAM"
-        android:layout_below="@+id/DAtextView"
-        android:layout_alignLeft="@+id/textViewDA"
-        android:layout_alignStart="@+id/textViewDA" />
+        android:text="Loading..."
+        android:id="@+id/date"
+        android:layout_alignBottom="@+id/dateTitle"
+        android:layout_alignParentRight="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:layout_marginLeft="20dp"
-        android:id="@+id/AMtextView"
-        android:layout_alignBottom="@+id/textViewAM"
-        android:layout_toRightOf="@+id/textViewAM"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/notesText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textViewAM" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:id="@+id/imageViewHist"
-        android:background="#b007085f"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/notesText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:id="@+id/imageViewHist2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:layout_above="@+id/textViewDA"
-        android:background="#b007085f"
-        android:layout_alignParentTop="true" />
+        android:text="Amount:"
+        android:id="@+id/amountTitle"
+        android:layout_below="@+id/date"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Harvested By"
-        android:id="@+id/harvestedByHarvestAdapter"
-        android:layout_alignBottom="@+id/notesText"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Loading..."
+        android:id="@+id/amount"
+        android:layout_alignBottom="@+id/amountTitle"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Notes:"
+        android:id="@+id/notesTitle"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/harvestedByTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Loading..."
+        android:id="@+id/notes"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/notesTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvested By:"
+        android:id="@+id/harvestedByTitle"
+        android:layout_below="@+id/amountTitle"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Loading..."
+        android:id="@+id/harvestedBy"
+        android:layout_alignBottom="@+id/harvestedByTitle"
+        android:layout_alignParentRight="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:id="@+id/imageViewHist"
+        android:background="#b007085f"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/notes"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

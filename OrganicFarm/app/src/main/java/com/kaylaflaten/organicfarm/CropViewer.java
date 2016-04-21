@@ -39,13 +39,13 @@ public class CropViewer extends AppCompatActivity {
         bed = (TextView) findViewById(R.id.bed);
         name = (TextView) findViewById(R.id.cropByName);
         date = (TextView) findViewById(R.id.dateByName);
-        harvestDate = (TextView) findViewById(R.id.harvestDateCropViewer);
+        harvestDate = (TextView) findViewById(R.id.harvestDate);
         notes = (TextView) findViewById(R.id.notesHarvestViewer);
         amount = (TextView) findViewById(R.id.amount);
         edit = (Button) findViewById(R.id.edit);
         harvest = (Button) findViewById(R.id.harvest);
         history = (Button) findViewById(R.id.HHbutton);
-        owner = (TextView) findViewById(R.id.ownerCropViewer);
+        owner = (TextView) findViewById(R.id.plantedBy);
 
         final Bundle extras = getIntent().getExtras();
 

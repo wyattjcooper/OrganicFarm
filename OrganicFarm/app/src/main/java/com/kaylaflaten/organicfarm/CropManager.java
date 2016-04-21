@@ -46,10 +46,10 @@ public class CropManager extends AppCompatActivity {
         bed = (TextView) findViewById(R.id.bed);
         name = (EditText) findViewById(R.id.name);
         date = (TextView) findViewById(R.id.dateByName);
-        harvestDate = (TextView) findViewById(R.id.harvestDateCropAdder);
+        harvestDate = (TextView) findViewById(R.id.harvestDate);
         notes = (EditText) findViewById(R.id.notesHarvestViewer);
         enter = (Button) findViewById(R.id.enter);
-        owner = (TextView) findViewById(R.id.ownerCropAdder);
+        owner = (TextView) findViewById(R.id.harvestDate);
 
         final Bundle extras = getIntent().getExtras();
 
