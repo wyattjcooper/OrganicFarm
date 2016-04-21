@@ -120,5 +120,4 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             alertDialog.show();
         }
     }
-
 }

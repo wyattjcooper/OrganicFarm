@@ -209,4 +209,5 @@ public class CropEditor extends AppCompatActivity {
         }
         return true;
     }
+
 }
