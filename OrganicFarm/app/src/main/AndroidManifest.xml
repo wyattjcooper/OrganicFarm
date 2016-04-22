@@ -81,10 +81,10 @@
             android:name=".CropHistoryEditor"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".CropViewer">
+            android:parentActivityName=".CropHistoryViewer">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kaylaflaten.organicfarm.CropViewer" />
+                android:value="com.kaylaflaten.organicfarm.CropHistoryViewer" />
         </activity>
 
         <activity
