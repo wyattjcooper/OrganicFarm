@@ -49,7 +49,7 @@ public class CropManager extends AppCompatActivity {
         harvestDate = (TextView) findViewById(R.id.harvestDate);
         notes = (EditText) findViewById(R.id.notesHarvestViewer);
         enter = (Button) findViewById(R.id.enter);
-        owner = (TextView) findViewById(R.id.harvestDate);
+        owner = (TextView) findViewById(R.id.planter);
 
         final Bundle extras = getIntent().getExtras();
 

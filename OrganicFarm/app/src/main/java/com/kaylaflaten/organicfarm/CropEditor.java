@@ -27,9 +27,11 @@ public class CropEditor extends AppCompatActivity {
     TextView section;
     TextView bed;
     EditText name;
+    EditText plantedBy;
     TextView date;
     TextView harvestDate;
     EditText notes;
+    TextView amount;
     Button back;
     Button enter;
     Button delete;
@@ -53,14 +55,16 @@ public class CropEditor extends AppCompatActivity {
 
 
 
-        section = (TextView) findViewById(R.id.section);
-        bed = (TextView) findViewById(R.id.bed);
-        name = (EditText) findViewById(R.id.name);
-        date = (TextView) findViewById(R.id.dateByName);
-        harvestDate = (TextView) findViewById(R.id.harvestDateByName);
-        notes = (EditText) findViewById(R.id.notesHarvestViewer);
-        enter = (Button) findViewById(R.id.enter);
-        delete = (Button) findViewById(R.id.delete);
+        section = (TextView) findViewById(R.id.sectionCropEditor);
+        bed = (TextView) findViewById(R.id.bedCropEditor);
+        name = (EditText) findViewById(R.id.nameCropEditor);
+        date = (TextView) findViewById(R.id.dateCropEditor);
+        harvestDate = (TextView) findViewById(R.id.harvestDateCropEditor);
+        plantedBy = (EditText) findViewById(R.id.plantedByCropEditor);
+        notes = (EditText) findViewById(R.id.notesCropEditor);
+        enter = (Button) findViewById(R.id.enterCropEditor);
+        delete = (Button) findViewById(R.id.deleteCropEditor);
+        amount = (TextView) findViewById(R.id.amountCropEditor);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -95,6 +99,10 @@ public class CropEditor extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetEditText(location, notes, "notes", "Enter notes here");
+        dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "HarvestDate");
+        dbCtrl.listenAndSetEditText(location, plantedBy, "owner", "Owner");
+        dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
+
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +133,7 @@ public class CropEditor extends AppCompatActivity {
            // Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
             // If we are adding a new crop, push a new child
                 //Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),plantedBy.getText().toString(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
             String[] location = new String[3];
