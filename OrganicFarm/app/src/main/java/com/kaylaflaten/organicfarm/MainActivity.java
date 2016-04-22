@@ -1,7 +1,12 @@
 package com.kaylaflaten.organicfarm;
 
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         totalNumHarvestsData.setGravity(Gravity.CENTER);
         totalCropsData.setGravity(Gravity.RIGHT);
 
-
+        isOnline();
     }
 
     @Override
@@ -93,5 +99,27 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
+    }
+
+    // Checks if device/app is connected to the Internet
+    public void isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        boolean connected = (networkInfo != null && networkInfo.isConnected());
+
+        if (!connected) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Internet Connection");
+            alertDialog.setMessage("You are not connected to the Internet");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            //alertDialog.setIcon(R.drawable.icon);
+            alertDialog.show();
+        }
     }
 }

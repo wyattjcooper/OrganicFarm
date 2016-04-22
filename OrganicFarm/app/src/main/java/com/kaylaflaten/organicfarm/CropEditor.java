@@ -1,6 +1,12 @@
 package com.kaylaflaten.organicfarm;
 
+<<<<<<< HEAD
+import android.app.Activity;
+import android.app.AlertDialog;
+=======
+>>>>>>> master
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -117,31 +123,37 @@ public class CropEditor extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
+            //Intent intent = new Intent(CropEditor.this, CropViewer.class);
+            Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
+            // If we are adding a new crop, push a new child
+=======
                 //Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
+>>>>>>> master
 
-                String[] location = new String[3];
-                location[0] = secS;
-                location[1] = bedS;
-                location[2] = cropID;
-                // If we are not adding a new crop, modify the existing child we clicked on
-                dbCtrl.setValueAtLocation(location, newEntry);
-
-
-                String[] locationCropOverall = new String[2];
-                locationCropOverall[0] = "All Crops";
-                locationCropOverall[1] = cropID;
-                dbCtrl.setValueAtLocation(locationCropOverall, newEntry);
+            String[] location = new String[3];
+            location[0] = secS;
+            location[1] = bedS;
+            location[2] = cropID;
+            // If we are not adding a new crop, modify the existing child we clicked on
+            dbCtrl.setValueAtLocation(location, newEntry);
 
 
-                String[] allActivitiesLocation = new String[2];
-                allActivitiesLocation[0] = "All Activities";
-                allActivitiesLocation[1] = cropID;
-                dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
+            String[] locationCropOverall = new String[2];
+            locationCropOverall[0] = "All Crops";
+            locationCropOverall[1] = cropID;
+            dbCtrl.setValueAtLocation(locationCropOverall, newEntry);
 
 
-                finish();
+            String[] allActivitiesLocation = new String[2];
+            allActivitiesLocation[0] = "All Activities";
+            allActivitiesLocation[1] = cropID;
+            dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
+
+
+            finish();
             }
         });
 
@@ -150,34 +162,47 @@ public class CropEditor extends AppCompatActivity {
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (extras.getBoolean("new") == true) {
-                    // If we are adding a new crop, there is nothing to delete so do nothing
-                }
-                // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
-                else if (extras.getBoolean("new") != true) {
-                    dbCtrl.removeValueFromLocation(location);
+                new AlertDialog.Builder(CropEditor.this)
+                    .setTitle("Delete entry")
+                    .setMessage("Are you sure you want to delete this entry?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (extras.getBoolean("new") == true) {
+                                // If we are adding a new crop, there is nothing to delete so do nothing
+                            }
+                            // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
+                            else if (extras.getBoolean("new") != true) {
+                                dbCtrl.removeValueFromLocation(location);
 
-                    String[] harvestLocation = new String[2];
-                    harvestLocation[0] = "Harvest";
-                    harvestLocation[1] = cropID;
-                    dbCtrl.removeValueFromLocation(harvestLocation);
+                                String[] harvestLocation = new String[2];
+                                harvestLocation[0] = "Harvest";
+                                harvestLocation[1] = cropID;
+                                dbCtrl.removeValueFromLocation(harvestLocation);
 
-                    String[] cropsOverallLocation = new String[2];
-                    cropsOverallLocation[0] = "All Crops";
-                    cropsOverallLocation[1] = cropID;
-                    dbCtrl.removeValueFromLocation(cropsOverallLocation);
-                    dbCtrl.deleteHarvests(cropID);
+                                String[] cropsOverallLocation = new String[2];
+                                cropsOverallLocation[0] = "All Crops";
+                                cropsOverallLocation[1] = cropID;
+                                dbCtrl.removeValueFromLocation(cropsOverallLocation);
+                                dbCtrl.deleteHarvests(cropID);
 
-                    String[] allActivitiesLocation = new String[2];
-                    allActivitiesLocation[0] = "All Activities";
-                    allActivitiesLocation[1] = cropID;
-                    dbCtrl.removeValueFromLocation(allActivitiesLocation);
+                                String[] allActivitiesLocation = new String[2];
+                                allActivitiesLocation[0] = "All Activities";
+                                allActivitiesLocation[1] = cropID;
+                                dbCtrl.removeValueFromLocation(allActivitiesLocation);
 
-                    Intent intent = new Intent();
-                    setResult(2, intent);
-                    finish();
-
-                }
+                                Intent intent = new Intent();
+                                setResult(2, intent);
+                                finish();
+                            }
+                        }
+                    })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
             }
         });
     }
@@ -214,4 +239,5 @@ public class CropEditor extends AppCompatActivity {
         }
         return true;
     }
+
 }

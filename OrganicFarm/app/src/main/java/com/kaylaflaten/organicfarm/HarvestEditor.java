@@ -1,6 +1,8 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -125,11 +127,37 @@ public class HarvestEditor extends AppCompatActivity {
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
+            new AlertDialog.Builder(HarvestEditor.this)
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (extras.getBoolean("new") == true) {
+                            // If we are adding a new crop, there is nothing to delete so do nothing
+                        }
+                        // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
+                        else if (extras.getBoolean("new") != true) {
+                            dbCtrl.removeValueFromLocation(locationHarvest);
+                            dbCtrl.removeValueFromLocation(locationAllActivities);
+                            finish();
+                        }
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+=======
                 Intent intent = new Intent();
                 dbCtrl.removeValueFromLocation(locationHarvest);
                 dbCtrl.removeValueFromLocation(locationAllActivities);
                 setResult(2, intent);
                 finish();
+>>>>>>> master
             }
 
         });
@@ -147,9 +175,7 @@ public class HarvestEditor extends AppCompatActivity {
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
-
-
-    }
+}
 
 
 
