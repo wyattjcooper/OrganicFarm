@@ -127,7 +127,6 @@ public class HarvestEditor extends AppCompatActivity {
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
             new AlertDialog.Builder(HarvestEditor.this)
                 .setTitle("Delete entry")
                 .setMessage("Are you sure you want to delete this entry?")
@@ -151,13 +150,11 @@ public class HarvestEditor extends AppCompatActivity {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-=======
                 Intent intent = new Intent();
                 dbCtrl.removeValueFromLocation(locationHarvest);
                 dbCtrl.removeValueFromLocation(locationAllActivities);
                 setResult(2, intent);
                 finish();
->>>>>>> master
             }
 
         });
