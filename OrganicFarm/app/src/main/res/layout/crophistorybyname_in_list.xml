@@ -9,25 +9,16 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="crop"
         android:id="@+id/crop"
-        android:layout_below="@+id/line"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingTop="5dp"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-        <!--android:text="Location"-->
-        <!--android:id="@+id/location"-->
-        <!--android:layout_below="@+id/crop"-->
-        <!--android:layout_alignParentLeft="true" />-->
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Date:"
+        android:text="Planted:"
         android:id="@+id/dateTitle"
         android:layout_below="@+id/crop"
         android:layout_alignParentLeft="true" />
@@ -35,7 +26,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Date"
         android:id="@+id/date"
         android:layout_alignBottom="@+id/dateTitle"
@@ -46,24 +37,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Notes:"
         android:id="@+id/notesTitle"
-        android:foregroundTint="#9bd88e"
         android:singleLine="false"
-        android:layout_below="@+id/dateTitle"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/plantedByTitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Note"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Loading..."
         android:id="@+id/notes"
         android:singleLine="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/notesTitle"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 
@@ -75,5 +67,42 @@
         android:id="@+id/line"
         android:layout_alignParentTop="true"
         android:background="#b007085f" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvest Completed:"
+        android:id="@+id/harvestCompletedTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dateTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Date"
+        android:id="@+id/harvestCompleted"
+        android:layout_alignBottom="@+id/harvestCompletedTitle"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Loading..."
+        android:id="@+id/plantedBy"
+        android:layout_alignBottom="@+id/plantedByTitle"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Planted By:"
+        android:id="@+id/plantedByTitle"
+        android:layout_below="@+id/harvestCompletedTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

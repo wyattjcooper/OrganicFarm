@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setTitle("Current Farm");
+
+
         sectionitems = (ListView) findViewById(R.id.sectionItems);
         totalAmountData = (TextView) findViewById(R.id.totalAmountData);
         totalNumHarvestsData = (TextView) findViewById(R.id.totalNumharvestsData);
@@ -60,9 +63,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         dbCtrl.listenAndSetTextToTotalAmount(totalAmountData);
         dbCtrl.listenAndSetTextToTotalNumberOfHarvests(totalNumHarvestsData);
         dbCtrl.listenAndSetTextToTotalNumberOfCropsEverPlanted(totalCropsData);
-        if (dbCtrl.getUID() != null) {
-            dbCtrl.listenAndSetToUsername(userID);
-        }
+        dbCtrl.listenAndSetToUsername(userID);
+
 
         totalAmountData.setGravity(Gravity.LEFT);
         totalNumHarvestsData.setGravity(Gravity.CENTER);

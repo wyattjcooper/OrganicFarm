@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -54,13 +53,17 @@ public class CropHistoryAdapter extends ArrayAdapter<Entry> {
         Entry e = entries.get(position);
 
         if (e != null) {
-            TextView date = (TextView) v.findViewById(R.id.date);
+            TextView date = (TextView) v.findViewById(R.id.dateBySB);
             TextView location = (TextView) v.findViewById(R.id.location);
             TextView notes = (TextView) v.findViewById(R.id.notes);
+            TextView harvestDate = (TextView) v.findViewById(R.id.harvestCompleted);
+            TextView plantedBy = (TextView) v.findViewById(R.id.plantedBy);
 
             date.setText(e.getDate().toString());
             location.setText("Section: " + e.getSection() + " Bed: " + e.getBed());
             notes.setText(e.getNotes());
+            plantedBy.setText("Planted By " + e.getOwner());
+            harvestDate.setText(e.getHarvestDate());
 
 
 

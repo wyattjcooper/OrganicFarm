@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class HarvestHistory extends AppCompatActivity {
     ListView lv;
     DatabaseCtrl dbCtrl;
     HarvestAdapter ha;
+    Button edit;
+
+    String cropName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class HarvestHistory extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         String cropID = "";
-        String cropName = "";
+        cropName = "";
         String cropDate = "";
 
 
@@ -57,22 +61,25 @@ public class HarvestHistory extends AppCompatActivity {
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
         final ArrayList<String> finalKeys = keys;
         final String finalCropID = cropID;
+        final String finalCropName = cropName;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(HarvestHistory.this, HarvestEditor.class);
+                Intent intent = new Intent(HarvestHistory.this, HarvestViewer.class);
                 // Look up the key in the keys list - same position
                 String itemSelected = finalKeys.get(position).toString();
                 intent.putExtra("harvestID", itemSelected);
                 intent.putExtra("cropID", finalCropID);
+                intent.putExtra("cropName", finalCropName);
                 startActivity(intent);
             }
         });
 
-        getSupportActionBar().setTitle("Harvest History Of "+ cropDate);
+        getSupportActionBar().setTitle("Harvest History Of "+ cropName);
         //toolbar.setTitle("Harvest History Of "+ cropDate);
 
+        final String finalCropID1 = cropID;
 
 
     }
@@ -86,6 +93,24 @@ public class HarvestHistory extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+        lv = (ListView) findViewById(R.id.listViewHH);
+        Harvest[] harvests = new Harvest[] { };
+        // Setting up the ArrayAdapter and ListView
+        final ArrayList<Harvest> harvestList = new ArrayList<Harvest>();
+        harvestList.addAll(Arrays.asList(harvests));
+        ha = new HarvestAdapter(this, R.layout.harvest_in_list, harvestList);
+        lv.setAdapter(ha);
+
+        // Set up our database control object
+        dbCtrl = new DatabaseCtrl(this);
+        ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropName, ha);
+
     }
 
 }

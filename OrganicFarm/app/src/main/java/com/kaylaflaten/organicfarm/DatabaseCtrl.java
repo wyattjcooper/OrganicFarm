@@ -82,7 +82,7 @@ public class DatabaseCtrl {
                     Log.println(1, "MyApp", "Reading harvests");
                     // Fetch the key from the database
                     String key = postSnapshot.getKey();
-                    if (!keys.contains(key) && (pid1.equals(object.getPID()))) {
+                    if (!keys.contains(key) && (object != null) && (pid1.equals(object.getPID()))) {
                         Log.println(1, "MyApp", "The read succeeded");
 
                         // Add key to keys list
@@ -307,7 +307,7 @@ public class DatabaseCtrl {
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
                     //parentID[0] = harvest.getPID();
                     //amount[0] = amount[0] + harvest.getAmount();
-                    if (harvest.getPID().equals(pid1)) {
+                    if (harvest.getPID()!=null && harvest.getPID().equals(pid1)) {
                         Log.println(1, "MyApp", "Read succeeded");
 
                         amount[0] = amount[0] + harvest.getAmount();
@@ -336,7 +336,7 @@ public class DatabaseCtrl {
                     Harvest harvest = postSnapshot.getValue(Harvest.class);
                     //parentID[0] = harvest.getPID();
                     //amount[0] = amount[0] + harvest.getAmount();
-                    if (harvest.getName().equals(name1)) {
+                    if (harvest.getName()!=null && harvest.getName().equals(name1)) {
                         Log.println(1, "MyApp", "Read succeeded");
 
                         amount[0] = amount[0] + harvest.getAmount();
@@ -525,7 +525,7 @@ public class DatabaseCtrl {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest currHarvest = postSnapshot.getValue(Harvest.class);
-                    if (currHarvest.getPID().equals(cropID)) {
+                    if (currHarvest.getPID()!=null && currHarvest.getPID().equals(cropID)) {
                         finalReference.child(postSnapshot.getKey()).removeValue();
                     }
                 }
@@ -565,12 +565,14 @@ public class DatabaseCtrl {
 
     public void listenAndSetToUsername(final TextView text){
         Firebase ref = new Firebase(REFNAME);
-        ref = ref.child("Users").child(ref.getAuth().getUid().toString());
+        if (ref.getAuth()!=null) {
+            ref = ref.child("Users").child(ref.getAuth().getUid());
+        }
         final Firebase finalRef = ref;
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot!=null) {
+                if (dataSnapshot.child("firstName").getValue()!=null) {
                     String user = dataSnapshot.child("firstName").getValue().toString();
                     text.setText(user);
                 }

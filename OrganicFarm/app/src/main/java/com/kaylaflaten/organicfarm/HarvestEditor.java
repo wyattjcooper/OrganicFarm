@@ -22,22 +22,14 @@ import java.util.Locale;
 public class HarvestEditor extends AppCompatActivity {
 
 
-    TextView section;
-    TextView bed;
+
     TextView name;
-    EditText date;
+    TextView date;
     EditText notes;
     EditText amount;
     TextView owner;
     Button enter;
     Button delete;
-
-    TextView sectionTitle;
-    TextView bedTitle;
-    TextView dateTitle;
-    TextView amountTitle;
-    TextView notesTitle;
-
 
     private SimpleDateFormat dateFormatter;
 
@@ -46,30 +38,23 @@ public class HarvestEditor extends AppCompatActivity {
 
     String harvestID;
     String cropID;
+    String cropName;
+    int secN;
+    int bedN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_editor);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
-
-        section = (TextView) findViewById(R.id.sectionHarvestEditor);
-        bed = (TextView) findViewById(R.id.bedHarvestEditor);
-        name = (TextView) findViewById(R.id.nameTextHarvestEditor);
-        date = (EditText) findViewById(R.id.dateHarvestEditor);
+        date = (TextView) findViewById(R.id.dateHarvestEditor);
         notes = (EditText) findViewById(R.id.notesHarvestEditor);
         owner = (TextView) findViewById(R.id.ownerHarvestEditor);
         amount = (EditText) findViewById(R.id.amountHarvestEditor);
-        enter = (Button) findViewById(R.id.enterHarvestEditor);
         delete = (Button) findViewById(R.id.deleteHarvestEditor);
-
-        sectionTitle = (TextView) findViewById(R.id.sectionDisplayTitleHarvestEditor);
-        bedTitle = (TextView) findViewById(R.id.bedDisplayLabelHarvestEditor);
-        dateTitle = (TextView) findViewById(R.id.dateLabelHarvestEditor);
-        amountTitle = (TextView) findViewById(R.id.amountLabelHarvestEditor);
-        notesTitle = (TextView) findViewById(R.id.notesLabelHarvestEditor);
+        enter = (Button) findViewById(R.id.enterHarvestEditor);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -79,10 +64,17 @@ public class HarvestEditor extends AppCompatActivity {
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
         final Bundle extras = getIntent().getExtras();
-
+        secN = 0;
+        bedN = 0;
+        cropName = "";
+        String pid = "";
         if (extras != null) {
             harvestID = extras.getString("harvestID");
             cropID = extras.getString("cropID");
+            cropName = extras.getString("cropName");
+            secN = extras.getInt("secN", 1);
+            bedN = extras.getInt("bedN", 1);
+            pid = extras.getString("pid");
         }
 
         final String[] locationHarvest = new String[2];
@@ -94,27 +86,33 @@ public class HarvestEditor extends AppCompatActivity {
         locationAllActivities[1] = harvestID;
 
 
-        dbCtrl.listenAndSetText(locationHarvest, name,"name", "NULL" );
-        dbCtrl.listenAndSetEditText(locationHarvest, date,"date", "NULL" );
-        dbCtrl.listenAndSetEditText(locationHarvest, amount,"amount", "NULL" );
-        dbCtrl.listenAndSetText(locationHarvest, section, "section", "NULL");
-        dbCtrl.listenAndSetText(locationHarvest, bed, "bed", "NULL");
+        dbCtrl.listenAndSetText(locationHarvest, date,"date", "NULL" );
+        dbCtrl.listenAndSetEditText(locationHarvest, amount, "amount", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "NULL");
 
+        getSupportActionBar().setTitle(cropName + " Harvest");
 
 
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //date.setEnabled(false);
+                datePicker.show();
 
+            }
+        });
 
 
 
         // Push new data or modify old data when pressing enter button
+        final String finalPid = pid;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Harvest newHarvest = new Harvest(name.getText().toString(), cropID, date.getText().toString(), owner.getText().toString(),
+                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(), owner.getText().toString(),
                                                 Double.parseDouble(amount.getText().toString()), notes.getText().toString(),
-                                                Integer.parseInt(section.getText().toString()), Integer.parseInt(bed.getText().toString()) );
+                                                secN, bedN);
                 dbCtrl.setValueAtLocation(locationHarvest, newHarvest);
                 dbCtrl.setValueAtLocation(locationAllActivities, newHarvest);
 
@@ -129,6 +127,7 @@ public class HarvestEditor extends AppCompatActivity {
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
             new AlertDialog.Builder(HarvestEditor.this)
                 .setTitle("Delete entry")
                 .setMessage("Are you sure you want to delete this entry?")
@@ -152,7 +151,15 @@ public class HarvestEditor extends AppCompatActivity {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+=======
+                Intent intent = new Intent();
+                dbCtrl.removeValueFromLocation(locationHarvest);
+                dbCtrl.removeValueFromLocation(locationAllActivities);
+                setResult(2, intent);
+                finish();
+>>>>>>> master
             }
+
         });
     }
 

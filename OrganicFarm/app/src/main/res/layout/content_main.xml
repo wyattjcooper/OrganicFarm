@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Loading..."
+        android:text="Anonymous"
         android:id="@+id/userIDTextView"
         android:layout_below="@+id/sectionItems"
         android:layout_alignRight="@+id/sectionItems"
