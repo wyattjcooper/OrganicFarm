@@ -1,10 +1,8 @@
 package com.kaylaflaten.organicfarm;
 
-<<<<<<< HEAD
 import android.app.Activity;
 import android.app.AlertDialog;
-=======
->>>>>>> master
+
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -123,15 +121,12 @@ public class CropEditor extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
             //Intent intent = new Intent(CropEditor.this, CropViewer.class);
-            Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
+           // Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
             // If we are adding a new crop, push a new child
-=======
                 //Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
->>>>>>> master
 
             String[] location = new String[3];
             location[0] = secS;
