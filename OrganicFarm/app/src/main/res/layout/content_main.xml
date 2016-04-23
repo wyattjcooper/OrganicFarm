@@ -99,4 +99,14 @@
         android:layout_toLeftOf="@+id/userIDTextView"
         android:layout_toStartOf="@+id/userIDTextView" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:id="@+id/logout_button"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/totalAmountData"
+        android:layout_alignEnd="@+id/totalAmountData" />
+
 </RelativeLayout>

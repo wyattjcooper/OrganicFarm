@@ -83,6 +83,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private DatabaseCtrl dbCtrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Firebase.setAndroidContext(this);
@@ -108,6 +110,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
         final String email = mEmailView.getText().toString();
         isOnline();
+
+
+
+        final Firebase ref = new Firebase(REFNAME);
+        AuthData authData = ref.getAuth();
+        if (authData != null) {
+            //System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+            Toast.makeText(getApplicationContext(), "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider(), Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            finish();
+            startActivity(intent);
+        } else {
+            // no user authenticated
+        }
 
         final String password = mPasswordView.getText().toString();
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -469,6 +486,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
+                    Toast.makeText(getApplicationContext(), "Incorrect username or password", Toast.LENGTH_SHORT).show();
 
 
                 }

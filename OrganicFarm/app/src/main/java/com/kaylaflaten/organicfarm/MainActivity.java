@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
 import android.app.AlertDialog;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     TextView totalNumHarvestsData;
     TextView totalCropsData;
     TextView userID;
+    Button logout;
     DatabaseCtrl dbCtrl;
 
     @Override
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         totalNumHarvestsData = (TextView) findViewById(R.id.totalNumharvestsData);
         totalCropsData = (TextView) findViewById(R.id.totalCropsData);
         userID = (TextView) findViewById(R.id.userIDTextView);
+        logout = (Button) findViewById(R.id.logout_button);
         dbCtrl = new DatabaseCtrl(this);
 
         sectionitems.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sectionList)));
@@ -71,7 +74,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         totalCropsData.setGravity(Gravity.RIGHT);
 
         isOnline();
+
+        logout.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbCtrl.logout();
+                finish();
+            }
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

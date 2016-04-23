@@ -525,7 +525,7 @@ public class DatabaseCtrl {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     // Fetch the object from the database
                     Harvest currHarvest = postSnapshot.getValue(Harvest.class);
-                    if (currHarvest.getPID()!=null && currHarvest.getPID().equals(cropID)) {
+                    if (currHarvest.getPID() != null && currHarvest.getPID().equals(cropID)) {
                         finalReference.child(postSnapshot.getKey()).removeValue();
                     }
                 }
@@ -592,5 +592,10 @@ public class DatabaseCtrl {
             uid = ref.getAuth().getUid();
         }
         return uid;
+    }
+
+    public void logout() {
+        Firebase ref = new Firebase(REFNAME);
+        ref.unauth();
     }
 }
