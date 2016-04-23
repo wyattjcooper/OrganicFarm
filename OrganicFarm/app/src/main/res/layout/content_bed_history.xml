@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Total Amount"
+        android:text="Harvest Total"
         android:id="@+id/amountTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Crops Harvested"
+        android:text="Crops Completed"
         android:id="@+id/titleHarvested"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"/>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kaylaflaten.organicfarm"
-    >
+    package="com.kaylaflaten.organicfarm">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -20,16 +18,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
-
-
-        </activity>
-
-
-        <activity
-            android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,15 +27,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".CropHarvester"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".CropViewer">
+            android:parentActivityName=".CropViewer"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropViewer" />
         </activity>
-
         <activity
             android:name=".CropViewer"
             android:label="@string/app_name"
@@ -73,8 +66,8 @@
         <activity
             android:name=".CropEditor"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".CropViewer">
+            android:parentActivityName=".CropViewer"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropViewer" />
@@ -82,18 +75,17 @@
         <activity
             android:name=".CropHistoryEditor"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".CropHistoryViewer">
+            android:parentActivityName=".CropHistoryViewer"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropHistoryViewer" />
         </activity>
-
         <activity
             android:name=".CropManager"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".CropsInBed">
+            android:parentActivityName=".CropsInBed"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.CropsInBed" />
@@ -149,14 +141,15 @@
         <activity
             android:name=".HarvestEditor"
             android:label="@string/title_activity_harvest_editor"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".HarvestHistory">
-
+            android:parentActivityName=".HarvestHistory"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kaylaflaten.organicfarm.HarvestHistory" />
         </activity>
-
+        <activity
+            android:name=".LoginActivity2"
+            android:label="@string/title_activity_login2"></activity>
     </application>
 
 </manifest>

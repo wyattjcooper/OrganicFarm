@@ -43,6 +43,8 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 
 
+
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
 
-
+    private static String REFNAME = "https://dazzling-inferno-9759.firebaseio.com/";
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -99,12 +101,133 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+        final String email = mEmailView.getText().toString();
 
+        final String password = mPasswordView.getText().toString();
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailRegisterButton = (Button) findViewById(R.id.register_button);
+        Button continueAnonButton = (Button) findViewById(R.id.continue_anon_button);
+        mEmailRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Store values at the time of the login attempt.
+                final String email = mEmailView.getText().toString();
+                final String password = mPasswordView.getText().toString();
+
+                boolean cancel = false;
+                View focusView = null;
+
+                // Check for a valid password, if the user entered one.
+                if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+                    mPasswordView.setError(getString(R.string.error_invalid_password));
+                    focusView = mPasswordView;
+                    cancel = true;
+                }
+
+                // Check for a valid email address.
+                if (TextUtils.isEmpty(email)) {
+                    mEmailView.setError(getString(R.string.error_field_required));
+                    focusView = mEmailView;
+                    cancel = true;
+                } else if (!isEmailValid(email)) {
+                    mEmailView.setError(getString(R.string.error_invalid_email));
+                    focusView = mEmailView;
+                    cancel = true;
+                }
+                mEmailView.setError(null);
+                mPasswordView.setError(null);
+                final Firebase ref = new Firebase(REFNAME);
+
+                //Toast.makeText(getApplicationContext(), "Email " + mEmailView.getText().toString() + " Password " + mPasswordView.getText(), Toast.LENGTH_SHORT).show();
+
+                ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+                    @Override
+                    public void onSuccess(Map<String, Object> result) {
+                        Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
+                        User newUser = new User(email, password, mlastNameEntry.getText().toString(), 0);
+                        ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
+                    }
+
+                    @Override
+                    public void onError(FirebaseError firebaseError) {
+                        switch (firebaseError.getMessage().toString()) {
+                            case "EMAIL_TAKEN":
+                                Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_SHORT).show();
+                            case "INVALID_EMAIL":
+                                Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
+                            default:
+                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+//                ref.createUser(email,password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+//                    @Override
+//                    public void onSuccess(Map<String, Object> result) {
+//                        //System.out.println("Successfully created user account with uid: " + result.get("uid"));
+//                        Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
+//                       // Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+//
+//                        User newUser = new User(email, password, mlastNameEntry.getText().toString(), 0);
+//                        ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
+//                        //finish();
+//                        //startActivity(intent);
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(FirebaseError firebaseError) {
+//                        switch (firebaseError.getMessage()) {
+//                            case "EMAIL_TAKEN":
+//                                Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_SHORT).show();
+//                            case "INVALID_EMAIL":
+//                                Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
+//                            default:
+//                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+
+//                ref.createUser(email, password, new Firebase.ResultHandler() {
+//                    @Override
+//                    public void onSuccess() {
+//                        //System.out.println("Successfully created user account with uid: " + result.get("uid"));
+//                        Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
+//                        // Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+//
+//                        User newUser = new User(email, password, mlastNameEntry.getText().toString(), 0);
+//                        //ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
+//                        //finish();
+//                        //startActivity(intent);
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(FirebaseError firebaseError) {
+//                        switch (firebaseError.getMessage()) {
+//                            case "EMAIL_TAKEN":
+//                                Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_SHORT).show();
+//                            case "INVALID_EMAIL":
+//                                Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
+//                            default:
+//                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+            }
+        });
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+        continueAnonButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -205,62 +328,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
+           // mAuthTask.doInBackground((Void) null);
             mAuthTask.execute((Void) null);
         }
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptRegster() {
-        if (mAuthTask != null) {
-            return;
-        }
-
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt registration and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Register the user
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-
-        }
-    }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -379,7 +452,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             final Firebase ref = new Firebase("https://dazzling-inferno-9759.firebaseio.com/");
-            final boolean[] succeeded = {true};
             ref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
@@ -404,28 +476,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
 
-            ref.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
-                @Override
-                public void onSuccess(Map<String, Object> result) {
-                    System.out.println("Successfully created user account with uid: " + result.get("uid"));
-                    Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+//            ref.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
+//                @Override
+//                public void onSuccess(Map<String, Object> result) {
+//                    System.out.println("Successfully created user account with uid: " + result.get("uid"));
+//                    Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+//
+//                    User newUser = new User(mEmail, mfirstNameEntry.getText().toString(), mlastNameEntry.getText().toString(), 0);
+//                    ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
+//                    finish();
+//                    startActivity(intent);
+//
+//                }
+//
+//                @Override
+//                public void onError(FirebaseError firebaseError) {
+//                    // there was an error
+////                    succeeded[0] =false;
+////                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+////                    finish();
+////                    startActivity(intent);
+//                    Toast.makeText(getApplicationContext(), "There was an error", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            });
 
-                    User newUser = new User(mEmail, mfirstNameEntry.getText().toString(), mlastNameEntry.getText().toString(), 0);
-                    ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
-                    finish();
-                    startActivity(intent);
-
-                }
-                @Override
-                public void onError(FirebaseError firebaseError) {
-                    // there was an error
-                    succeeded[0] =false;
-                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                    finish();
-                    startActivity(intent);
-                }
-            });
             return true;
         }
 

@@ -136,4 +136,5 @@
         completions."
     </string>
     <string name="title_activity_harvest_editor">HarvestEditor</string>
+    <string name="title_activity_login2">Sign in</string>
 </resources>
