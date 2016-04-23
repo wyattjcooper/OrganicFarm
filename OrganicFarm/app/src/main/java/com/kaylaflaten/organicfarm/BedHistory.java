@@ -14,6 +14,7 @@ import java.util.Arrays;
 public class BedHistory extends AppCompatActivity {
 
     ListView lv;
+    ListView lv_harvests;
     DatabaseCtrl dbCtrl;
     CropHistoryByNameAdapter ca;
     TextView amountData;
