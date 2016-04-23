@@ -51,6 +51,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         history = (Button) findViewById(R.id.HHbuttonCropHistoryViewer);
         owner = (TextView) findViewById(R.id.ownerCropHistoryViewer);
 
+
         final Bundle extras = getIntent().getExtras();
 
         String secS = "Section ";
@@ -87,7 +88,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(location, owner,"owner", "Owner");
         dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Harvest Date");
-        getSupportActionBar().setTitle(cropName + " Planted on " + cropDate);
+        getSupportActionBar().setTitle(cropName + " Planted On " + cropDate);
 
 
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
