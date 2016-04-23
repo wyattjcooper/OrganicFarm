@@ -73,10 +73,10 @@ public class CropAdapter extends ArrayAdapter<Entry>  {
 
             Calendar today = Calendar.getInstance();
 
-            long diff = today.getTimeInMillis() - thatDay.getTimeInMillis();
+            long diff =  thatDay.getTimeInMillis() - today.getTimeInMillis();
             long days = diff / (24 * 60 * 60 * 1000);
 
-            v.setBackgroundColor((int) days);
+            //v.setBackgroundColor((int) days);
 
         }
 
