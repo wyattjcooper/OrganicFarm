@@ -27,6 +27,7 @@ public class CropsInBed extends AppCompatActivity {
     ListView lv;
     DatabaseCtrl dbCtrl;
     ArrayAdapter<String> aa;
+    ArrayList<String> keys;
 
     int secN;
     int bedN;
@@ -150,7 +151,7 @@ public class CropsInBed extends AppCompatActivity {
         String[] location = new String[2];
         location[0] = secS;
         location[1] = bedS;
-        ArrayList<String> keys = dbCtrl.generateKeysListFromLocation(location, aa);
+        keys = dbCtrl.generateKeysListFromLocation(location, aa);
     }
 
 
