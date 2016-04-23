@@ -3,7 +3,12 @@ package com.kaylaflaten.organicfarm;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -102,6 +107,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
         final String email = mEmailView.getText().toString();
+        isOnline();
 
         final String password = mPasswordView.getText().toString();
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -144,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onSuccess(Map<String, Object> result) {
                         Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-                        User newUser = new User(email, password, mlastNameEntry.getText().toString(), 0);
+                        User newUser = new User(email,mfirstNameEntry.getText().toString(), mlastNameEntry.getText().toString(), 0);
                         ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
                     }
 
@@ -523,6 +529,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+
+    // Checks if device/app is connected to the Internet
+    public void isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        boolean connected = (networkInfo != null && networkInfo.isConnected());
+
+        if (!connected) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Internet Connection");
+            alertDialog.setMessage("You are not connected to the Internet");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            //alertDialog.setIcon(R.drawable.icon);
+            alertDialog.show();
         }
     }
 }
