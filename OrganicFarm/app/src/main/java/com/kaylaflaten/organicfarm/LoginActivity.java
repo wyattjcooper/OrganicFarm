@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             case "INVALID_EMAIL":
                                 Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
                             default:
-                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Error: email address already exists", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

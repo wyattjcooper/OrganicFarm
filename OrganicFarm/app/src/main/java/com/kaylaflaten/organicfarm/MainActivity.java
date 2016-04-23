@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 dbCtrl.logout();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
