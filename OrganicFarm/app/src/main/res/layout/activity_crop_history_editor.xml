@@ -96,7 +96,7 @@
         android:layout_alignParentLeft="true" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/crop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -168,8 +168,9 @@
         android:layout_alignParentEnd="true"
         android:editable="true" />
 
-    <EditText
+    <TextView
         android:id="@+id/amount"
+        android:gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"

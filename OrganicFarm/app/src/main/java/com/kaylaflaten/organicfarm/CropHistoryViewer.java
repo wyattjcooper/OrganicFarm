@@ -69,7 +69,6 @@ public class CropHistoryViewer extends AppCompatActivity {
         }
         section.setText(secS);
         bed.setText(bedS);
-        //setSupportActionBar(toolbar);
 
 
         final String cropID = extras.getString("cropID");
@@ -91,10 +90,6 @@ public class CropHistoryViewer extends AppCompatActivity {
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
 
         getSupportActionBar().setTitle(cropName + " Planted on " + cropDate);
-
-
-
-       // dbCtrl.listenAndSetTextToAmountOfCropNameHarvested(amount, name.getText().toString());
 
 
 

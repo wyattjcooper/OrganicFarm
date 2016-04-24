@@ -29,7 +29,7 @@ public class CropHistoryEditor extends AppCompatActivity {
     EditText name;
     TextView date;
     TextView owner;
-    TextView dateHarvested;
+    TextView amount;
     EditText notes;
     Button enter;
     Button delete;
@@ -54,12 +54,14 @@ public class CropHistoryEditor extends AppCompatActivity {
 
 
 
-        name = (EditText) findViewById(R.id.name);
+        name = (EditText) findViewById(R.id.crop);
         date = (TextView) findViewById(R.id.date);
         harvestDate = (TextView) findViewById(R.id.harvestDate);
         notes = (EditText) findViewById(R.id.notes);
+        owner = (EditText) findViewById(R.id.plantedBy);
         enter = (Button) findViewById(R.id.enter);
         delete = (Button) findViewById(R.id.delete);
+        amount = (TextView) findViewById(R.id.amount);
 
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
@@ -97,7 +99,9 @@ public class CropHistoryEditor extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetEditText(location, notes, "notes", "Enter notes here");
         dbCtrl.listenAndSetText(location, owner, "owner", "Owner");
-        dbCtrl.listenAndSetText(location, dateHarvested, "harvestDate", "Date");
+        dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Date");
+        dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
+
 
 
         date.setOnClickListener(new View.OnClickListener() {
