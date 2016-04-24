@@ -132,23 +132,19 @@ public class HarvestEditor extends AppCompatActivity {
                 .setMessage("Are you sure you want to delete this entry?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if (extras.getBoolean("new") == true) {
-                            // If we are adding a new crop, there is nothing to delete so do nothing
-                        }
-                        // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
-                        else if (extras.getBoolean("new") != true) {
+                            Intent intent = new Intent();
                             dbCtrl.removeValueFromLocation(locationHarvest);
                             dbCtrl.removeValueFromLocation(locationAllActivities);
                             finish();
+
+                    }
+                })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
                         }
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
 //                Intent intent = new Intent();
 //                dbCtrl.removeValueFromLocation(locationHarvest);
