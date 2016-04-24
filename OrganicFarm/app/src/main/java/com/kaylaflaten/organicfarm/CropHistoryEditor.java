@@ -51,12 +51,12 @@ public class CropHistoryEditor extends AppCompatActivity {
 
         //section = (TextView) findViewById(R.id.sectionCropHistoryEditor);
         //bed = (TextView) findViewById(R.id.bedCropHistoryEditor);
-        name = (EditText) findViewById(R.id.nameCropHistoryEditor);
-        date = (TextView) findViewById(R.id.dateCropHistoryEditor);
-        harvestDate = (TextView) findViewById(R.id.harvestDateCropHistoryEditor);
-        notes = (EditText) findViewById(R.id.notesCropHistoryEditor);
-        enter = (Button) findViewById(R.id.enterCropHistoryEditor);
-        delete = (Button) findViewById(R.id.deleteCropHistoryEditor);
+        name = (EditText) findViewById(R.id.name);
+        date = (TextView) findViewById(R.id.date);
+        harvestDate = (TextView) findViewById(R.id.harvestDate);
+        notes = (EditText) findViewById(R.id.notes);
+        enter = (Button) findViewById(R.id.enter);
+        delete = (Button) findViewById(R.id.delete);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 

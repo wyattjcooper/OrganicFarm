@@ -62,4 +62,15 @@ public class CropHistory extends AppCompatActivity {
 
     }
 
+
+//    @Override
+//    public void onRestart() {
+//        super.onRestart();
+//
+//        // Attach crops already in the database to our list
+//        String[] location = new String[1];
+//        location[0] = "Crop History";
+//        ArrayList<String> keys = dbCtrl.addCropNamesToArrayAdapter(location, aa);
+//    }
+
 }

@@ -24,7 +24,7 @@ import java.util.Locale;
  */
 public class CropHarvester extends AppCompatActivity {
 
-
+    TextView crop;
     EditText notes;
     TextView date;
     TextView owner;
@@ -41,10 +41,10 @@ public class CropHarvester extends AppCompatActivity {
     String secS;
     String bedS;
 
-    String cropName = "";
-    String cropNotes = "";
-    String cropDate = "";
-    String cropID = "";
+    String cropName;
+    String cropNotes;
+    String cropDate;
+    String cropID;
 
     private SimpleDateFormat dateFormatter;
 
@@ -69,6 +69,7 @@ public class CropHarvester extends AppCompatActivity {
 
         setDateTimeField();
 
+        crop = (TextView) findViewById(R.id.crop);
         enter = (Button) findViewById(R.id.enter);
         date = (TextView) findViewById(R.id.dateByName);
         owner = (TextView) findViewById(R.id.ownerCropHarvester);
@@ -96,6 +97,8 @@ public class CropHarvester extends AppCompatActivity {
             secS = secS + (secN + 1);
             bedS = bedS + (bedN + 1);
         }
+
+        crop.setText(cropName);
 
 
         // If we selected a crop from the list,

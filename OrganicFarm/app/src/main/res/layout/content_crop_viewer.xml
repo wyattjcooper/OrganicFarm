@@ -39,7 +39,7 @@
         android:layout_below="@+id/bed"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Anticipated Harvest Date"
+        android:text="Exp Harvest Date"
         android:layout_below="@+id/dateTitle"
         android:layout_marginTop="20dp"
         android:layout_alignParentLeft="true"
@@ -96,7 +96,7 @@
         android:layout_alignParentLeft="true" />
 
     <TextView
-        android:id="@+id/cropByName"
+        android:id="@+id/crop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -117,7 +117,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/dateByName"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -139,10 +139,10 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/notesHarvestViewer"
+        android:id="@+id/notes"
         android:gravity="top|left"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
         android:inputType="textMultiLine"
@@ -174,31 +174,21 @@
 
     <Button
         android:id="@+id/harvest"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Harvest"
+        android:textAppearance="?android:attr/textAppearanceButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"/>
+
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Harvest History"
-        android:id="@+id/HHbutton"
+        android:id="@+id/harvestHistory"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/cropByName"
-        android:layout_alignEnd="@+id/cropByName" />
-
-
-
-
-
-
-
-
-
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

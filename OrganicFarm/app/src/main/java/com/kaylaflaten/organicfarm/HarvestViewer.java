@@ -32,6 +32,7 @@ public class HarvestViewer extends AppCompatActivity {
     TextView amount;
     TextView pid;
     TextView finished;
+    TextView crop;
     Button edit;
 
 
@@ -71,13 +72,13 @@ public class HarvestViewer extends AppCompatActivity {
 
         //setDateTimeField();
 
-        //name = (TextView) findViewById(R.id.nameHarvestViewer);
-        edit = (Button) findViewById(R.id.editHarvestViewer);
-        date = (TextView) findViewById(R.id.dateHarvestViewer);
-        owner = (TextView) findViewById(R.id.ownerHarvestViewer);
-        notes = (TextView) findViewById(R.id.notesHarvestViewer);
-        amount = (TextView) findViewById(R.id.amountHarvestViewer);
-        pid = (TextView) findViewById(R.id.pidPlaceHolderHarvestViewer);
+        crop = (TextView) findViewById(R.id.crop);
+        edit = (Button) findViewById(R.id.edit);
+        date = (TextView) findViewById(R.id.date);
+        owner = (TextView) findViewById(R.id.harvestedBy);
+        notes = (TextView) findViewById(R.id.notes);
+        amount = (TextView) findViewById(R.id.amount);
+        //pid = (TextView) findViewById(R.id.pidPlaceHolderHarvestViewer);
 
 
         // Create the DatabaseCtrl object
@@ -86,7 +87,7 @@ public class HarvestViewer extends AppCompatActivity {
         final Bundle extras = getIntent().getExtras();
 
         String harvestID = "";
-        String cropID = "";
+
         String cropName = "";
         int secN;
         int bedN;
@@ -108,11 +109,13 @@ public class HarvestViewer extends AppCompatActivity {
         locationHarvest[0] = "Harvest";
         locationHarvest[1] = harvestID;
 
+        crop.setText(cropName);
+
         dbCtrl.listenAndSetText(locationHarvest, date, "date", "Name");
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(locationHarvest, amount, "amount", "Amount");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "Owner");
-        dbCtrl.listenAndSetText(locationHarvest, pid, "pid", "PID");
+        //dbCtrl.listenAndSetText(locationHarvest, pid, "pid", "PID");
         //dbCtrl.listenAndSetText(locationHarvest, finished, "finished", "Finished");
 
 
@@ -125,85 +128,12 @@ public class HarvestViewer extends AppCompatActivity {
                 // Look up the key in the keys list - same position
                 intent.putExtra("cropName", finalCropName);
                 intent.putExtra("harvestID", finalHarvestID);
-                intent.putExtra("cropID",pid.getText().toString() );
+                intent.putExtra("cropID",cropID );
                 startActivityForResult(intent, 1);
             }
         });
-
-        // If we selected a crop from the list,
-        // we will have passed its ID, so we set our reference to that ID
-        //final String cropID = extras.getString("itemSelected");
-//        enter.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
-//                Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(),dbCtrl.getUID(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
-//                String[] locationHarvest = new String[1];
-//                locationHarvest[0] = "Harvest";
-//                int resultCode = 0;
-//
-//                //locationHarvest[1] = cropID;
-//                String key = dbCtrl.pushObjectReturnKey(locationHarvest, newHarvest);
-//                if (finished.isChecked()) {
-//                    resultCode = 3;
-//                    String[] locationCropOverall = new String[2];
-//                    locationCropOverall[0] = "All Crops";
-//                    locationCropOverall[1] = cropID;
-//                    Entry entryHistory = new Entry(cropName, cropDate, date.getText().toString(),cropNotes,owner.getText().toString(), true, secN + 1, bedN + 1);
-//                    dbCtrl.setValueAtLocation(locationCropOverall, entryHistory);
-//
-//
-//                    String[] locationCropHist = new String[3];
-//                    locationCropHist[0] = "Crop History";
-//                    locationCropHist[1] = cropName;
-//                    locationCropHist[2] = cropID;
-//                    dbCtrl.setValueAtLocation(locationCropHist, entryHistory);
-//
-//                    String[] locationOldCrop = new String[3];
-//                    locationOldCrop[0] = secS;
-//                    locationOldCrop[1] = bedS;
-//                    locationOldCrop[2] = cropID;
-//                    dbCtrl.removeValueFromLocation(locationOldCrop);
-//                }
-//                String[] allActivitiesLocation = new String[2];
-//                allActivitiesLocation[0] = "All Activities";
-//                allActivitiesLocation[1] = key;
-//                dbCtrl.setValueAtLocation(allActivitiesLocation, newHarvest);
-//                Intent intent = new Intent();
-//                setResult(resultCode, intent);
-//                finish();
-//                finish();
-//            }
-//        });
-
-
-//        date.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                //date.setEnabled(false);
-//                datePicker.show();
-//
-//            }
-//        });
-
-//        if (!dbCtrl.getUID().equals("no id")) {
-//            dbCtrl.listenAndSetToUsername(owner);
-//        }
-
     }
 
-//    private void setDateTimeField() {
-//        Calendar newCalendar = Calendar.getInstance();
-//        datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-//
-//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                Calendar newDate = Calendar.getInstance();
-//                newDate.set(year, monthOfYear, dayOfMonth);
-//                date.setText(dateFormatter.format(newDate.getTime()));
-//            }
-//
-//        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-//    }
 
     @Override
     public void onRestart(){

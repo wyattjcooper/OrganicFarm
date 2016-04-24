@@ -21,9 +21,7 @@ import java.util.Locale;
 
 public class HarvestEditor extends AppCompatActivity {
 
-
-
-    TextView name;
+    TextView crop;
     TextView date;
     EditText notes;
     EditText amount;
@@ -49,12 +47,13 @@ public class HarvestEditor extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        date = (TextView) findViewById(R.id.dateHarvestEditor);
-        notes = (EditText) findViewById(R.id.notesHarvestEditor);
-        owner = (TextView) findViewById(R.id.ownerHarvestEditor);
-        amount = (EditText) findViewById(R.id.amountHarvestEditor);
-        delete = (Button) findViewById(R.id.deleteHarvestEditor);
-        enter = (Button) findViewById(R.id.enterHarvestEditor);
+        crop = (TextView) findViewById(R.id.crop);
+        date = (TextView) findViewById(R.id.date);
+        notes = (EditText) findViewById(R.id.notes);
+        owner = (TextView) findViewById(R.id.harvestedBy);
+        amount = (EditText) findViewById(R.id.amount);
+        delete = (Button) findViewById(R.id.delete);
+        enter = (Button) findViewById(R.id.enter);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -85,6 +84,8 @@ public class HarvestEditor extends AppCompatActivity {
         locationAllActivities[0] = "All Activities";
         locationAllActivities[1] = harvestID;
 
+
+        crop.setText(cropName);
 
         dbCtrl.listenAndSetText(locationHarvest, date,"date", "NULL" );
         dbCtrl.listenAndSetEditText(locationHarvest, amount, "amount", "NULL");

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sectionID"
-        android:id="@+id/sectionCropEditor"
+        android:id="@+id/section"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -24,84 +24,86 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/bedCropEditor"
-        android:layout_below="@+id/sectionCropEditor"
+        android:id="@+id/bed"
+        android:layout_below="@+id/section"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/cropTitleCropEditor"
+        android:id="@+id/cropTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cropID"
-        android:layout_below="@+id/bedCropEditor"
+        android:layout_below="@+id/bed"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Planted By"
-        android:id="@+id/plantedByTitleCropEditor"
-        android:layout_below="@+id/cropTitleCropEditor"
+        android:id="@+id/plantedByTitle"
+        android:layout_below="@+id/cropTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp" />
 
     <TextView
-        android:id="@+id/dateTitleCropEditor"
+        android:id="@+id/dateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/datePlantedID"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/plantedByTitleCropEditor"
+        android:layout_below="@+id/plantedByTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/harvestDateTitleCropEditor"
+        android:id="@+id/harvestDateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Anticipated Harvest Date"
-        android:layout_below="@+id/dateTitleCropEditor"
+        android:text="Exp Harvest Date"
+        android:layout_below="@+id/dateTitle"
         android:layout_marginTop="20dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/amountTitleCropEditor"
+        android:id="@+id/amountTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Amount Harvested"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/harvestDateTitleCropEditor"
+        android:layout_below="@+id/harvestDateTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/notesTitleCropEditor"
+        android:id="@+id/notesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/notesID"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/amountTitleCropEditor"
+        android:layout_below="@+id/amountTitle"
         android:layout_alignParentLeft="true" />
 
     <EditText
-        android:id="@+id/nameCropEditor"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
-        android:layout_alignBottom="@+id/cropTitleCropEditor"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/amountTitle"
+        android:layout_alignBottom="@+id/cropTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:editable="true" />
@@ -111,63 +113,76 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
-        android:id="@+id/plantedByCropEditor"
-        android:layout_alignBottom="@+id/plantedByTitleCropEditor"
+        android:id="@+id/plantedBy"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/amountTitle"
+        android:layout_alignBottom="@+id/plantedByTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:editable="true" />
 
     <TextView
-        android:id="@+id/dateCropEditor"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:hint="@string/dateHint"
         android:text="Loading..."
         android:inputType="date"
-        android:layout_alignBottom="@+id/dateTitleCropEditor"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/amountTitle"
+        android:layout_alignBottom="@+id/dateTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/harvestDateCropEditor"
+        android:id="@+id/harvestDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
         android:text="Loading..."
         android:inputType="date"
-        android:layout_alignBottom="@+id/harvestDateTitleCropEditor"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/amountTitle"
+        android:layout_alignBottom="@+id/harvestDateTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <EditText
-        android:id="@+id/notesCropEditor"
+        android:id="@+id/notes"
         android:gravity="top|left"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
         android:inputType="textMultiLine"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/notesTitleCropEditor"
-        android:layout_above="@+id/enterCropEditor"
+        android:layout_below="@+id/notesTitle"
+        android:layout_above="@+id/enter"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:editable="true" />
 
-    <TextView
-        android:id="@+id/amountCropEditor"
+    <EditText
+        android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Loading..."
-        android:layout_alignTop="@+id/amountTitleCropEditor"
+        android:layout_alignBottom="@+id/amountTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/amountTitle"
         android:layout_alignParentRight="true"
         android:editable="false" />
 
 
     <Button
-        android:id="@+id/enterCropEditor"
+        android:id="@+id/enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter"
@@ -179,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:id="@+id/deleteCropEditor"
+        android:id="@+id/delete"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

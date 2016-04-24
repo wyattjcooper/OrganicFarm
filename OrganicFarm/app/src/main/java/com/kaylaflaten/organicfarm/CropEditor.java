@@ -55,16 +55,16 @@ public class CropEditor extends AppCompatActivity {
 
 
 
-        section = (TextView) findViewById(R.id.sectionCropEditor);
-        bed = (TextView) findViewById(R.id.bedCropEditor);
-        name = (EditText) findViewById(R.id.nameCropEditor);
-        date = (TextView) findViewById(R.id.dateCropEditor);
-        harvestDate = (TextView) findViewById(R.id.harvestDateCropEditor);
-        plantedBy = (EditText) findViewById(R.id.plantedByCropEditor);
-        notes = (EditText) findViewById(R.id.notesCropEditor);
-        enter = (Button) findViewById(R.id.enterCropEditor);
-        delete = (Button) findViewById(R.id.deleteCropEditor);
-        amount = (TextView) findViewById(R.id.amountCropEditor);
+        section = (TextView) findViewById(R.id.section);
+        bed = (TextView) findViewById(R.id.bed);
+        name = (EditText) findViewById(R.id.name);
+        date = (TextView) findViewById(R.id.date);
+        harvestDate = (TextView) findViewById(R.id.harvestDate);
+        plantedBy = (EditText) findViewById(R.id.plantedBy);
+        notes = (EditText) findViewById(R.id.notes);
+        enter = (Button) findViewById(R.id.enter);
+        delete = (Button) findViewById(R.id.delete);
+        amount = (EditText) findViewById(R.id.amount);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 

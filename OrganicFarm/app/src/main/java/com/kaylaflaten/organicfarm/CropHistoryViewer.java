@@ -39,17 +39,17 @@ public class CropHistoryViewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_history_viewer);
 
-        section = (TextView) findViewById(R.id.sectionCropHistoryViewer);
-        bed = (TextView) findViewById(R.id.bedCropHistoryViewer);
-        name = (TextView) findViewById(R.id.cropCropHistoryViewer);
-        date = (TextView) findViewById(R.id.dateCropHistoryViewer);
-        harvestDate = (TextView) findViewById(R.id.harvestDateCropHistoryViewer);
-        notes = (TextView) findViewById(R.id.notesCropHistoryViewer);
-        amount = (TextView) findViewById(R.id.amountCropHistoryViewer);
-        edit = (Button) findViewById(R.id.editCropHistoryViewer);
+        section = (TextView) findViewById(R.id.section);
+        bed = (TextView) findViewById(R.id.bed);
+        name = (TextView) findViewById(R.id.crop);
+        date = (TextView) findViewById(R.id.date);
+        harvestDate = (TextView) findViewById(R.id.harvestDate);
+        notes = (TextView) findViewById(R.id.notes);
+        amount = (TextView) findViewById(R.id.amount);
+        edit = (Button) findViewById(R.id.edit);
         //harvest = (Button) findViewById(R.id.harvestCropHistoryViewer);
-        history = (Button) findViewById(R.id.HHbuttonCropHistoryViewer);
-        owner = (TextView) findViewById(R.id.ownerCropHistoryViewer);
+        history = (Button) findViewById(R.id.harvestHistory);
+        owner = (TextView) findViewById(R.id.plantedBy);
 
         final Bundle extras = getIntent().getExtras();
 
@@ -87,10 +87,11 @@ public class CropHistoryViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(location, owner,"owner", "Owner");
         dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Harvest Date");
+        dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
+
         getSupportActionBar().setTitle(cropName + " Planted on " + cropDate);
 
 
-        dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
        // dbCtrl.listenAndSetTextToAmountOfCropNameHarvested(amount, name.getText().toString());
 
 
@@ -106,8 +107,7 @@ public class CropHistoryViewer extends AppCompatActivity {
                 intent.putExtra("bed", bedN);
                 intent.putExtra("cropID", cropID);
                 intent.putExtra("cropName", finalCropName2);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent,1);
             }
         });
 
@@ -115,20 +115,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         final String finalCropName = cropName;
         final String finalSecS = secS;
         final String finalBedS = bedS;
-//        harvest.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(CropViewer.this, CropHarvester.class);
-//                // Look up the key in the keys list - same position
-//                intent.putExtra("section", secN);
-//                intent.putExtra("bed", bedN);
-//                intent.putExtra("itemSelected", cropID);
-//                intent.putExtra("cropName", name.getText().toString());
-//                intent.putExtra("cropDate", date.getText().toString());
-//                intent.putExtra("cropNotes", notes.getText().toString());
-//                startActivityForResult(intent,1);
-//            }
-//        });
+
 
         // View harvest history
         final String finalCropName1 = cropName;
@@ -140,7 +127,7 @@ public class CropHistoryViewer extends AppCompatActivity {
                 intent.putExtra("cropID", cropID);
                 intent.putExtra("cropName", finalCropName1);
                 intent.putExtra("cropData", name.getText().toString() + " Planted In " + finalSecS +"," + finalBedS);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -171,5 +158,7 @@ public class CropHistoryViewer extends AppCompatActivity {
             finish();
         }
     }
+
+
 
 }

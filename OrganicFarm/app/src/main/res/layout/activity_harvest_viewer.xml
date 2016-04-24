@@ -10,127 +10,117 @@
     tools:context="com.kaylaflaten.organicfarm.CropHarvester">
 
     <TextView
-        android:id="@+id/dateTitleHarvestViewer"
+        android:id="@+id/crop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harvest Date"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/cropID"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/amountHarvestViewer"
-        android:layout_toStartOf="@+id/amountHarvestViewer" />
-
-    <TextView
-        android:id="@+id/amountTitleHarvestViewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/amountHarvestedID"
-        android:layout_alignTop="@+id/dateTitleHarvestViewer"
-        android:layout_alignRight="@+id/notesHarvestViewer"
-        android:layout_alignEnd="@+id/notesHarvestViewer" />
-
-    <TextView
-        android:id="@+id/finishedTitleHarvestViewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/amountTitleHarvestViewer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/notesTitleHarvestViewer"
+        android:id="@+id/dateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/dateHarvestedID"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/crop"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/amountTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/amountHarvestedID"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/dateTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/harvestedByTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Harvested By"
+        android:layout_below="@+id/amount"/>
+
+
+
+    <TextView
+        android:id="@+id/notesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Harvest Notes"
-        android:layout_below="@+id/finishedTitleHarvestViewer"
-        android:layout_alignRight="@+id/dateHarvestViewer"
-        android:layout_alignEnd="@+id/dateHarvestViewer" />
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/harvestedByTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/dateHarvestViewer"
+        android:id="@+id/date"
         android:gravity="right"
         android:textAlignment="gravity"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:hint="@string/na"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:text="Loading..."
-        android:textAppearance="@android:style/TextAppearance.Large"
-        android:layout_below="@+id/dateTitleHarvestViewer"
-        android:layout_toRightOf="@+id/finishedTitleHarvestViewer"
-        android:layout_toEndOf="@+id/finishedTitleHarvestViewer" />
+        android:layout_marginLeft="20dp"
+        android:layout_alignBottom="@+id/dateTitle"
+        android:layout_toRightOf="@+id/amountTitle"
+        android:layout_alignParentRight="true" />
 
     <TextView
-        android:id="@+id/amountHarvestViewer"
+        android:id="@+id/amount"
         android:gravity="right"
-        android:textAlignment="gravity"
-        android:hint="@string/amountHint"
+        android:hint="@string/na"
+        android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:text="Loading..."
-        android:textAppearance="@android:style/TextAppearance.Large"
-        android:layout_below="@+id/amountTitleHarvestViewer"
-        android:layout_alignLeft="@+id/amountTitleHarvestViewer"
-        android:layout_alignStart="@+id/amountTitleHarvestViewer" />
-
-
-    <TextView
-        android:id="@+id/notesHarvestViewer"
-        android:gravity="top|left"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:textAlignment="gravity"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/notesTitleHarvestViewer"
-        android:layout_above="@+id/editHarvestViewer"
-        android:text="Loading..." />
-
-    <Button
-        android:id="@+id/editHarvestViewer"
-        android:textAppearance="?android:attr/textAppearanceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_alignBottom="@+id/amountTitle"
         android:layout_alignParentRight="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@android:style/TextAppearance.Large"
-        android:text="Anonymous"
-        android:id="@+id/ownerHarvestViewer"
-        android:layout_below="@+id/textView7"
-        android:layout_toRightOf="@+id/finishedTitleHarvestViewer"
-        android:layout_toEndOf="@+id/finishedTitleHarvestViewer" />
+        android:hint="@string/na"
+        android:id="@+id/harvestedBy"
+        android:layout_alignBottom="@+id/harvestedByTitle"
+        android:layout_alignParentRight="true" />
+
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/notes"
+        android:gravity="top|left"
+        android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Harvested By"
-        android:layout_centerVertical="true"
+        android:inputType="textMultiLine"
+        android:hint="@string/na"
+        android:textAlignment="gravity"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/notesTitle"
+        android:layout_above="@+id/edit" />
 
-    <TextView
+
+    <Button
+        android:id="@+id/edit"
+        android:textAppearance="?android:attr/textAppearanceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/pidPlaceHolderHarvestViewer"
+        android:text="@string/editButtonID"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/dateTitleHarvestViewer"
-        android:layout_alignEnd="@+id/dateTitleHarvestViewer"
-        android:textColor="#ffffff" />
-
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
