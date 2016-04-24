@@ -209,10 +209,9 @@ public class DatabaseCtrl {
     }
 
     // Delete all harvests of a specific crop specified by the parent id
-    public void deleteHarvestsOfCropID(final String parent) {
+    public ArrayList<String> getHarvestsOfCropID(final String parent) {
         final ArrayList<String> keys = new ArrayList<String>();
         Firebase reference = new Firebase(REFNAME);
-        final Firebase[] ref = {new Firebase(REFNAME)};
 
         // Attach crops already in the database to our list
         reference.child("Harvest").addValueEventListener(new ValueEventListener() {
@@ -228,8 +227,7 @@ public class DatabaseCtrl {
                         Log.println(1, "MyApp", "The read succeeded");
                         // Add key to keys list
                         keys.add(key);
-                        ref[0] = ref[0].child("Harvest").child(key);
-                        ref[0].removeValue();
+
 
                     }
                 }
@@ -241,13 +239,8 @@ public class DatabaseCtrl {
             }
         });
 
-        for (String key: keys) {
 
-
-
-        }
-
-        return;
+        return keys;
     }
 
     // Populates an array adapter with crop names and creates a key list with their key
