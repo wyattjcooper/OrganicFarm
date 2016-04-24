@@ -170,11 +170,6 @@ public class CropEditor extends AppCompatActivity {
                     .setMessage("Are you sure you want to delete this entry?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            if (extras.getBoolean("new") == true) {
-                                // If we are adding a new crop, there is nothing to delete so do nothing
-                            }
-                            // If we are not adding a new crop, delete the existing child we clicked on and return to bed view
-                            else if (extras.getBoolean("new") != true) {
                                 dbCtrl.removeValueFromLocation(location);
 
                                 String[] harvestLocation = new String[2];
@@ -196,7 +191,7 @@ public class CropEditor extends AppCompatActivity {
                                 Intent intent = new Intent();
                                 setResult(2, intent);
                                 finish();
-                            }
+
                         }
                     })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

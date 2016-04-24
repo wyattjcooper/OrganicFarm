@@ -53,8 +53,11 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="185dp"
         android:id="@+id/listViewBedHistory"
-        android:layout_below="@+id/harvested"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/amount" />
+
 </RelativeLayout>

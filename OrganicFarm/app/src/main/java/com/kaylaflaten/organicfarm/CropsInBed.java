@@ -25,9 +25,12 @@ public class CropsInBed extends AppCompatActivity {
     Button add;
     Button history;
     ListView lv;
+    ListView lv_harvest;
     DatabaseCtrl dbCtrl;
-    ArrayAdapter<String> aa;
+    CropAdapter ca;
+    HarvestAdapter ha;
     ArrayList<String> keys;
+    ArrayList<String> keys_harvest;
 
     int secN;
     int bedN;
@@ -45,16 +48,24 @@ public class CropsInBed extends AppCompatActivity {
         add = (Button) findViewById(R.id.add);
         //reload = (Button) findViewById(R.id.cropsInBedRefreshB);
         lv = (ListView) findViewById(R.id.listView);
+        lv_harvest = (ListView) findViewById(R.id.harvest_list_cropsInBed);
         history = (Button) findViewById(R.id.bedsHistoryButton);
 
 
-        String[] crops = new String[] { };
+        Entry[] crops = new Entry[] { };
+        Harvest[] harvests = new Harvest[] { };
+
 
         // Setting up the ArrayAdapter and ListView
-        final ArrayList<String> cropList = new ArrayList<String>();
+        final ArrayList<Entry> cropList = new ArrayList<Entry>();
+        final ArrayList<Harvest> harvestList = new ArrayList<Harvest>();
+        harvestList.addAll(Arrays.asList(harvests));
+
         cropList.addAll( Arrays.asList(crops) );
-        aa = new ArrayAdapter<String>(this, R.layout.simplerow, cropList);
-        lv.setAdapter(aa);
+        ca = new CropAdapter(this, R.layout.crops_in_list, cropList);
+        ha = new HarvestAdapter(this, R.layout.harvest_in_list, harvestList);
+        lv.setAdapter(ca);
+        lv_harvest.setAdapter(ha);
 
         // Grabbing Section and Bed values from intent
         secS = "Section ";
@@ -75,7 +86,10 @@ public class CropsInBed extends AppCompatActivity {
         String[] location = new String[2];
         location[0] = secS;
         location[1] = bedS;
-        ArrayList<String> keys = dbCtrl.generateKeysListFromLocation(location, aa);
+        ArrayList<String> keys = dbCtrl.addEntriesOfBedToCropAdapter(secS, bedS, ca);
+
+        ArrayList<String> keys_harvest = dbCtrl.addHarvestsOfBedToHarvestAdapter(secN + 1, bedN + 1, ha);
+
 
         // Add new crop by clicking the add button
         add.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +133,23 @@ public class CropsInBed extends AppCompatActivity {
             }
         });
 
+        final ArrayList<String> finalKeys_harvest = keys_harvest;
+        //final String finalCropID = cropID;
+        //final String finalCropName = cropName;
+        lv_harvest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(CropsInBed.this, HarvestViewer.class);
+                // Look up the key in the keys list - same position
+                String itemSelected = finalKeys_harvest.get(position).toString();
+                intent.putExtra("harvestID", itemSelected);
+                //intent.putExtra("cropID", finalCropID);
+                //intent.putExtra("cropName", finalCropName);
+                startActivity(intent);
+            }
+        });
+
 
         getSupportActionBar().setTitle(secS + " " + bedS);
 
@@ -141,17 +172,25 @@ public class CropsInBed extends AppCompatActivity {
         super.onRestart();
 
         // Setting up the ArrayAdapter and ListView
-        String[] crops = new String[] { };
-        final ArrayList<String> cropList = new ArrayList<String>();
+        Entry[] crops = new Entry[] { };
+        Harvest[] harvests = new Harvest[] { };
+
+        final ArrayList<Entry> cropList = new ArrayList<Entry>();
         cropList.addAll( Arrays.asList(crops) );
-        aa = new ArrayAdapter<String>(this, R.layout.simplerow, cropList);
-        lv.setAdapter(aa);
+        final ArrayList<Harvest> harvestList = new ArrayList<Harvest>();
+        harvestList.addAll(Arrays.asList(harvests));
+        ca = new CropAdapter(this, R.layout.crops_in_list, cropList);
+        ha = new HarvestAdapter(this, R.layout.harvest_in_list, harvestList);
+        lv.setAdapter(ca);
+        lv_harvest.setAdapter(ha);
+
 
 
         String[] location = new String[2];
         location[0] = secS;
         location[1] = bedS;
-        keys = dbCtrl.generateKeysListFromLocation(location, aa);
+        ArrayList<String> keys = dbCtrl.addEntriesOfBedToCropAdapter(secS, bedS, ca);
+        keys_harvest = dbCtrl.addHarvestsOfBedToHarvestAdapter(secN + 1, bedN + 1, ha);
     }
 
 

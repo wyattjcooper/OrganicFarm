@@ -11,9 +11,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -125,21 +127,11 @@ public class CropHistoryEditor extends AppCompatActivity {
                 //Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),owner.getText().toString(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
-
-//                String[] location = new String[3];
-//                location[0] = secS;
-//                location[1] = bedS;
-//                location[2] = cropID;
-//                // If we are not adding a new crop, modify the existing child we clicked on
-//                dbCtrl.setValueAtLocation(location, newEntry);
-
-
                 String[] locationCropHistory = new String[3];
                 locationCropHistory[0] = "Crop History";
                 locationCropHistory[1] = name.getText().toString();
                 locationCropHistory[2] = finalCropID;
                 dbCtrl.setValueAtLocation(locationCropHistory, newEntry);
-
 
                 String[] allActivitiesLocation = new String[2];
                 allActivitiesLocation[0] = "All Activities";
@@ -159,12 +151,17 @@ public class CropHistoryEditor extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                    dbCtrl.removeValueFromLocation(location);
+                // remove all harvest data associated with crop instance
+                String[] locationHarvests = new String[2];
+                locationHarvests[0] = "Harvest";
 
-                    String[] harvestLocation = new String[2];
-                    harvestLocation[0] = "Harvest";
-                    harvestLocation[1] = finalCropID1;
-                    dbCtrl.removeValueFromLocation(harvestLocation);
+                ArrayList<String> harvestKeys = dbCtrl.getHarvestsOfCropID(finalCropID1);
+                    for (String key : harvestKeys) {
+                        Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
+
+                        location[1] = key;
+                        dbCtrl.removeValueFromLocation(locationHarvests);
+                    }
 
                     String[] locationCropHistory = new String[3];
                     locationCropHistory[0] = "Crop History";

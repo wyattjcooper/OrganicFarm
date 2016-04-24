@@ -10,6 +10,8 @@ import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
+
+import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.CheckBox;
 
@@ -101,6 +103,78 @@ public class DatabaseCtrl {
         return keys;
     }
 
+
+    // Populates an array adapter with crop names and creates a key list with their key
+    public ArrayList<String> addHarvestsOfBedToHarvestAdapter(final int section, final int bed, final HarvestAdapter ha) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = new Firebase(REFNAME);
+        // Attach crops already in the database to our list
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest object = (Harvest) postSnapshot.getValue(Harvest.class);
+                    Log.println(1, "MyApp", "Reading harvests");
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key) && (object != null) && (((int) object.getSection() == section) && ((int) object.getBed() == bed))) {
+                        Log.println(1, "MyApp", "The read succeeded");
+
+                        // Add key to keys list
+                        int currLength = keys.size();
+                        keys.add(currLength, key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        ha.insert(object, currLength);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        return keys;
+    }
+
+
+    // Populates an array adapter with crop names and creates a key list with their key
+    public ArrayList<String> addEntriesOfBedToCropAdapter(final String section, final String bed, final CropAdapter ca) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = new Firebase(REFNAME);
+        // Attach crops already in the database to our list
+        reference.child(section).child(bed).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Entry object = (Entry) postSnapshot.getValue(Entry.class);
+                    Log.println(1, "MyApp", "Reading harvests");
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key) && (object != null)) {
+                        Log.println(1, "MyApp", "The read succeeded");
+
+                        // Add key to keys list
+                        int currLength = keys.size();
+                        keys.add(currLength, key);
+                        // Add name to the list by adding it to the ArrayAdapter
+                        ca.insert(object, currLength);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        return keys;
+    }
+
     // Populates an array adapter with crop names and creates a key list with their key
     public ArrayList<String> addHarvestsOfCropNameToHarvestAdapter(final String name1, final HarvestAdapter ha) {
         final ArrayList<String> keys = new ArrayList<String>();
@@ -131,6 +205,41 @@ public class DatabaseCtrl {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+        return keys;
+    }
+
+    // Delete all harvests of a specific crop specified by the parent id
+    public ArrayList<String> getHarvestsOfCropID(final String parent) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = new Firebase(REFNAME);
+
+        // Attach crops already in the database to our list
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest object = (Harvest) postSnapshot.getValue(Harvest.class);
+                    Log.println(1, "MyApp", "Reading harvests");
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key) && (parent.equals(object.getPID()))) {
+                        Log.println(1, "MyApp", "The read succeeded");
+                        // Add key to keys list
+                        keys.add(key);
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+
         return keys;
     }
 
