@@ -142,11 +142,11 @@
         <activity
             android:name=".HarvestEditor"
             android:label="@string/title_activity_harvest_editor"
-            android:parentActivityName=".HarvestHistory"
+            android:parentActivityName=".CropsInBed"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kaylaflaten.organicfarm.HarvestHistory" />
+                android:value="com.kaylaflaten.organicfarm.CropsInBed" />
         </activity>
     </application>
 

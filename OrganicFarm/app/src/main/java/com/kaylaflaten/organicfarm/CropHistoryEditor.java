@@ -156,17 +156,19 @@ public class CropHistoryEditor extends AppCompatActivity {
 
         // Delete crops
         final String finalCropID1 = cropID;
+        final String finalCropID2 = cropID;
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                    dbCtrl.removeValueFromLocation(location);
+                    //dbCtrl.removeValueFromLocation(location);
+                    dbCtrl.deleteHarvestsOfCropID(finalCropID2);
 
-                    String[] harvestLocation = new String[2];
-                    harvestLocation[0] = "Harvest";
-                    harvestLocation[1] = finalCropID1;
-                    dbCtrl.removeValueFromLocation(harvestLocation);
+//                    String[] harvestLocation = new String[2];
+//                    harvestLocation[0] = "Harvest";
+//                    harvestLocation[1] = finalCropID1;
+//                    dbCtrl.removeValueFromLocation(harvestLocation);
 
                     String[] locationCropHistory = new String[3];
                     locationCropHistory[0] = "Crop History";

@@ -135,6 +135,7 @@ public class HarvestEditor extends AppCompatActivity {
                             Intent intent = new Intent();
                             dbCtrl.removeValueFromLocation(locationHarvest);
                             dbCtrl.removeValueFromLocation(locationAllActivities);
+                            setResult(2, intent);
                             finish();
 
                     }

@@ -10,6 +10,8 @@ import com.firebase.client.ValueEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
+
+import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.CheckBox;
 
@@ -204,6 +206,48 @@ public class DatabaseCtrl {
             }
         });
         return keys;
+    }
+
+    // Delete all harvests of a specific crop specified by the parent id
+    public void deleteHarvestsOfCropID(final String parent) {
+        final ArrayList<String> keys = new ArrayList<String>();
+        Firebase reference = new Firebase(REFNAME);
+        final Firebase[] ref = {new Firebase(REFNAME)};
+
+        // Attach crops already in the database to our list
+        reference.child("Harvest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    // Fetch the object from the database
+                    Harvest object = (Harvest) postSnapshot.getValue(Harvest.class);
+                    Log.println(1, "MyApp", "Reading harvests");
+                    // Fetch the key from the database
+                    String key = postSnapshot.getKey();
+                    if (!keys.contains(key) && (parent.equals(object.getPID()))) {
+                        Log.println(1, "MyApp", "The read succeeded");
+                        // Add key to keys list
+                        keys.add(key);
+                        ref[0] = ref[0].child("Harvest").child(key);
+                        ref[0].removeValue();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+        for (String key: keys) {
+
+
+
+        }
+
+        return;
     }
 
     // Populates an array adapter with crop names and creates a key list with their key
