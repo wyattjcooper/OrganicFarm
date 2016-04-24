@@ -68,13 +68,13 @@ public class CropAdapter extends ArrayAdapter<Entry>  {
             notes.setText("Notes: " + c.getNotes());
 
 
-            Calendar thatDay = Calendar.getInstance();
-            thatDay.setTime(stringToDate(c.getHarvestDate().toString(), "mm/dd/yyyy"));
+  //          Calendar thatDay = Calendar.getInstance();
+//            thatDay.setTime(stringToDate(c.getHarvestDate().toString(), "mm/dd/yyyy"));
 
-            Calendar today = Calendar.getInstance();
+    //        Calendar today = Calendar.getInstance();
 
-            long diff =  thatDay.getTimeInMillis() - today.getTimeInMillis();
-            long days = diff / (24 * 60 * 60 * 1000);
+      //      long diff =  thatDay.getTimeInMillis() - today.getTimeInMillis();
+        //    long days = diff / (24 * 60 * 60 * 1000);
 
             //v.setBackgroundColor((int) days);
 

@@ -32,7 +32,7 @@ public class CropEditor extends AppCompatActivity {
     TextView harvestDate;
     EditText notes;
     TextView amount;
-    Button back;
+
     Button enter;
     Button delete;
 
@@ -64,7 +64,7 @@ public class CropEditor extends AppCompatActivity {
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
         delete = (Button) findViewById(R.id.delete);
-        amount = (EditText) findViewById(R.id.amount);
+        amount = (TextView) findViewById(R.id.amount);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
