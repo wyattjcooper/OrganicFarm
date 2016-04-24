@@ -25,6 +25,8 @@ public class EntriesHistory extends AppCompatActivity {
     DatabaseCtrl dbCtrl;
     CropHistoryAdapter ca;
     TextView amountData;
+    String cropName;
+    Entry[] entries;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -45,11 +47,11 @@ public class EntriesHistory extends AppCompatActivity {
 //        toolbar.setTitle("History of Crops Planted");
 //        setSupportActionBar(toolbar);
 
-        String cropName = "";
+        cropName = "";
 
         lv = (ListView) findViewById(R.id.entriesHistoryListView);
 
-        Entry[] entries = new Entry[]{};
+        entries = new Entry[]{};
 
         // Setting up the ArrayAdapter and ListView
         final ArrayList<Entry> entryList = new ArrayList<Entry>();
@@ -169,5 +171,23 @@ public class EntriesHistory extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+        // Setting up the ArrayAdapter and ListView
+        final ArrayList<Entry> entryList = new ArrayList<Entry>();
+        entryList.addAll(Arrays.asList(entries));
+        ca = new CropHistoryAdapter(this, R.layout.crophistory_in_list, entryList);
+        lv.setAdapter(ca);
+
+        // Attach crops already in the database to our list
+        String[] location = new String[2];
+        location[0] = "Crop History";
+        location[1] = cropName;
+        final ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapter(location, ca);
+
     }
 }
