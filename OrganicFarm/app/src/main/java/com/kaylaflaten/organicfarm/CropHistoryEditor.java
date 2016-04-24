@@ -26,6 +26,8 @@ public class CropHistoryEditor extends AppCompatActivity {
     TextView harvestDate;
     EditText name;
     TextView date;
+    TextView owner;
+    TextView dateHarvested;
     EditText notes;
     Button enter;
     Button delete;
@@ -49,14 +51,14 @@ public class CropHistoryEditor extends AppCompatActivity {
 
 
 
-        //section = (TextView) findViewById(R.id.sectionCropHistoryEditor);
-        //bed = (TextView) findViewById(R.id.bedCropHistoryEditor);
+
         name = (EditText) findViewById(R.id.name);
         date = (TextView) findViewById(R.id.date);
         harvestDate = (TextView) findViewById(R.id.harvestDate);
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
         delete = (Button) findViewById(R.id.delete);
+
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -92,6 +94,9 @@ public class CropHistoryEditor extends AppCompatActivity {
         dbCtrl.listenAndSetEditText(location, name, "name", "Enter name here");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetEditText(location, notes, "notes", "Enter notes here");
+        dbCtrl.listenAndSetText(location, owner, "owner", "Owner");
+        dbCtrl.listenAndSetText(location, dateHarvested, "harvestDate", "Date");
+
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +123,7 @@ public class CropHistoryEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
+                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),owner.getText().toString(), false, secN + 1, bedN + 1);
                 // If we are adding a new crop, push a new child
 
 //                String[] location = new String[3];

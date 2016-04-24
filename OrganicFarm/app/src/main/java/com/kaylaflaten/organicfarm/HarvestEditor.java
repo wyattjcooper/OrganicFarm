@@ -151,11 +151,11 @@ public class HarvestEditor extends AppCompatActivity {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-                Intent intent = new Intent();
-                dbCtrl.removeValueFromLocation(locationHarvest);
-                dbCtrl.removeValueFromLocation(locationAllActivities);
-                setResult(2, intent);
-                finish();
+//                Intent intent = new Intent();
+//                dbCtrl.removeValueFromLocation(locationHarvest);
+//                dbCtrl.removeValueFromLocation(locationAllActivities);
+//                setResult(2, intent);
+//                finish();
             }
 
         });
