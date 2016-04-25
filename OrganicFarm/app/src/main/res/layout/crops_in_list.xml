@@ -10,29 +10,29 @@
         android:text="Crop Name"
         android:id="@+id/cropName_in_list"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp" />
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Planted By"
-        android:id="@+id/plantedBy_crops_in_list"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/cropName_in_list"
-        android:layout_toEndOf="@+id/cropName_in_list" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="Planted By"-->
+        <!--android:id="@+id/plantedBy_crops_in_list"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_toRightOf="@+id/cropName_in_list"-->
+        <!--android:layout_toEndOf="@+id/cropName_in_list"-->
+        <!--android:textColor="#ffffff" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Notes"
-        android:id="@+id/notesView_crops_in_list"
-        android:layout_below="@+id/cropName_in_list"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="Notes"-->
+        <!--android:id="@+id/notesView_crops_in_list"-->
+        <!--android:layout_below="@+id/cropName_in_list"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:textColor="#ffffff" />-->
 </RelativeLayout>

@@ -55,6 +55,7 @@ public class CropHistoryEditor extends AppCompatActivity {
         name = (EditText) findViewById(R.id.crop);
         date = (TextView) findViewById(R.id.date);
         harvestDate = (TextView) findViewById(R.id.harvestDate);
+        owner = (TextView) findViewById(R.id.plantedBy);
         notes = (EditText) findViewById(R.id.notes);
         owner = (EditText) findViewById(R.id.plantedBy);
         enter = (Button) findViewById(R.id.enter);
@@ -95,7 +96,6 @@ public class CropHistoryEditor extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Date");
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
 
-
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,6 @@ public class CropHistoryEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 datePicker2.show();
-
             }
         });
 

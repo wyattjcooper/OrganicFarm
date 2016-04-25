@@ -45,20 +45,12 @@ public class CropAdapter extends ArrayAdapter<Entry>  {
         if (c != null) {
 
             TextView cropName = (TextView) v.findViewById(R.id.cropName_in_list);
-            TextView plantedBy = (TextView) v.findViewById(R.id.plantedBy_crops_in_list);
-            TextView notes = (TextView) v.findViewById(R.id.notesView_crops_in_list);
+            // TextView plantedBy = (TextView) v.findViewById(R.id.plantedBy_crops_in_list);
+            // TextView notes = (TextView) v.findViewById(R.id.notesView_crops_in_list);
             cropName.setText(c.getName());
-            plantedBy.setText(" Planted On " + c.getDate());
-            notes.setText("Notes: " + c.getNotes());
+            // plantedBy.setText(" Planted On " + c.getDate());
+            // notes.setText("Notes: " + c.getNotes());
 
-
-            Calendar thatDay = Calendar.getInstance();
-            thatDay.setTime(stringToDate(c.getHarvestDate().toString(), "mm/dd/yyyy"));
-
-            Calendar today = Calendar.getInstance();
-
-            long diff =  thatDay.getTimeInMillis() - today.getTimeInMillis();
-            long days = diff / (24 * 60 * 60 * 1000);
 
         }
 

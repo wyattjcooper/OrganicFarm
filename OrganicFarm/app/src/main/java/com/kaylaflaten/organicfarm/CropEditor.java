@@ -32,6 +32,7 @@ public class CropEditor extends AppCompatActivity {
     TextView harvestDate;
     EditText notes;
     TextView amount;
+
     Button enter;
     Button delete;
 
@@ -51,8 +52,6 @@ public class CropEditor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_editor);
-
-
 
         section = (TextView) findViewById(R.id.section);
         bed = (TextView) findViewById(R.id.bed);

@@ -183,60 +183,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         }
                     }
                 });
-
-//                ref.createUser(email,password, new Firebase.ValueResultHandler<Map<String, Object>>() {
-//                    @Override
-//                    public void onSuccess(Map<String, Object> result) {
-//                        //System.out.println("Successfully created user account with uid: " + result.get("uid"));
-//                        Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-//                       // Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-//
-//                        User newUser = new User(email, password, mlastNameEntry.getText().toString(), 0);
-//                        ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
-//                        //finish();
-//                        //startActivity(intent);
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(FirebaseError firebaseError) {
-//                        switch (firebaseError.getMessage()) {
-//                            case "EMAIL_TAKEN":
-//                                Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_SHORT).show();
-//                            case "INVALID_EMAIL":
-//                                Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
-//                            default:
-//                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-
-//                ref.createUser(email, password, new Firebase.ResultHandler() {
-//                    @Override
-//                    public void onSuccess() {
-//                        //System.out.println("Successfully created user account with uid: " + result.get("uid"));
-//                        Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-//                        // Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-//
-//                        User newUser = new User(email, password, mlastNameEntry.getText().toString(), 0);
-//                        //ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
-//                        //finish();
-//                        //startActivity(intent);
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(FirebaseError firebaseError) {
-//                        switch (firebaseError.getMessage()) {
-//                            case "EMAIL_TAKEN":
-//                                Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_SHORT).show();
-//                            case "INVALID_EMAIL":
-//                                Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT).show();
-//                            default:
-//                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
             }
         });
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
