@@ -64,13 +64,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static String REFNAME = "https://dazzling-inferno-9759.firebaseio.com/";
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -83,7 +76,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    private DatabaseCtrl dbCtrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +108,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         final Firebase ref = new Firebase(REFNAME);
         AuthData authData = ref.getAuth();
         if (authData != null) {
-            //System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
             Toast.makeText(getApplicationContext(), "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider(), Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             finish();
             startActivity(intent);
@@ -161,7 +151,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mPasswordView.setError(null);
                 final Firebase ref = new Firebase(REFNAME);
 
-                //Toast.makeText(getApplicationContext(), "Email " + mEmailView.getText().toString() + " Password " + mPasswordView.getText(), Toast.LENGTH_SHORT).show();
 
                 ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                     @Override
@@ -444,34 +433,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (InterruptedException e) {
                 return false;
             }
-
-
-//            ref.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
-//                @Override
-//                public void onSuccess(Map<String, Object> result) {
-//                    System.out.println("Successfully created user account with uid: " + result.get("uid"));
-//                    Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-//
-//                    User newUser = new User(mEmail, mfirstNameEntry.getText().toString(), mlastNameEntry.getText().toString(), 0);
-//                    ref.child("Users").child(result.get("uid").toString()).setValue(newUser);
-//                    finish();
-//                    startActivity(intent);
-//
-//                }
-//
-//                @Override
-//                public void onError(FirebaseError firebaseError) {
-//                    // there was an error
-////                    succeeded[0] =false;
-////                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-////                    finish();
-////                    startActivity(intent);
-//                    Toast.makeText(getApplicationContext(), "There was an error", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            });
-
             return true;
         }
 
