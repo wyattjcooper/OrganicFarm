@@ -108,7 +108,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         final Firebase ref = new Firebase(REFNAME);
         AuthData authData = ref.getAuth();
         if (authData != null) {
-            Toast.makeText(getApplicationContext(), "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             finish();
             startActivity(intent);
