@@ -139,10 +139,12 @@ public class CropsInBed extends AppCompatActivity {
                                     long id) {
                 Intent intent = new Intent(CropsInBed.this, HarvestViewer.class);
                 // Look up the key in the keys list - same position
+                View viewAtPos = getViewByPosition(position, lv_harvest);
+                TextView name = (TextView) viewAtPos.findViewById(R.id.name);
                 String itemSelected = finalKeys_harvest.get(position).toString();
                 intent.putExtra("harvestID", itemSelected);
                 //intent.putExtra("cropID", finalCropID);
-                //intent.putExtra("cropName", finalCropName);
+                intent.putExtra("cropName", name.getText().toString());
                 startActivity(intent);
             }
         });
@@ -188,6 +190,16 @@ public class CropsInBed extends AppCompatActivity {
         ArrayList<String> keys = dbCtrl.addEntriesOfBedToCropAdapter(secS, bedS, ca);
         keys_harvest = dbCtrl.addHarvestsOfBedToHarvestAdapter(secN + 1, bedN + 1, ha);
     }
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
+        if (pos < firstListItemPosition || pos > lastListItemPosition) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
+    }
 
 }
