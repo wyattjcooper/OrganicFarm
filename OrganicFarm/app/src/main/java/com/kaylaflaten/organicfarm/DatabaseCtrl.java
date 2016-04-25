@@ -140,7 +140,7 @@ public class DatabaseCtrl {
     }
 
 
-    // Populates an array adapter with crop names and creates a key list with their key
+    // Populates a crop adapter with entries and creates a key list with their keys
     public ArrayList<String> addEntriesOfBedToCropAdapter(final String section, final String bed, final CropAdapter ca) {
         final ArrayList<String> keys = new ArrayList<String>();
         Firebase reference = new Firebase(REFNAME);
@@ -160,7 +160,7 @@ public class DatabaseCtrl {
                         // Add key to keys list
                         int currLength = keys.size();
                         keys.add(currLength, key);
-                        // Add name to the list by adding it to the ArrayAdapter
+                        // Add name to the list by adding it to the Adapter
                         ca.insert(object, currLength);
 
                     }
@@ -243,7 +243,7 @@ public class DatabaseCtrl {
         return keys;
     }
 
-    // Populates an array adapter with crop names and creates a key list with their key
+    // Populates a crop adapter with entries and creates a key list with their unique IDs
     public ArrayList<String> addEntriesToEntryAdapter(String[] location, final CropHistoryAdapter ca) {
         final ArrayList<String> keys = new ArrayList<String>();
         Firebase reference = createReferenceFromLocationList(location);
@@ -259,7 +259,7 @@ public class DatabaseCtrl {
                     if (!keys.contains(key)) {
                         // Add key to keys list
                         keys.add(key);
-                        // Add name to the list by adding it to the ArrayAdapter
+                        // Add entry to the list by adding it to the CropAdapter
                         ca.add(object);
                     }
                 }

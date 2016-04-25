@@ -42,7 +42,7 @@ public class HarvestHistory extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listViewHH);
         Harvest[] harvests = new Harvest[] { };
 
-        // Setting up the ArrayAdapter and ListView
+        // Setting up the Adapter and ListView
         final ArrayList<Harvest> harvestList = new ArrayList<Harvest>();
         harvestList.addAll(Arrays.asList(harvests));
         ha = new HarvestAdapter(this, R.layout.harvest_in_list, harvestList);
