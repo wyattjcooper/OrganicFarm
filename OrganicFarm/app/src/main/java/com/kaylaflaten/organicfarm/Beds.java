@@ -2,31 +2,22 @@
 package com.kaylaflaten.organicfarm;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.content.Intent;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 /**
- * Created by Kayla Flaten on 2/16/2016.
+ * Beds for each section
  */
 public class Beds extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.beds);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         ListView beditems;
         int bedXML = 0;
@@ -38,7 +29,6 @@ public class Beds extends AppCompatActivity {
             section = 0;
         }
 
-        //TODO: Make switch statement
         switch(section) {
             case 0: bedXML = R.array.sec1BedList;
                 break;
@@ -52,10 +42,9 @@ public class Beds extends AppCompatActivity {
                 break;
             default: Log.d("IntentError", "No extras sent to Intent");
                 break;
-
         }
+
         beditems = (ListView) findViewById(R.id.bedItems);
-        /*Check which section was clicked; change next line with xml name */
 
         beditems.setAdapter(new ArrayAdapter<String>(Beds.this, android.R.layout.simple_list_item_1, getResources().getStringArray(bedXML)));
         beditems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,11 +58,6 @@ public class Beds extends AppCompatActivity {
             }
         });
 
-
-
-        //getActionBar().setTitle("Section " + (section + 1));
         getSupportActionBar().setTitle("Section " + (section + 1));
-
-
     }
 }

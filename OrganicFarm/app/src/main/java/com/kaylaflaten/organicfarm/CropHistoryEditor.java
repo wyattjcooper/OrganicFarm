@@ -36,9 +36,10 @@ public class CropHistoryEditor extends AppCompatActivity {
 
     int secN;
     int bedN;
-
     String secS;
     String bedS;
+    String cropName;
+    String cropID;
 
     private SimpleDateFormat dateFormatter;
 
@@ -51,9 +52,6 @@ public class CropHistoryEditor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_history_editor);
 
-
-
-
         name = (EditText) findViewById(R.id.crop);
         date = (TextView) findViewById(R.id.date);
         harvestDate = (TextView) findViewById(R.id.harvestDate);
@@ -63,17 +61,14 @@ public class CropHistoryEditor extends AppCompatActivity {
         delete = (Button) findViewById(R.id.delete);
         amount = (TextView) findViewById(R.id.amount);
 
-
+        //used for date picker
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-
         setDateTimeField();
 
         final Bundle extras = getIntent().getExtras();
 
         secS = "Section ";
         bedS = "Bed ";
-        String cropName = "";
-        String cropID = "";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
@@ -83,8 +78,6 @@ public class CropHistoryEditor extends AppCompatActivity {
             secS = secS + (secN + 1);
             bedS = bedS + (bedN + 1);
         }
-        //section.setText(secS);
-        //bed.setText(bedS);
 
         final String[] location = new String[3];
         location[0] = "Crop History";
@@ -103,11 +96,9 @@ public class CropHistoryEditor extends AppCompatActivity {
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
 
 
-
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker1.show();
 
             }
@@ -116,7 +107,6 @@ public class CropHistoryEditor extends AppCompatActivity {
         harvestDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker2.show();
 
             }
@@ -124,24 +114,20 @@ public class CropHistoryEditor extends AppCompatActivity {
 
 
         // Push new data or modify old data when pressing enter button
-        final String finalCropID = cropID;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(CropEditor.this, CropViewer.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),owner.getText().toString(), false, secN + 1, bedN + 1);
-                // If we are adding a new crop, push a new child
                 String[] locationCropHistory = new String[3];
                 locationCropHistory[0] = "Crop History";
                 locationCropHistory[1] = name.getText().toString();
-                locationCropHistory[2] = finalCropID;
+                locationCropHistory[2] = cropID;
                 dbCtrl.setValueAtLocation(locationCropHistory, newEntry);
 
                 String[] allActivitiesLocation = new String[2];
                 allActivitiesLocation[0] = "All Activities";
-                allActivitiesLocation[1] = finalCropID;
+                allActivitiesLocation[1] = cropID;
                 dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
-
 
                 finish();
             }
@@ -216,7 +202,6 @@ public class CropHistoryEditor extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

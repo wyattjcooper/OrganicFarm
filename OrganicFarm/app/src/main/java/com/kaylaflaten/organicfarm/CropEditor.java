@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Carmen on 3/7/2016.
+ * Allows user to edit crop information
  */
 public class CropEditor extends AppCompatActivity {
 
@@ -32,7 +32,6 @@ public class CropEditor extends AppCompatActivity {
     TextView harvestDate;
     EditText notes;
     TextView amount;
-    Button back;
     Button enter;
     Button delete;
 
@@ -64,7 +63,7 @@ public class CropEditor extends AppCompatActivity {
         notes = (EditText) findViewById(R.id.notes);
         enter = (Button) findViewById(R.id.enter);
         delete = (Button) findViewById(R.id.delete);
-        amount = (EditText) findViewById(R.id.amount);
+        amount = (TextView) findViewById(R.id.amount);
 
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -107,7 +106,6 @@ public class CropEditor extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker1.show();
 
             }
@@ -116,7 +114,6 @@ public class CropEditor extends AppCompatActivity {
         harvestDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker2.show();
 
             }
@@ -129,18 +126,14 @@ public class CropEditor extends AppCompatActivity {
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //Intent intent = new Intent(CropEditor.this, CropViewer.class);
-           // Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), notes.getText().toString(),dbCtrl.getUID(), false, secN + 1, bedN + 1);
-            // If we are adding a new crop, push a new child
-                //Intent intent = new Intent(CropEditor.this, CropViewer.class);
-                Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(),plantedBy.getText().toString(), false, secN + 1, bedN + 1);
-                // If we are adding a new crop, push a new child
+            Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(),
+                    harvestDate.getText().toString(), notes.getText().toString(),plantedBy.getText().toString(),
+                    false, secN + 1, bedN + 1);
 
             String[] location = new String[3];
             location[0] = secS;
             location[1] = bedS;
             location[2] = cropID;
-            // If we are not adding a new crop, modify the existing child we clicked on
             dbCtrl.setValueAtLocation(location, newEntry);
 
 
@@ -149,13 +142,10 @@ public class CropEditor extends AppCompatActivity {
             locationCropOverall[1] = cropID;
             dbCtrl.setValueAtLocation(locationCropOverall, newEntry);
 
-
             String[] allActivitiesLocation = new String[2];
             allActivitiesLocation[0] = "All Activities";
             allActivitiesLocation[1] = cropID;
             dbCtrl.setValueAtLocation(allActivitiesLocation, newEntry);
-
-
             finish();
             }
         });
@@ -231,7 +221,6 @@ public class CropEditor extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

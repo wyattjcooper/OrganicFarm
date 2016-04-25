@@ -16,6 +16,9 @@ import com.kaylaflaten.organicfarm.DatabaseCtrl;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * List of past crops
+ */
 public class CropHistory extends AppCompatActivity {
 
     ListView lv;
@@ -26,7 +29,6 @@ public class CropHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_history);
-        //setSupportActionBar(toolbar);
 
         lv = (ListView) findViewById(R.id.cropHistoryListView);
         String[] crops = new String[] { };
@@ -61,16 +63,4 @@ public class CropHistory extends AppCompatActivity {
 
 
     }
-
-
-//    @Override
-//    public void onRestart() {
-//        super.onRestart();
-//
-//        // Attach crops already in the database to our list
-//        String[] location = new String[1];
-//        location[0] = "Crop History";
-//        ArrayList<String> keys = dbCtrl.addCropNamesToArrayAdapter(location, aa);
-//    }
-
 }

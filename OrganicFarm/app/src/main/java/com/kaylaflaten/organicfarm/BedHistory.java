@@ -11,29 +11,31 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * History of each bed
+ */
 public class BedHistory extends AppCompatActivity {
 
     ListView lv;
-    ListView lv_harvests;
     DatabaseCtrl dbCtrl;
     CropHistoryByNameAdapter ca;
     TextView amountData;
     TextView numberData;
 
+    int secN;
+    int bedN;
+
+    ArrayList<String> keys;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_history);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBedsHistory);
         amountData = (TextView) findViewById(R.id.amount);
         numberData = (TextView) findViewById(R.id.harvested);
 
         getSupportActionBar().setTitle("History of Crops Planted");
-//        setSupportActionBar(toolbar);
 
-        String cropName = "";
-        int secN = 0;
-        int bedN = 0;
 
         lv = (ListView) findViewById(R.id.listViewBedHistory);
 
@@ -59,29 +61,25 @@ public class BedHistory extends AppCompatActivity {
         // Attach crops already in the database to our list
         String[] location = new String[1];
         location[0] = "All Crops";
-        final ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapterByNameHistorically(location, ca, (secN + 1), (bedN + 1));
+        keys = dbCtrl.addEntriesToEntryAdapterByNameHistorically(location, ca, (secN + 1), (bedN + 1));
 
         // Click on a crop - pass the key to the CropManager so that it can load the harvest data
-        final ArrayList<String> finalKeys = keys;
-        final String finalCropName = cropName;
-        final int finalSecN = secN;
-        final int finalBedN = bedN;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(BedHistory.this, CropHistoryViewer.class);
+
                 // Look up the key in the keys list - same position
-                String itemSelected = finalKeys.get(position).toString();
+                String itemSelected = keys.get(position).toString();
 
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
                 TextView data = (TextView) viewAtPos.findViewById(R.id.date);
                 TextView name = (TextView) viewAtPos.findViewById(R.id.crop);
-                intent.putExtra("secN", finalSecN);
-                intent.putExtra("bedN", finalBedN);
+                intent.putExtra("secN", secN);
+                intent.putExtra("bedN", bedN);
 
-//                TextView data = (TextView)
                 String date = data.getText().toString();
                 intent.putExtra("cropData", date);
                 intent.putExtra("cropName", name.getText().toString());
@@ -90,7 +88,6 @@ public class BedHistory extends AppCompatActivity {
         });
     dbCtrl.listenAndSetTextToAmountInSectionAndBedHistorically(amountData, (secN + 1), (bedN + 1));
     dbCtrl.listenAndSetTextToTotalNumberOfCropsHistoricallyInSectionBed(numberData, (secN + 1), (bedN + 1));
-
     }
 
     public View getViewByPosition(int pos, ListView listView) {

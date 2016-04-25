@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Wyatt on 4/19/2016.
+ * Crop history viewer
  */
 public class CropHistoryViewer extends AppCompatActivity {
 
@@ -33,6 +33,12 @@ public class CropHistoryViewer extends AppCompatActivity {
     int secN;
     int bedN;
 
+    String secS;
+    String bedS;
+
+    String cropName;
+    String cropDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +53,16 @@ public class CropHistoryViewer extends AppCompatActivity {
         notes = (TextView) findViewById(R.id.notes);
         amount = (TextView) findViewById(R.id.amount);
         edit = (Button) findViewById(R.id.edit);
-        //harvest = (Button) findViewById(R.id.harvestCropHistoryViewer);
         history = (Button) findViewById(R.id.harvestHistory);
         owner = (TextView) findViewById(R.id.plantedBy);
 
 
         final Bundle extras = getIntent().getExtras();
 
-        String secS = "Section ";
-        String bedS = "Bed ";
-        String cropName = "";
-        String cropDate = "";
+        secS = "Section ";
+        bedS = "Bed ";
+        cropName = "";
+        cropDate = "";
 
         if (extras != null) {
             bedN = extras.getInt("secN", -1);
@@ -70,9 +75,7 @@ public class CropHistoryViewer extends AppCompatActivity {
         section.setText(secS);
         bed.setText(bedS);
 
-
         final String cropID = extras.getString("cropID");
-
 
         String[] location = new String[3];
         location[0] = "Crop History";
@@ -91,10 +94,7 @@ public class CropHistoryViewer extends AppCompatActivity {
 
         getSupportActionBar().setTitle(cropName + " Planted on " + cropDate);
 
-
-
         // Edit crops
-        final String finalCropName2 = cropName;
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,38 +103,25 @@ public class CropHistoryViewer extends AppCompatActivity {
                 intent.putExtra("section", secN);
                 intent.putExtra("bed", bedN);
                 intent.putExtra("cropID", cropID);
-                intent.putExtra("cropName", finalCropName2);
+                intent.putExtra("cropName", cropName);
                 startActivityForResult(intent,1);
             }
         });
 
-        // Harvest the crop
-        final String finalCropName = cropName;
-        final String finalSecS = secS;
-        final String finalBedS = bedS;
-
-
         // View harvest history
-        final String finalCropName1 = cropName;
         history.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CropHistoryViewer.this, HarvestHistory.class);
                 // Look up the key in the keys list - same position
                 intent.putExtra("cropID", cropID);
-                intent.putExtra("cropName", finalCropName1);
-                intent.putExtra("cropData", name.getText().toString() + " Planted In " + finalSecS +"," + finalBedS);
+                intent.putExtra("cropName", cropName);
+                intent.putExtra("cropData", name.getText().toString() + " Planted In " + secS +"," + bedS);
                 startActivityForResult(intent,1);
             }
         });
 
 
-
-    }
-
-    @Override
-    public void onRestart(){
-        super.onRestart();
 
     }
 
@@ -142,7 +129,6 @@ public class CropHistoryViewer extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

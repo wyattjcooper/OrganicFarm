@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Carmen on 2/29/2016.
+ * Allows user to harvest crops
  */
 public class CropHarvester extends AppCompatActivity {
 
@@ -50,22 +50,12 @@ public class CropHarvester extends AppCompatActivity {
 
     private DatePickerDialog datePicker;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_harvester);
         Firebase.setAndroidContext(this);
 
-
-
         dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-
 
         setDateTimeField();
 
@@ -77,7 +67,6 @@ public class CropHarvester extends AppCompatActivity {
         finished = (CheckBox) findViewById(R.id.finished);
         amount = (EditText) findViewById(R.id.amount);
 
-
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
@@ -85,7 +74,6 @@ public class CropHarvester extends AppCompatActivity {
 
         secS = "Section ";
         bedS = "Bed ";
-
 
         if (extras != null) {
             cropName = extras.getString("cropName");
@@ -100,20 +88,19 @@ public class CropHarvester extends AppCompatActivity {
 
         crop.setText(cropName);
 
+        if (!dbCtrl.getUID().equals("no id")) {
+            dbCtrl.listenAndSetToUsername(owner);
+        }
 
-        // If we selected a crop from the list,
-        // we will have passed its ID, so we set our reference to that ID
-        //final String cropID = extras.getString("itemSelected");
+        // save the harvest
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(CropHarvester.this, MainActivity.class);
                 Harvest newHarvest = new Harvest(cropName, cropID, date.getText().toString(),owner.getText().toString(), Double.parseDouble(amount.getText().toString()), notes.getText().toString(), secN + 1, bedN + 1);
                 String[] locationHarvest = new String[1];
                 locationHarvest[0] = "Harvest";
                 int resultCode = 0;
 
-                //locationHarvest[1] = cropID;
                 String key = dbCtrl.pushObjectReturnKey(locationHarvest, newHarvest);
                 if (finished.isChecked()) {
                     resultCode = 3;
@@ -147,20 +134,13 @@ public class CropHarvester extends AppCompatActivity {
             }
         });
 
-
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker.show();
 
             }
         });
-
-        if (!dbCtrl.getUID().equals("no id")) {
-            dbCtrl.listenAndSetToUsername(owner);
-        }
-
     }
 
     private void setDateTimeField() {
