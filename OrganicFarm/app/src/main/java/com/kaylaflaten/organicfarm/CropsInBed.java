@@ -20,8 +20,6 @@ import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
 public class CropsInBed extends AppCompatActivity {
 
-    //TextView sectionDisplay;
-    //TextView bedDisplay;
     Button add;
     Button history;
     ListView lv;
@@ -46,7 +44,6 @@ public class CropsInBed extends AppCompatActivity {
 
 
         add = (Button) findViewById(R.id.add);
-        //reload = (Button) findViewById(R.id.cropsInBedRefreshB);
         lv = (ListView) findViewById(R.id.listView);
         lv_harvest = (ListView) findViewById(R.id.harvest_list_cropsInBed);
         history = (Button) findViewById(R.id.bedsHistoryButton);
@@ -160,7 +157,6 @@ public class CropsInBed extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

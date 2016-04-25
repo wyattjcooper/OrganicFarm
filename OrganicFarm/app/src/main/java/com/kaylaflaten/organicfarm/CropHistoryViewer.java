@@ -47,7 +47,6 @@ public class CropHistoryViewer extends AppCompatActivity {
         notes = (TextView) findViewById(R.id.notes);
         amount = (TextView) findViewById(R.id.amount);
         edit = (Button) findViewById(R.id.edit);
-        //harvest = (Button) findViewById(R.id.harvestCropHistoryViewer);
         history = (Button) findViewById(R.id.harvestHistory);
         owner = (TextView) findViewById(R.id.plantedBy);
 
