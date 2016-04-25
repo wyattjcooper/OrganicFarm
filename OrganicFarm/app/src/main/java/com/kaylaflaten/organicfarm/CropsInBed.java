@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,8 @@ public class CropsInBed extends AppCompatActivity {
     HarvestAdapter ha;
     ArrayList<String> keys;
     ArrayList<String> keys_harvest;
+    int[] admin = new int[1];
+    int access = 0;
 
     int secN;
     int bedN;
@@ -86,6 +89,8 @@ public class CropsInBed extends AppCompatActivity {
 
         ArrayList<String> keys_harvest = dbCtrl.addHarvestsOfBedToHarvestAdapter(secN + 1, bedN + 1, ha);
 
+        access = dbCtrl.listenSetAdmin(admin);
+
         // set action bar title
         getSupportActionBar().setTitle(secS + " " + bedS);
 
@@ -93,11 +98,19 @@ public class CropsInBed extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CropsInBed.this, CropManager.class);
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                intent.putExtra("new", true);
-                startActivity(intent);
+                if (admin[0] == 1) {
+
+                    Intent intent = new Intent(CropsInBed.this, CropManager.class);
+                    intent.putExtra("section", secN);
+                    intent.putExtra("bed", bedN);
+                    intent.putExtra("new", true);
+                    startActivity(intent);
+                }
+                else{
+                    new AlertDialog.Builder(CropsInBed.this)
+                            .setTitle("You must have admin priveledges to add crops")
+                            .show();
+                }
             }
         });
 

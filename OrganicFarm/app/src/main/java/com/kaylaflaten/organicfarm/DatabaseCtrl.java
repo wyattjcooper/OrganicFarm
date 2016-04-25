@@ -694,6 +694,29 @@ public class DatabaseCtrl {
         });
     }
 
+    public int listenSetAdmin(final int[] admin){
+        Firebase ref = new Firebase(REFNAME);
+        if (ref.getAuth()!=null) {
+            ref = ref.child("Users").child(ref.getAuth().getUid());
+        }
+        final Firebase finalRef = ref;
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("firstName").getValue()!=null) {
+                    long l = (long) dataSnapshot.child("admin").getValue();
+                    admin[0] = (int) l;
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        return admin[0];
+    }
+
     public String getUID() {
         Firebase ref = new Firebase(REFNAME);
         String uid = "";
@@ -701,6 +724,13 @@ public class DatabaseCtrl {
             uid = ref.getAuth().getUid();
         }
         return uid;
+    }
+
+    public boolean isLoggedIn(){
+        if (!getUID().equals("") ){
+            return true;
+        }
+        return false;
     }
 
     public void logout() {

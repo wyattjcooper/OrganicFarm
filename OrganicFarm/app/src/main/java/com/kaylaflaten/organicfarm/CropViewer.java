@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,8 @@ public class CropViewer extends AppCompatActivity {
     Button harvest;
     Button history;
     TextView owner;
+    int[] admin = new int[1];
+    int access = 0;
 
     int secN;
     int bedN;
@@ -82,18 +85,28 @@ public class CropViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Harvest Date");
         dbCtrl.listenAndSetText(location, owner, "owner", "Owner");
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
+        access = dbCtrl.listenSetAdmin(admin);
+
 
         // Edit crops
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropViewer.this, CropEditor.class);
-                // Look up the key in the keys list - same position
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                intent.putExtra("itemSelected", cropID);
-                intent.putExtra("cropName", name.getText().toString());
-                startActivityForResult(intent, 1);
+
+                if (admin[0] == 1) {
+                    Intent intent = new Intent(CropViewer.this, CropEditor.class);
+                    // Look up the key in the keys list - same position
+                    intent.putExtra("section", secN);
+                    intent.putExtra("bed", bedN);
+                    intent.putExtra("itemSelected", cropID);
+                    intent.putExtra("cropName", name.getText().toString());
+                    startActivityForResult(intent, 1);
+                }
+                else{
+                    new AlertDialog.Builder(CropViewer.this)
+                            .setTitle("You must have admin priveledges to edit crops")
+                            .show();
+                }
             }
         });
 
@@ -101,15 +114,21 @@ public class CropViewer extends AppCompatActivity {
         harvest.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CropViewer.this, CropHarvester.class);
-                // Look up the key in the keys list - same position
-                intent.putExtra("section", secN);
-                intent.putExtra("bed", bedN);
-                intent.putExtra("itemSelected", cropID);
-                intent.putExtra("cropName", name.getText().toString());
-                intent.putExtra("cropDate", date.getText().toString());
-                intent.putExtra("cropNotes", notes.getText().toString());
-                startActivityForResult(intent,1);
+                if (admin[0] == 1) {
+                    Intent intent = new Intent(CropViewer.this, CropHarvester.class);
+                    // Look up the key in the keys list - same position
+                    intent.putExtra("section", secN);
+                    intent.putExtra("bed", bedN);
+                    intent.putExtra("itemSelected", cropID);
+                    intent.putExtra("cropName", name.getText().toString());
+                    intent.putExtra("cropDate", date.getText().toString());
+                    intent.putExtra("cropNotes", notes.getText().toString());
+                    startActivityForResult(intent, 1);
+                } else {
+                    new AlertDialog.Builder(CropViewer.this)
+                            .setTitle("You must have admin priveledges to harvest crops")
+                            .show();
+                }
             }
         });
 

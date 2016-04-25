@@ -1,5 +1,6 @@
 package com.kaylaflaten.organicfarm;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,6 +47,9 @@ public class HarvestViewer extends AppCompatActivity {
     String harvestID = "";
 
 
+    int[] admin = new int[1];
+    int access = 0;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_viewer);
@@ -86,16 +90,26 @@ public class HarvestViewer extends AppCompatActivity {
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(locationHarvest, amount, "amount", "Amount");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "Owner");
+        access = dbCtrl.listenSetAdmin(admin);
+
 
         // opens activity to edit harvest
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HarvestViewer.this, HarvestEditor.class);
-                intent.putExtra("cropName", cropName);
-                intent.putExtra("harvestID", harvestID);
-                intent.putExtra("cropID",cropID );
-                startActivityForResult(intent, 1);
+                if (admin[0] == 1) {
+
+                    Intent intent = new Intent(HarvestViewer.this, HarvestEditor.class);
+                    intent.putExtra("cropName", cropName);
+                    intent.putExtra("harvestID", harvestID);
+                    intent.putExtra("cropID", cropID);
+                    startActivityForResult(intent, 1);
+                }
+                else{
+                    new AlertDialog.Builder(HarvestViewer.this)
+                            .setTitle("You must have admin priveledges to edit harvests")
+                            .show();
+                }
             }
         });
     }
