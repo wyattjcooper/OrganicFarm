@@ -14,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * Allows a user to add a crop
+ */
 public class CropManager extends AppCompatActivity {
 
     TextView section;
@@ -23,8 +26,11 @@ public class CropManager extends AppCompatActivity {
     TextView owner;
     TextView harvestDate;
     EditText notes;
-    Button back;
     Button enter;
+
+    String secS;
+    String bedS;
+
     int secN;
     int bedN;
 
@@ -53,33 +59,30 @@ public class CropManager extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String sectionNum = "Section ";
-        String bedNum = "Bed ";
+        secS = "Section ";
+        bedS = "Bed ";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
-            sectionNum = sectionNum + (secN + 1);
-            bedNum = bedNum + (bedN + 1);
+            secS = secS + (secN + 1);
+            bedS = bedS + (bedN + 1);
         }
-        section.setText(sectionNum);
-        bed.setText(bedNum);
+        section.setText(secS);
+        bed.setText(bedS);
 
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
-        // Push new data or modify old data when pressing enter button
+        // Push new entry
         final String[] entryKey = {"blank"};
-        final String finalSectionNum = sectionNum;
-        final String finalBedNum = bedNum;
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(CropManager.this, CropsInBed.class);
                 Entry newEntry = new Entry(name.getText().toString(), date.getText().toString(), harvestDate.getText().toString(), notes.getText().toString(), owner.getText().toString(),false, secN + 1, bedN + 1);
                 String[] location = new String[2];
-                location[0] = finalSectionNum;
-                location[1] = finalBedNum;
+                location[0] = secS;
+                location[1] = bedS;
                 entryKey[0] = dbCtrl.pushObjectReturnKey(location,newEntry);
                 String key = entryKey[0];
                 if (entryKey[0] != null) {
@@ -100,7 +103,6 @@ public class CropManager extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker1.show();
 
             }
@@ -109,7 +111,6 @@ public class CropManager extends AppCompatActivity {
         harvestDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker2.show();
 
             }
@@ -147,7 +148,6 @@ public class CropManager extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

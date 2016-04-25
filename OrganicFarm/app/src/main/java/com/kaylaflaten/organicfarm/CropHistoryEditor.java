@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Created by Wyatt on 4/20/2016.
+ * Allows user to edit a crop already harvested in history
  */
 public class CropHistoryEditor extends AppCompatActivity {
 
@@ -45,7 +45,6 @@ public class CropHistoryEditor extends AppCompatActivity {
 
     private DatePickerDialog datePicker1;
     private DatePickerDialog datePicker2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +110,6 @@ public class CropHistoryEditor extends AppCompatActivity {
             }
         });
 
-
         // Push new data or modify old data when pressing enter button
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -169,7 +167,6 @@ public class CropHistoryEditor extends AppCompatActivity {
                 Intent intent = new Intent();
                     setResult(2, intent);
                     finish();
-
                 }
 
         });

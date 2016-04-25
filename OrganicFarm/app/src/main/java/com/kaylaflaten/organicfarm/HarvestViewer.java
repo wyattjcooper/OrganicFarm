@@ -21,17 +21,14 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Carmen on 2/29/2016.
+ * Allows a user to view harvest information
  */
 public class HarvestViewer extends AppCompatActivity {
 
-    //TextView name;
     TextView notes;
     TextView date;
     TextView owner;
     TextView amount;
-    TextView pid;
-    TextView finished;
     TextView crop;
     Button edit;
 
@@ -45,19 +42,8 @@ public class HarvestViewer extends AppCompatActivity {
     String bedS;
 
     String cropName = "";
-    String cropNotes = "";
-    String cropDate = "";
     String cropID = "";
-
-//    private SimpleDateFormat dateFormatter;
-//
-//    private DatePickerDialog datePicker;
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    String harvestID = "";
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +51,12 @@ public class HarvestViewer extends AppCompatActivity {
         setContentView(R.layout.activity_harvest_viewer);
         Firebase.setAndroidContext(this);
 
-
-
-        //dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-
-
-        //setDateTimeField();
-
         crop = (TextView) findViewById(R.id.crop);
         edit = (Button) findViewById(R.id.edit);
         date = (TextView) findViewById(R.id.date);
         owner = (TextView) findViewById(R.id.harvestedBy);
         notes = (TextView) findViewById(R.id.notes);
         amount = (TextView) findViewById(R.id.amount);
-        //pid = (TextView) findViewById(R.id.pidPlaceHolderHarvestViewer);
 
 
         // Create the DatabaseCtrl object
@@ -86,14 +64,6 @@ public class HarvestViewer extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String harvestID = "";
-
-        String cropName = "";
-        int secN;
-        int bedN;
-        secN = 0;
-        bedN = 0;
-        cropName = "";
         if (extras != null) {
             harvestID = extras.getString("harvestID");
             cropID = extras.getString("cropID");
@@ -102,6 +72,7 @@ public class HarvestViewer extends AppCompatActivity {
             bedN = extras.getInt("bedN", 1);
         }
 
+        // setting action bar title
         getSupportActionBar().setTitle(cropName + " Harvest");
 
 
@@ -109,25 +80,20 @@ public class HarvestViewer extends AppCompatActivity {
         locationHarvest[0] = "Harvest";
         locationHarvest[1] = harvestID;
 
+        // setting text view/editor text
         crop.setText(cropName);
-
         dbCtrl.listenAndSetText(locationHarvest, date, "date", "Name");
         dbCtrl.listenAndSetText(locationHarvest, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(locationHarvest, amount, "amount", "Amount");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "Owner");
-        //dbCtrl.listenAndSetText(locationHarvest, pid, "pid", "PID");
-        //dbCtrl.listenAndSetText(locationHarvest, finished, "finished", "Finished");
 
-
-        final String finalHarvestID = harvestID;
-        final String finalCropName = cropName;
+        // opens activity to edit harvest
         edit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HarvestViewer.this, HarvestEditor.class);
-                // Look up the key in the keys list - same position
-                intent.putExtra("cropName", finalCropName);
-                intent.putExtra("harvestID", finalHarvestID);
+                intent.putExtra("cropName", cropName);
+                intent.putExtra("harvestID", harvestID);
                 intent.putExtra("cropID",cropID );
                 startActivityForResult(intent, 1);
             }
@@ -136,16 +102,9 @@ public class HarvestViewer extends AppCompatActivity {
 
 
     @Override
-    public void onRestart(){
-        super.onRestart();
-
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

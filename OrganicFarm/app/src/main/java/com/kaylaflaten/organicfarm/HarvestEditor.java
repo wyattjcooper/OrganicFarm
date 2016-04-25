@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * Allows user to edit harvest information
+ */
 public class HarvestEditor extends AppCompatActivity {
 
     TextView crop;
@@ -37,6 +40,7 @@ public class HarvestEditor extends AppCompatActivity {
     String harvestID;
     String cropID;
     String cropName;
+
     int secN;
     int bedN;
 
@@ -44,8 +48,6 @@ public class HarvestEditor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_editor);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         crop = (TextView) findViewById(R.id.crop);
         date = (TextView) findViewById(R.id.date);
@@ -66,14 +68,12 @@ public class HarvestEditor extends AppCompatActivity {
         secN = 0;
         bedN = 0;
         cropName = "";
-        String pid = "";
         if (extras != null) {
             harvestID = extras.getString("harvestID");
             cropID = extras.getString("cropID");
             cropName = extras.getString("cropName");
             secN = extras.getInt("secN", 1);
             bedN = extras.getInt("bedN", 1);
-            pid = extras.getString("pid");
         }
 
         final String[] locationHarvest = new String[2];
@@ -84,9 +84,8 @@ public class HarvestEditor extends AppCompatActivity {
         locationAllActivities[0] = "All Activities";
         locationAllActivities[1] = harvestID;
 
-
+        // set text for each text view/editor
         crop.setText(cropName);
-
         dbCtrl.listenAndSetText(locationHarvest, date,"date", "NULL" );
         dbCtrl.listenAndSetEditText(locationHarvest, amount, "amount", "NULL");
         dbCtrl.listenAndSetText(locationHarvest, owner, "owner", "NULL");
@@ -98,16 +97,12 @@ public class HarvestEditor extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //date.setEnabled(false);
                 datePicker.show();
 
             }
         });
 
-
-
-        // Push new data or modify old data when pressing enter button
-        final String finalPid = pid;
+        // update data when enter button is pressed
         enter.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,9 +115,6 @@ public class HarvestEditor extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
 
         // Delete harvests
         delete.setOnClickListener(new Button.OnClickListener() {
@@ -138,7 +130,6 @@ public class HarvestEditor extends AppCompatActivity {
                             dbCtrl.removeValueFromLocation(locationAllActivities);
                             setResult(2, intent);
                             finish();
-
                     }
                 })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -149,7 +140,6 @@ public class HarvestEditor extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
             }
-
         });
     }
 
@@ -166,6 +156,3 @@ public class HarvestEditor extends AppCompatActivity {
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 }
-
-
-

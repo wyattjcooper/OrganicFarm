@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.kaylaflaten.organicfarm.DatabaseCtrl;
 
+/**
+ * List of crops in a bed
+ */
 public class CropsInBed extends AppCompatActivity {
 
     Button add;
@@ -41,17 +44,13 @@ public class CropsInBed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crops_in_be);
 
-
-
         add = (Button) findViewById(R.id.add);
         lv = (ListView) findViewById(R.id.listView);
         lv_harvest = (ListView) findViewById(R.id.harvest_list_cropsInBed);
         history = (Button) findViewById(R.id.bedsHistoryButton);
 
-
         Entry[] crops = new Entry[] { };
         Harvest[] harvests = new Harvest[] { };
-
 
         // Setting up the ArrayAdapter and ListView
         final ArrayList<Entry> cropList = new ArrayList<Entry>();
@@ -87,6 +86,8 @@ public class CropsInBed extends AppCompatActivity {
 
         ArrayList<String> keys_harvest = dbCtrl.addHarvestsOfBedToHarvestAdapter(secN + 1, bedN + 1, ha);
 
+        // set action bar title
+        getSupportActionBar().setTitle(secS + " " + bedS);
 
         // Add new crop by clicking the add button
         add.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +132,6 @@ public class CropsInBed extends AppCompatActivity {
         });
 
         final ArrayList<String> finalKeys_harvest = keys_harvest;
-        //final String finalCropID = cropID;
-        //final String finalCropName = cropName;
         lv_harvest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -143,16 +142,10 @@ public class CropsInBed extends AppCompatActivity {
                 TextView name = (TextView) viewAtPos.findViewById(R.id.name);
                 String itemSelected = finalKeys_harvest.get(position).toString();
                 intent.putExtra("harvestID", itemSelected);
-                //intent.putExtra("cropID", finalCropID);
                 intent.putExtra("cropName", name.getText().toString());
                 startActivity(intent);
             }
         });
-
-
-        getSupportActionBar().setTitle(secS + " " + bedS);
-
-
     }
 
     @Override

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Crop history viewer
+ * Allows a user to view a crop in history
  */
 public class CropHistoryViewer extends AppCompatActivity {
 
@@ -120,9 +120,6 @@ public class CropHistoryViewer extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
-
-
-
     }
 
     @Override

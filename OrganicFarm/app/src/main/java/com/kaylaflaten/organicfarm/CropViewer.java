@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by Carmen on 3/7/2016.
+ * Allows a user to view crop info
  */
 public class CropViewer extends AppCompatActivity {
 
@@ -28,6 +28,9 @@ public class CropViewer extends AppCompatActivity {
 
     int secN;
     int bedN;
+
+    String secS;
+    String bedS;
 
 
     @Override
@@ -49,23 +52,17 @@ public class CropViewer extends AppCompatActivity {
 
         final Bundle extras = getIntent().getExtras();
 
-        String secS = "Section ";
-        String bedS = "Bed ";
-        String cropName = "";
+        secS = "Section ";
+        bedS = "Bed ";
 
         if (extras != null) {
             bedN = extras.getInt("bed", -1);
             secN = extras.getInt("section", -1);
-            cropName = extras.getString("cropName");
             secS = secS + (secN + 1);
             bedS = bedS + (bedN + 1);
         }
         section.setText(secS);
         bed.setText(bedS);
-        //setSupportActionBar(toolbar);
-
-
-
 
         String[] location = new String[3];
         location[0] = secS;
@@ -78,19 +75,13 @@ public class CropViewer extends AppCompatActivity {
         // Create the DatabaseCtrl object
         final DatabaseCtrl dbCtrl = new DatabaseCtrl(this);
 
+        // set textView information
         dbCtrl.listenAndSetText(location,name, "name", "Name");
         dbCtrl.listenAndSetText(location, date, "date", "Date");
         dbCtrl.listenAndSetText(location, notes, "notes", "Notes");
         dbCtrl.listenAndSetText(location, harvestDate, "harvestDate", "Harvest Date");
         dbCtrl.listenAndSetText(location, owner, "owner", "Owner");
-
-
-        //getSupportActionBar().setTitle("Planted by" + owner.getText().toString());
-
-
         dbCtrl.listenAndSetTextToAmountOfSpecificCropHarvested(amount, cropID);
-
-
 
         // Edit crops
         edit.setOnClickListener(new Button.OnClickListener() {
@@ -107,9 +98,6 @@ public class CropViewer extends AppCompatActivity {
         });
 
         // Harvest the crop
-        final String finalCropName = cropName;
-        final String finalSecS = secS;
-        final String finalBedS = bedS;
         harvest.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,34 +121,25 @@ public class CropViewer extends AppCompatActivity {
                 // Look up the key in the keys list - same position
                 intent.putExtra("cropID", cropID);
                 intent.putExtra("cropName", name.getText().toString());
-                intent.putExtra("cropData", name.getText().toString() + " Planted In " + finalSecS +"," + finalBedS);
+                intent.putExtra("cropData", name.getText().toString() + " Planted In " + secS +"," + bedS);
                 startActivity(intent);
             }
         });
-
-
-
-    }
-
-    @Override
-    public void onRestart(){
-        super.onRestart();
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
         return true;
     }
 
-    //checks to see if delete was just called.  If so, finish.
+    // checks to see if crop was deleted or harvested.  If so, finish.
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        // returnCode = 2 is delete, returnCode = 3 is harvested
         if (resultCode == 2 || resultCode == 3){
             finish();
         }

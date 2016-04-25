@@ -16,28 +16,28 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Creates list for a harvested crop
+ */
 public class HarvestHistory extends AppCompatActivity {
 
     ListView lv;
     DatabaseCtrl dbCtrl;
     HarvestAdapter ha;
-    Button edit;
 
     String cropName;
     String cropID;
+
+    ArrayList<String> keys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_harvest_history);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitle("Harvest History For Something");
-        //setSupportActionBar(toolbar);
 
         cropID = "";
         cropName = "";
         String cropDate = "";
-
 
         lv = (ListView) findViewById(R.id.listViewHH);
         Harvest[] harvests = new Harvest[] { };
@@ -57,45 +57,37 @@ public class HarvestHistory extends AppCompatActivity {
 
         // Set up our database control object
         dbCtrl = new DatabaseCtrl(this);
-        ArrayList<String> keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropID, ha);
+        keys = dbCtrl.addHarvestsOfSpecificCropToHarvestAdapter(cropID, ha);
 
         // Click on a crop - pass the key to the CropManager so that it can load the crops data
-        final ArrayList<String> finalKeys = keys;
-        final String finalCropID = cropID;
-        final String finalCropName = cropName;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(HarvestHistory.this, HarvestViewer.class);
                 // Look up the key in the keys list - same position
-                String itemSelected = finalKeys.get(position).toString();
+                String itemSelected = keys.get(position).toString();
                 intent.putExtra("harvestID", itemSelected);
-                intent.putExtra("cropID", finalCropID);
-                intent.putExtra("cropName", finalCropName);
+                intent.putExtra("cropID", cropID);
+                intent.putExtra("cropName", cropName);
                 startActivity(intent);
             }
         });
 
         getSupportActionBar().setTitle("Harvest History Of "+ cropName);
-        //toolbar.setTitle("Harvest History Of "+ cropDate);
-
-        final String finalCropID1 = cropID;
-
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //Toast.makeText(getApplicationContext(), "Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
         return true;
     }
 
+    //overrides onRestart to update list in case information changed
     @Override
     public void onRestart() {
         super.onRestart();

@@ -1,7 +1,7 @@
 package com.kaylaflaten.organicfarm;
 
 /**
- * Created by WyattCooper on 2/16/16.
+ * Entry Object - a crop planted in a bed
  */
 public class Entry {
     private String date;

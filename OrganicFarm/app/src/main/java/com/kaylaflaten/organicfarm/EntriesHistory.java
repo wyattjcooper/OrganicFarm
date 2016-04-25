@@ -19,6 +19,9 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * List of each entry already harvested
+ */
 public class EntriesHistory extends AppCompatActivity {
 
     ListView lv;
@@ -27,25 +30,15 @@ public class EntriesHistory extends AppCompatActivity {
     TextView amountData;
     String cropName;
     Entry[] entries;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entries_history);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        //setSupportActionBar(toolbar);
 
         amountData = (TextView) findViewById(R.id.entriesHistoryAmountData);
-
-
-//        toolbar.setTitle("History of Crops Planted");
-//        setSupportActionBar(toolbar);
 
         cropName = "";
 
@@ -64,7 +57,7 @@ public class EntriesHistory extends AppCompatActivity {
             cropName = extras.getString("cropName");
         }
 
-
+        // Adding title to action bar
         getSupportActionBar().setTitle("History Of " + cropName);
 
         // Set up our database control object
@@ -77,16 +70,14 @@ public class EntriesHistory extends AppCompatActivity {
         final ArrayList<String> keys = dbCtrl.addEntriesToEntryAdapter(location, ca);
 
         // Click on a crop - pass the key to the CropManager so that it can load the harvest data
-        final ArrayList<String> finalKeys = keys;
-        final String finalCropName = cropName;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(EntriesHistory.this, CropHistoryViewer.class);
                 // Look up the key in the keys list - same position
-                String itemSelected = finalKeys.get(position).toString();
-                intent.putExtra("cropName", finalCropName);
+                String itemSelected = keys.get(position).toString();
+                intent.putExtra("cropName", cropName);
                 intent.putExtra("cropID", itemSelected);
                 View viewAtPos = getViewByPosition(position, lv);
                 TextView data = (TextView) viewAtPos.findViewById(R.id.dateBySB);
@@ -103,7 +94,6 @@ public class EntriesHistory extends AppCompatActivity {
 
                 intent.putExtra("secN",ints.get(0) - 1);
                 intent.putExtra("bedN",ints.get(1) - 1);
-
 
                 String date = data.getText().toString();
                 intent.putExtra("cropData", date);
@@ -160,8 +150,8 @@ public class EntriesHistory extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "EntriesHistory Page", // TODO: Define a title for the content shown.
+                Action.TYPE_VIEW,
+                "EntriesHistory Page",
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -173,10 +163,11 @@ public class EntriesHistory extends AppCompatActivity {
         client.disconnect();
     }
 
+
+    // updates list when activity comes to front because data could have changed
     @Override
     public void onRestart() {
         super.onRestart();
-
         // Setting up the ArrayAdapter and ListView
         final ArrayList<Entry> entryList = new ArrayList<Entry>();
         entryList.addAll(Arrays.asList(entries));

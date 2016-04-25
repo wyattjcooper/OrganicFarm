@@ -1,7 +1,7 @@
 package com.kaylaflaten.organicfarm;
 
 /**
- * Created by WyattCooper on 3/7/16.
+ * Harvest object
  */
 public class Harvest {
     private String date;

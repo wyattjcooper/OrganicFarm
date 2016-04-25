@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Date:"
         android:id="@+id/dateTitle"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -76,25 +76,15 @@
         android:layout_alignBottom="@+id/harvestedByTitle"
         android:layout_alignParentRight="true"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:id="@+id/imageViewHist"
-        android:background="#b007085f"
-        android:layout_below="@+id/notes"
-        android:layout_alignRight="@+id/harvestedBy"
-        android:layout_alignEnd="@+id/harvestedBy"
-        android:layout_marginTop="70dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Loading..."
+        android:text="Name"
         android:id="@+id/name"
-        android:layout_below="@+id/notes"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true" />
 
 
 </RelativeLayout>

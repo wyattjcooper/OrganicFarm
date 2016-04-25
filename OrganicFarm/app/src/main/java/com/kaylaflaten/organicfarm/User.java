@@ -1,7 +1,7 @@
 package com.kaylaflaten.organicfarm;
 
 /**
- * Created by WyattCooper on 4/5/16.
+ * user object - pushed to firebase
  */
 public class User {
     private String email;

@@ -24,6 +24,9 @@ import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
 import android.app.AlertDialog;
 
+/**
+ * main activity - list of sections
+ */
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     ListView sectionitems;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         getSupportActionBar().setTitle("Current Farm");
 
-
+        // pulls objects from xml layout file
         sectionitems = (ListView) findViewById(R.id.sectionItems);
         totalAmountData = (TextView) findViewById(R.id.totalAmountData);
         totalNumHarvestsData = (TextView) findViewById(R.id.totalNumharvestsData);
@@ -63,18 +66,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
         });
 
+        // sets textView text
         dbCtrl.listenAndSetTextToTotalAmount(totalAmountData);
         dbCtrl.listenAndSetTextToTotalNumberOfHarvests(totalNumHarvestsData);
         dbCtrl.listenAndSetTextToTotalNumberOfCropsEverPlanted(totalCropsData);
         dbCtrl.listenAndSetToUsername(userID);
 
-
+        // centers texts
         totalAmountData.setGravity(Gravity.LEFT);
         totalNumHarvestsData.setGravity(Gravity.CENTER);
         totalCropsData.setGravity(Gravity.RIGHT);
 
         isOnline();
 
+        // logs out user
         logout.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,19 +95,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.cropHistorySelected) {
             Intent cropHistory = new Intent(MainActivity.this, CropHistory.class);
             startActivity(cropHistory);
@@ -133,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     dialog.cancel();
                 }
             });
-            //alertDialog.setIcon(R.drawable.icon);
             alertDialog.show();
         }
     }
